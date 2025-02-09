@@ -11,10 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
-import java.util.*;
+import java.util.List;
 
-public class DemoComboAttack extends ComboBasicAttack {
-    public DemoComboAttack(Builder builder) {
+public class Demo1 extends ComboBasicAttack {
+    public Demo1(Builder builder) {
         super(builder);
     }
 

@@ -1,10 +1,9 @@
 package com.arc.arc.gameassets;
 
+import com.arc.arc.skill.Demo1;
 import com.p1nero.invincible.api.events.BiEvent;
-import com.p1nero.invincible.conditions.DodgeSuccessCondition;
-import com.p1nero.invincible.conditions.JumpCondition;
-import com.p1nero.invincible.conditions.ParrySuccessCondition;
-import com.p1nero.invincible.conditions.SprintingCondition;
+import com.p1nero.invincible.api.events.TimeStampedEvent;
+import com.p1nero.invincible.conditions.*;
 import com.p1nero.invincible.skill.api.ComboNode;
 import com.arc.arc.ArcMod;
 import com.arc.arc.skill.DemoComboAttack;
@@ -32,7 +31,7 @@ public class Skills {
         ComboNode sw0rdbasicAttack=ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_1).setPriority(1);
         ComboNode sw0rdextend=ComboNode.createNode(()->WOMAnimations.AGONY_AIR_SLASH).setPriority(1);
         ComboNode sw0rdgp =ComboNode.createNode(()->WOMAnimations.KATANA_FATAL_DRAW).setPriority(4).addCondition(new ParrySuccessCondition()).setCanBeInterrupt(false).setConvertTime(-0.2F);
-        ComboNode sw0rddodge=ComboNode.createNode(()->WOMAnimations.KATANA_SHEATHED_DASH).setPriority(1).addCondition(new DodgeSuccessCondition()).setCanBeInterrupt(false);
+        ComboNode sw0rddodge=ComboNode.createNode(()->WOMAnimations.KATANA_SHEATHED_DASH).setPriority(1).addCondition(new DodgeSuccessCondition()).setCanBeInterrupt(false).addCondition(new StackCondition(1,4)).addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack value 1", false));
         ComboNode dodge=ComboNode.createNode(()->Animations.BIPED_STEP_BACKWARD).addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(EpicFightSounds.ENTITY_MOVE,0,0))));
         ComboNode a=ComboNode.create().addConditionAnimation(sw0rdjump).
                   addConditionAnimation(sw0rddash).
@@ -53,9 +52,10 @@ public class Skills {
         sw0rddash.key1(a);
         sw0rdextend.key1(a);
 
-        SkillManager.register(DemoComboAttack::new, DemoComboAttack.createComboBasicAttack().setCombo(sw0rdroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
+        SkillManager.register(Demo1::new, Demo1.createComboBasicAttack().setCombo(sw0rdroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
 
-
+        ComboNode sw1rdroot = ComboNode.create();
+        SkillManager.register(DemoComboAttack::new, DemoComboAttack.createComboBasicAttack().setCombo(sw1rdroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo1");
 
 
 
