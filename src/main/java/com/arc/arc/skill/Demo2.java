@@ -13,8 +13,8 @@ import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
 import java.util.*;
 
-public class DemoComboAttack extends ComboBasicAttack {
-    public DemoComboAttack(Builder builder) {
+public class Demo2 extends ComboBasicAttack {
+    public Demo2(Builder builder) {
         super(builder);
     }
 
@@ -22,10 +22,10 @@ public class DemoComboAttack extends ComboBasicAttack {
     public List<Component> getTooltipOnItem(ItemStack itemstack, CapabilityItem cap, PlayerPatch<?> playerCap) {
         List<Component> list = Lists.newArrayList();
         list.add(new TranslatableComponent(this.getTranslationKey()).withStyle(ChatFormatting.GOLD).append(new TextComponent(String.format("[%.0f]", this.consumption)).withStyle(ChatFormatting.AQUA)));
-        list.add(new TextComponent("攻击"));
-        list.add(new TextComponent("KEY2: ").append(InvincibleKeyMappings.getTranslatableKey2()));
-        list.add(new TranslatableComponent("skill.your_mod_id.demo_combo.tooltip1"));
-        list.add(new TranslatableComponent("skill.your_mod_id.demo_combo.tooltip2"));
+        list.add(new TextComponent("普攻三段后按下KEY2可消耗一层技能额外居合攻击"));
+        list.add(new TextComponent("无条件常态按下KEY2，消耗一层技能向后瞬步,若后瞬步为极限闪避，则GP成功，再次按下KEY2触发追击,恢复一层技能"));
+        list.add(new TranslatableComponent("成功招架后按KEY2消耗一层技能触发防反"));
+        list.add(new TextComponent("成功招架后按").append(InvincibleKeyMappings.getTranslatableKey2()).append(new TextComponent("消耗一层技能触发防反")));
         list.add(new TextComponent(""));
         return list;
     }
