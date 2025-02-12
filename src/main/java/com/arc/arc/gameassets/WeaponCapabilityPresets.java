@@ -1,10 +1,13 @@
 package com.arc.arc.gameassets;
 
 import com.arc.arc.ArcMod;
+import com.guhao.star.efmex.StarAnimations;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
+import reascer.wom.gameasset.WOMSkills;
+import reascer.wom.skill.weaponpassive.SatsujinPassive;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.collider.MultiOBBCollider;
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
@@ -35,7 +38,7 @@ public class WeaponCapabilityPresets {
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
                     .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.Arc)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.BLOCK, Animations.UCHIGATANA_GUARD)
-                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.IDLE,WOMAnimations.KATANA_IDLE)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.IDLE, WOMAnimations.KATANA_IDLE)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.WALK, WOMAnimations.KATANA_WALK)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.RUN, WOMAnimations.KATANA_RUN)
                     .comboCancel((style) -> false);
@@ -82,13 +85,29 @@ public class WeaponCapabilityPresets {
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.BLOCK, Animations.UCHIGATANA_GUARD)
                     .comboCancel((style) -> false);
 
+        public static final Function<Item, CapabilityItem.Builder> ARC2 = (item) ->
+                (CapabilityItem.Builder) WeaponCapability.builder().category(CapabilityItem.WeaponCategories.UCHIGATANA)//蹭格挡，用别的也行
+                        .styleProvider((entityPatch) -> CapabilityItem.Styles.TWO_HAND)
+                        .collider(ColliderPreset.UCHIGATANA)//这里可以用预设的，也可以new 一个
+                        .swingSound(EpicFightSounds.WHOOSH)
+                        .hitSound(EpicFightSounds.BLADE_HIT)
+                        .hitParticle(EpicFightParticles.HIT_BLADE.get())
+                        .canBePlacedOffhand(false)
+                        .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
+                        .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.Arcblade)
+                        .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.BLOCK, Animations.UCHIGATANA_GUARD)
+                        .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.IDLE, Animations.BIPED_HOLD_UCHIGATANA)
+                        .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.WALK, Animations.BIPED_WALK_UCHIGATANA)
+                        .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.RUN, Animations.BIPED_RUN_UCHIGATANA)
+                        .comboCancel((style) -> false);
 
 
-
-    @SubscribeEvent
-    public static void register(WeaponCapabilityPresetRegistryEvent event) {
-        event.getTypeEntry().put("sw0rd", ARC);
-        event.getTypeEntry().put("sw1rd", ARC1);
+        @SubscribeEvent
+        public static void register(WeaponCapabilityPresetRegistryEvent event) {
+            event.getTypeEntry().put("sw0rd", ARC);
+            event.getTypeEntry().put("sw1rd", ARC1);
+            event.getTypeEntry().put("arcblade", ARC2);
+        }
     }
-}
+
 
