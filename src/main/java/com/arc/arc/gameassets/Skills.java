@@ -157,26 +157,25 @@ public class Skills {
                 .addCondition(new SprintingCondition())
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
-                .setPriority(5);
+                .setPriority(6);
 
         ComboNode ArcjumpSkill = ComboNode.createNode(()-> WOMAnimations.SOLAR_HORNO)
                 .addCondition(new JumpCondition())
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
-                .setPriority(5);
+                .setPriority(6);
 
 
-        ComboNode Free =ComboNode.createNode(()-> Animations.BIPED_STEP_LEFT)
+        ComboNode Free =ComboNode.createNode(()-> Animations.BIPED_STEP_BACKWARD)
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
 
         ComboNode ArcbasicAttack =ComboNode.create().addConditionAnimation(ArcJump)
                                                     .addConditionAnimation(ArcDash)
                                                     .addConditionAnimation(ArcAuto1)
-                                                    .addConditionAnimation(ArcdashSkill)
-                                                    .addConditionAnimation(ArcjumpSkill)
                                                     .setPriority(4)
                                                     ;
+
 
         Arcbladeroot.key1(ArcbasicAttack);//初始无条件使用1A 疾跑攻击 跳跃攻击
         ArcDash.key1(ArcAuto1);//疾跑攻击后接1A
@@ -292,6 +291,7 @@ public class Skills {
         ComboNode Arc3AS1=ComboNode.createNode(()->StarAnimations.YAMATO_COUNTER1)
                 .setConvertTime(-0.1F)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.6 0.5",true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "indestructible @s play \"epicfight:biped/skill/step_forward\" 0.2 1", true))
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
         ComboNode Arc3AS2=ComboNode.createNode(()->StarAnimations.YAMATO_COUNTER2)
@@ -307,7 +307,7 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s star:really_stun_immune 5 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s epicfight:stun_immune 5 1", false))
                 .addTimeEvent(new TimeStampedEvent(0.4F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD,0.0F);}))
-                .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.ENDERSTEP_FORWARD,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.3F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.ENDERSTEP_FORWARD,0.0F);}))
                 ;
 
         ComboNode Arc5As=ComboNode.createNode(()->StarAnimations.YAMATO_AUTO2)
@@ -324,7 +324,6 @@ public class Skills {
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
         ComboNode Arc5As4=ComboNode.createNode(()->WOMAnimations.KATANA_AUTO_3)
-                .setNotCharge(true)
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.6 0.5",true))
@@ -341,16 +340,16 @@ public class Skills {
         ArcAuto3.key2(Arc3AS1);//普攻三段派生一段
         Arc3AS1.key2(Arc3AS2);//普攻三段派生二段
         Arc3AS1.key1(ArcAuto4);//普攻三段派生一段接4A
-        Arc3AS2.key1(ArcAuto4);//普攻三段派生二段接1A
+        Arc3AS2.key1(ArcAuto1);//普攻三段派生二段接1A
         ArcAuto4.key2(Arc4AS);//普攻四段派生
         Arc4AS.key1(ArcAuto5);//普攻四段派生接5A
         ArcAuto5.key2(Arc5As);//普攻五段派生1 阎魔刀2A
         Arc5As.key2(Arc5As2);//普攻五段派生2 人斩1A
         Arc5As2.key2(Arc5As3);//普攻五段派生3 人斩2A
         Arc5As3.key2(Arc5As4);//普攻五段派生4 人斩3A
-        Arc5As.key1(ArcAuto6);//普攻五段派生1接6A
-        Arc5As2.key1(ArcAuto6);//普攻五段派生2接6A
-        Arc5As3.key1(ArcAuto6);//普攻五段派生3接6A
+        Arc5As.key1(ArcAuto6);//普攻五段派生1接1A
+        Arc5As2.key1(ArcAuto6);//普攻五段派生2接2A
+        Arc5As3.key1(ArcAuto6);//普攻五段派生3接3A
         Arc5As4.key1(ArcAuto6);//普攻五段派生4接6A
         ArcAuto6.key2(Arc6As);//普攻六段派生，次元斩绝
         Arc6As.key1(ArcbasicAttack);//普攻六段派生重置平A
@@ -410,7 +409,7 @@ public class Skills {
         ArcGP2extendAttack3.key2(ArcGP2extendAttack4);//
         ArcGP2extendAttack4.key2(ArcGP2extendAttack5);//
         ArcGP2extendAttack5.key2(ArcGP2extendAttack6);//
-        ArcGP2extendAttack6.key1(ArcAuto5);//空中下砸落地后KEY1接普攻4A
+        ArcGP2extendAttack6.key1(ArcAuto5);//空中下砸落地后KEY1接普攻5A
         ArcGP2extendAttack6.key2(ArcGP1);//
 
 
@@ -475,16 +474,21 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s minecraft:resistance 3 3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s star:really_stun_immune 3 2", false));;
 
+        ComboNode ArcAdvancedAttack =ComboNode
+                .create().addConditionAnimation(ArcdashSkill)
+                .addConditionAnimation(ArcjumpSkill)
+                .addConditionAnimation(ArcParryStrike1)
+                .setPriority(4);
 
-        ComboNode ArcParry =ComboNode.create()
-                .addConditionAnimation(ArcParryStrike1);
-
-        Arcbladeroot.key3(ArcParry);//常态按下key3招架反击
+        Arcbladeroot.key3(ArcAdvancedAttack);//常态按下key3招架反击
+        ArcdashSkill.key3(ArcAdvancedAttack);//疾跑技能后可接进阶攻击
+        ArcjumpSkill.key3(ArcAdvancedAttack);//跳跃技能后可接进阶攻击
         ArcParryStrike1.key3(ArcParryStrike2);//招架反击1段后按下key3使用二段
         ArcParryStrike1.key1(ArcAuto2);//招架反击1段后按下key1，接普攻二段
         ArcParryStrike1.key2(ArcGP1);//招架反击1段后按下key2，使用GP1
         ArcParryStrike2.key1(ArcAuto3);//招架反击2段后按下key1，接普攻三段
         ArcParryStrike2.key2(Arc2ASGP2);//招架反击2段后按下key2，使用GP2
+        ArcParryStrike2.key3(ArcParryStrike1);//招架反击2段后可继续触发招架反击
 
 
         SkillManager.register(ArcbladeSkill::new, ArcbladeSkill.createComboBasicAttack().setCombo(Arcbladeroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo2");
