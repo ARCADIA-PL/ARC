@@ -493,37 +493,35 @@ public class Skills {
                 ;
 
         ComboNode ArcGP2extendSkill2 =ComboNode.createNode(()->StarAnimations.TACHI_TWOHAND_AUTO_1)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,0,0);}))
                 .setNotCharge(true)
                 .setPlaySpeed(1.3F)
                 ;
 
         ComboNode ArcGP2extendSkill3 =ComboNode.createNode(()->Animations.RUSHING_TEMPO1)
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .setNotCharge(true)
                 .setPlaySpeed(1.2F)
                 ;
 
         ComboNode ArcGP2extendSkill4 =ComboNode.createNode(()->StarAnimations.TACHI_TWOHAND_AUTO_2)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,0,0);}))
                 .setNotCharge(true)
                 .setPlaySpeed(1.3F)
                 ;
         ComboNode ArcGP2extendSkill5 =ComboNode.createNode(()->Animations.RUSHING_TEMPO2)
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .setNotCharge(true)
                 .setPlaySpeed(1.2F)
                 ;
         ComboNode ArcGP2extendSkill6 =ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .setNotCharge(true)
                 .setConvertTime(0.15F)
-                .setPlaySpeed(1F)
+                .setPlaySpeed(1.1F)
                 ;
 
         ComboNode ArcGP2extendSkill7 =ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .setNotCharge(true)
                 .setConvertTime(0.15F)
-                .setPlaySpeed(1F)
+                .setPlaySpeed(1.1F)
                 ;
 
         Arc2ASGP2.key1(ArcGP2extendSkill1);//
