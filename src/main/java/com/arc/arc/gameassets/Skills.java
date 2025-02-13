@@ -291,7 +291,7 @@ public class Skills {
                 .setPlaySpeed(1.5F)
                 .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.DODGEMASTER_BACKWARD,0.0F);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s minecraft:haste 3", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s minecraft:haste 5 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s epicfight:stun_immunity 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s star:really_stun_immunity 2", false))
                 .addCondition(new StackCondition(1,8))
@@ -303,6 +303,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 3",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 3",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 3 3",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:haste 5 3",false))
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false));;;
