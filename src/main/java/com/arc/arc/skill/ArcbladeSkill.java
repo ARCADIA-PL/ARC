@@ -24,7 +24,7 @@ public class ArcbladeSkill extends ComboBasicAttack {
         list.add(new TranslatableComponent(this.getTranslationKey()).withStyle(ChatFormatting.GOLD).append(new TextComponent(String.format("[%.0f]", this.consumption)).withStyle(ChatFormatting.AQUA)));
         list.add(new TextComponent("§6§l§o旧世幻影之刃-ArcBlade"));
         list.add(new TextComponent("共有六段普攻，每段普攻后可使用").append(InvincibleKeyMappings.getTranslatableKey2()).append(new TextComponent("§b派生技能")));
-        list.add(new TextComponent("§d普攻一段派生：拔剑上挑，给予自身短暂的攻速提升；命中目标则恢复技能层数,结束后按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("§b衔接普攻二段")));
+        list.add(new TextComponent("§d普攻一段派生1：拔剑上挑，给予自身短暂的攻速提升；命中目标则恢复技能层数,结束后按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("§b衔接普攻二段")));
         list.add(new TextComponent("§d普攻二段派生GP2：向前瞬身；若为完美闪避，可按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("或者").append(InvincibleKeyMappings.getTranslatableKey2()).append(new TextComponent("§p§c派生攻击"))));
         list.add(new TextComponent("普攻二段派生GP2若非完美闪避，短暂时间内无法攻击，可消耗技能按").append(InvincibleKeyMappings.getTranslatableKey3()).append(new TextComponent("§c进行一次跨步紧急逃生")));
         list.add(new TextComponent("§6§oGP2:追击A2：共5段，消耗技能连点").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("释放：结束后按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("§b衔接普攻第四段"))));
