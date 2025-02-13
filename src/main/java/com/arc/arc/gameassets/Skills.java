@@ -135,7 +135,7 @@ public class Skills {
                 .setPlaySpeed(1.1F)
                 ;;
         ComboNode ArcAuto3 = ComboNode.createNode(()-> StarAnimations.YAMATO_AUTO4)
-                .addTimeEvent(new TimeStampedEvent(1.35F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.ENDERSTEP_FORWARD,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(1.25F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.ENDERSTEP_FORWARD,0.0F);}))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .setPlaySpeed(1.2F)
                 .setConvertTime(-0.2F)
@@ -320,7 +320,7 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(Sounds.FORESIGHT,0,0))))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s",true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3",true))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.8 0.5",true))
                 ;
 
 
@@ -428,13 +428,13 @@ public class Skills {
                 .addCondition(new DodgeSuccessCondition())
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 7",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 2",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.8 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 6",true))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.9 0.5",true))
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s star:really_stun_immunity 5 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s epicfight:stun_immunity 5 1", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s minecraft:resistance 4 4", false));;
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s minecraft:resistance 6 4", false));;
 
 
         ComboNode ArcGP2extendAttack2 =ComboNode.createNode(()->WOMAnimations.AGONY_PLUNGE_FORWARD)
@@ -464,7 +464,7 @@ public class Skills {
                 ;
 
         ComboNode ArcGP2extendAttack6 =ComboNode.createNode(()->WOMAnimations.SOLAR_HORNO)
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.3 0.5",true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "indestructible @s play \"epicfight:biped/combat/hit_long\" 0.4 0.5", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0F, "effect give @s minecraft:slow_falling 2", false))
                 .setNotCharge(true)
                 .setConvertTime(-0.1F)
