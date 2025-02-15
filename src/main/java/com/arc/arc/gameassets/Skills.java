@@ -702,6 +702,13 @@ public class Skills {
                 .setPriority(5);
 
         Arcbladeroot.key3(ArcParryStrike1);//常态按下key3招架反击
+        ArcAuto1.key3(ArcParryStrike1);
+        ArcAuto2.key3(ArcParryStrike1);
+        ArcAuto3.key3(ArcParryStrike1);
+        ArcAuto4.key3(ArcParryStrike1);
+        ArcAuto5.key3(ArcParryStrike1);
+        ArcAuto6.key3(ArcParryStrike1);
+
         ArcParryStrike1.key3(ArcParryStrike2);//招架反击1段后按下key3使用二段
         ArcParryStrike1.key1(ArcAuto2);//招架反击1段后按下key1，接普攻二段
         ArcParryStrike1.key2(ArcGP1);//招架反击1段后按下key2，使用GP1
@@ -808,12 +815,10 @@ public class Skills {
 
         ComboNode ArcAuto3extend2 =ComboNode.create()
                 .addConditionAnimation(Arc3AS1)
-                .addConditionAnimation(ArcGP3Skill1)
-                .addConditionAnimation(Arc6As);
+                .addConditionAnimation(ArcGP3Skill1);
 
         ArcAuto3.key2(ArcAuto3extend2);//普攻三段完美闪避派生S
         Arc3AS2.key2(ArcGP3Skill1);
-        ArcAuto6.key2(ArcAuto3extend2);
         ArcGP3Skill1.key2(ArcGP3Skill2);
 
         ArcGP3Skill2.key2(ArcGP3Skill3);
@@ -964,7 +969,6 @@ public class Skills {
                 ;
 
         ArcAuto3.key3(ArcAuto3extend1);//普攻三段完美闪避派生A
-        ArcAuto6.key3(ArcAuto3extend1);
         Arc3AS2.key3(ArcAuto3extend1);
         ArcGP3Attack1.key3(ArcGP3Attack2);
         ArcGP3Attack2.key3(ArcGP3Attack3);
