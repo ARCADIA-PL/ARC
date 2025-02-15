@@ -219,7 +219,8 @@ public class Skills {
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false))
                 .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(Sounds.FORESIGHT,0,0))))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s",true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.6",true))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.3 0.6",true))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 2",true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.02 1 force @s",false))
                 ;;
 
@@ -296,8 +297,6 @@ public class Skills {
         ArcGP1.key1(ArcGP1extendA);//后瞬步GP成功后可按KEY1接A追击1
         ArcGP1extendA.key1(ArcGP1extendA1);//后瞬步GP成功后可按KEY1接A追击2
         ArcGP1extendA1.key1(ArcAuto3);//A1追击后接普攻3A
-        ArcGP1extendA.key2(ArcGP1);//
-        ArcGP1extendA1.key2(ArcGP1);//
 
         ArcGP1.key2(ArcGP1extendS1);//后瞬步GP成功后可消耗技能按KEY2接S1追击第一段
         ArcGP1extendS1.key2(ArcGP1extendS2);//GP成功发动S1追击后衔接S2第二段追击
@@ -305,10 +304,9 @@ public class Skills {
         ArcGP1extendS2.key1(ArcGP1extendS4);//S2追击后提前结算发动S4四段
         ArcGP1extendS3.key2(ArcGP1extendS4);//S3追击后衔接S4第四段追击
         ArcGP1extendS1.key1(ArcAuto3);//S1追击后接普攻3A
-        ArcGP1extendS4.key1(ArcAuto4);//S4追击后接普攻4A;
         ArcGP1extendS3.key1(ArcAuto4);//S3追击后接普攻4A;
+        ArcGP1extendS4.key1(ArcAuto4);//S4追击后接普攻4A;
 
-        ArcGP1extendS4.key2(ArcGP1);//
 
 
 
@@ -319,8 +317,8 @@ public class Skills {
                 .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.DODGEMASTER_BACKWARD,0.0F);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s minecraft:haste 5 2", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s epicfight:stun_immunity 2", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s star:really_stun_immunity 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s epicfight:stun_immunity 3", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s star:really_stun_immunity 3", false))
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .setDamageMultiplier(ValueModifier.multiplier(1.1F));;;
@@ -330,8 +328,8 @@ public class Skills {
                 .setCanBeInterrupt(false)
                 .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 1.5 false false false", true))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 3",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 3",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 4",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 4",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 3 3",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:haste 5 3",false))
                 .addCondition(new StackCondition(1,8))
@@ -348,8 +346,9 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
                 .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(Sounds.FORESIGHT,0,0))))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s",true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",true))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.8 0.5",true))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 2",true))
                 ;
 
 
@@ -374,10 +373,11 @@ public class Skills {
         ComboNode Arc3AS2=ComboNode.createNode(()->StarAnimations.YAMATO_STEP_FORWARD)
                 .addCondition(new StackCondition(1,8))
                 .setCanBeInterrupt(false)
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3",true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.8 0.5",true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.02 1 force @s",false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack -1", false));;;;
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack -2", false));;;;
 
         ComboNode Arc4AS=ComboNode.createNode(()->WOMAnimations.KATANA_SHEATHED_DASH)
                 .setNotCharge(true)
@@ -391,6 +391,7 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s minecraft:absorption 10 3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s star:really_stun_immunity 5 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s epicfight:stun_immunity 5 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s minecraft:resistance 2 4", false))
                 .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_COUNTER2,0.0F);}))
                 ;
         ComboNode Arc4AS1=ComboNode.createNode(()->StarAnimations.YAMATO_AUTO4)
@@ -478,23 +479,28 @@ public class Skills {
         ComboNode Arc6As=ComboNode.createNode(()-> MyAnimations.DMC5_V_JC)
                 .addCondition(new StackCondition(8,8))
                 .setCooldown(3600)
+                .setPriority(5)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F,"effect give @s cataclysm:stun 3",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 8", false));;
 
         ArcAuto1.key2(Arc1AS);//普攻一段派生一段
         Arc1AS.key2(Arc1AS1);//派生一段接二段
         Arc1AS.key1(ArcAuto2);//一段派生接2A
+
         Arc1AS1.key1(ArcAuto2);//二段派生接2A
         ArcAuto2.key2(GP2);//普攻二段派生，特殊GP
         GP2.key3(Free);//普攻二段派生失败紧急逃生
+
         ArcAuto3.key2(Arc3AS1);//普攻三段派生一段
         Arc3AS1.key2(Arc3AS2);//普攻三段派生二段
         Arc3AS1.key1(ArcAuto4);//普攻三段派生一段接4A
         Arc3AS2.key1(ArcAuto2);//普攻三段派生二段接1A
+
         ArcAuto4.key2(Arc4AS);//普攻四段派生一段
         Arc4AS.key2(Arc4AS1);//普攻四段派生二段
         Arc4AS.key1(ArcAuto5);//普攻四段派生一段接5A
         Arc4AS1.key1(ArcAuto5);//普攻四段派生二段接5A
+
         ArcAuto5.key2(Arc5As);//普攻五段派生1 阎魔刀2A
         Arc5As.key2(Arc5As2);//普攻五段派生2 人斩1A
         Arc5As2.key2(Arc5As3);//普攻五段派生3 人斩2A
@@ -503,10 +509,13 @@ public class Skills {
         Arc5As2.key1(ArcAuto6);//普攻五段派生2接2A
         Arc5As3.key1(ArcAuto6);//普攻五段派生3接3A
         Arc5As4.key1(ArcAuto6);//普攻五段派生4接6A
+
         ArcAuto6.key2(Arc6As);//普攻六段派生，次元斩绝
         Arc6As.key1(ArcbasicAttack);//普攻六段派生重置平A
-        ArcGP1extendS4.key3(Arc2ASGP2);//GP1S追击后KEY3发动GP2
-        ArcGP1extendA1.key3(Arc2ASGP2);//GP1A追击后KEY3发动GP2
+
+        ArcGP1extendA1.key2(Arc2ASGP2);//GP1A追击后KEY2发动GP2
+        ArcGP1extendS4.key2(Arc2ASGP2);//GP1S追击后KEY2发动GP2
+
 
 
         ComboNode ArcGP2extendAttack1 =ComboNode.createNode(()->WOMAnimations.AGONY_CLAWSTRIKE)
@@ -666,6 +675,7 @@ public class Skills {
         ArcGP2extendSkill7.key2(ArcGP1);//
 
         ComboNode ArcParryStrike1 =ComboNode.createNode(()->StarAnimations.YAMATO_COUNTER1)
+                .setPriority(5)
                 .addCondition(new ParrySuccessCondition())
                 .addCondition(new StackCondition(1,8))
                 .setCanBeInterrupt(false)
@@ -679,6 +689,7 @@ public class Skills {
 
 
         ComboNode ArcParryStrike2 =ComboNode.createNode(()->StarAnimations.YAMATO_COUNTER2)
+                .setPriority(5)
                 .setDamageMultiplier(ValueModifier.multiplier(0.5F))
                 .setCanBeInterrupt(false)
                 .setStunTypeModifier(StunType.SHORT)
@@ -687,14 +698,10 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s star:really_stun_immunity 3 2", false));;
 
         ComboNode ArcAdvancedAttack =ComboNode
-                .create().addConditionAnimation(ArcdashSkill)
-                .addConditionAnimation(ArcjumpSkill)
-                .addConditionAnimation(ArcParryStrike1)
-                .setPriority(4);
+                .create().addConditionAnimation(ArcParryStrike1)
+                .setPriority(5);
 
-        Arcbladeroot.key3(ArcAdvancedAttack);//常态按下key3招架反击
-        ArcdashSkill.key3(ArcAdvancedAttack);//疾跑技能后可接进阶攻击
-        ArcjumpSkill.key3(ArcAdvancedAttack);//跳跃技能后可接进阶攻击
+        Arcbladeroot.key3(ArcParryStrike1);//常态按下key3招架反击
         ArcParryStrike1.key3(ArcParryStrike2);//招架反击1段后按下key3使用二段
         ArcParryStrike1.key1(ArcAuto2);//招架反击1段后按下key1，接普攻二段
         ArcParryStrike1.key2(ArcGP1);//招架反击1段后按下key2，使用GP1
@@ -801,7 +808,8 @@ public class Skills {
 
         ComboNode ArcAuto3extend2 =ComboNode.create()
                 .addConditionAnimation(Arc3AS1)
-                .addConditionAnimation(ArcGP3Skill1);
+                .addConditionAnimation(ArcGP3Skill1)
+                .addConditionAnimation(Arc6As);
 
         ArcAuto3.key2(ArcAuto3extend2);//普攻三段完美闪避派生S
         Arc3AS2.key2(ArcGP3Skill1);
