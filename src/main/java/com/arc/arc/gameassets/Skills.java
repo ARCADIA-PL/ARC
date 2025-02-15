@@ -407,14 +407,16 @@ public class Skills {
                 ;
 
         ComboNode Arc5As=ComboNode.createNode(()->StarAnimations.YAMATO_STRIKE1)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s cofh_core:lightning_resistance 10", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @s at @s run particle irons_spellbooks:electricity ~ ~0.1 ~ 0.4 0.2 0.4 0.1 32", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 0.5 2.0", false))
+                .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD,0.0F);}))
                 .setNotCharge(true)
                 .addCondition(new StackCondition(1,8))
                 .setDamageMultiplier(ValueModifier.multiplier(2F))
-                .setPlaySpeed(1.3F)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true));
         ComboNode Arc5As2=ComboNode.createNode(()->WOMAnimations.KATANA_AUTO_1)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
@@ -422,28 +424,34 @@ public class Skills {
                 .addCondition(new StackCondition(1,8))
                 .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.5",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true));
         ComboNode Arc5As3=ComboNode.createNode(()->WOMAnimations.KATANA_AUTO_2)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 0.5 1.75", false))
                 .setNotCharge(true)
                 .addCondition(new StackCondition(1,8))
                 .setDamageMultiplier(ValueModifier.multiplier(2))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.5",true))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true));
         ComboNode Arc5As4=ComboNode.createNode(()->WOMAnimations.KATANA_AUTO_3)
                 .setConvertTime(0.1F)
                 .setPlaySpeed(1F)
                 .addCondition(new StackCondition(1,8))
                 .setDamageMultiplier(ValueModifier.multiplier(3))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.5",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true))
+
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.02 1 force @s",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -4",false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 50 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 50 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 20 force", false))
@@ -453,12 +461,12 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 20 force", false))
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 20", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s cofh_core:lightning_resistance 5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "summon minecraft:lightning_bolt ^ ^0 ^-7", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "summon minecraft:lightning_bolt ^-3 ^0 ^-5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 20", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s cofh_core:lightning_resistance 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^ ^0 ^-7", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^-3 ^0 ^-5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
 
 
@@ -769,6 +777,7 @@ public class Skills {
                 .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.5 0.5",true))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
+                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true))
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 50 force", false))
@@ -781,12 +790,12 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 20 force", false))
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 20", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s cofh_core:lightning_resistance 5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "summon minecraft:lightning_bolt ^ ^0 ^-7", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "summon minecraft:lightning_bolt ^-3 ^0 ^-5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 20", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s cofh_core:lightning_resistance 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^ ^0 ^-7", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^-3 ^0 ^-5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));;
 
 
@@ -918,6 +927,7 @@ public class Skills {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina -3",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true))
                 .setPlaySpeed(1.2F)
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
