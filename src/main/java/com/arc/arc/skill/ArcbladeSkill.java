@@ -22,7 +22,8 @@ public class ArcbladeSkill extends ComboBasicAttack {
     public List<Component> getTooltipOnItem(ItemStack itemstack, CapabilityItem cap, PlayerPatch<?> playerCap) {
         List<Component> list = Lists.newArrayList();
         list.add(new TranslatableComponent(this.getTranslationKey()).withStyle(ChatFormatting.GOLD).append(new TextComponent(String.format("[%.0f]", this.consumption)).withStyle(ChatFormatting.AQUA)));
-        list.add(new TextComponent("§6§l§o旧世幻影之刃-ArcBlade"));
+        list.add(new TextComponent("§6§l旧世幻影之刃-ArcBlade"));
+        list.add(new TextComponent("§4§l§o旧界终焉力量铸造的究极兵刃,其强大的力量使得常人难以驾驭...(不可通过附魔台直接附魔)"));
         list.add(new TextComponent("共有六段普攻，每段普攻后可使用").append(InvincibleKeyMappings.getTranslatableKey2()).append(new TextComponent("§b派生技能")));
         list.add(new TextComponent("每次普攻之间可以穿插跳跃攻击和冲刺攻击，§b跳跃攻击后衔接普攻二段，冲刺攻击后衔接普攻一段"));
         list.add(new TextComponent("§d普攻一段派生1：拔剑上挑，给予自身短暂的攻速提升以及霸体；,可按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey2()).append(new TextComponent("§d发动二段一文字斩击:命中获得抗性提升4以及霸体，恢复两层技能,可按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("§b衔接普攻二段"))));

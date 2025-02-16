@@ -4,11 +4,14 @@ buildscript {
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = "https://repo.spongepowered.org/maven" }
         maven { url = 'https://maven.parchmentmc.org' }
+        maven { url = 'https://maven.blamejared.com' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+
+
     }
 }
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
