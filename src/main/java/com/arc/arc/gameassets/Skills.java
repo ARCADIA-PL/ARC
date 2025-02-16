@@ -51,27 +51,27 @@ public class Skills {
                                       .addConditionAnimation(sw0rddodgegp1);
 
         sw0rdroot.key1(a);//无条件使用普攻一段,跳劈，跑攻
-        sw0rdroot.key2(b);//常态按技能后瞬步
+        sw0rdroot.keyWeaponInnate(b);//常态按技能后瞬步
         GP.key1(sw0rddodgegp);//若后瞬步为极限闪避，则GP成功，再次按下KEY1触发追击1,恢复一层技能
-        GP.key2(sw0rddodgegp1);//若后瞬步为极限闪避，则GP成功，再次按下KEY2触发追击2
-        GP.key2(b);//瞬步后可衔接瞬步
+        GP.keyWeaponInnate(sw0rddodgegp1);//若后瞬步为极限闪避，则GP成功，再次按下keyWeaponInnate触发追击2
+        GP.keyWeaponInnate(b);//瞬步后可衔接瞬步
         sw0rdjump.key1(a);//跳劈后接普攻一段
         sw0rddash.key1(a);//跑攻后接普攻一段
         sw0rdgp.key1(a);//触发防反后接普攻一段
         sw0rdextend.key1(a);//额外攻击后接普攻一段
-        sw0rdextend.key2(b);//额外攻击后可衔接瞬步
+        sw0rdextend.keyWeaponInnate(b);//额外攻击后可衔接瞬步
         sw0rddodgegp.key1(aa);//触发瞬步GP追击1后接普攻二段
         sw0rddodgegp1.key1(aaa);//触发瞬步GP2追击后接普攻三段
-        sw0rddodgegp.key2(b);//触发瞬步GP追击1后可继续瞬步
-        sw0rddodgegp1.key2(b);//触发瞬步GP追击2后可继续瞬步
-        sw0rdgp.key2(b);//触发招架反击后可继续瞬步
+        sw0rddodgegp.keyWeaponInnate(b);//触发瞬步GP追击1后可继续瞬步
+        sw0rddodgegp1.keyWeaponInnate(b);//触发瞬步GP追击2后可继续瞬步
+        sw0rdgp.keyWeaponInnate(b);//触发招架反击后可继续瞬步
         a.key1(aa);//普攻一段接普攻二段
-        a.key2(b);//普攻一段可衔接瞬步
+        a.keyWeaponInnate(b);//普攻一段可衔接瞬步
         aa.key1(aaa);//普攻二段接普攻三段
-        aa.key2(b);//普攻二段可衔接瞬步
+        aa.keyWeaponInnate(b);//普攻二段可衔接瞬步
         aaa.key1(a);//普攻三段后接普攻一段
-        aaa.key2(sw0rdextend);//普攻三段后按下KEY2可消耗一层技能额外攻击
-        sw0rdroot.key2(b);//成功招架后按KEY2消耗一层技能触发防反
+        aaa.keyWeaponInnate(sw0rdextend);//普攻三段后按下keyWeaponInnate可消耗一层技能额外攻击
+        sw0rdroot.keyWeaponInnate(b);//成功招架后按keyWeaponInnate消耗一层技能触发防反
 
 
 
@@ -125,14 +125,14 @@ public class Skills {
                 .setConvertTime(-0.1F)
                 .setPlaySpeed(1.3F)
                 .addCondition(new JumpCondition())
-                .setDamageMultiplier(ValueModifier.multiplier(0.7F))
+                .setDamageMultiplier(ValueModifier.multiplier(0.5F))
                 .setPriority(5)
                 ;;
-        ComboNode ArcDash = ComboNode.createNode(()->Animations.TACHI_DASH)
+        ComboNode ArcDash = ComboNode.createNode(()->StarAnimations.YAMATO_DASH)
                 .setConvertTime(-0.1F)
                 .setPlaySpeed(1.2F)
                 .addCondition(new SprintingCondition())
-                .setDamageMultiplier(ValueModifier.multiplier(0.7F))
+                .setDamageMultiplier(ValueModifier.multiplier(0.5F))
                 .setPriority(5)
                 ;;
         ComboNode ArcAuto1 = ComboNode.createNode(()-> StarAnimations.TACHI_TWOHAND_AUTO_1)
@@ -254,7 +254,7 @@ public class Skills {
                 .setPlaySpeed(0.9F)
                 .setConvertTime(0F)
                 .addCondition(new StackCondition(1,8))
-                .setCooldown(100)
+                .setCooldown(200)
                 .setCanBeInterrupt(false)
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false))
                 .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(Sounds.FORESIGHT,0,0))))
@@ -266,7 +266,6 @@ public class Skills {
 
 
         ComboNode ArcGP1extendA=ComboNode.createNode(()->WOMAnimations.KATANA_SHEATHED_AUTO_2)
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 2 15",true))
                 .addCondition(new StackCondition(1,8))
                 .setPlaySpeed(1F)
                 .setPriority(4)
@@ -292,7 +291,6 @@ public class Skills {
 
 
         ComboNode ArcGP1extendS1=ComboNode.createNode(()->StarAnimations.YAMATO_STRIKE2)
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible consumeStack 1", false))
                 .addCondition(new StackCondition(1,8))
                 .setNotCharge(true)
@@ -333,7 +331,7 @@ public class Skills {
                 ;
 
 
-        Arcbladeroot.key2(ArcGP1);//常态按技能消耗一层技能后瞬步尝试GP，若为极限闪避则GP成功，则给予敌人1S晕眩
+        Arcbladeroot.keyWeaponInnate(ArcGP1);//常态按技能消耗一层技能后瞬步尝试GP，若为极限闪避则GP成功，则给予敌人1S晕眩
         ArcGP1.key3(Free);//无论GP成功与否，可按key3消耗一层充能使用后跨步重置普攻
         Free.key1(ArcbasicAttack);//key3跨步重置普攻
 
@@ -342,11 +340,11 @@ public class Skills {
         ArcGP1extendA.key1(ArcGP1extendA1);//后瞬步GP成功后可按KEY1接A追击2
         ArcGP1extendA1.key1(ArcAutoDash3);//A1追击后接普攻3A
 
-        ArcGP1.key2(ArcGP1extendS1);//后瞬步GP成功后可消耗技能按KEY2接S1追击第一段
-        ArcGP1extendS1.key2(ArcGP1extendS2);//GP成功发动S1追击后衔接S2第二段追击
-        ArcGP1extendS2.key2(ArcGP1extendS3);//S2追击后衔接S3第三段追击
+        ArcGP1.keyWeaponInnate(ArcGP1extendS1);//后瞬步GP成功后可消耗技能按keyWeaponInnate接S1追击第一段
+        ArcGP1extendS1.keyWeaponInnate(ArcGP1extendS2);//GP成功发动S1追击后衔接S2第二段追击
+        ArcGP1extendS2.keyWeaponInnate(ArcGP1extendS3);//S2追击后衔接S3第三段追击
         ArcGP1extendS2.key1(ArcGP1extendS4);//S2追击后提前结算发动S4四段
-        ArcGP1extendS3.key2(ArcGP1extendS4);//S3追击后衔接S4第四段追击
+        ArcGP1extendS3.keyWeaponInnate(ArcGP1extendS4);//S3追击后衔接S4第四段追击
         ArcGP1extendS1.key1(ArcAutoDash3);//S1追击后接普攻3A
         ArcGP1extendS3.key1(ArcAutoDash4);//S3追击后接普攻4A;
         ArcGP1extendS4.key1(ArcAutoDash4);//S4追击后接普攻4A;
@@ -484,8 +482,8 @@ public class Skills {
                 .setNotCharge(true)
                 .addCondition(new StackCondition(1,8))
                 .setDamageMultiplier(ValueModifier.multiplier(1.3F))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.5 0.5",true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.2 0.5",true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true));
         ComboNode Arc5As2=ComboNode.createNode(()->WOMAnimations.KATANA_AUTO_1)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32", false))
@@ -495,7 +493,7 @@ public class Skills {
                 .setDamageMultiplier(ValueModifier.multiplier(1.1F))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.5 0.5",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true));
         ComboNode Arc5As3=ComboNode.createNode(()->WOMAnimations.KATANA_AUTO_2)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32", false))
@@ -503,7 +501,7 @@ public class Skills {
                 .setNotCharge(true)
                 .addCondition(new StackCondition(1,8))
                 .setDamageMultiplier(ValueModifier.multiplier(1.3F))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.5 0.5",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true))
@@ -514,11 +512,10 @@ public class Skills {
                 .addCondition(new StackCondition(1,8))
                 .setDamageMultiplier(ValueModifier.multiplier(2.5F))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.5",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true))
 
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.02 1 force @s",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -4",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
@@ -550,41 +547,42 @@ public class Skills {
                 .addCondition(new StackCondition(8,8))
                 .setCooldown(3600)
                 .setPriority(5)
+                .setDamageMultiplier(ValueModifier.multiplier(0.6F))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F,"effect give @s cataclysm:stun 3",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 8", false));;
 
-        ArcAuto1.key2(Arc1AS);//普攻一段派生一段
-        Arc1AS.key2(Arc1AS1);//派生一段接二段
+        ArcAuto1.keyWeaponInnate(Arc1AS);//普攻一段派生一段
+        Arc1AS.keyWeaponInnate(Arc1AS1);//派生一段接二段
         Arc1AS.key1(ArcAutoDash2);//一段派生接2A
 
         Arc1AS1.key1(ArcAutoDash2);//二段派生接2A
-        ArcAuto2.key2(GP2);//普攻二段派生，特殊GP
+        ArcAuto2.keyWeaponInnate(GP2);//普攻二段派生，特殊GP
         GP2.key3(Free);//普攻二段派生失败紧急逃生
 
-        ArcAuto3.key2(Arc3AS1);//普攻三段派生一段
-        Arc3AS1.key2(Arc3AS2);//普攻三段派生二段
+        ArcAuto3.keyWeaponInnate(Arc3AS1);//普攻三段派生一段
+        Arc3AS1.keyWeaponInnate(Arc3AS2);//普攻三段派生二段
         Arc3AS1.key1(ArcAutoDash4);//普攻三段派生一段接4A
         Arc3AS2.key1(ArcAutoDash2);//普攻三段派生二段接2A
 
-        ArcAuto4.key2(Arc4AS);//普攻四段派生一段
-        Arc4AS.key2(Arc4AS1);//普攻四段派生二段
+        ArcAuto4.keyWeaponInnate(Arc4AS);//普攻四段派生一段
+        Arc4AS.keyWeaponInnate(Arc4AS1);//普攻四段派生二段
         Arc4AS.key1(ArcAutoDash5);//普攻四段派生一段接5A
         Arc4AS1.key1(ArcAutoDash5);//普攻四段派生二段接5A
 
-        ArcAuto5.key2(Arc5As);//普攻五段派生1 阎魔刀2A
-        Arc5As.key2(Arc5As2);//普攻五段派生2 人斩1A
-        Arc5As2.key2(Arc5As3);//普攻五段派生3 人斩2A
-        Arc5As3.key2(Arc5As4);//普攻五段派生4 人斩3A
+        ArcAuto5.keyWeaponInnate(Arc5As);//普攻五段派生1 阎魔刀2A
+        Arc5As.keyWeaponInnate(Arc5As2);//普攻五段派生2 人斩1A
+        Arc5As2.keyWeaponInnate(Arc5As3);//普攻五段派生3 人斩2A
+        Arc5As3.keyWeaponInnate(Arc5As4);//普攻五段派生4 人斩3A
         Arc5As.key1(ArcAutoDash6);//普攻五段派生1接6A
         Arc5As2.key1(ArcAutoDash6);//普攻五段派生2接6A
         Arc5As3.key1(ArcAutoDash6);//普攻五段派生3接6A
         Arc5As4.key1(ArcAutoDash6);//普攻五段派生4接6A
 
-        ArcAuto6.key2(Arc6As);//普攻六段派生，次元斩绝
+        ArcAuto6.keyWeaponInnate(Arc6As);//普攻六段派生，次元斩绝
         Arc6As.key1(ArcbasicAttack);//普攻六段派生重置平A
 
-        ArcGP1extendA1.key2(Arc2ASGP2);//GP1A追击后KEY2发动GP2
-        ArcGP1extendS4.key2(Arc2ASGP2);//GP1S追击后KEY2发动GP2
+        ArcGP1extendA1.keyWeaponInnate(Arc2ASGP2);//GP1A追击后keyWeaponInnate发动GP2
+        ArcGP1extendS4.keyWeaponInnate(Arc2ASGP2);//GP1S追击后keyWeaponInnate发动GP2
 
 
 
@@ -661,18 +659,18 @@ public class Skills {
         ;;
 
 
-        Arc2ASGP2.key2(ArcGP2extendAttack1);//特殊GP成功后消耗一层技能按KEY1挑飞敌人，消耗一层技能,给予漂浮
+        Arc2ASGP2.keyWeaponInnate(ArcGP2extendAttack1);//特殊GP成功后消耗一层技能按KEY1挑飞敌人，消耗一层技能,给予漂浮
 
         Arc2ASGP2.key3(Free);//特殊GP无论成功与否可按key3消耗充能，后撤重置普攻
-        ArcGP2extendAttack1.key2(ArcGP2extendAttack2);//
-        ArcGP2extendAttack2.key2(ArcGP2extendAttack3);//
-        ArcGP2extendAttack3.key2(ArcGP2extendAttack4);//
-        ArcGP2extendAttack4.key2(ArcGP2extendAttack5);//
-        ArcGP2extendAttack5.key2(ArcGP2extendAttack6);//
-        ArcGP2extendAttack6.key2(ArcGP2extendAttack7);//
-        ArcGP2extendAttack7.key2(ArcGP2extendAttack8);//
+        ArcGP2extendAttack1.keyWeaponInnate(ArcGP2extendAttack2);//
+        ArcGP2extendAttack2.keyWeaponInnate(ArcGP2extendAttack3);//
+        ArcGP2extendAttack3.keyWeaponInnate(ArcGP2extendAttack4);//
+        ArcGP2extendAttack4.keyWeaponInnate(ArcGP2extendAttack5);//
+        ArcGP2extendAttack5.keyWeaponInnate(ArcGP2extendAttack6);//
+        ArcGP2extendAttack6.keyWeaponInnate(ArcGP2extendAttack7);//
+        ArcGP2extendAttack7.keyWeaponInnate(ArcGP2extendAttack8);//
         ArcGP2extendAttack8.key1(ArcAutoDash5);//空中下砸落地后KEY1接普攻5A
-        ArcGP2extendAttack8.key2(ArcGP1);//
+        ArcGP2extendAttack8.keyWeaponInnate(ArcGP1);//
 
 
 
@@ -746,7 +744,7 @@ public class Skills {
         ArcGP2extendSkill5.key1(ArcGP2extendSkill6);//
         ArcGP2extendSkill6.key1(ArcGP2extendSkill7);//
         ArcGP2extendSkill7.key1(ArcAutoDash4);//
-        ArcGP2extendSkill7.key2(ArcGP1);//
+        ArcGP2extendSkill7.keyWeaponInnate(ArcGP1);//
 
         ComboNode ArcParryStrike1 =ComboNode.createNode(()->StarAnimations.YAMATO_COUNTER1)
                 .setPriority(5)
@@ -787,9 +785,9 @@ public class Skills {
 
         ArcParryStrike1.key3(ArcParryStrike2);//招架反击1段后按下key3使用二段
         ArcParryStrike1.key1(ArcAutoDash2);//招架反击1段后按下key1，接普攻二段
-        ArcParryStrike1.key2(ArcGP1);//招架反击1段后按下key2，使用GP1
+        ArcParryStrike1.keyWeaponInnate(ArcGP1);//招架反击1段后按下keyWeaponInnate，使用GP1
         ArcParryStrike2.key1(ArcAutoDash3);//招架反击2段后按下key1，接普攻三段
-        ArcParryStrike2.key2(Arc2ASGP2);//招架反击2段后按下key2，使用GP2
+        ArcParryStrike2.keyWeaponInnate(Arc2ASGP2);//招架反击2段后按下keyWeaponInnate，使用GP2
         ArcParryStrike2.key3(ArcParryStrike1);//招架反击2段后可继续触发招架反击
 
         ComboNode ArcGP3Skill1 =ComboNode.createNode(()->WOMAnimations.AGONY_CLAWSTRIKE)
@@ -894,18 +892,18 @@ public class Skills {
                 .addConditionAnimation(Arc3AS1)
                 .addConditionAnimation(ArcGP3Skill1);
 
-        ArcAuto3.key2(ArcAuto3extend2);//普攻三段完美闪避派生S
-        Arc3AS2.key2(ArcGP3Skill1);
-        ArcjumpSkill.key2(ArcGP3Skill1);
+        ArcAuto3.keyWeaponInnate(ArcAuto3extend2);//普攻三段完美闪避派生S
+        Arc3AS2.keyWeaponInnate(ArcGP3Skill1);
+        ArcjumpSkill.keyWeaponInnate(ArcGP3Skill1);
 
-        ArcGP3Skill1.key2(ArcGP3Skill2);
-        ArcGP3Skill2.key2(ArcGP3Skill3);
-        ArcGP3Skill3.key2(ArcGP3Skill4);
-        ArcGP3Skill4.key2(ArcGP3Skill5);
-        ArcGP3Skill5.key2(ArcGP3Skill6);
-        ArcGP3Skill6.key2(ArcGP3Skill7);
+        ArcGP3Skill1.keyWeaponInnate(ArcGP3Skill2);
+        ArcGP3Skill2.keyWeaponInnate(ArcGP3Skill3);
+        ArcGP3Skill3.keyWeaponInnate(ArcGP3Skill4);
+        ArcGP3Skill4.keyWeaponInnate(ArcGP3Skill5);
+        ArcGP3Skill5.keyWeaponInnate(ArcGP3Skill6);
+        ArcGP3Skill6.keyWeaponInnate(ArcGP3Skill7);
         ArcGP3Skill7.key1(ArcAutoDash5);
-        ArcGP3Skill7.key2(Arc2ASGP2);
+        ArcGP3Skill7.keyWeaponInnate(Arc2ASGP2);
 
 
 
@@ -1064,7 +1062,7 @@ public class Skills {
         ArcGP3Attack12.key3(ArcGP3Attack13);
         ArcGP3Attack13.key3(ArcGP3Attack14);
         ArcGP3Attack14.key1(ArcAutoDash5);
-        ArcGP3Attack14.key2(Arc2ASGP2);
+        ArcGP3Attack14.keyWeaponInnate(Arc2ASGP2);
         ArcGP3Attack7.key1(ArcAutoDash5);
         ArcGP3Attack8.key1(ArcAutoDash5);
         ArcGP3Attack9.key1(ArcAutoDash5);
