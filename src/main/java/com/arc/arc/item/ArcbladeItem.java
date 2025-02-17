@@ -1,5 +1,7 @@
 package com.arc.arc.item;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.ItemStack;
@@ -8,8 +10,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 
 public class ArcbladeItem extends SwordItem {
@@ -23,6 +30,25 @@ public class ArcbladeItem extends SwordItem {
         return false; // 禁止耐久损耗
 
     }
+    @Override
+    public boolean isEnchantable(@NotNull ItemStack stack) {
+        return true;
+    }
 
-}
+    // 控制可接受的附魔类型
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment.category == EnchantmentCategory.WEAPON;
+    }
+
+    // 设置附魔强度（影响附魔等级）
+    @Override
+    public int getEnchantmentValue() {
+        return 15; // 原版钻石剑为 10
+    }
+
+    }
+
+
+
 
