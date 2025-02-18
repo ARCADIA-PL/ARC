@@ -239,6 +239,7 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.00 1 force @s",false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -1",false))
                 .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(0.8F))
                 .setConvertTime(0.1F)
@@ -254,8 +255,9 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStack -1",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.0F,"invincible setPlayerPhase 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent( "effect give @s minecraft:absorption 10 8", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
+
 
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
@@ -294,7 +296,7 @@ public class Skills {
 
         ComboNode ArcjumpSkill = ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
                 .addCondition(new JumpCondition())
-                .addCondition(new StackCondition(1,8))
+                .addCondition(new StackCondition(3,8))
                 .setCanBeInterrupt(false)
                 .setPriority(7)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 3", false))
@@ -309,9 +311,9 @@ public class Skills {
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
 
-        ComboNode Arctest =ComboNode.createNode(()->StarAnimations.FATAL_DRAW_DASH)
-                .setConvertTime(-0.5F)
-                .addTimeEvent(new TimeStampedEvent(1.1F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,-0.13F);}))
+        ComboNode Arctest =ComboNode.createNode(()->StarAnimations.LETHAL_SLICING_THIRD)
+                .setPlaySpeed(1F)
+                .addCondition(new MobEffectCondition(true,(()->MobEffects.WITHER),1))
                 ;
 
         ComboNode ArcbasicAttack =ComboNode.create().addConditionAnimation(ArcJump)
@@ -587,20 +589,26 @@ public class Skills {
                 .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_COUNTER2,0.0F);}))
                 ;
         ComboNode Arc4AS1=ComboNode.createNode(()->StarAnimations.YAMATO_AUTO4)
-                .setConvertTime(-0.4F)
+                .addTimeEvent(new TimeStampedEvent(1.2F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_STEP_FORWARD,0.0F);}))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 14", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s irons_spellbooks:rend",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 6",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 6",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 6 4",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s alexsmobs:soulsteal 8 10",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:instant_health 1 10",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 6 18",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:blight 10 0",true))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.0 0.0 0.02 1 force @s",false))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3",true))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 0.5",true))
                 .setPlaySpeed(1.4F)
                 .setCanBeInterrupt(false)
-                .addTimeEvent(new TimeStampedEvent(1.3F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_STEP_FORWARD,0.0F);}))
-                .addCondition(new StackCondition(1,8))
-                .setDamageMultiplier(ValueModifier.multiplier(2F))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 2 19",true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -1",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 3 4",false))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3",true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.8 0.5",true))
-                .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}));;
+                .setDamageMultiplier(ValueModifier.multiplier(1.2F))
+                .setConvertTime(-0.28F)
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 3 15",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 2",false));
                 ;
 
         ComboNode Arc5As=ComboNode.createNode(()->StarAnimations.YAMATO_STRIKE1)
@@ -702,7 +710,7 @@ public class Skills {
         ArcAuto4.keyWeaponInnate(Arc4AS);//普攻四段派生一段
         Arc4AS.keyWeaponInnate(Arc4AS1);//普攻四段派生二段
         Arc4AS.key1(ArcAutoDash5);//普攻四段派生一段接5A
-        Arc4AS1.key1(ArcAutoDash5);//普攻四段派生二段接5A
+        Arc4AS1.key1(ArcAutoDash4);//普攻四段派生二段接4A
 
         ArcAuto5.keyWeaponInnate(Arc5As);//普攻五段派生1 阎魔刀2A
         Arc5As.keyWeaponInnate(Arc5As2);//普攻五段派生2 人斩1A
@@ -730,7 +738,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 2",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 8 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 6",true))
-                .addCondition(new StackCondition(1,8))
+                .addCondition(new StackCondition(2,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s star:really_stun_immunity 7 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s epicfight:stun_immunity 7 1", false))
@@ -819,7 +827,7 @@ public class Skills {
                 .setNotCharge(true)
                 .setCanBeInterrupt(false)
                 .addCondition(new DodgeSuccessCondition())
-                .addCondition(new StackCondition(1,8))
+                .addCondition(new StackCondition(2,8))
                 .setDamageMultiplier(ValueModifier.multiplier(1.2F))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 6",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 2", false))
@@ -963,7 +971,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 3",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 7",true))
-                .addCondition(new StackCondition(1,8))
+                .addCondition(new StackCondition(3,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s star:really_stun_immunity 7 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s epicfight:stun_immunity 7 1", false))
@@ -1084,7 +1092,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 2",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 3 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 7",true))
-                .addCondition(new StackCondition(1,8))
+                .addCondition(new StackCondition(4,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 4", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s star:really_stun_immunity 7 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s epicfight:stun_immunity 7 1", false))
