@@ -152,7 +152,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 2 4",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 4 14",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 4 16",true))
                 .setDamageMultiplier(ValueModifier.multiplier(0.75F))
                 .setPlaySpeed(1.25F)
                 .setPriority(1)
@@ -163,7 +163,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 2 4",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 4 14",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 4 16",true))
                 .setStunTypeModifier(StunType.SHORT)
                 .setDamageMultiplier(ValueModifier.multiplier(0.75F))
                 .setPlaySpeed(1.17F)
@@ -191,7 +191,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 2",false))
                 ;;;;
         ComboNode ArcAuto4 = ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_2)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 14", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 16", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s irons_spellbooks:rend",false))
                 .setDamageMultiplier(ValueModifier.multiplier(0.5F))
                 .setConvertTime(-0.1F)
@@ -215,7 +215,7 @@ public class Skills {
 
 
         ComboNode ArcAuto5 = ComboNode.createNode(()-> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_3)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 14", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 16", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s irons_spellbooks:rend",false))
                 .setDamageMultiplier(ValueModifier.multiplier(0.3F))
                 .setPlaySpeed(1.1F);;
@@ -233,7 +233,7 @@ public class Skills {
 
 
         ComboNode ArcAuto6 = ComboNode.createNode(()-> StarAnimations.YAMATO_POWER3_FINISH)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 14", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 16", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s irons_spellbooks:rend",false))
                 .addTimeEvent(new TimeStampedEvent(0.9F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_STEP_BACKWARD,0.1F);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.00 1 force @s",false))
@@ -490,7 +490,7 @@ public class Skills {
                 .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.DODGEMASTER_BACKWARD,0.0F);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 2 6",true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s minecraft:haste 5 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s minecraft:haste 8 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s epicfight:stun_immunity 3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s star:really_stun_immunity 3", false))
                 .addCondition(new StackCondition(1,8))
@@ -506,7 +506,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 4",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 4",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 3 3",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:haste 5 3",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:haste 8 3",false))
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false))
@@ -665,10 +665,6 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^-3 ^0 ^-5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
-
-
-
-
                 ;
         ;
 

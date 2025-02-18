@@ -23,9 +23,9 @@ public class ArcbladeSkill extends ComboBasicAttack {
     public List<Component> getTooltipOnItem(ItemStack itemstack, CapabilityItem cap, PlayerPatch<?> playerCap) {
         List<Component> list = Lists.newArrayList();
         list.add(new TranslatableComponent(this.getTranslationKey()).withStyle(ChatFormatting.GOLD).append(new TextComponent(String.format("[%.0f]", this.consumption)).withStyle(ChatFormatting.AQUA)));
-        list.add(new TextComponent("§6§l旧世幻影之刃-ArcBlade"));
+        list.add(new TextComponent("§5§l§o旧世幻影之刃-ArcBlade"));
         list.add(new TextComponent("§4§l§o旧界终焉力量铸造的究极兵刃,其强大的力量使得常人难以驾驭..."));
-        list.add(new TextComponent("§4§l§o终焉的气息：每段普攻都会使你碎甲，若命中目标则将碎甲效果转移；普攻三段命中目标后获得霸体及抗性提升五，同时强化接下来的三次普攻"));
+        list.add(new TextComponent("§4§l§o逆咒回响：每段普攻都会使你碎甲，若命中目标则将碎甲效果转移；普攻三段命中目标后获得霸体及抗性提升五，同时强化接下来的三次普攻"));
         list.add(new TextComponent("共有六段普攻，每段普攻后可使用").append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage()).append(new TextComponent("§b派生技能")));
         list.add(new TextComponent("每次普攻之间可以穿插跳跃攻击和冲刺攻击，§b跳跃攻击后衔接普攻二段，冲刺攻击后衔接普攻一段"));
         list.add(new TextComponent("§d普攻一段派生1：拔剑上挑，给予自身短暂的攻速提升以及霸体；,可按").withStyle(ChatFormatting.YELLOW).append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage()).append(new TextComponent("§d发动二段一文字斩击:命中获得抗性提升4以及霸体，恢复两层技能,可按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("§b衔接普攻二段"))));
@@ -46,7 +46,7 @@ public class ArcbladeSkill extends ComboBasicAttack {
         list.add(new TextComponent(""));
         list.add(new TextComponent(""));
         list.add(new TextComponent("§6常态技能"));
-        list.add(new TranslatableComponent("§6常态按下").append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage()).append(new TextComponent("§b释放GP1，消耗一层技能向后跨步，CD5S：若为完美闪避则恢复两层技能，可使用").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("或者").append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage()).append(new TextComponent("§c派生攻击")))));
+        list.add(new TranslatableComponent("§6常态按下").append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage()).append(new TextComponent("§b释放GP1，消耗一层技能向后跨步，CD7S，释放6AS的CD内无法使用：若为完美闪避则恢复两层技能，可使用").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("或者").append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage()).append(new TextComponent("§c派生攻击")))));
         list.add(new TextComponent("常态GP1若非完美闪避，短暂时间内无法攻击，可消耗技能按").append(InvincibleKeyMappings.getTranslatableKey3()).append(new TextComponent("§c进行一次跨步紧急逃生")));
         list.add(new TextComponent("§6§oGP1:追击A1：共2段，消耗技能连点").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("释放：结束后按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("§b衔接普攻三段"))));
         list.add(new TextComponent("§6§oGP1:追击S1：共4段，消耗技能连点").withStyle(ChatFormatting.YELLOW).append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage()).append(new TextComponent("释放,其中第二段可按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent(")：提前结算，第三段可获得急迫与力量效果；结束后按").withStyle(ChatFormatting.YELLOW).append(InvincibleKeyMappings.getTranslatableKey1()).append(new TextComponent("§b衔接普攻四段")))));
