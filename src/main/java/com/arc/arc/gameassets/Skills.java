@@ -226,6 +226,7 @@ public class Skills {
                 .setConvertTime(-0.2F)
                 .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(1.2F))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.0F,"invincible setPlayerPhase 1",false))
                 .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW_DASH,-0.5F);}))
                 .addHitEvent(BiEvent.createBiCommandEvent( "effect give @s minecraft:absorption 10 8", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F,"invincible consumeStack -1",false))
@@ -498,7 +499,8 @@ public class Skills {
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.5",true))
-                .setDamageMultiplier(ValueModifier.multiplier(1.1F));;;
+                .setDamageMultiplier(ValueModifier.multiplier(1.1F))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false));;;
 
         ComboNode Arc1AS1=ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
                 .setPlaySpeed(1.2F)
@@ -514,6 +516,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 3 6",true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .setDamageMultiplier(ValueModifier.multiplier(1.2F));;;;
 
         ComboNode Arc2ASGP2 =ComboNode.createNode(()->StarAnimations.YAMATO_STEP_FORWARD)
@@ -600,6 +603,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:instant_health 1 10",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 6 18",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:blight 10 0",true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.0 0.0 0.02 1 force @s",false))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3",true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 0.5",true))
@@ -689,8 +693,8 @@ public class Skills {
         ArcAuto1.keyWeaponInnate(Arc1AS);//普攻一段派生一段
         Arc1AS.keyWeaponInnate(Arc1AS1);//派生一段接二段
         Arc1AS.key1(ArcAutoDash2);//一段派生接2A
-
         Arc1AS1.key1(ArcAutoDash2);//二段派生接2A
+
         ArcAuto2.keyWeaponInnate(GP2);//普攻二段派生，特殊GP
         ArcPowerAuto4.keyWeaponInnate(GP2);
         ArcPowerAuto5.keyWeaponInnate(GP2);
