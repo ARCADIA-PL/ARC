@@ -205,6 +205,7 @@ public class Skills {
                 .setConvertTime(-0.5F)
                 .setPriority(4)
                 .addCondition(new PlayerPhaseCondition(2,2))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible groundSlam @s 1.5 false false false", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.3F,"invincible setPlayerPhase 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent( "effect give @s minecraft:absorption 10 8", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F,"invincible consumeStack -1",false))
@@ -239,7 +240,7 @@ public class Skills {
                 .addTimeEvent(new TimeStampedEvent(0.9F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_STEP_BACKWARD,0.1F);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.00 1 force @s",false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -1",false))
                 .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(0.8F))
@@ -256,7 +257,7 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStack -1",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.0F,"invincible setPlayerPhase 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent( "effect give @s minecraft:absorption 10 8", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
 
 
@@ -301,9 +302,9 @@ public class Skills {
                 .setCanBeInterrupt(false)
                 .setPriority(7)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 3", false))
-                .setDamageMultiplier(ValueModifier.multiplier(2F))
+                .setDamageMultiplier(ValueModifier.multiplier(3F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -1", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 1.5 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3.8 false false false", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2.5 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 3 15",true));
 
@@ -458,7 +459,7 @@ public class Skills {
         ComboNode ArcGP1extendS4=ComboNode.createNode(()->StarAnimations.YAMATO_POWER3_FINISH)
                 .setDamageMultiplier(ValueModifier.multiplier(1.1F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s irons_spellbooks:abyssal_shroud 2 0", false))
                 .setCanBeInterrupt(false)
                 ;
         ComboNode GP1After=ComboNode.create()
@@ -487,13 +488,14 @@ public class Skills {
 
 
         ComboNode Arc1AS=ComboNode.createNode(()->StarAnimations.YAMATO_POWER1)
-                .setConvertTime(-0.2F)
-                .setPlaySpeed(1.5F)
+                .setConvertTime(-0.1F)
+                .setPlaySpeed(1.4F)
                 .setCanBeInterrupt(false)
                 .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
-                .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.DODGEMASTER_BACKWARD,0.0F);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 2 false false false", true))
+                .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,0.1F);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 2 6",true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s minecraft:haste 8 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s minecraft:haste 12 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s epicfight:stun_immunity 3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s star:really_stun_immunity 3", false))
                 .addCondition(new StackCondition(1,8))
@@ -503,21 +505,21 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false));;;
 
         ComboNode Arc1AS1=ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
-                .setPlaySpeed(1.2F)
+                .setConvertTime(0.1F)
+                .setPlaySpeed(1.3F)
                 .setCanBeInterrupt(false)
-                .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 1.5 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3 false false false", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 4",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 4",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 3 3",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:haste 8 3",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:haste 12 3",false))
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.3 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 3 6",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
-                .setDamageMultiplier(ValueModifier.multiplier(1.2F));;;;
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F));;;;
 
         ComboNode Arc2ASGP2 =ComboNode.createNode(()->StarAnimations.YAMATO_STEP_FORWARD)
                 .setPriority(4)
@@ -545,11 +547,11 @@ public class Skills {
                 .setConvertTime(-0.07F)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @2 minecraft:slowness 2 255", true))
-                .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.DODGEMASTER_BACKWARD,0.0F);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
+                .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_COUNTER2,0.1F);}))
                 .addCondition(new StackCondition(1,8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible consumeStack 1", false))
                 .setDamageMultiplier(ValueModifier.multiplier(0.7F))
-                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 3 0.0 0.02 1 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
@@ -564,8 +566,8 @@ public class Skills {
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 20", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
         ComboNode Arc3AS2=ComboNode.createNode(()->StarAnimations.YAMATO_STEP_FORWARD)
                 .addCondition(new StackCondition(1,8))
                 .setCanBeInterrupt(false)
@@ -737,6 +739,7 @@ public class Skills {
                 .setPriority(5)
                 .setNotCharge(true)
                 .setCanBeInterrupt(false)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addCondition(new DodgeSuccessCondition())
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 7",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 2",true))
@@ -752,6 +755,7 @@ public class Skills {
 
         ComboNode ArcGP2extendAttack2 =ComboNode.createNode(()->WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .setNotCharge(true)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addTimeEvent(new TimeStampedEvent(0.43F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD,0.1F);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0F, "effect give @s minecraft:slow_falling 2", false))
@@ -759,6 +763,7 @@ public class Skills {
                 ;;;
 
         ComboNode ArcGP2extendAttack3 =ComboNode.createNode(()->WOMAnimations.TORMENT_BERSERK_AUTO_1)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5",true))
                 .setNotCharge(true)
                 .setConvertTime(0.1F)
@@ -767,12 +772,14 @@ public class Skills {
                 ;
 
         ComboNode ArcGP2extendAttack4 =ComboNode.createNode(()->WOMAnimations.TORMENT_BERSERK_AUTO_2)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5",true))
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(1.7F))
                 .setPlaySpeed(1.8F);
 
         ComboNode ArcGP2extendAttack5 =ComboNode.createNode(()->WOMAnimations.MOONLESS_AUTO_2)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.0 0.0 0.02 1 force @s",false))
                 .setNotCharge(true)
@@ -782,6 +789,7 @@ public class Skills {
                 ;
 
         ComboNode ArcGP2extendAttack6 =ComboNode.createNode(()->WOMAnimations.SOLAR_HORNO)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.5 0.5",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0F, "effect give @s minecraft:slow_falling 2", false))
                 .setConvertTime(-0.1F)
@@ -791,6 +799,7 @@ public class Skills {
 
         ComboNode ArcGP2extendAttack7 =ComboNode.createNode(()->StarAnimations.YAMATO_COUNTER1)
                 .setNotCharge(true)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.3 0.5",true))
                 .setDamageMultiplier(ValueModifier.multiplier(1.2F))
@@ -798,6 +807,7 @@ public class Skills {
 
         ComboNode ArcGP2extendAttack8 =ComboNode.createNode(()->StarAnimations.BLADE_RUSH_FINISHER)
                 .setNotCharge(true)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.2 0.5",true))
@@ -832,7 +842,8 @@ public class Skills {
                 .setCanBeInterrupt(false)
                 .addCondition(new DodgeSuccessCondition())
                 .addCondition(new StackCondition(2,8))
-                .setDamageMultiplier(ValueModifier.multiplier(1.2F))
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 6",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5",true))
@@ -844,6 +855,7 @@ public class Skills {
 
         ComboNode ArcGP2extendSkill2 =ComboNode.createNode(()->StarAnimations.TACHI_TWOHAND_AUTO_1)
                 .setDamageMultiplier(ValueModifier.multiplier(0.7F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5",true))
                 .setNotCharge(true)
                 .setPlaySpeed(1.3F)
@@ -851,26 +863,30 @@ public class Skills {
 
         ComboNode ArcGP2extendSkill3 =ComboNode.createNode(()->WOMAnimations.TORMENT_BERSERK_AUTO_1)
                 .setDamageMultiplier(ValueModifier.multiplier(1.5F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5",true))
                 .setNotCharge(true)
-                .setPlaySpeed(1.1F)
+                .setPlaySpeed(1.5F)
                 ;
 
         ComboNode ArcGP2extendSkill4 =ComboNode.createNode(()->StarAnimations.TACHI_TWOHAND_AUTO_2)
                 .setDamageMultiplier(ValueModifier.multiplier(0.7F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 1 0.5",true))
                 .setNotCharge(true)
                 .setPlaySpeed(1.3F)
                 ;
         ComboNode ArcGP2extendSkill5 =ComboNode.createNode(()->WOMAnimations.TORMENT_BERSERK_AUTO_2)
                 .setDamageMultiplier(ValueModifier.multiplier(1.5F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.5 0.5",true))
                 .setNotCharge(true)
-                .setPlaySpeed(1.1F)
+                .setPlaySpeed(1.5F)
                 ;
         ComboNode ArcGP2extendSkill6 =ComboNode.createNode(()->StarAnimations.YAMATO_AUTO4)
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(2F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.0 0.0 0.02 1 force @s",false))
@@ -882,6 +898,7 @@ public class Skills {
         ComboNode ArcGP2extendSkill7 =ComboNode.createNode(()->StarAnimations.BLADE_RUSH_FINISHER)
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(1.1F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.2 0.5",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .setPlaySpeed(1F)
@@ -971,6 +988,7 @@ public class Skills {
                 .setCanBeInterrupt(false)
                 .addCondition(new DodgeSuccessCondition())
                 .setDamageMultiplier(ValueModifier.multiplier(1F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 7",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 3",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5",true))
@@ -985,6 +1003,7 @@ public class Skills {
         ComboNode ArcGP3Skill2 =ComboNode.createNode(()->WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(1F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addTimeEvent(new TimeStampedEvent(0.4F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD,0.1F);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0F, "effect give @s minecraft:slow_falling 4", false));
@@ -994,6 +1013,7 @@ public class Skills {
                 .setConvertTime(0.15F)
                 .setPlaySpeed(1.2F)
                 .setNotCharge(true)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5",true))
@@ -1016,6 +1036,7 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.0F, "indestructible @s play 'epicfight:biped/living/hold_longsword' 0.1 1", false));
 
         ComboNode ArcGP3Skill4 =ComboNode.createNode(()->WOMAnimations.AGONY_PLUNGE_FORWARD)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .setDamageMultiplier(ValueModifier.multiplier(1.1F))
                 .setConvertTime(-0.3F)
                 .addTimeEvent(new TimeStampedEvent(1.3F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD,0.0F);}))
@@ -1027,6 +1048,7 @@ public class Skills {
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(3F))
                 .setConvertTime(-0.1F)
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD,0.0F);}))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 2.0 0.0 0.02 1 force @s",false));
@@ -1034,6 +1056,7 @@ public class Skills {
         ComboNode ArcGP3Skill6 =ComboNode.createNode(()->WOMAnimations.KATANA_SHEATHED_AUTO_2)
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(3F))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
                 .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD,0.0F);}))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 2.0 0.0 0.02 1 force @s",false))
@@ -1045,6 +1068,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.2 0.5",true))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2",false))
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 50 force", false))
