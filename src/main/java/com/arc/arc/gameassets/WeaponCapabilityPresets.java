@@ -55,8 +55,8 @@ public class WeaponCapabilityPresets {
                         }
                         return CapabilityItem.Styles.TWO_HAND;
                     })
-                    .collider(ColliderPreset.UCHIGATANA)//这里可以用预设的，也可以new 一个
-                    .swingSound(EpicFightSounds.WHOOSH_SMALL)
+                    .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
+                    .swingSound(EpicFightSounds.WHOOSH)
                     .hitSound(EpicFightSounds.BLADE_HIT)
                     .hitParticle(EpicFightParticles.HIT_BLADE.get())
                     .canBePlacedOffhand(false)

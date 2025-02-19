@@ -3,10 +3,6 @@ package com.arc.arc.gameassets;
 import com.arc.arc.skill.ArcbladeSkill;
 import com.arc.arc.skill.Demo1;
 import com.dfdyz.epicacg.registry.MyAnimations;
-import com.github.alexthe666.alexsmobs.effect.AMEffectRegistry;
-import com.github.alexthe666.alexsmobs.effect.EffectBugPheromones;
-import com.github.alexthe666.alexsmobs.effect.EffectKnockbackResistance;
-import com.guhao.star.Star;
 import com.guhao.star.efmex.StarAnimations;
 import com.guhao.star.regirster.Sounds;
 import com.p1nero.invincible.api.events.BiEvent;
@@ -15,10 +11,6 @@ import com.p1nero.invincible.conditions.*;
 import com.p1nero.invincible.skill.api.ComboNode;
 import com.arc.arc.ArcMod;
 import com.arc.arc.skill.Demo2;
-import io.redspace.ironsspellbooks.IronsSpellbooks;
-import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
-import net.minecraft.client.gui.font.glyphs.BakedGlyph;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,11 +21,10 @@ import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.*;
+import yesman.epicfight.world.capabilities.entitypatch.EntityPatch;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.damagesource.StunType;
-
-import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
 public class Skills {
@@ -92,12 +83,35 @@ public class Skills {
         SkillManager.register(Demo1::new, Demo1.createComboBasicAttack().setCombo(sw0rdroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
 
         ComboNode sw1rdroot = ComboNode.create();
-        ComboNode sw1rdjump=ComboNode.createNode(()-> Animations.UCHIGATANA_AIR_SLASH).setPriority(3).addCondition(new JumpCondition());
-        ComboNode sw1rddash=ComboNode.createNode(()-> Animations.UCHIGATANA_DASH).setPriority(3).addCondition(new JumpCondition());
-        ComboNode sw1rdauto1=ComboNode.createNode(()-> Animations.UCHIGATANA_AUTO1).setPriority(1);
-        ComboNode sw1rdauto2=ComboNode.createNode(()-> Animations.UCHIGATANA_AUTO2);
-        ComboNode sw1rdauto3=ComboNode.createNode(()-> Animations.UCHIGATANA_AUTO3).addCondition(new DownCondition());
-        ComboNode sw1rdsheateAttack =ComboNode.createNode(()-> Animations.UCHIGATANA_SHEATHING_AUTO).setPriority(4).addCondition(new CustomCondition(){
+        ComboNode sw1rdjump=ComboNode.createNode(()-> Animations.UCHIGATANA_AIR_SLASH)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false))
+                .setPriority(3)
+                .addCondition(new JumpCondition());
+        ComboNode sw1rddash=ComboNode.createNode(()-> Animations.UCHIGATANA_DASH)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false))
+                .setPriority(3)
+                .addCondition(new JumpCondition());
+
+        ComboNode sw1rdauto1=ComboNode.createNode(()-> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_3)
+                .setPlaySpeed(0.9F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false))
+                .setPriority(1);
+
+        ComboNode sw1rdauto2=ComboNode.createNode(()-> Animations.UCHIGATANA_AUTO1)
+                .setPlaySpeed(1F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false));
+
+        ComboNode sw1rdauto3=ComboNode.createNode(()-> Animations.UCHIGATANA_AUTO3)
+                .setPlaySpeed(0.9F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false));
+
+        ComboNode sw1rdauto4=ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_3)
+                .setPlaySpeed(0.8F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false));
+
+        ComboNode sw1rdsheathautoAttack =ComboNode.createNode(()-> Animations.UCHIGATANA_SHEATHING_AUTO)
+                .setPriority(4)
+                .addCondition(new CustomCondition(){
             @Override
             public boolean predicate(LivingEntityPatch<?> entityPatch) {
                 if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
@@ -109,23 +123,211 @@ public class Skills {
                 return false;
             }
         });
-        ComboNode sw1rdfocussheathattack =ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_3).setPriority(3);
+        ComboNode sw1rdsheathdashattack =ComboNode.createNode(()-> Animations.UCHIGATANA_SHEATHING_DASH)
+                .setPriority(5)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
+                .addCondition(new SprintingCondition())
+                .addCondition(new CustomCondition(){
+            @Override
+            public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                    SkillDataManager skillDataManager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                    if(skillDataManager.hasData(BattojutsuPassive.SHEATH)){
+                        return skillDataManager.getDataValue(BattojutsuPassive.SHEATH);
+                    }
+                }
+                return false;
+            }
+        });
+        ComboNode sw1rdsheathBattojuzu =ComboNode.createNode(()-> Animations.BATTOJUTSU)
+                .setPriority(4)
+                .setConvertTime(-0.7F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
+                .addCondition(new CustomCondition(){
+            @Override
+            public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                    SkillDataManager skillDataManager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                    if(skillDataManager.hasData(BattojutsuPassive.SHEATH)){
+                        return skillDataManager.getDataValue(BattojutsuPassive.SHEATH);
+                    }
+                }
+                return false;
+            }
+        });
+
+        ComboNode sw1rdsheathBattojuzuDash =ComboNode.createNode(()-> Animations.BATTOJUTSU_DASH)
+                .setPriority(5)
+                .setConvertTime(-0.6F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
+                .addCondition(new SprintingCondition())
+                .addCondition(new CustomCondition(){
+            @Override
+            public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                    SkillDataManager skillDataManager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                    if(skillDataManager.hasData(BattojutsuPassive.SHEATH)){
+                        return skillDataManager.getDataValue(BattojutsuPassive.SHEATH);
+                    }
+                }
+                return false;
+            }
+        });
+
+        ComboNode sw1rdfocussheat1=ComboNode.createNode(()-> Animations.BIPED_UCHIGATANA_SCRAP)
+                .setPriority(4)
+                .addCondition(new ParrySuccessCondition())
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false))
+                .addTimeEvent(new TimeStampedEvent(0.09F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_HOLD_UCHIGATANA_SHEATHING,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
+                    if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                        SkillDataManager manager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                        if(manager.hasData(BattojutsuPassive.SHEATH)){
+                            manager.setDataSync(BattojutsuPassive.SHEATH, true, serverPlayerPatch.getOriginal());
+                            serverPlayerPatch.modifyLivingMotionByCurrentItem();
+                            serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getSkill().setConsumptionSynchronize(serverPlayerPatch, 0.0F);
+                        }
+                    }
+                })))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_RUN_UCHIGATANA_SHEATHING,0.0F);}));
+        ComboNode sw1rdfocussheat2=ComboNode.createNode(()->Animations.BIPED_UCHIGATANA_SCRAP)
+                .setPriority(4)
+                .setPlaySpeed(1.1F)
+                .addCondition(new DodgeSuccessCondition())
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false))
+                .addTimeEvent(new TimeStampedEvent(0.09F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_HOLD_UCHIGATANA_SHEATHING,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
+                    if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                        SkillDataManager manager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                        if(manager.hasData(BattojutsuPassive.SHEATH)){
+                            manager.setDataSync(BattojutsuPassive.SHEATH, true, serverPlayerPatch.getOriginal());
+                            serverPlayerPatch.modifyLivingMotionByCurrentItem();
+                            serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getSkill().setConsumptionSynchronize(serverPlayerPatch, 0.0F);
+                        }
+                    }
+                })))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_RUN_UCHIGATANA_SHEATHING,0.0F);}));
+
+        ComboNode sw1rdfocussheat3=ComboNode.createNode(()->Animations.BIPED_UCHIGATANA_SCRAP)
+                .setPriority(4)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false))
+                .addTimeEvent(new TimeStampedEvent(0.09F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_HOLD_UCHIGATANA_SHEATHING,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
+                    if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                        SkillDataManager manager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                        if(manager.hasData(BattojutsuPassive.SHEATH)){
+                            manager.setDataSync(BattojutsuPassive.SHEATH, true, serverPlayerPatch.getOriginal());
+                            serverPlayerPatch.modifyLivingMotionByCurrentItem();
+                            serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getSkill().setConsumptionSynchronize(serverPlayerPatch, 0.0F);
+                        }
+                    }
+                })))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_RUN_UCHIGATANA_SHEATHING,0.0F);}))
+                ;
+                ;
+
+        ComboNode sw1rdpowerBato =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
+                .setPriority(5)
+                .setNotCharge(true)
+                .setPlaySpeed(1.05F)
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
+                .addTimeEvent(new TimeStampedEvent(0.9F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,0.0F);}))
+                .setConvertTime(-0.6F)
+                .addCondition(new CustomCondition(){
+                    @Override
+                    public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                        if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                            SkillDataManager skillDataManager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                            if(skillDataManager.hasData(BattojutsuPassive.SHEATH)){
+                                return skillDataManager.getDataValue(BattojutsuPassive.SHEATH);
+                            }
+                        }
+                        return false;
+                    }
+                });
+
+        ComboNode sw1rdpowerSkillBato =ComboNode.createNode(()-> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_4)
+                .setPriority(5)
+                .setNotCharge(true)
+                .setPlaySpeed(1.2F)
+                .setConvertTime(-0.2F)
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
+                .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW_DASH,-0.5F);}))
+                .addCondition(new CustomCondition(){
+                    @Override
+                    public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                        if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                            SkillDataManager skillDataManager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                            if(skillDataManager.hasData(BattojutsuPassive.SHEATH)){
+                                return skillDataManager.getDataValue(BattojutsuPassive.SHEATH);
+                            }
+                        }
+                        return false;
+                    }
+                });
+        ComboNode sw1rdpowerDash =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW_DASH)
+                .setPriority(6)
+                .addCondition(new SprintingCondition())
+                .setNotCharge(true)
+                .setPlaySpeed(1.05F)
+                .setConvertTime(-0.7F)
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "invincible setPlayerPhase 1", false))
+                .addCondition(new CustomCondition(){
+                    @Override
+                    public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                        if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
+                            SkillDataManager skillDataManager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
+                            if(skillDataManager.hasData(BattojutsuPassive.SHEATH)){
+                                return skillDataManager.getDataValue(BattojutsuPassive.SHEATH);
+                            }
+                        }
+                        return false;
+                    }
+                });
+
+
+
+
+
+
+
         ComboNode sw1rdbasicAttack =ComboNode.create().addConditionAnimation(sw1rdjump).
                 addConditionAnimation(sw1rddash).
                 addConditionAnimation(sw1rdauto1).
-                addConditionAnimation(sw1rdsheateAttack);
+                addConditionAnimation(sw1rdsheathautoAttack)
+                .addConditionAnimation(sw1rdsheathautoAttack)
+                .addConditionAnimation(sw1rdsheathdashattack)
+                .addConditionAnimation(sw1rdpowerDash)
+                .addConditionAnimation(sw1rdpowerBato);
 
+        ComboNode sw1rdsheathauto =ComboNode.create()
+                .addConditionAnimation(sw1rdsheathBattojuzu)
+                .addConditionAnimation(sw1rdsheathBattojuzuDash)
+                .addConditionAnimation(sw1rdpowerSkillBato)
+                .addConditionAnimation(sw1rdfocussheat1)
+                .addConditionAnimation(sw1rdfocussheat2)
+
+                ;
+        ComboNode PowerBatoAttack =ComboNode.create()
+                .addConditionAnimation(sw1rdpowerBato);
 
 
         sw1rdroot.key1(sw1rdbasicAttack);
-        sw1rdroot.keyWeaponInnate(sw1rdbasicAttack);
+        sw1rdroot.keyWeaponInnate(sw1rdsheathauto);
         sw1rddash.key1(sw1rdauto1);
         sw1rdjump.key1(sw1rdauto1);
-        sw1rdbasicAttack.key1(sw1rdauto1);
-        sw1rdsheateAttack.key1(sw1rdauto2);
+        sw1rdauto4.key1(sw1rdauto1);
+
+        sw1rdsheathautoAttack.key1(sw1rdauto2);
+        sw1rdsheathdashattack.key1(sw1rdauto2);
+        sw1rdsheathauto.key1(sw1rdauto2);
+
         sw1rdauto1.key1(sw1rdauto2);
         sw1rdauto2.key1(sw1rdauto3);
-
+        sw1rdauto3.key1(sw1rdauto4);
 
 
         SkillManager.register(Demo2::new, Demo2.createComboBasicAttack().setCombo(sw1rdroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo1");
@@ -490,6 +692,7 @@ public class Skills {
         ComboNode Arc1AS=ComboNode.createNode(()->StarAnimations.YAMATO_POWER1)
                 .setConvertTime(-0.1F)
                 .setPlaySpeed(1.4F)
+                .setNotCharge(true)
                 .setCanBeInterrupt(false)
                 .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 2 false false false", true))
@@ -508,6 +711,7 @@ public class Skills {
                 .setConvertTime(0.1F)
                 .setPlaySpeed(1.3F)
                 .setCanBeInterrupt(false)
+                .setNotCharge(true)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3 false false false", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 4",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 4",false))
@@ -546,6 +750,7 @@ public class Skills {
                 .setPriority(3)
                 .setConvertTime(-0.07F)
                 .setPlaySpeed(1.1F)
+                .setNotCharge(true)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @2 minecraft:slowness 2 255", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.73F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
@@ -572,6 +777,7 @@ public class Skills {
         ComboNode Arc3AS2=ComboNode.createNode(()->StarAnimations.YAMATO_STEP_FORWARD)
                 .addCondition(new StackCondition(1,8))
                 .setCanBeInterrupt(false)
+                .setNotCharge(true)
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3",true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -3",true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.8 0.5",true))
@@ -611,6 +817,7 @@ public class Skills {
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3",true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 0.5",true))
                 .setPlaySpeed(1.4F)
+                .setNotCharge(true)
                 .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(1.2F))
                 .setConvertTime(-0.28F)
@@ -652,6 +859,7 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 3 6",true));
         ComboNode Arc5As4=ComboNode.createNode(()->WOMAnimations.KATANA_AUTO_3)
                 .setConvertTime(0.1F)
+                .setNotCharge(true)
                 .setPlaySpeed(1F)
                 .addCondition(new StackCondition(1,8))
                 .setDamageMultiplier(ValueModifier.multiplier(2.5F))
@@ -686,6 +894,7 @@ public class Skills {
         ComboNode Arc6As=ComboNode.createNode(()-> MyAnimations.DMC5_V_JC)
                 .addCondition(new StackCondition(8,8))
                 .setCooldown(3600)
+                .setNotCharge(true)
                 .addCondition(new CooldownCondition(false))
                 .setPriority(5)
                 .setDamageMultiplier(ValueModifier.multiplier(0.6F))
