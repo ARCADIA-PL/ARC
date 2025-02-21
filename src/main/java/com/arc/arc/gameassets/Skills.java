@@ -33,46 +33,79 @@ public class Skills {
 
     public static void registerSkills() {
         ComboNode sw0rdroot = ComboNode.create();
-        ComboNode sw0rdjump=ComboNode.createNode(()-> Animations.AXE_AIRSLASH).setPriority(3).addCondition(new JumpCondition());
-        ComboNode sw0rddash=ComboNode.createNode(()-> Animations.BATTOJUTSU_DASH).setPriority(3).addCondition(new SprintingCondition()).setConvertTime(-0.3F);
-        ComboNode sw0rdbasicAttack=ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_1).setPriority(1);
-        ComboNode sw0rdextend=ComboNode.createNode(()->WOMAnimations.RUINE_AUTO_2).setNotCharge(true).setPriority(2).addCondition(new StackCondition(1,4)).addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F,"invincible consumeStack 1", false));
-        ComboNode sw0rdgp =ComboNode.createNode(()->Animations.RUSHING_TEMPO3).setNotCharge(true).setPriority(3).addCondition(new ParrySuccessCondition()).setCanBeInterrupt(false).addCondition(new StackCondition(1,4)).addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F,"invincible consumeStack 1", false));
-        ComboNode sw0rddodgegp=ComboNode.createNode(()->WOMAnimations.ENDERBLASTER_ONEHAND_SHOOT_3).setNotCharge(true).setPriority(3).addCondition(new DodgeSuccessCondition()).setCanBeInterrupt(false).addCondition(new StackCondition(0,4)).addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack -1", false));
-        ComboNode sw0rddodgegp1=ComboNode.createNode(()->WOMAnimations.RUINE_AUTO_4).setPriority(4).setNotCharge(true).addCondition(new DodgeSuccessCondition()).setCanBeInterrupt(false).addCondition(new StackCondition(1,4)).addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
-        ComboNode GP=ComboNode.createNode(()->WOMAnimations.ENDERSTEP_BACKWARD).setPriority(3).setConvertTime(-0.2F).addCondition(new StackCondition(1,4)).addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false)).addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(EpicFightSounds.ENTITY_MOVE,0,0)))).addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s",true));;
-        ComboNode aa=ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_2);
-        ComboNode aaa=ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_3);
-        ComboNode a=ComboNode.create().addConditionAnimation(sw0rdjump)
-                  .addConditionAnimation(sw0rddash)
-                  .addConditionAnimation(sw0rdbasicAttack)
-                  .addConditionAnimation(sw0rddodgegp);
-        ComboNode b=ComboNode.create().addConditionAnimation(sw0rdgp)
-                                      .addConditionAnimation(GP)
-                                      .addConditionAnimation(sw0rddodgegp1);
+        ComboNode SwordFormAirSlash = ComboNode.createNode(()-> Animations.SWORD_AIR_SLASH)
+                .setPriority(4)
+                .addCondition(new JumpCondition())
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 1",false));
+        ComboNode SwordFormDashAttack = ComboNode.createNode(()-> Animations.SWORD_DASH)
+                .setPriority(4)
+                .addCondition(new SprintingCondition());
+        ComboNode SwordFormAuto1 = ComboNode.createNode(()-> Animations.SWORD_AUTO1)
+                .setPriority(1);
+        ComboNode SwordFormAuto2 = ComboNode.createNode(()-> Animations.SWORD_AUTO2);
+        ComboNode SwordFormAuto3 = ComboNode.createNode(()-> Animations.SWORD_AUTO3);
 
-        sw0rdroot.key1(a);//无条件使用普攻一段,跳劈，跑攻
-        sw0rdroot.keyWeaponInnate(b);//常态按技能后瞬步
-        GP.key1(sw0rddodgegp);//若后瞬步为极限闪避，则GP成功，再次按下KEY1触发追击1,恢复一层技能
-        GP.keyWeaponInnate(sw0rddodgegp1);//若后瞬步为极限闪避，则GP成功，再次按下keyWeaponInnate触发追击2
-        GP.keyWeaponInnate(b);//瞬步后可衔接瞬步
-        sw0rdjump.key1(a);//跳劈后接普攻一段
-        sw0rddash.key1(a);//跑攻后接普攻一段
-        sw0rdgp.key1(a);//触发防反后接普攻一段
-        sw0rdextend.key1(a);//额外攻击后接普攻一段
-        sw0rdextend.keyWeaponInnate(b);//额外攻击后可衔接瞬步
-        sw0rddodgegp.key1(aa);//触发瞬步GP追击1后接普攻二段
-        sw0rddodgegp1.key1(aaa);//触发瞬步GP2追击后接普攻三段
-        sw0rddodgegp.keyWeaponInnate(b);//触发瞬步GP追击1后可继续瞬步
-        sw0rddodgegp1.keyWeaponInnate(b);//触发瞬步GP追击2后可继续瞬步
-        sw0rdgp.keyWeaponInnate(b);//触发招架反击后可继续瞬步
-        a.key1(aa);//普攻一段接普攻二段
-        a.keyWeaponInnate(b);//普攻一段可衔接瞬步
-        aa.key1(aaa);//普攻二段接普攻三段
-        aa.keyWeaponInnate(b);//普攻二段可衔接瞬步
-        aaa.key1(a);//普攻三段后接普攻一段
-        aaa.keyWeaponInnate(sw0rdextend);//普攻三段后按下keyWeaponInnate可消耗一层技能额外攻击
-        sw0rdroot.keyWeaponInnate(b);//成功招架后按keyWeaponInnate消耗一层技能触发防反
+        ComboNode AxeFormAirSlash = ComboNode.createNode(()-> Animations.AXE_AIRSLASH)
+                .setPriority(5)
+                .addCondition(new JumpCondition())
+                .addCondition(new PlayerPhaseCondition(1,1))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false));
+        ComboNode AxeFormDashAttack = ComboNode.createNode(()-> Animations.AXE_DASH)
+                .setPriority(5)
+                .addCondition(new SprintingCondition())
+                .addCondition(new PlayerPhaseCondition(1,1));
+        ComboNode AxeFormAuto1 = ComboNode.createNode(()-> Animations.AXE_AUTO1)
+                .setPriority(2)
+                .addCondition(new PlayerPhaseCondition(1,1));;
+        ComboNode AxeFormAuto2 = ComboNode.createNode(()-> Animations.AXE_AUTO2)
+                .setPriority(2)
+                .addCondition(new PlayerPhaseCondition(1,1));
+        ComboNode AxeFormAuto3 = ComboNode.createNode(()-> Animations.TACHI_AUTO3)
+                .setPriority(2)
+                .addCondition(new PlayerPhaseCondition(1,1));
+
+        ComboNode DefeatBasicAttack =ComboNode.create()
+                .addConditionAnimation(SwordFormAirSlash)
+                .addConditionAnimation(SwordFormDashAttack)
+                .addConditionAnimation(SwordFormAuto1);
+
+        ComboNode NormalAttackAuto1 =ComboNode.create()
+                .addConditionAnimation(AxeFormAuto1)
+                .addConditionAnimation(AxeFormDashAttack)
+                .addConditionAnimation(AxeFormAirSlash);;
+        ComboNode NormalAttackAuto2 =ComboNode.create()
+                .addConditionAnimation(SwordFormAuto2)
+                .addConditionAnimation(AxeFormAuto2)
+                .addConditionAnimation(SwordFormDashAttack)
+                .addConditionAnimation(SwordFormAirSlash)
+                .addConditionAnimation(AxeFormDashAttack)
+                .addConditionAnimation(AxeFormAirSlash);
+        ComboNode NormalAttackAuto3 =ComboNode.create()
+                .addConditionAnimation(SwordFormAuto3)
+                .addConditionAnimation(AxeFormAuto3)
+                .addConditionAnimation(SwordFormDashAttack)
+                .addConditionAnimation(SwordFormAirSlash)
+                .addConditionAnimation(AxeFormDashAttack)
+                .addConditionAnimation(AxeFormAirSlash);
+        ComboNode NormalAttackAuto3After =ComboNode.create()
+                .addConditionAnimation(SwordFormAuto1)
+                .addConditionAnimation(AxeFormAuto1);
+
+
+        sw0rdroot.key1(DefeatBasicAttack);//初始剑形态
+        DefeatBasicAttack.key1(NormalAttackAuto2);//剑形态普攻一段衔接二段
+        NormalAttackAuto2.key1(NormalAttackAuto3);//剑形态普攻二段衔接三段,斧形态普攻二段衔接三段
+        NormalAttackAuto1.key1(NormalAttackAuto2);//斧形态普攻一段衔接二段
+        NormalAttackAuto3.key1(NormalAttackAuto3After);//双形态普攻3A后接1A
+        SwordFormAuto1.key1(NormalAttackAuto2);
+        AxeFormAuto1.key1(NormalAttackAuto2);
+
+        SwordFormAirSlash.key1(NormalAttackAuto1);//剑形态跳劈切换斧形态
+        AxeFormAirSlash.key1(SwordFormAuto1);//斧形态跳劈切换剑形态
+
+        SwordFormDashAttack.key1(SwordFormAuto1);//剑形态冲刺攻击衔接普攻一段
+        AxeFormDashAttack.key1(AxeFormAuto1);//斧形态冲刺攻击衔接普攻一段
+
 
 
 
@@ -109,11 +142,14 @@ public class Skills {
         ComboNode UchigatanaPowerauto4=ComboNode.createNode(()-> Animations.UCHIGATANA_AUTO3)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false));
 
-        ComboNode UchigatanaPowerauto5=ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
-                .setDamageMultiplier(ValueModifier.multiplier(0.8F))
+        ComboNode UchigatanaPowerauto5=ComboNode.createNode(()-> Animations.BATTOJUTSU)
+                .setDamageMultiplier(ValueModifier.multiplier(0.3F))
+                .setStunTypeModifier(StunType.SHORT)
+                .setNotCharge(true)
+                .addTimeEvent(new TimeStampedEvent(0.11F,entityPatch -> {entityPatch.playSound(EpicFightSounds.SWORD_IN,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false))
                 .setConvertTime(-0.1F)
-                .setPlaySpeed(1.2F)
+                .setPlaySpeed(1.1F)
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false));
 
@@ -214,23 +250,26 @@ public class Skills {
                 .setPriority(3)
                 .setConvertTime(-0.2F)
                 .setPlaySpeed(1.2F)
-                .addCondition(new StackCondition(1,4))
+                .addCondition(new StackCondition(2,2))
                 .setNotCharge(true)
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 5 4",true))
                 .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW_DASH,-0.5F);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible setPlayerPhase 1", false));
 
         ComboNode UchigatanaPowerParryActiveScrap=ComboNode.createNode(()-> WOMAnimations.KATANA_GUARD_HIT)
-                .setPriority(4)
+                .setCanBeInterrupt(false)
+                .setCooldown(300)
+                .addCondition(new CooldownCondition(false))
+                .setPriority(5)
                 .setPlaySpeed(1.2F)
                 .addCondition(new ParrySuccessCondition())
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:haste 7 1",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:strength 7 1",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s irons_spellbooks:rend 5 5",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s minecraft:slowness 1 10", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect clear @s irons_spellbooks:abyssal_shroud", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false))
-                .addCondition(new StackCondition(1,4))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
                 .addTimeEvent(new TimeStampedEvent(0.09F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_HOLD_UCHIGATANA_SHEATHING,0.0F);}))
                 .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
                     if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
@@ -244,14 +283,18 @@ public class Skills {
                 })))
                 .addTimeEvent(new TimeStampedEvent(0.15F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_RUN_UCHIGATANA_SHEATHING,0.0F);}));
         ComboNode UchigatanaPowerDodgeSuccessActiveScrap=ComboNode.createNode(()->WOMAnimations.KATANA_GUARD_HIT)
-                .setPriority(4)
+                .setCanBeInterrupt(false)
+                .setCooldown(300)
+                .addCondition(new CooldownCondition(false))
+                .setPriority(5)
                 .setPlaySpeed(1.2F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:haste 7 1",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:strength 7 1",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s irons_spellbooks:rend 5 5",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s minecraft:slowness 1 10", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect clear @s irons_spellbooks:abyssal_shroud", false))
                 .addCondition(new DodgeSuccessCondition())
-                .addCondition(new StackCondition(1,4))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false))
                 .addTimeEvent(new TimeStampedEvent(0.09F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_HOLD_UCHIGATANA_SHEATHING,0.0F);}))
                 .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
@@ -266,15 +309,13 @@ public class Skills {
                 })))
                 .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_RUN_UCHIGATANA_SHEATHING,0.0F);}));
 
-        ComboNode UchigatanaPowerAuto1ActiveScrap=ComboNode.createNode(()->WOMAnimations.KATANA_GUARD_HIT)
+        ComboNode UchigatanaPowerActiveScrapTest=ComboNode.createNode(()->Animations.BIPED_STEP_BACKWARD)
+                .setCanBeInterrupt(false)
                 .setPriority(4)
-                .addCondition(new StackCondition(1,4))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "effect clear @s irons_spellbooks:abyssal_shroud", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible consumeStack 1", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false))
-                .addTimeEvent(new TimeStampedEvent(0.09F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_HOLD_UCHIGATANA_SHEATHING,0.0F);}))
-                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
+                .addTimeEvent(new TimeStampedEvent(0.3F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_UCHIGATANA,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.31F, (entityPatch)-> {entityPatch.playAnimationSynchronized(WOMAnimations.KATANA_GUARD_HIT,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.32F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_HOLD_UCHIGATANA_SHEATHING,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.33F, (entityPatch -> {
                     if(entityPatch instanceof ServerPlayerPatch serverPlayerPatch){
                         SkillDataManager manager = serverPlayerPatch.getSkill(SkillSlots.WEAPON_PASSIVE).getDataManager();
                         if(manager.hasData(BattojutsuPassive.SHEATH)){
@@ -284,19 +325,22 @@ public class Skills {
                         }
                     }
                 })))
-                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_RUN_UCHIGATANA_SHEATHING,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.33F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_RUN_UCHIGATANA_SHEATHING,0.0F);}))
                 ;
                 ;
 
         ComboNode UchigatanaPowerActiveScrapAttack =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
+                .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(1F))
                 .setPriority(5)
                 .setNotCharge(true)
                 .setPlaySpeed(1.13F)
                 .addCondition(new PlayerPhaseCondition(2,2))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "invincible setPlayerPhase 1", false))
+                .addCondition(new StackCondition(1,4))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible consumeStack 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
                 .addTimeEvent(new TimeStampedEvent(0.7F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,-0.1F);}))
-                .setConvertTime(-0.6F)
+                .setConvertTime(-0.5F)
                 .addCondition(new CustomCondition(){
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -310,18 +354,19 @@ public class Skills {
                     }
                 });
 
-        ComboNode UchigatanaPowerActiveScrapSkill =ComboNode.createNode(()-> WOMAnimations.KATANA_SHEATHED_AUTO_2)
-                .setDamageMultiplier(ValueModifier.multiplier(0.8F))
+        ComboNode UchigatanaPowerActiveScrapSkill =ComboNode.createNode(()-> StarAnimations.YAMATO_POWER1)
+                .setCanBeInterrupt(false)
+                .setDamageMultiplier(ValueModifier.multiplier(1.4F))
                 .setPriority(5)
                 .setNotCharge(true)
-                .setPlaySpeed(1.2F)
-                .setConvertTime(-0.2F)
-                .addCondition(new StackCondition(1,4))
-                .setNotCharge(true)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "invincible consumeStack 1", false))
+                .setPlaySpeed(1.3F)
+                .setConvertTime(-0.1F)
+                .addCondition(new StackCondition(2,2))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible consumeStack 2", false))
                 .addCondition(new PlayerPhaseCondition(2,2))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
-                .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW_DASH,-0.5F);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible setPlayerPhase 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.12F, "invincible groundSlam @s 1.2 false false false", true))
+                .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,0.1F);}))
                 .addCondition(new CustomCondition(){
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -335,6 +380,7 @@ public class Skills {
                     }
                 });
         ComboNode UchigatanaPowerActiveScrapDashAttack =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW_DASH)
+                .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(1.1F))
                 .setPriority(6)
                 .setNotCharge(true)
@@ -343,6 +389,8 @@ public class Skills {
                 .setConvertTime(-0.7F)
                 .addCondition(new PlayerPhaseCondition(2,2))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "invincible setPlayerPhase 1", false))
+                .addCondition(new StackCondition(1,2))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "invincible consumeStack 1", false))
                 .addCondition(new CustomCondition(){
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -356,6 +404,8 @@ public class Skills {
                     }
                 });
         ComboNode UchigatanaPowerActiveScrapAirAttack =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
+                .setDamageMultiplier(ValueModifier.multiplier(1.3F))
+                .setCanBeInterrupt(false)
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(1F))
                 .setPriority(6)
@@ -364,6 +414,8 @@ public class Skills {
                 .setConvertTime(-0.5F)
                 .addCondition(new PlayerPhaseCondition(2,2))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
+                .addCondition(new StackCondition(1,4))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "invincible consumeStack 1", false))
                 .addCondition(new CustomCondition(){
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -377,17 +429,18 @@ public class Skills {
                     }
                 });
 
-        ComboNode UchigatanaPowerActiveScrapDashSkill =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW_DASH)
+        ComboNode UchigatanaPowerActiveScrapDashSkill =ComboNode.createNode(()-> WOMAnimations.KATANA_SHEATHED_DASH)
+                .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(1.1F))
                 .setPriority(6)
                 .addCondition(new SprintingCondition())
                 .setNotCharge(true)
-                .setPlaySpeed(0.8F)
-                .setConvertTime(-0.7F)
+                .setPlaySpeed(1F)
+                .setConvertTime(-0.1F)
                 .addCondition(new PlayerPhaseCondition(2,2))
-                .addCondition(new StackCondition(1,4))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "invincible consumeStack 1", false))
-                .addTimeEvent(new TimeStampedEvent(0.9F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,-0.1F);}))
+                .addCondition(new StackCondition(2,2))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "invincible consumeStack 2", false))
+                .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,-0.1F);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "invincible setPlayerPhase 1", false))
                 .addCondition(new CustomCondition(){
                     @Override
@@ -445,7 +498,8 @@ public class Skills {
 
         ComboNode UchigatanaPowerActiveScrap=ComboNode.create()
                 .addConditionAnimation(UchigatanaPowerDodgeSuccessActiveScrap)
-                .addConditionAnimation(UchigatanaPowerParryActiveScrap);
+                .addConditionAnimation(UchigatanaPowerParryActiveScrap)
+                .addConditionAnimation(UchigatanaPowerSkill);
 
         ComboNode UchigatanaPowerActiveScrapAfter=ComboNode.create()
                 .addConditionAnimation(UchigatanaPowerDodgeSuccessActiveScrap)
@@ -466,6 +520,7 @@ public class Skills {
 
         UchigatanaPowerroot.key1(UchigatanaPowerBasicAttack);//常态跳跃，疾跑，普攻一段，自动收刀居合泛普通攻击
         UchigatanaPowerroot.keyWeaponInnate(UchigatanaPowerSkills);//常态收刀居合攻击以及两种主动收刀
+        UchigatanaPowerSkills.keyWeaponInnate(UchigatanaPowerSkill);//
         UchigatanaPowerdashAttack.key1(UchigatanaPowerauto1);//疾跑攻击后接1A
         UchigatanaPowerJumpAttack.key1(UchigatanaPowerauto1);//跳跃攻击后接1A
         UchigatanaPowerauto5.key1(UchigatanaPowerBasicAttack);//普攻五段后重置泛普攻
@@ -483,7 +538,7 @@ public class Skills {
         UchigatanaPowerSheathedSkillDash.keyWeaponInnate(UchigatanaPowerActiveScrap);
 
         UchigatanaPowerauto1.key1(UchigatanaPowerNormalAttack2);
-        UchigatanaPowerauto1.keyWeaponInnate(UchigatanaPowerActiveScrap);//普攻一段命中后可主动收刀
+        UchigatanaPowerauto1.keyWeaponInnate(UchigatanaPowerActiveScrap);//普攻一段后可主动收刀
         UchigatanaPowerauto2.key1(UchigatanaPowerNormalAttack3);
         UchigatanaPowerauto2.keyWeaponInnate(UchigatanaPowerActiveScrap);
         UchigatanaPowerauto3.key1(UchigatanaPowerNormalAttack4);
@@ -492,16 +547,13 @@ public class Skills {
         UchigatanaPowerauto4.keyWeaponInnate(UchigatanaPowerActiveScrap);
 
         UchigatanaPowerParryActiveScrap.key1(UchigatanaActiveScarpAttacks);
-        UchigatanaPowerParryActiveScrap.keyWeaponInnate(UchigatanaPowerActiveScrapAfter);
+        UchigatanaPowerParryActiveScrap.keyWeaponInnate(UchigatanaActiveScarpSkills);
+        UchigatanaActiveScarpSkills.key1(UchigatanaPowerBasicAttack);
 
         UchigatanaPowerDodgeSuccessActiveScrap.key1(UchigatanaActiveScarpAttacks);
-        UchigatanaPowerDodgeSuccessActiveScrap.keyWeaponInnate(UchigatanaPowerActiveScrapAfter);
+        UchigatanaPowerDodgeSuccessActiveScrap.keyWeaponInnate(UchigatanaActiveScarpSkills);
 
-        UchigatanaActiveScarpAttacks.key1(UchigatanaPowerBasicAttack);
-        UchigatanaActiveScarpAttacks.keyWeaponInnate(UchigatanaPowerActiveScrapAfter);
 
-        UchigatanaActiveScarpSkills.key1(UchigatanaPowerBasicAttack);
-        UchigatanaActiveScarpSkills.keyWeaponInnate(UchigatanaPowerActiveScrapAfter);
 
 
         SkillManager.register(com.arc.arc.skill.UchigatanaPower::new, com.arc.arc.skill.UchigatanaPower.createComboBasicAttack().setCombo(UchigatanaPowerroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo1");
