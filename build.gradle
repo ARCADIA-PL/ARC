@@ -165,7 +165,7 @@ dependencies {
     implementation fg.deobf("libs:indestructible:18.5.14")
 
 
-    implementation fg.deobf("libs:invincible1739802683:18.5.10")
+    implementation fg.deobf("libs:invincible1739975381:18.5.11")
 
     implementation fg.deobf("libs:MmmMmmMmmMmm:1.18.2-1.5.2")
     implementation fg.deobf("libs:WeaponsOfMiracles:18.1.7.38")

@@ -21,7 +21,7 @@ public class EventHandlers {
             // 计算目标生命值（50%）
             float targetHealth = maxHealth * 0.5f;
 
-            // 强制设置当前生命值（若高于目标值）
+            // 强制设置当前生命值
             if (player.getHealth() > targetHealth) {
                 player.setHealth(targetHealth);
             }
