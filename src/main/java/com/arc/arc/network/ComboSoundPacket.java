@@ -26,9 +26,9 @@ public class ComboSoundPacket {
         // 将逻辑包装到 enqueueWork 中确保主线程执行
         ctx.get().enqueueWork(() -> {
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                if (this.level == 5) {
+                if (this.level == 4) {
                     ClientSoundHandler.playCombo5();
-                } else if (this.level == 10) {
+                } else if (this.level == 9) {
                     ClientSoundHandler.playCombo10();
                 }
             });

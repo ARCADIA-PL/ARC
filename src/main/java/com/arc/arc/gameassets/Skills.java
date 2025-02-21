@@ -147,16 +147,14 @@ public class Skills {
         ComboNode UchigatanaPowerauto5=ComboNode.createNode(()-> Animations.BATTOJUTSU)
                 .setDamageMultiplier(ValueModifier.multiplier(1F))
                 .setStunTypeModifier(StunType.HOLD)
-                .addCondition(new StackCondition(1,2))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),5,1000000000))
-                .addTimeEvent(new TimeStampedEvent(0.21F,entityPatch -> {entityPatch.playSound(EpicFightSounds.SWORD_IN,0,0);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.21F, "invincible setPlayerPhase 1", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.21F, "effect clear @s arc:hit_counter", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hit_counter 10 4",false))
+                .addTimeEvent(new TimeStampedEvent(0.25F,entityPatch -> {entityPatch.playSound(EpicFightSounds.SWORD_IN,0,0);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible setPlayerPhase 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "effect clear @s arc:hit_counter", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hit_counter 10 8",false))
                 .setPriority(3)
                 .setConvertTime(-0.2F)
-                .setPlaySpeed(1.1F);
+                .setPlaySpeed(1.6F);
 
         ComboNode UchigatanaPowerSheathedAttack =ComboNode.createNode(()-> Animations.UCHIGATANA_SHEATHING_AUTO)
                 .setDamageMultiplier(ValueModifier.multiplier(0.8F))
@@ -264,17 +262,24 @@ public class Skills {
 
         ComboNode UchigatanaPowerActiveScrap=ComboNode.createNode(()-> WOMAnimations.KATANA_GUARD_HIT)
                 .setCanBeInterrupt(false)
-                .setCooldown(300)
+                .setCooldown(100)
                 .addCondition(new CooldownCondition(false))
                 .setPriority(5)
                 .setPlaySpeed(1.2F)
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),10,1000000000))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:haste 7 1",false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:strength 7 1",false))
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),9,1000000000))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch)-> {entityPatch.playSound(Sounds.YAMATO_IN,0,0);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:haste 10 1",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:strength 10 1",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s irons_spellbooks:rend 5 5",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s minecraft:slowness 1 10", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect clear @s irons_spellbooks:abyssal_shroud", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s run particle minecraft:enchant ~ ~ ~ 0 0 0 1 50 force",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s rotated ~ 0 run particle minecraft:enchant ^ ^ ^1 0 0 0 1 50 force",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s rotated ~ 36 run particle minecraft:enchant ^ ^ ^1 0 0 0 1 50 force",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s rotated ~ 72 run particle minecraft:enchant ^ ^ ^1 0 0 0 1 50 force",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s rotated ~ 108 run particle minecraft:enchant ^ ^ ^1 0 0 0 1 50 force",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s rotated ~ 144 run particle minecraft:enchant ^ ^ ^1 0 0 0 1 50 force",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false))
                 .addTimeEvent(new TimeStampedEvent(0.09F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.BIPED_HOLD_UCHIGATANA_SHEATHING,0.0F);}))
                 .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
@@ -338,7 +343,7 @@ public class Skills {
 
         ComboNode UchigatanaPowerActiveScrapAttack =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
                 .setCanBeInterrupt(false)
-                .setDamageMultiplier(ValueModifier.multiplier(1F))
+                .setDamageMultiplier(ValueModifier.multiplier(1.3F))
                 .setPriority(5)
                 .setNotCharge(true)
                 .setPlaySpeed(1.13F)
@@ -364,7 +369,7 @@ public class Skills {
 
         ComboNode UchigatanaPowerActiveScrapSkill =ComboNode.createNode(()-> StarAnimations.YAMATO_POWER1)
                 .setCanBeInterrupt(false)
-                .setDamageMultiplier(ValueModifier.multiplier(1.4F))
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .setPriority(5)
                 .setNotCharge(true)
                 .setPlaySpeed(1.3F)
@@ -390,7 +395,7 @@ public class Skills {
                 });
         ComboNode UchigatanaPowerActiveScrapDashAttack =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW_DASH)
                 .setCanBeInterrupt(false)
-                .setDamageMultiplier(ValueModifier.multiplier(1.1F))
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .setPriority(6)
                 .setNotCharge(true)
                 .addCondition(new SprintingCondition())
@@ -414,7 +419,7 @@ public class Skills {
                     }
                 });
         ComboNode UchigatanaPowerActiveScrapAirAttack =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
-                .setDamageMultiplier(ValueModifier.multiplier(1.3F))
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .setCanBeInterrupt(false)
                 .setNotCharge(true)
                 .setPriority(6)
@@ -440,20 +445,19 @@ public class Skills {
                     }
                 });
 
-        ComboNode UchigatanaPowerActiveScrapDashSkill =ComboNode.createNode(()-> WOMAnimations.KATANA_SHEATHED_DASH)
+        ComboNode UchigatanaPowerActiveScrapDashSkill =ComboNode.createNode(()->WOMAnimations.KATANA_SHEATHED_DASH)
                 .setCanBeInterrupt(false)
-                .setDamageMultiplier(ValueModifier.multiplier(1.1F))
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .setPriority(6)
                 .addCondition(new SprintingCondition())
                 .setNotCharge(true)
-                .setPlaySpeed(1F)
-                .setConvertTime(-0.1F)
+                .setPlaySpeed(1.2F)
                 .addCondition(new PlayerPhaseCondition(2,2))
                 .addCondition(new StackCondition(2,2))
-                .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,-0.1F);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible consumeStack 2", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible setPlayerPhase 1", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect clear @s arc:hit_counter", false))
+                .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW_DASH,-0.7F);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect clear @s arc:hit_counter", false))
                 .addCondition(new CustomCondition(){
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {

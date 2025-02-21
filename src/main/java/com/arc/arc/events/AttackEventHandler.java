@@ -15,6 +15,7 @@ public class AttackEventHandler {
     public static void onLivingHurt(LivingHurtEvent event) {
         // 检查攻击者是否为玩家
         if (event.getSource().getEntity() instanceof Player player) {
+
             // 检查玩家是否拥有 BUFF
             if (player.hasEffect(ArcEffectsRegistry.HIT_COUNTER.get())) {
                 // 获取当前效果等级
@@ -37,11 +38,18 @@ public class AttackEventHandler {
                 player.addEffect(newEffect);
 
                 // 检测等级触发条件
-                if (newLevel == 5 || newLevel == 10) {
+                if (newLevel == 4 || newLevel == 9) {
                     // 发送带等级参数的音效包
-                    ArcMod.CHANNEL.sendToServer(new ComboSoundPacket(newLevel));
-                }
+                    ArcMod.CHANNEL.sendToServer(new ComboSoundPacket(newLevel));}
+
+
+
+
+
+
+
             }
         }
+
     }
 }
