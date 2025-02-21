@@ -1,15 +1,11 @@
 package com.arc.arc.gameassets;
 
 import com.arc.arc.ArcMod;
-import com.guhao.star.efmex.StarAnimations;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
-import reascer.wom.gameasset.WOMSkills;
-import reascer.wom.skill.weaponpassive.SatsujinPassive;
 import yesman.epicfight.api.animation.LivingMotions;
-import yesman.epicfight.api.collider.MultiOBBCollider;
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.ColliderPreset;
@@ -21,7 +17,6 @@ import yesman.epicfight.skill.SkillSlots;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.WeaponCapability;
-import yesman.epicfight.world.entity.ai.goal.CombatBehaviors;
 
 import java.util.function.Function;
 
@@ -61,8 +56,8 @@ public class WeaponCapabilityPresets {
                     .hitParticle(EpicFightParticles.HIT_BLADE.get())
                     .canBePlacedOffhand(false)
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
-                    .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.Arc1)
-                    .innateSkill(CapabilityItem.Styles.SHEATH, (itemstack) -> Skills.Arc1)
+                    .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.UchigatanaPower)
+                    .innateSkill(CapabilityItem.Styles.SHEATH, (itemstack) -> Skills.UchigatanaPower)
                     .passiveSkill(EpicFightSkills.BATTOJUTSU_PASSIVE)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.IDLE, Animations.BIPED_HOLD_UCHIGATANA)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.KNEEL, Animations.BIPED_HOLD_UCHIGATANA)
@@ -105,7 +100,7 @@ public class WeaponCapabilityPresets {
         @SubscribeEvent
         public static void register(WeaponCapabilityPresetRegistryEvent event) {
             event.getTypeEntry().put("sw0rd", ARC);
-            event.getTypeEntry().put("sw1rd", ARC1);
+            event.getTypeEntry().put("uchigatanapower", ARC1);
             event.getTypeEntry().put("arcblade", ARC2);
         }
     }

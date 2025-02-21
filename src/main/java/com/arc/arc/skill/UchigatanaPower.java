@@ -8,13 +8,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
+import yesman.epicfight.client.input.EpicFightKeyMappings;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
 import java.util.*;
 
-public class Demo2 extends ComboBasicAttack {
-    public Demo2(Builder builder) {
+public class UchigatanaPower extends ComboBasicAttack {
+    public UchigatanaPower(Builder builder) {
         super(builder);
     }
 
@@ -22,11 +23,9 @@ public class Demo2 extends ComboBasicAttack {
     public List<Component> getTooltipOnItem(ItemStack itemstack, CapabilityItem cap, PlayerPatch<?> playerCap) {
         List<Component> list = Lists.newArrayList();
         list.add(new TranslatableComponent(this.getTranslationKey()).withStyle(ChatFormatting.GOLD).append(new TextComponent(String.format("[%.0f]", this.consumption)).withStyle(ChatFormatting.AQUA)));
-        list.add(new TextComponent("普攻三段后按下KEY2可消耗一层技能额外居合攻击"));
-        list.add(new TextComponent("无条件常态按下KEY2，消耗一层技能向后瞬步,若后瞬步为极限闪避，则GP成功，再次按下KEY2触发追击,恢复一层技能"));
-        list.add(new TranslatableComponent("成功招架后按KEY2消耗一层技能触发防反"));
-        list.add(new TextComponent("成功招架后按").append(InvincibleKeyMappings.getTranslatableKey2()).append(new TextComponent("消耗一层技能触发防反")));
-        list.add(new TextComponent(""));
+        list.add(new TextComponent("5s不攻击后自动收刀，收刀状态下可使用居合攻击;普攻连段之间可用疾跑攻击重置普攻"));
+        list.add(new TextComponent("成功招架，完美闪避后可按").withStyle(ChatFormatting.YELLOW).append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage()).append(new TextComponent("消耗一层技能主动收刀")));
+        list.add(new TextComponent("主动收刀后短暂时间内无法移动，但可自动闪避一次攻击：主动收刀强化所有的居合攻击:其中疾跑技能和原地技能释放需要消耗一层技能"));
         return list;
     }
 
