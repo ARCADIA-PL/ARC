@@ -2,7 +2,6 @@ package com.arc.arc.gameassets;
 
 import com.arc.arc.init.ArcEffectsRegistry;
 import com.arc.arc.skill.ArcbladeSkill;
-import com.arc.arc.skill.Demo1;
 import com.dfdyz.epicacg.registry.MyAnimations;
 import com.guhao.star.efmex.StarAnimations;
 import com.guhao.star.regirster.Sounds;
@@ -15,7 +14,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
-import reascer.wom.gameasset.WOMSounds;
 import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
@@ -28,84 +26,59 @@ import yesman.epicfight.world.damagesource.StunType;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
 public class Skills {
-    public static Skill Arc;
+    public static Skill TachiPower;
     public static Skill UchigatanaPower;
     public static Skill Arcblade;
 
     public static void registerSkills() {
-        ComboNode sw0rdroot = ComboNode.create();
-        ComboNode SwordFormAirSlash = ComboNode.createNode(()-> Animations.SWORD_AIR_SLASH)
+        ComboNode Tachiroot = ComboNode.create();
+        ComboNode TachiAirSlash = ComboNode.createNode(()-> StarAnimations.KATANA_AIR_SLASH)
                 .setPriority(4)
-                .addCondition(new JumpCondition())
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 1",false));
-        ComboNode SwordFormDashAttack = ComboNode.createNode(()-> Animations.SWORD_DASH)
+                .addCondition(new JumpCondition());
+        ComboNode TachiDashAttack = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_DASH)
                 .setPriority(4)
                 .addCondition(new SprintingCondition());
-        ComboNode SwordFormAuto1 = ComboNode.createNode(()-> Animations.SWORD_AUTO1)
+        ComboNode TachiAuto1 = ComboNode.createNode(()-> StarAnimations.TACHI_TWOHAND_AUTO_1)
                 .setPriority(1);
-        ComboNode SwordFormAuto2 = ComboNode.createNode(()-> Animations.SWORD_AUTO2);
-        ComboNode SwordFormAuto3 = ComboNode.createNode(()-> Animations.SWORD_AUTO3);
+        ComboNode TachiAuto2 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO2);
+        ComboNode TachiAuto3 = ComboNode.createNode(()-> Animations.RUSHING_TEMPO2)
+                .setStunTypeModifier(StunType.SHORT)
+                .setPlaySpeed(0.7F);;
+        ComboNode TachiAuto4 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO1)
+                .setConvertTime(0.2F);
+        ComboNode TachiAuto5 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO4);
 
-        ComboNode AxeFormAirSlash = ComboNode.createNode(()-> Animations.AXE_AIRSLASH)
-                .setPriority(5)
-                .addCondition(new JumpCondition())
-                .addCondition(new PlayerPhaseCondition(1,1))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible setPlayerPhase 2",false));
-        ComboNode AxeFormDashAttack = ComboNode.createNode(()-> Animations.AXE_DASH)
-                .setPriority(5)
-                .addCondition(new SprintingCondition())
-                .addCondition(new PlayerPhaseCondition(1,1));
-        ComboNode AxeFormAuto1 = ComboNode.createNode(()-> Animations.AXE_AUTO1)
-                .setPriority(2)
-                .addCondition(new PlayerPhaseCondition(1,1));;
-        ComboNode AxeFormAuto2 = ComboNode.createNode(()-> Animations.AXE_AUTO2)
-                .setPriority(2)
-                .addCondition(new PlayerPhaseCondition(1,1));
-        ComboNode AxeFormAuto3 = ComboNode.createNode(()-> Animations.TACHI_AUTO3)
-                .setPriority(2)
-                .addCondition(new PlayerPhaseCondition(1,1));
+        ComboNode TachiBasicAttack = ComboNode.create()
+                .addConditionAnimation(TachiAirSlash)
+                .addConditionAnimation(TachiDashAttack)
+                .addConditionAnimation(TachiAuto1);
 
-        ComboNode DefeatBasicAttack =ComboNode.create()
-                .addConditionAnimation(SwordFormAirSlash)
-                .addConditionAnimation(SwordFormDashAttack)
-                .addConditionAnimation(SwordFormAuto1);
+        ComboNode TachiAttack2 = ComboNode.create()
+                .addConditionAnimation(TachiAuto2)
+                .addConditionAnimation(TachiDashAttack);
 
-        ComboNode NormalAttackAuto1 =ComboNode.create()
-                .addConditionAnimation(AxeFormAuto1)
-                .addConditionAnimation(AxeFormDashAttack)
-                .addConditionAnimation(AxeFormAirSlash);;
-        ComboNode NormalAttackAuto2 =ComboNode.create()
-                .addConditionAnimation(SwordFormAuto2)
-                .addConditionAnimation(AxeFormAuto2)
-                .addConditionAnimation(SwordFormDashAttack)
-                .addConditionAnimation(SwordFormAirSlash)
-                .addConditionAnimation(AxeFormDashAttack)
-                .addConditionAnimation(AxeFormAirSlash);
-        ComboNode NormalAttackAuto3 =ComboNode.create()
-                .addConditionAnimation(SwordFormAuto3)
-                .addConditionAnimation(AxeFormAuto3)
-                .addConditionAnimation(SwordFormDashAttack)
-                .addConditionAnimation(SwordFormAirSlash)
-                .addConditionAnimation(AxeFormDashAttack)
-                .addConditionAnimation(AxeFormAirSlash);
-        ComboNode NormalAttackAuto3After =ComboNode.create()
-                .addConditionAnimation(SwordFormAuto1)
-                .addConditionAnimation(AxeFormAuto1);
+        ComboNode TachiAttack3 = ComboNode.create()
+                .addConditionAnimation(TachiAuto3)
+                .addConditionAnimation(TachiDashAttack);
+
+        ComboNode TachiAttack4 = ComboNode.create()
+                .addConditionAnimation(TachiAuto4)
+                .addConditionAnimation(TachiDashAttack);
+
+        ComboNode TachiAttack5 = ComboNode.create()
+                .addConditionAnimation(TachiAuto5)
+                .addConditionAnimation(TachiDashAttack);
+
+        Tachiroot.key1(TachiBasicAttack);
+        TachiAirSlash.key1(TachiAuto1);
+        TachiDashAttack.key1(TachiAuto1);
+        TachiAuto5.key1(TachiAuto1);
 
 
-        sw0rdroot.key1(DefeatBasicAttack);//初始剑形态
-        DefeatBasicAttack.key1(NormalAttackAuto2);//剑形态普攻一段衔接二段
-        NormalAttackAuto2.key1(NormalAttackAuto3);//剑形态普攻二段衔接三段,斧形态普攻二段衔接三段
-        NormalAttackAuto1.key1(NormalAttackAuto2);//斧形态普攻一段衔接二段
-        NormalAttackAuto3.key1(NormalAttackAuto3After);//双形态普攻3A后接1A
-        SwordFormAuto1.key1(NormalAttackAuto2);
-        AxeFormAuto1.key1(NormalAttackAuto2);
-
-        SwordFormAirSlash.key1(NormalAttackAuto1);//剑形态跳劈切换斧形态
-        AxeFormAirSlash.key1(SwordFormAuto1);//斧形态跳劈切换剑形态
-
-        SwordFormDashAttack.key1(SwordFormAuto1);//剑形态冲刺攻击衔接普攻一段
-        AxeFormDashAttack.key1(AxeFormAuto1);//斧形态冲刺攻击衔接普攻一段
+        TachiAuto1.key1(TachiAttack2);
+        TachiAuto2.key1(TachiAttack3);
+        TachiAuto3.key1(TachiAttack4);
+        TachiAuto4.key1(TachiAttack5);
 
 
 
@@ -113,7 +86,11 @@ public class Skills {
 
 
 
-        SkillManager.register(Demo1::new, Demo1.createComboBasicAttack().setCombo(sw0rdroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
+
+
+
+
+        SkillManager.register(com.arc.arc.skill.TachiPower::new, com.arc.arc.skill.TachiPower.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
 
         ComboNode UchigatanaPowerroot = ComboNode.create();
         ComboNode UchigatanaPowerJumpAttack=ComboNode.createNode(()-> Animations.UCHIGATANA_AIR_SLASH)
@@ -1711,7 +1688,7 @@ public class Skills {
 
     @SubscribeEvent
     public static void BuildSkills(SkillBuildEvent event) {
-        Arc =  event.build(ArcMod.MOD_ID, "combo0");
+        TachiPower =  event.build(ArcMod.MOD_ID, "combo0");
         UchigatanaPower =  event.build(ArcMod.MOD_ID, "combo1");
         Arcblade =  event.build(ArcMod.MOD_ID, "combo2");
         //注意和上面对应上

@@ -12,8 +12,8 @@ import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
 import java.util.*;
 
-public class Demo1 extends ComboBasicAttack {
-    public Demo1(Builder builder) {
+public class TachiPower extends ComboBasicAttack {
+    public TachiPower(Builder builder) {
         super(builder);
     }
 
