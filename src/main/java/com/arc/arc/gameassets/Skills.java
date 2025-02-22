@@ -271,7 +271,7 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:strength 10 1",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s irons_spellbooks:rend 5 5",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s minecraft:slowness 1 10", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s run particle minecraft:enchant ~ ~ ~ 0 0 0 1 50 force",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s rotated ~ 0 run particle minecraft:enchant ^ ^ ^1 0 0 0 1 50 force",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"execute as @p at @s rotated ~ 36 run particle minecraft:enchant ^ ^ ^1 0 0 0 1 50 force",false))
@@ -342,6 +342,7 @@ public class Skills {
 
         ComboNode UchigatanaPowerActiveScrapSkill =ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
                 .setCanBeInterrupt(false)
+                .setStunTypeModifier(StunType.LONG)
                 .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .setPriority(5)
                 .setNotCharge(true)
@@ -351,7 +352,7 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "invincible consumeStack 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "effect clear @s arc:hit_counter", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "invincible setPlayerPhase 1", false))
-                .addTimeEvent(new TimeStampedEvent(0.9F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.LETHAL_SLICING_TWICE,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.9F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.BLADE_RUSH_FINISHER,0.0F);}))
                 .addCondition(new CustomCondition(){
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
