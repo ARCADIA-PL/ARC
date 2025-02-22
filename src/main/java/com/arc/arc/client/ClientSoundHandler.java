@@ -25,8 +25,8 @@ public class ClientSoundHandler {
         ClientParticleUtils.spawnParticlesAroundEntity(
                 Minecraft.getInstance().player,
                 ParticleTypes.END_ROD,
-                50,
-                3
+                100,
+                2
         );
     }
 
@@ -45,7 +45,7 @@ public class ClientSoundHandler {
         ClientParticleUtils.spawnParticlesAroundEntity(
                 Minecraft.getInstance().player,
                 ParticleTypes.ENCHANT,
-                100,
+                200,
                 2
         );
     }
