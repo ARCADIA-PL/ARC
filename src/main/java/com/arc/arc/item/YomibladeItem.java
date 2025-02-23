@@ -1,15 +1,14 @@
 package com.arc.arc.item;
 
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import org.jetbrains.annotations.NotNull;
 
-
-public class ArcbladeItem extends SwordItem {
-    public ArcbladeItem(Tier tier, int attackDamage, float attackSpeed, Properties properties) {
+public class YomibladeItem extends SwordItem {
+    public YomibladeItem(Tier tier, int attackDamage, float attackSpeed, Properties properties) {
         super(tier, attackDamage, attackSpeed, properties);
     }
 
@@ -36,7 +35,4 @@ public class ArcbladeItem extends SwordItem {
         return 15; // 原版钻石剑为 10
     }
 
-    }
-
-
-
+}

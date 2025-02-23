@@ -1,5 +1,6 @@
 package com.arc.arc;
 
+import com.arc.arc.command.HurtCounterCommand;
 import com.arc.arc.events.AttackEventHandler;
 import com.arc.arc.gameassets.Skills;
 import com.arc.arc.init.ArcEffectsRegistry;
@@ -7,6 +8,8 @@ import com.arc.arc.network.ComboSoundPacket;
 import com.arc.arc.sound.SoundRegistry;
 import com.stereowalker.unionlib.config.ConfigBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,6 +29,7 @@ public class ArcMod {
     public ArcMod() {
         Skills.registerSkills();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
         ItemRegistry.ITEMS.register(bus);
         ArcEffectsRegistry.EFFECTS.register(bus);
         MinecraftForge.EVENT_BUS.register(new AttackEventHandler());
@@ -44,8 +48,8 @@ public class ArcMod {
 
         ;}
 
-
-
-
+    private void registerCommands(RegisterCommandsEvent event) {
+        HurtCounterCommand.register(event.getDispatcher());
+    }
 }
 

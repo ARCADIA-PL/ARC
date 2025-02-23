@@ -127,17 +127,16 @@ public class Skills {
         ComboNode TachiMartialArtAuto4 = ComboNode.createNode(()-> StarAnimations.LETHAL_SLICING_START)
                 .addCondition(new StackCondition(3,5))
                 .addCondition(new PlayerPhaseCondition(2,2))
+                .setStunTypeModifier(StunType.HOLD)
                 .setCanBeInterrupt(false)
                 .setImpactMultiplier(2)
                 .addTimeEvent(new TimeStampedEvent(0.2F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.LETHAL_SLICING_ONCE,0.1F);}))
                 .setPlaySpeed(0.85F)
                 .setPriority(2);
-        ComboNode TachiMartialArtAuto5 = ComboNode.createNode(()-> Animations.RUSHING_TEMPO3)
+        ComboNode TachiMartialArtAuto5 = ComboNode.createNode(()-> StarAnimations.LETHAL_SLICING_TWICE)
                 .addCondition(new StackCondition(3,5))
                 .addCondition(new PlayerPhaseCondition(2,2))
-                .setConvertTime(0.15F)
-                .setPlaySpeed(0.9F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 2 false false false", true))
+                .setPlaySpeed(1.1F)
                 .setPriority(2);
 
         ComboNode TachiBasicAttack = ComboNode.create()
