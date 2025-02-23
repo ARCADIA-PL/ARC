@@ -7,7 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = "arc")
-public class EventHandlers {
+public class ArcbladeAttributeHandlers {
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent event) {

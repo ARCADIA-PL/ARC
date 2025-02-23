@@ -55,7 +55,7 @@ public class HurtCounterCommand {
                 livingEntity.addEffect(new MobEffectInstance(
                         ArcEffectsRegistry.HURT_COUNTER.get(),
                         durationSeconds * 20, // 转换为tick
-                        0, // 等级从0开始
+                        -1, // 等级从0开始
                         false,
                         true
                 ));
