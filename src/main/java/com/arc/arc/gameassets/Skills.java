@@ -87,6 +87,7 @@ public class Skills {
                 .setPriority(2)
                 .setConvertTime(-0.5F)
                 .setImpactMultiplier(2)
+                .setNotCharge(true)
                 .setStunTypeModifier(StunType.LONG)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible setPlayerPhase 2", false))
