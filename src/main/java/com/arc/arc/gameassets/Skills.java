@@ -34,51 +34,164 @@ public class Skills {
         ComboNode Tachiroot = ComboNode.create();
         ComboNode TachiAirSlash = ComboNode.createNode(()-> StarAnimations.KATANA_AIR_SLASH)
                 .setPriority(4)
-                .addCondition(new JumpCondition());
-        ComboNode TachiDashAttack = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_DASH)
+                .addCondition(new JumpCondition())
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s arc:hit_counter 10", false));
+        ComboNode TachiDashAttack = ComboNode.createNode(()-> Animations.TACHI_DASH)
                 .setPriority(4)
-                .addCondition(new SprintingCondition());
+                .addCondition(new SprintingCondition())
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s arc:hit_counter 10", false));;
+        //技能0-2层普通太刀形态
         ComboNode TachiAuto1 = ComboNode.createNode(()-> StarAnimations.TACHI_TWOHAND_AUTO_1)
-                .setPriority(1);
-        ComboNode TachiAuto2 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO2);
+                .addCondition(new StackCondition(0,3))
+                .setPriority(1)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s arc:hit_counter 10", false));;
+        ComboNode TachiAuto2 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO2)
+                .addCondition(new StackCondition(0,3))
+                .setPriority(1)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false));;
         ComboNode TachiAuto3 = ComboNode.createNode(()-> Animations.RUSHING_TEMPO2)
+                .addCondition(new StackCondition(0,3))
+                .setPriority(1)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false))
+                .setDamageMultiplier(ValueModifier.multiplier(0.8F))
                 .setStunTypeModifier(StunType.SHORT)
                 .setPlaySpeed(0.7F);;
         ComboNode TachiAuto4 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO1)
+                .addCondition(new StackCondition(0,3))
+                .setPriority(1)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 1", false))
                 .setConvertTime(0.2F);
-        ComboNode TachiAuto5 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO4);
+        ComboNode TachiAuto5 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO4)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible setPlayerPhase 2", false))
+                .addCondition(new StackCondition(0,3))
+                .setPriority(1);
+
+        ComboNode TachiSkillOnce= ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_3)
+                .addCondition(new StackCondition(1,3))
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),4,9))
+                .setPriority(1)
+                .setConvertTime(-0.2F)
+                .setImpactMultiplier(2)
+                .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.LETHAL_SLICING_TWICE,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.22F, (entityPatch)-> {entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible setPlayerPhase 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible groundSlam @s 2 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect clear @s arc:hit_counter", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hit_counter 10 8",false));;
+
+        ComboNode TachiSkillTwice= ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
+                .addCondition(new StackCondition(2,3))
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),9,1000000000))
+                .setPriority(2)
+                .setConvertTime(-0.5F)
+                .setImpactMultiplier(2)
+                .setStunTypeModifier(StunType.LONG)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible setPlayerPhase 2", false))
+                .addTimeEvent(new TimeStampedEvent(0.9F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.BLADE_RUSH_FINISHER,0.0F);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect clear @s arc:hit_counter", false));
+
+
+
+
+
+
+
+        //技能3-5层体术太刀形态
+        ComboNode TachiMartialArtAuto1 = ComboNode.createNode(()->  WOMAnimations.KATANA_AUTO_1)
+                .addCondition(new StackCondition(3,5))
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .setConvertTime(0.1F)
+                .setPlaySpeed(1F)
+                .setPriority(2)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "effect clear @s arc:hit_counter", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s arc:hit_counter 10", false));;;
+        ComboNode TachiMartialArtAuto2 = ComboNode.createNode(()-> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_2)
+                .addCondition(new StackCondition(3,5))
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .setCanBeInterrupt(false)
+                .setImpactMultiplier(2)
+                .setConvertTime(-0.45F)
+                .setPlaySpeed(1.1F)
+                .setPriority(2);
+        ComboNode TachiMartialArtAuto3 = ComboNode.createNode(()-> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_3)
+                .addCondition(new StackCondition(3,5))
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .setCanBeInterrupt(false)
+                .setImpactMultiplier(2)
+                .setPlaySpeed(1.1F)
+                .setPriority(2);
+        ComboNode TachiMartialArtAuto4 = ComboNode.createNode(()-> StarAnimations.LETHAL_SLICING_START)
+                .addCondition(new StackCondition(3,5))
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .setCanBeInterrupt(false)
+                .setImpactMultiplier(2)
+                .addTimeEvent(new TimeStampedEvent(0.2F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.LETHAL_SLICING_ONCE,0.1F);}))
+                .setPlaySpeed(0.85F)
+                .setPriority(2);
+        ComboNode TachiMartialArtAuto5 = ComboNode.createNode(()-> Animations.RUSHING_TEMPO3)
+                .addCondition(new StackCondition(3,5))
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .setConvertTime(0.15F)
+                .setPlaySpeed(0.9F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 2 false false false", true))
+                .setPriority(2);
 
         ComboNode TachiBasicAttack = ComboNode.create()
                 .addConditionAnimation(TachiAirSlash)
                 .addConditionAnimation(TachiDashAttack)
-                .addConditionAnimation(TachiAuto1);
+                .addConditionAnimation(TachiAuto1)
+                .addConditionAnimation(TachiMartialArtAuto1);
 
         ComboNode TachiAttack2 = ComboNode.create()
                 .addConditionAnimation(TachiAuto2)
+                .addConditionAnimation(TachiMartialArtAuto2)
                 .addConditionAnimation(TachiDashAttack);
 
         ComboNode TachiAttack3 = ComboNode.create()
                 .addConditionAnimation(TachiAuto3)
+                .addConditionAnimation(TachiMartialArtAuto3)
                 .addConditionAnimation(TachiDashAttack);
 
         ComboNode TachiAttack4 = ComboNode.create()
                 .addConditionAnimation(TachiAuto4)
+                .addConditionAnimation(TachiMartialArtAuto4)
                 .addConditionAnimation(TachiDashAttack);
 
         ComboNode TachiAttack5 = ComboNode.create()
                 .addConditionAnimation(TachiAuto5)
+                .addConditionAnimation(TachiMartialArtAuto5)
                 .addConditionAnimation(TachiDashAttack);
 
-        Tachiroot.key1(TachiBasicAttack);
-        TachiAirSlash.key1(TachiAuto1);
-        TachiDashAttack.key1(TachiAuto1);
-        TachiAuto5.key1(TachiAuto1);
+        ComboNode TachiDefeatSkills = ComboNode.create()
+                .addConditionAnimation(TachiSkillOnce)
+                .addConditionAnimation(TachiSkillTwice);
+
+        Tachiroot.key1(TachiBasicAttack);//基础太刀形态 0-2层技能可用
+        Tachiroot.keyWeaponInnate(TachiDefeatSkills);//基础太刀形态两种技能
+        TachiDefeatSkills.key1(TachiBasicAttack);//基础太刀形态释放技能后重置普攻
+        TachiAirSlash.key1(TachiBasicAttack);//跳跃攻击后接双形态一段普攻
+        TachiDashAttack.key1(TachiBasicAttack);//疾跑攻击后接双形态一段普攻
+        TachiAuto5.key1(TachiBasicAttack);//基础太刀形态五段普攻后重置普攻
+        TachiMartialArtAuto5.key1(TachiBasicAttack);//体术太刀形态五段普攻后重置普攻
 
 
         TachiAuto1.key1(TachiAttack2);
+        TachiAuto1.keyWeaponInnate(TachiDefeatSkills);
         TachiAuto2.key1(TachiAttack3);
+        TachiAuto2.keyWeaponInnate(TachiDefeatSkills);
         TachiAuto3.key1(TachiAttack4);
+        TachiAuto3.keyWeaponInnate(TachiDefeatSkills);
         TachiAuto4.key1(TachiAttack5);
+        TachiAuto4.keyWeaponInnate(TachiDefeatSkills);
+        TachiAuto5.keyWeaponInnate(TachiDefeatSkills);
+
+        TachiMartialArtAuto1.key1(TachiAttack2);
+        TachiMartialArtAuto2.key1(TachiAttack3);
+        TachiMartialArtAuto3.key1(TachiAttack4);
+        TachiMartialArtAuto4.key1(TachiAttack5);
 
 
 
@@ -377,9 +490,10 @@ public class Skills {
                 .setConvertTime(-0.5F)
                 .addCondition(new PlayerPhaseCondition(2,2))
                 .addCondition(new StackCondition(1,4))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible consumeStack 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect clear @s arc:hit_counter", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible consumeStack 1", false))
+
 
                 .addCondition(new CustomCondition(){
                     @Override
