@@ -5,7 +5,6 @@ import com.arc.arc.events.MobHurtCounterHandler;
 import com.arc.arc.events.PlayerAttackCounterHandler;
 import com.arc.arc.gameassets.Skills;
 import com.arc.arc.init.ArcEffectsRegistry;
-import com.arc.arc.init.ModCapabilities;
 import com.arc.arc.network.ComboSoundPacket;
 import com.arc.arc.sound.SoundRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -32,7 +31,6 @@ public class ArcMod {
         MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
         ItemRegistry.ITEMS.register(bus);
         ArcEffectsRegistry.EFFECTS.register(bus);
-        ModCapabilities.register();
         MinecraftForge.EVENT_BUS.register(new MobHurtCounterHandler());
         MinecraftForge.EVENT_BUS.register(PlayerAttackCounterHandler.class);
         SoundRegistry.SOUNDS.register(bus);

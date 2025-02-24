@@ -32,7 +32,7 @@ public class PlayerAttackCounterHandler {
 
                 MobEffectInstance newEffect = new MobEffectInstance(
                         ArcEffectsRegistry.HIT_COUNTER.get(),
-                        duration,
+                        10 * 20,
                         currentLevel + 1,
                         false,
                         true,
