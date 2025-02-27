@@ -1,6 +1,7 @@
 package com.arc.arc.gameassets;
 
 import com.arc.arc.init.ArcEffectsRegistry;
+import com.arc.arc.skill.ArcbladeMini;
 import com.arc.arc.skill.ArcbladeSkill;
 import com.dfdyz.epicacg.registry.MyAnimations;
 import com.guhao.star.efmex.StarAnimations;
@@ -29,6 +30,7 @@ public class Skills {
     public static Skill TachiPower;
     public static Skill UchigatanaPower;
     public static Skill Arcblade;
+    public static Skill ArcbladeMini;
 
     public static void registerSkills() {
         ComboNode Tachiroot = ComboNode.create();
@@ -229,7 +231,7 @@ public class Skills {
 
 
 
-        SkillManager.register(com.arc.arc.skill.TachiPower::new, com.arc.arc.skill.TachiPower.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
+        SkillManager.register(com.arc.arc.skill.ArcbladeMini::new, com.arc.arc.skill.ArcbladeMini.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
 
         ComboNode UchigatanaPowerroot = ComboNode.create();
         ComboNode UchigatanaPowerJumpAttack=ComboNode.createNode(()-> Animations.UCHIGATANA_AIR_SLASH)
@@ -429,6 +431,11 @@ public class Skills {
                 ;
 
         ComboNode UchigatanaPowerActiveScrapAttack =ComboNode.createNode(()-> WOMAnimations.KATANA_AUTO_3)
+                .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,-0.1F);}))
+                .addTimeEvent(new TimeStampedEvent(0.25F, (entityPatch)-> {entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.36F, "invincible groundSlam @s 1.5 false false false", true))
+                .setPlaySpeed(0.85F)
+                .setConvertTime(-0.2F)
                 .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(1.3F))
                 .setPriority(5)
@@ -437,12 +444,9 @@ public class Skills {
                 .setConvertTime(-0.2F)
                 .addCondition(new PlayerPhaseCondition(2,2))
                 .addCondition(new StackCondition(1,2))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.36F, "invincible groundSlam @s 1.5 false false false", true))
-                .addTimeEvent(new TimeStampedEvent(0.25F, (entityPatch)-> {entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect clear @s arc:hit_counter", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible setPlayerPhase 1", false))
-                .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,-0.1F);}))
                 .addCondition(new CustomCondition(){
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -1822,15 +1826,237 @@ public class Skills {
 
 
 
+        ComboNode ArcbladeMiniroot = ComboNode.create();
+        ComboNode ArcbladeMiniJump = ComboNode.createNode(()-> StarAnimations.YAMATO_AIRSLASH)
+                .setConvertTime(-0.1F)
+                .setPlaySpeed(1.3F)
+                .addCondition(new JumpCondition())
+                .setDamageMultiplier(ValueModifier.multiplier(0.5F))
+                .setPriority(4)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s arc:hit_counter 10", false))
+                ;;
+        ComboNode ArcbladeMiniDash = ComboNode.createNode(()->StarAnimations.YAMATO_DASH)
+                .setConvertTime(-0.1F)
+                .setPlaySpeed(1.2F)
+                .addCondition(new SprintingCondition())
+                .setDamageMultiplier(ValueModifier.multiplier(0.5F))
+                .setPriority(4)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s arc:hit_counter 10", false))
+                ;;
+        ComboNode ArcbladeMiniAuto1 = ComboNode.createNode(()-> StarAnimations.TACHI_TWOHAND_AUTO_1)
+                .setPlaySpeed(1.25F)
+                .setPriority(1)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s arc:hit_counter 10", false))
+                ;;
+        ComboNode ArcbladeMiniAuto2 = ComboNode.createNode(()-> StarAnimations.YAMATO_AUTO3)
+                .setStunTypeModifier(StunType.SHORT)
+                .setPlaySpeed(1.17F)
+                ;;
+        ComboNode ArcbladeMiniAuto3 = ComboNode.createNode(()-> StarAnimations.YAMATO_AUTO4)
+                .addCondition(new PlayerPhaseCondition(0,1))
+                .addTimeEvent(new TimeStampedEvent(1.2F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_STEP_FORWARD,0.0F);}))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
+                .setPlaySpeed(1.4F)
+                .setCanBeInterrupt(false)
+                .setDamageMultiplier(ValueModifier.multiplier(1.2F))
+                .setConvertTime(-0.28F)
+                ;
+        ComboNode ArcbladeMiniPowerAuto3 =ComboNode.createNode(()-> StarAnimations.YAMATO_AUTO4)
+                .setNotCharge(true)
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),4,999999999))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect clear @s arc:hit_counter", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hit_counter 10 8",false))
+                .addTimeEvent(new TimeStampedEvent(1.15F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.BLADE_RUSH_FINISHER,0.0F);}))
+                .addTimeEvent(new TimeStampedEvent(0.7F, (entityPatch)-> {entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "invincible groundSlam @s 2 false false false", true))
+                .setPlaySpeed(1.4F)
+                .setConvertTime(-0.28F)
+                .setPriority(2)
+                ;
+        ComboNode ArcbladeMiniAuto4 = ComboNode.createNode(()->StarAnimations.YAMATO_COUNTER1)
+                .setConvertTime(-0.07F)
+                .setPlaySpeed(1.03F)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
+                .addTimeEvent(new TimeStampedEvent(0.75F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW,-0.35F);}))
+                .setDamageMultiplier(ValueModifier.multiplier(0.7F))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 20", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
+
+        ComboNode ArcbladeMiniPowerAuto4 = ComboNode.createNode(()->StarAnimations.YAMATO_COUNTER1)
+                .setConvertTime(-0.07F)
+                .setPlaySpeed(1F)
+                .setPriority(2)
+                .setNotCharge(true)
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),9,99999999))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect clear @s arc:hit_counter", false))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {entityPatch.playSound(EpicFightSounds.EVISCERATE,0,0);}))
+                .addTimeEvent(new TimeStampedEvent(1F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW_DASH,-0.6F);}))
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 20", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
+
+
+        ComboNode ArcbladeMiniSkill =ComboNode.createNode(()->StarAnimations.YAMATO_POWER1)
+                .setPriority(4)
+                .setConvertTime(-0.1F)
+                .setPlaySpeed(1.3F)
+                .setNotCharge(true)
+                .setCanBeInterrupt(false)
+                .addCondition(new StackCondition(1,4))
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),4,999999999))
+                .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch ->{entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 2 false false false", true))
+                .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,0.1F);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect clear @s arc:hit_counter", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hit_counter 10 8",false))
+                .setCanBeInterrupt(false)
+                ;
+
+
+
+        ComboNode ArcbladeMiniGP =ComboNode.createNode(()->StarAnimations.YAMATO_STEP_FORWARD)
+                .setPriority(5)
+                .setPlaySpeed(1.3F)
+                .addCondition(new StackCondition(1,8))
+                .setCanBeInterrupt(false)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
+                .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(Sounds.FORESIGHT,0,0))))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s",true))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -2",false))
+                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 2",false))
+                ;
+
+
+        ComboNode ArcbladeMiniGP1 = ComboNode.createNode(()-> StarAnimations.FATAL_DRAW)
+                .addCondition(new StackCondition(1,4))
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .addCondition(new DodgeSuccessCondition())
+                .setNotCharge(true)
+                .setCanBeInterrupt(false)
+                .setPlaySpeed(1.05F)
+                .setConvertTime(-0.5F)
+                .setPriority(3)
+                .setDamageMultiplier(ValueModifier.multiplier(1.2F))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
+                .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,0.0F);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible groundSlam @s 1.5 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible setPlayerPhase 1", false));
+
+        ComboNode ArcbladeMiniGP2 = ComboNode.createNode(()-> WOMAnimations.AGONY_PLUNGE_FORWARD)
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .addCondition(new StackCondition(2,4))
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),9,999999999))
+                .addCondition(new DodgeSuccessCondition())
+                .setCanBeInterrupt(false)
+                .setNotCharge(true)
+                .setPriority(4)
+                .setPlaySpeed(1.5F)
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect clear @s arc:hit_counter", false))
+                .addTimeEvent(new TimeStampedEvent(1.3F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_COUNTER1,0.1F);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 20", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.3F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.3F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F,"summon minecraft:lightning_bolt ~ ~ ~",true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible setPlayerPhase 1", false));;
+
+
+                ComboNode ArcbladeMiniBasicAttack =ComboNode.create()
+                .addConditionAnimation(ArcbladeMiniAuto1)
+                .addConditionAnimation(ArcbladeMiniJump)
+                .addConditionAnimation(ArcbladeMiniDash);
+
+                ComboNode ArcbladeMiniAttack2 =ComboNode.create()
+                        .addConditionAnimation(ArcbladeMiniDash)
+                        .addConditionAnimation(ArcbladeMiniAuto2);
+
+                ComboNode ArcbladeMiniAttack3 =ComboNode.create()
+                        .addConditionAnimation(ArcbladeMiniDash)
+                        .addConditionAnimation(ArcbladeMiniAuto3)
+                        .addConditionAnimation(ArcbladeMiniPowerAuto3);
+
+                ComboNode ArcbladeMiniAttack4 =ComboNode.create()
+                        .addConditionAnimation(ArcbladeMiniDash)
+                        .addConditionAnimation(ArcbladeMiniAuto4)
+                        .addConditionAnimation(ArcbladeMiniPowerAuto4);
+
+                ComboNode ArcbladeMiniGPAttack =ComboNode.create()
+                        .addConditionAnimation(ArcbladeMiniGP1)
+                        .addConditionAnimation(ArcbladeMiniGP2)
+                        .addConditionAnimation(ArcbladeMiniAuto3);
+
+
+
+
+
+        ArcbladeMiniroot.key1(ArcbladeMiniBasicAttack);
+        ArcbladeMiniroot.keyWeaponInnate(ArcbladeMiniSkill);
+        ArcbladeMiniJump.key1(ArcbladeMiniAuto1);
+        ArcbladeMiniDash.key1(ArcbladeMiniAuto1);
+        ArcbladeMiniPowerAuto4.key1(ArcbladeMiniAuto1);
+        ArcbladeMiniSkill.key1(ArcbladeMiniAuto3);
+
+        ArcbladeMiniAuto1.key1(ArcbladeMiniAttack2);
+        ArcbladeMiniAuto1.keyWeaponInnate(ArcbladeMiniSkill);
+        ArcbladeMiniAuto2.key1(ArcbladeMiniAttack3);
+        ArcbladeMiniAuto2.keyWeaponInnate(ArcbladeMiniGP);
+        ArcbladeMiniGP.key1(ArcbladeMiniAuto3);
+        ArcbladeMiniGP.key1(ArcbladeMiniGPAttack);
+        ArcbladeMiniGP1.key1(ArcbladeMiniAttack3);
+        ArcbladeMiniGP2.key1(ArcbladeMiniAttack3);
+        ArcbladeMiniAuto3.key1(ArcbladeMiniAttack4);
+        ArcbladeMiniAuto3.keyWeaponInnate(ArcbladeMiniSkill);
+        ArcbladeMiniPowerAuto3.key1(ArcbladeMiniAttack4);
+        ArcbladeMiniAuto4.key1(ArcbladeMiniAuto1);
+        ArcbladeMiniAuto4.keyWeaponInnate(ArcbladeMiniSkill);
+
+
+
+        SkillManager.register(com.arc.arc.skill.ArcbladeMini::new, com.arc.arc.skill.ArcbladeMini.createComboBasicAttack().setCombo(ArcbladeMiniroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo3");
     }
-
-
-
     @SubscribeEvent
     public static void BuildSkills(SkillBuildEvent event) {
         TachiPower =  event.build(ArcMod.MOD_ID, "combo0");
         UchigatanaPower =  event.build(ArcMod.MOD_ID, "combo1");
         Arcblade =  event.build(ArcMod.MOD_ID, "combo2");
+        ArcbladeMini =  event.build(ArcMod.MOD_ID, "combo3");
         //注意和上面对应上
     }
 

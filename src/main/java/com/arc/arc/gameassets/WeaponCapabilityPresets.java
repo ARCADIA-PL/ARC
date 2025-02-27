@@ -98,11 +98,29 @@ public class WeaponCapabilityPresets {
                         .comboCancel((style) -> false);
 
 
+    public static final Function<Item, CapabilityItem.Builder> ARC3 = (item) ->
+            (CapabilityItem.Builder) WeaponCapability.builder().category(CapabilityItem.WeaponCategories.UCHIGATANA)//蹭格挡，用别的也行
+                    .styleProvider((entityPatch) -> CapabilityItem.Styles.TWO_HAND)
+                    .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
+                    .swingSound(EpicFightSounds.WHOOSH)
+                    .hitSound(EpicFightSounds.BLADE_HIT)
+                    .hitParticle(WOMParticles.OVERBLOOD_HIT.get())
+                    .canBePlacedOffhand(false)
+                    .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
+                    .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.ArcbladeMini)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.BLOCK, Animations.UCHIGATANA_GUARD)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.IDLE, Animations.BIPED_HOLD_UCHIGATANA)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.WALK, Animations.BIPED_WALK_UCHIGATANA)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.RUN, Animations.BIPED_RUN_UCHIGATANA)
+                    .comboCancel((style) -> false);
+
+
         @SubscribeEvent
         public static void register(WeaponCapabilityPresetRegistryEvent event) {
             event.getTypeEntry().put("tachipower", ARC);
             event.getTypeEntry().put("uchigatanapower", ARC1);
             event.getTypeEntry().put("arcblade", ARC2);
+            event.getTypeEntry().put("arcblademini", ARC3);
         }
     }
 

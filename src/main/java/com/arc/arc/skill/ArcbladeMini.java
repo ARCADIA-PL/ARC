@@ -12,8 +12,8 @@ import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
 import java.util.*;
 
-public class TachiPower extends ComboBasicAttack {
-    public TachiPower(Builder builder) {
+public class ArcbladeMini extends ComboBasicAttack {
+    public ArcbladeMini(Builder builder) {
         super(builder);
     }
 
