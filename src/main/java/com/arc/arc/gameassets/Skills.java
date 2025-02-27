@@ -1867,7 +1867,6 @@ public class Skills {
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -1",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.HIT_COUNTER),4,999999999))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect clear @s arc:hit_counter", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hit_counter 10 8",false))
                 .addTimeEvent(new TimeStampedEvent(1.15F, (entityPatch)-> {entityPatch.playAnimationSynchronized(StarAnimations.BLADE_RUSH_FINISHER,0.0F);}))
                 .addTimeEvent(new TimeStampedEvent(0.7F, (entityPatch)-> {entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}))
@@ -1938,7 +1937,6 @@ public class Skills {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 2 false false false", true))
                 .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch)-> {entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3,0.1F);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 1", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect clear @s arc:hit_counter", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hit_counter 10 8",false))
                 .setCanBeInterrupt(false)
                 ;
