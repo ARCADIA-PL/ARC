@@ -2,6 +2,7 @@ package com.arc.arc;
 import com.arc.arc.item.ArcbladeItem;
 import com.arc.arc.item.YomibladeItem;
 import com.arc.arc.item.ArcbladeMiniItem;
+import com.arc.arc.item.ArcbladeMini2Item;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -17,7 +18,18 @@ public class ItemRegistry {
     // 注册 ArcbladeMini
     public static final RegistryObject<Item> ARCBLADEMINI = ITEMS.register(
             "arcblademini",
-            () -> new YomibladeItem(
+            () -> new ArcbladeMiniItem(
+                    Tiers.NETHERITE,
+                    6,
+                    -2.0F,
+                    new Item.Properties()
+                            .tab(CreativeModeTab.TAB_COMBAT) // 放在创造模式“战斗”标签页
+            )
+    );
+    // 注册 ArcbladeMini2
+    public static final RegistryObject<Item> ARCBLADEMINI2 = ITEMS.register(
+            "arcblademini2",
+            () -> new ArcbladeMini2Item(
                     Tiers.NETHERITE,
                     6,
                     -2.0F,
