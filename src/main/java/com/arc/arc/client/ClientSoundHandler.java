@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT) // 确保仅客户端加载此类
+@OnlyIn(Dist.CLIENT)
 public class ClientSoundHandler {
 
     // 播放 5 级音效
@@ -19,7 +19,6 @@ public class ClientSoundHandler {
                 1.0f, // 音量
                 1.0f  // 音调
         );
-        // 开始持续粒子效果
         ClientEffectTracker.startTracking(player);
         // 生成环绕粒子
         ClientParticleUtils.spawnParticlesAroundEntity(
@@ -39,7 +38,6 @@ public class ClientSoundHandler {
                 1.2f, // 更大音量
                 0.9f  // 更低音调
         );
-        // 开始持续粒子效果
         ClientEffectTracker.startTracking(player);
         // 生成环绕粒子
         ClientParticleUtils.spawnParticlesAroundEntity(

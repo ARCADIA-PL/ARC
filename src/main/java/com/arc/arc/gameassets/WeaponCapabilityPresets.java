@@ -4,7 +4,6 @@ import com.arc.arc.ArcMod;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import reascer.wom.gameasset.WOMAnimations;
 import reascer.wom.particle.WOMParticles;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
@@ -32,7 +31,7 @@ public class WeaponCapabilityPresets {
                     .hitParticle(WOMParticles.OVERBLOOD_HIT.get())
                     .canBePlacedOffhand(false)
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
-                    .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.TachiPower)
+                    .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.StellarisTachi)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.BLOCK, Animations.LONGSWORD_GUARD)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.IDLE, Animations.BIPED_HOLD_TACHI)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.WALK, Animations.BIPED_WALK_LONGSWORD)
