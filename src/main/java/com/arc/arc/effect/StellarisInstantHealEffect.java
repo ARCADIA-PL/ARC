@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class StellarisInstantHealEffect extends InstantenousMobEffect {
     public StellarisInstantHealEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0x00FF00);
+        super(MobEffectCategory.NEUTRAL, 0x00FF00);
     }
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
