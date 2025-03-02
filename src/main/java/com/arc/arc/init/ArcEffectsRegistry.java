@@ -23,4 +23,7 @@ public class ArcEffectsRegistry {
 
     public static final RegistryObject<MobEffect> StellarisInstantHeal =
             EFFECTS.register("stellaris_instantheal",StellarisInstantHealEffect::new);
+
+    public static final RegistryObject<MobEffect> PercentageDamageEffect =
+            EFFECTS.register("stellaris_percentagedamageeffect",StellarisInstantHealEffect::new);
 }

@@ -41,7 +41,8 @@ public class Skills {
                 .setPriority(4)
                 .addCondition(new SprintingCondition());;
         ComboNode TachiAuto1 = ComboNode.createNode(()-> StarAnimations.TACHI_TWOHAND_AUTO_3)
-                .setPriority(1);
+                .setPriority(1)
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:stellaris_instantdamage 1 100",true));
         ComboNode TachiAuto2 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_AUTO4)
                 .setPriority(1)
                 .setConvertTime(0.1F)
