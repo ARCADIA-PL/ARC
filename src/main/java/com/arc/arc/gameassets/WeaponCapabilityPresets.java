@@ -28,7 +28,7 @@ public class WeaponCapabilityPresets {
                     .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
                     .swingSound(EpicFightSounds.WHOOSH)
                     .hitSound(EpicFightSounds.BLADE_HIT)
-                    .hitParticle(WOMParticles.OVERBLOOD_HIT.get())
+                    .hitParticle(WOMParticles.KATANA_SHEATHED_HIT.get())
                     .canBePlacedOffhand(false)
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
                     .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.StellarisTachi)

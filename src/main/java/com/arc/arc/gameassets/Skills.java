@@ -82,9 +82,9 @@ public class Skills {
         ComboNode TachiAuto5 = ComboNode.createNode(()-> StarAnimations.LONGSWORD_OLD_DASH)
                 .setPriority(1)
                 .setConvertTime(-0.1F)
-                .setPlaySpeed(1.2F)
+                .setPlaySpeed(0.75F)
                 .setStunTypeModifier(StunType.SHORT)
-                .addTimeEvent(new TimeStampedEvent(0.18F, (entityPatch)-> {entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}));
+                .addTimeEvent(new TimeStampedEvent(0.22F, (entityPatch)-> {entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0,0);}));
         ComboNode TachiPowerAuto5 = ComboNode.createNode(()-> StarAnimations.BLADE_RUSH_FINISHER)
                 .setPriority(2)
                 .setConvertTime(0.2F)
@@ -97,23 +97,32 @@ public class Skills {
                 .setPriority(2)
                 .setPlaySpeed(0.8F)
                 .addCondition(new StackCondition(1,4))
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
+                .setImpactMultiplier(1.1F)
+                .setArmorNegation(0.1F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStamina 2",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 2",false));
         ComboNode TachiMartialArtsAuto2 =ComboNode.createNode(()-> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_2)
                 .setPriority(2)
+                .setImpactMultiplier(1.5F)
+                .setArmorNegation(0.1F)
                 .setConvertTime(-0.4F)
                 .addCondition(new StackCondition(1,4))
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStamina 2",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 1 3",true));
         ComboNode TachiMartialArtsAuto3 =ComboNode.createNode(()-> StarAnimations.LETHAL_SLICING_START)
                 .setPriority(2)
                 .setPlaySpeed(0.8F)
+                .setImpactMultiplier(1.3F)
+                .setArmorNegation(0.1F)
                 .addCondition(new StackCondition(1,4))
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStamina 2",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 1 3",true));
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 1 3",true));;
 
 
         ComboNode TachiBasicAttack = ComboNode.create()
@@ -151,7 +160,7 @@ public class Skills {
         Tachiroot.key1(TachiBasicAttack);//基础太刀形态 0-2层技能可用
         TachiAirSlash.key1(TachiBasicAttack);//跳跃攻击后接双形态一段普攻
         TachiDashAttack.key1(TachiBasicAttack);//疾跑攻击后接双形态一段普攻
-        TachiAuto5.key1(TachiBasicAttack);//基础太刀形态五段普攻后重置普攻
+
         TachiPowerAuto4Fail.key1(TachiBasicAttack);
         TachiPowerAuto4Success.key1(TachiBasicAttack);
 
@@ -166,8 +175,9 @@ public class Skills {
         TachiPowerAuto5.key1(TachiAttack3);
 
         TachiAuto3.key1(TachiAttack4);
-        TachiPowerAuto3Success.key1(TachiAttack4);
+        TachiPowerAttack3.key1(TachiAttack4);
         TachiAuto3.keyWeaponInnate(TachiPowerAttack3);
+
 
         TachiAuto4.key1(TachiAttack5);
         TachiAuto4.keyWeaponInnate(TachiMartialArtsAuto3);
@@ -183,7 +193,7 @@ public class Skills {
 
 
 
-        SkillManager.register(com.arc.arc.skill.ArcbladeMini::new, com.arc.arc.skill.ArcbladeMini.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
+        SkillManager.register(com.arc.arc.skill.StellarisTachi::new, com.arc.arc.skill.StellarisTachi.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
 
         ComboNode UchigatanaPowerroot = ComboNode.create();
         ComboNode UchigatanaPowerJumpAttack=ComboNode.createNode(()-> Animations.UCHIGATANA_AIR_SLASH)
