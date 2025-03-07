@@ -45,7 +45,7 @@ public class ArcMod {
         ItemRegistry.ITEMS.register(bus);
         ArcEffectsRegistry.EFFECTS.register(bus);
         MinecraftForge.EVENT_BUS.register(new MobHurtCounterHandler());
-        MinecraftForge.EVENT_BUS.register(new PlayerAttackCounterHandler());
+        MinecraftForge.EVENT_BUS.register(PlayerAttackCounterHandler.class);
         SoundRegistry.SOUNDS.register(bus);
         List<PlayerEventListener> PLAYER_EVENT_LISTENERS = new ArrayList<>();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
