@@ -34,8 +34,7 @@ public class ArcMod {
             "1.0"::equals,
             "1.0"::equals);
     public static final String MOD_ID = "arc";
-    public static final DeferredRegister<MobEffect> EFFECTS =
-            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, "arc");
+
     public ArcMod() {
         Skills.registerSkills();
         Arcblade.registerSkills();
@@ -45,12 +44,12 @@ public class ArcMod {
         ItemRegistry.ITEMS.register(bus);
         ArcEffectsRegistry.EFFECTS.register(bus);
         MinecraftForge.EVENT_BUS.register(new MobHurtCounterHandler());
-        MinecraftForge.EVENT_BUS.register(PlayerAttackCounterHandler.class);
         SoundRegistry.SOUNDS.register(bus);
         List<PlayerEventListener> PLAYER_EVENT_LISTENERS = new ArrayList<>();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(ParryCounterHandler.class);
-        EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        MinecraftForge.EVENT_BUS.register(PlayerAttackCounterHandler.class);
+
 
 
 

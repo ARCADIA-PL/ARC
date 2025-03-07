@@ -58,12 +58,6 @@ public class ParryCounterHandler {
                                     int level = count; // 等级与招架次数一致
                                     // 更新药水效果（刷新持续时间）
                                     player.addEffect(new MobEffectInstance(ArcEffectsRegistry.StellarisParryCounter.get(), EFFECT_DURATION, level - 1));
-                                    // 发送招架成功消息
-                                    player.sendMessage(new TextComponent("成功招架 " + count + " 次"), player.getUUID());
-                                    // 如果等级达到 10，触发发光描边效果
-                                    if (level == 10) {
-                                        player.sendMessage(new TextComponent("招架计数已达到上限（10 次）！"), player.getUUID());
-                                    }
                                 } else {
                                     // 如果招架次数已达到上限（10 次），仅刷新持续时间
                                     player.addEffect(new MobEffectInstance(ArcEffectsRegistry.StellarisParryCounter.get(), EFFECT_DURATION, 9)); // 等级固定为 10（9 是等级索引）
