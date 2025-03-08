@@ -314,7 +314,7 @@ public class Arcblade {
                 .setStunTypeModifier(StunType.SHORT)
                 .setNotCharge(true)
                 .setCanBeInterrupt(false)
-                .addTimeEvent(new TimeStampedEvent(1.6F, (entityPatch) -> {
+                .addTimeEvent(new TimeStampedEvent(1.65F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW, -0.6F);
                 }));
 
