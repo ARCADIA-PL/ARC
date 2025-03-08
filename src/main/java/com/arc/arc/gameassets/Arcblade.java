@@ -1,6 +1,7 @@
 package com.arc.arc.gameassets;
 
 import com.arc.arc.ArcMod;
+import com.arc.arc.init.ArcEffectsRegistry;
 import com.arc.arc.skill.ArcbladeSkill;
 import com.dfdyz.epicacg.registry.MyAnimations;
 import com.guhao.star.Star;
@@ -291,7 +292,6 @@ public class Arcblade {
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s", true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 1", true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.3 0.6", true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.02 1 force @s", false))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:abyssal_shroud 2 0", false));
         ;
 
@@ -805,13 +805,14 @@ public class Arcblade {
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 2 2", true))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 2", true));
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 1", true));
 
         ComboNode ArcGP2extendSkill3 = ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .setConvertTime(-0.1F)
                 .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.29F,"effect give @s arc:stellaris_particleeffect 1",true))
                 .addTimeEvent(new TimeStampedEvent(1.3F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_POWER0_2, 0.0F);
                 }))
@@ -971,7 +972,7 @@ public class Arcblade {
                 }))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5", true))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1 0.0 0.02 1 force @s", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1 0.0 1.5 1 force @s", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force", false))
@@ -1009,8 +1010,7 @@ public class Arcblade {
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
-                }))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 2.0 0.0 1 1 force @s", false));
+                }));
 
         ComboNode ArcGP3Skill6 = ComboNode.createNode(() -> WOMAnimations.KATANA_SHEATHED_AUTO_2)
                 .setNotCharge(true)
