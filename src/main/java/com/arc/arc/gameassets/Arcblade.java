@@ -222,9 +222,8 @@ public class Arcblade {
                 .addCondition(new StackCondition(1, 8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
 
-        ComboNode Arctest = ComboNode.createNode(() -> StarAnimations.LETHAL_SLICING_THIRD)
-                .setPlaySpeed(1F)
-                .addCondition(new MobEffectCondition(true, (() -> MobEffects.WITHER), 1));
+        ComboNode Arctest = ComboNode.createNode(() -> WOMAnimations.ANTITHEUS_PULL);
+
 
         ComboNode ArcbasicAttack = ComboNode.create().addConditionAnimation(ArcJump)
                 .addConditionAnimation(ArcDash)
@@ -255,6 +254,7 @@ public class Arcblade {
 
 
         Arcbladeroot.key1(ArcbasicAttack);//初始无条件使用1A 疾跑攻击 跳跃攻击
+        Arcbladeroot.key4(Arctest);
         ArcDash.key1(ArcAuto1);//疾跑攻击后接1A
         ArcdashSkill.key1(ArcAutoDash2);//疾跑技能后接2A
         ArcJump.key1(ArcAutoDash2);//跳跃攻击后接2A

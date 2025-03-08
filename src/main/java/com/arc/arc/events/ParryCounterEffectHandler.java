@@ -2,7 +2,6 @@ package com.arc.arc.events;
 
 import com.arc.arc.ArcMod;
 import com.arc.arc.init.ArcEffectsRegistry;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
@@ -18,11 +17,10 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ParryCounterHandler {
+public class ParryCounterEffectHandler {
     // 存储玩家的招架次数
     private static final Map<UUID, Integer> playerParryCounts = new HashMap<>();
     // 存储已经注册监听器的玩家
@@ -117,14 +115,21 @@ public class ParryCounterHandler {
     public static void onPotionRemove(PotionEvent.PotionRemoveEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             UUID playerId = player.getUUID();
-            // 检查移除的药水效果是否是 PARRY_COUNTER_EFFECT
-            if (Objects.requireNonNull(event.getPotionEffect()).getEffect() == ArcEffectsRegistry.StellarisParryCounter.get()) {
+            if (event.getPotionEffect() != null && event.getPotionEffect().getEffect() == ArcEffectsRegistry.StellarisParryCounter.get()) {
                 // 清空招架计数
                 playerParryCounts.remove(playerId);
             }
         }
-
     }
-}
+    @SubscribeEvent
+    public static void onPotionExpire(PotionEvent.PotionExpiryEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            UUID playerId = player.getUUID();
+            if (event.getPotionEffect() != null && event.getPotionEffect().getEffect() == ArcEffectsRegistry.StellarisParryCounter.get()) {
+                // 清空招架计数
+                playerParryCounts.remove(playerId);
+            }
+        }
+}}
 
 

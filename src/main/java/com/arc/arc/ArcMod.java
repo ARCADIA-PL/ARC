@@ -1,16 +1,15 @@
 package com.arc.arc;
 
 import com.arc.arc.command.HurtCounterCommand;
+import com.arc.arc.events.ParryCounterEffectHandler;
 import com.arc.arc.events.PlayerAttackCounterHandler;
 import com.arc.arc.events.MobHurtCounterHandler;
-import com.arc.arc.events.ParryCounterHandler;
 import com.arc.arc.gameassets.Arcblade;
 import com.arc.arc.gameassets.Skills;
 import com.arc.arc.init.ArcEffectsRegistry;
 import com.arc.arc.network.ComboSoundPacket;
 import com.arc.arc.sound.SoundRegistry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,8 +17,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
 
 import java.util.ArrayList;
@@ -47,7 +44,7 @@ public class ArcMod {
         SoundRegistry.SOUNDS.register(bus);
         List<PlayerEventListener> PLAYER_EVENT_LISTENERS = new ArrayList<>();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        MinecraftForge.EVENT_BUS.register(ParryCounterHandler.class);
+        MinecraftForge.EVENT_BUS.register(ParryCounterEffectHandler.class);
         MinecraftForge.EVENT_BUS.register(PlayerAttackCounterHandler.class);
 
 
