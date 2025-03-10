@@ -27,10 +27,7 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect>StellarisParryCounter =
             EFFECTS.register("stellaris_parrycounter",ParryCounterEffect::new);
 
-    public static final RegistryObject<MobEffect>ParticleEffect =
-            EFFECTS.register("stellaris_particleeffect",ParticleEffect::new);
-
     public static final RegistryObject<MobEffect>ArcbladeTransformEffect =
-            EFFECTS.register("stellaris_arcbladetransformeffect",ParticleEffect::new);
+            EFFECTS.register("stellaris_arcbladetransformeffect",ArcbladeTransformEffect::new);
 
 }

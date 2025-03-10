@@ -1,6 +1,7 @@
 package com.arc.arc.gameassets;
 
 import com.arc.arc.ArcMod;
+import com.arc.arc.init.ArcEffectsRegistry;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -82,7 +83,15 @@ public class WeaponCapabilityPresets {
 
         public static final Function<Item, CapabilityItem.Builder> ARC2 = (item) ->
                 (CapabilityItem.Builder) WeaponCapability.builder().category(CapabilityItem.WeaponCategories.UCHIGATANA)//蹭格挡，用别的也行
-                        .styleProvider((entityPatch) -> CapabilityItem.Styles.TWO_HAND)
+                        .styleProvider((entitypatch) -> {
+                            if (entitypatch instanceof PlayerPatch<?> playerpatch) {
+                                // 检查玩家是否具有 ArcbladeTransformEffect 效果
+                                if (playerpatch.getOriginal().hasEffect(ArcEffectsRegistry.ArcbladeTransformEffect.get())) {
+                                    return CapabilityItem.Styles.COMMON; // 如果有 ArcbladeTransformEffect，返回 COMMON 风格
+                                }
+                            }
+                            return CapabilityItem.Styles.TWO_HAND; // 默认返回 TWO_HAND 风格
+                        })
                         .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
                         .swingSound(EpicFightSounds.WHOOSH)
                         .hitSound(EpicFightSounds.BLADE_HIT)
