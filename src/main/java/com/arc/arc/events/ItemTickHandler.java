@@ -26,6 +26,7 @@ public class ItemTickHandler {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Map<UUID, Long> transformationEndTimes = new HashMap<>();
     private static final Map<UUID, Long> particleEffectEndTimes = new HashMap<>();
+    private static final Map<UUID, Vec3> hexagramCenters = new HashMap<>(); // 存储每个玩家的法阵中心点
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -42,6 +43,7 @@ public class ItemTickHandler {
                 if (currentTime >= endTime) {
                     revertArcblade(player);
                     transformationEndTimes.remove(playerUUID);
+                    hexagramCenters.remove(playerUUID); // 移除法阵中心点
                     LOGGER.info("Reverted Arcblade for player: " + player.getName().getString());
                 }
             }
@@ -54,9 +56,13 @@ public class ItemTickHandler {
                 // 如果当前时间超过粒子效果结束时间，移除记录
                 if (currentTime >= endTime) {
                     particleEffectEndTimes.remove(playerUUID);
+                    hexagramCenters.remove(playerUUID); // 移除法阵中心点
                 } else {
                     // 生成粒子柱
-                    spawnPentagramParticles(player); // 持续生成五芒星粒子法阵
+                    Vec3 center = hexagramCenters.get(playerUUID);
+                    if (center != null) {
+                        spawnHexagramParticles(player, center); // 使用固定中心点生成六芒星粒子法阵
+                    }
                 }
             }
 
@@ -71,6 +77,7 @@ public class ItemTickHandler {
             }
         }
     }
+
 
 
     @SubscribeEvent
@@ -95,18 +102,20 @@ public class ItemTickHandler {
         if (event.getEntity() instanceof Player player) {
             if (event.getPotionEffect().getEffect() == ArcEffectsRegistry.ArcbladeTransformEffect.get()) {
                 int effectLevel = event.getPotionEffect().getAmplifier() + 1; // 获取 BUFF 等级
-                long transformationDuration = effectLevel * 4 * 1000; // 持续时间 = 等级 * 10 秒
+                long transformationDuration = effectLevel * 4L * 500; // 持续时间 = 等级 * 10 秒
                 long endTime = System.currentTimeMillis() + transformationDuration;
-
                 transformationEndTimes.put(player.getUUID(), endTime);
-                particleEffectEndTimes.put(player.getUUID(), System.currentTimeMillis() + 15000); // 粒子效果持续 15 秒
-
+                particleEffectEndTimes.put(player.getUUID(), System.currentTimeMillis() + 5000); // 粒子效果持续 15 秒
+                // 记录法阵的中心点
+                Vec3 center = player.position().add(0, 0.1, 0);
+                hexagramCenters.put(player.getUUID(), center);
                 transformArcblade(player);
-                spawnPentagramParticles(player); // 生成五芒星粒子法阵
+                spawnHexagramParticles(player, center); // 生成六芒星粒子法阵
                 LOGGER.info("Transformed Arcblade for player: " + player.getName().getString() + " for " + transformationDuration / 1000 + " seconds");
             }
         }
     }
+
 
 
     @SubscribeEvent
@@ -158,19 +167,16 @@ public class ItemTickHandler {
         player.inventoryMenu.broadcastChanges();
     }
 
-    private static void spawnPentagramParticles(Player player) {
+    private static void spawnHexagramParticles(Player player, Vec3 center) {
         if (player.level instanceof ServerLevel serverLevel) {
-            Vec3 center = player.position().add(0, 0.1, 0); // 玩家脚下的中心点，稍微抬高避免被地面遮挡
-            double[] radii = {2.0, 4.0, 6.0}; // 三层五芒星的半径
-            int points = 5; // 五芒星的顶点数
+            double[] radii = {2.0, 4.0, 6.0}; // 三层六芒星的半径
+            int points = 6; // 六芒星的顶点数
             double angleIncrement = 2 * Math.PI / points;
-
-            // 生成多层五芒星
+            // 生成多层六芒星
             for (int layer = 0; layer < radii.length; layer++) {
                 double layerRadius = radii[layer]; // 当前层的半径
                 double layerHeight = 0.2 * layer; // 每层高度递增
-
-                // 生成五芒星的顶点
+                // 生成六芒星的顶点
                 for (int i = 0; i < points; i++) {
                     double angle = i * angleIncrement;
                     double x = center.x + layerRadius * Math.cos(angle);
@@ -178,50 +184,62 @@ public class ItemTickHandler {
                     serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + layerHeight, z, 5, 0, 0, 0, 0); // 火焰粒子
                     serverLevel.sendParticles(ParticleTypes.ENCHANT, x, center.y + layerHeight, z, 5, 0, 0, 0, 0); // 附魔粒子
                 }
-
-                // 生成五芒星的连线
-                for (int i = 0; i < points; i++) {
+                // 生成六芒星的连线（正三角形）
+                for (int i = 0; i < points; i += 2) {
                     double angle1 = i * angleIncrement;
-                    double angle2 = (i + 2) % points * angleIncrement; // 五芒星的连线规则
+                    double angle2 = (i + 2) % points * angleIncrement;
                     double x1 = center.x + layerRadius * Math.cos(angle1);
                     double z1 = center.z + layerRadius * Math.sin(angle1);
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
-
                     // 在两点之间生成粒子
-                    int steps = 30; // 两点之间的粒子数量
+                    int steps = 10; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
                         double z = z1 + (z2 - z1) * t;
-                        serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
+                        serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
+                    }
+                }
+                // 生成六芒星的连线（倒三角形）
+                for (int i = 1; i < points; i += 2) {
+                    double angle1 = i * angleIncrement;
+                    double angle2 = (i + 2) % points * angleIncrement;
+                    double x1 = center.x + layerRadius * Math.cos(angle1);
+                    double z1 = center.z + layerRadius * Math.sin(angle1);
+                    double x2 = center.x + layerRadius * Math.cos(angle2);
+                    double z2 = center.z + layerRadius * Math.sin(angle2);
+                    // 在两点之间生成粒子
+                    int steps = 10; // 两点之间的粒子数量
+                    for (int j = 0; j <= steps; j++) {
+                        double t = (double) j / steps;
+                        double x = x1 + (x2 - x1) * t;
+                        double z = z1 + (z2 - z1) * t;
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
                         serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
                     }
                 }
             }
-
             // 生成粒子环
             double ringRadius = 6.0; // 粒子环的半径
-            int ringSteps = 30; // 粒子环的粒子数量
+            int ringSteps = 10; // 粒子环的粒子数量
             double ringSpeed = 0.2; // 旋转速度
             double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
-
             for (int i = 0; i < ringSteps; i++) {
                 double angle = ringAngle + i * (2 * Math.PI / ringSteps);
                 double x = center.x + ringRadius * Math.cos(angle);
                 double z = center.z + ringRadius * Math.sin(angle);
-
                 // 生成粒子环的粒子
-                serverLevel.sendParticles(ParticleTypes.ELECTRIC_SPARK, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 白色粒子
-                serverLevel.sendParticles(ParticleTypes.DRAGON_BREATH, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 灵魂火焰粒子
-
+                serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 白色粒子
+                serverLevel.sendParticles(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 灵魂火焰粒子
                 // 生成粒子柱
-                for (double y = 0; y < 0.7; y += 0.2) { // 粒子柱高度为 1 格
-                    serverLevel.sendParticles(ParticleTypes.SOUL, x, center.y + y, z, 1, 0, 0, 0, 0); // 紫色粒子
-                    serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + y, z, 1, 0, 0, 0, 0); // 金色粒子
+                for (double y = 0; y < 0.5; y += 0.2) { // 粒子柱高度为 1 格
+                    serverLevel.sendParticles(ParticleTypes.LANDING_LAVA, x, center.y + y, z, 1, 0, 0, 0, 0); // 紫色粒子
+                    serverLevel.sendParticles(ParticleTypes.ENCHANT, x, center.y + y, z, 1, 0, 0, 0, 0); // 金色粒子
                 }
             }
-
         }
     }
+
 }
