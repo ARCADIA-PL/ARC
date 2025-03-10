@@ -2,6 +2,7 @@ package com.arc.arc.events;
 
 import com.arc.arc.ArcItemRegistry;
 import com.arc.arc.init.ArcEffectsRegistry;
+import com.p1nero.invincible.api.events.TimeStampedEvent;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
@@ -15,6 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,10 +104,10 @@ public class ItemTickHandler {
         if (event.getEntity() instanceof Player player) {
             if (event.getPotionEffect().getEffect() == ArcEffectsRegistry.ArcbladeTransformEffect.get()) {
                 int effectLevel = event.getPotionEffect().getAmplifier() + 1; // 获取 BUFF 等级
-                long transformationDuration = effectLevel * 4L * 500; // 持续时间 = 等级 * 10 秒
+                long transformationDuration = effectLevel * 10L * 1000; // 持续时间 = 等级 * 10 秒
                 long endTime = System.currentTimeMillis() + transformationDuration;
                 transformationEndTimes.put(player.getUUID(), endTime);
-                particleEffectEndTimes.put(player.getUUID(), System.currentTimeMillis() + 5000); // 粒子效果持续 15 秒
+                particleEffectEndTimes.put(player.getUUID(), System.currentTimeMillis() + 2500); // 粒子效果持续 2 秒
                 // 记录法阵的中心点
                 Vec3 center = player.position().add(0, 0.1, 0);
                 hexagramCenters.put(player.getUUID(), center);
@@ -115,8 +117,6 @@ public class ItemTickHandler {
             }
         }
     }
-
-
 
     @SubscribeEvent
     public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
@@ -193,7 +193,7 @@ public class ItemTickHandler {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = 10; // 两点之间的粒子数量
+                    int steps = 30; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -211,7 +211,7 @@ public class ItemTickHandler {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = 10; // 两点之间的粒子数量
+                    int steps = 30; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -223,7 +223,7 @@ public class ItemTickHandler {
             }
             // 生成粒子环
             double ringRadius = 6.0; // 粒子环的半径
-            int ringSteps = 10; // 粒子环的粒子数量
+            int ringSteps = 30; // 粒子环的粒子数量
             double ringSpeed = 0.2; // 旋转速度
             double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
             for (int i = 0; i < ringSteps; i++) {
@@ -234,7 +234,7 @@ public class ItemTickHandler {
                 serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 白色粒子
                 serverLevel.sendParticles(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 灵魂火焰粒子
                 // 生成粒子柱
-                for (double y = 0; y < 0.5; y += 0.2) { // 粒子柱高度为 1 格
+                for (double y = 0; y < 1; y += 0.2) { // 粒子柱高度为 1 格
                     serverLevel.sendParticles(ParticleTypes.LANDING_LAVA, x, center.y + y, z, 1, 0, 0, 0, 0); // 紫色粒子
                     serverLevel.sendParticles(ParticleTypes.ENCHANT, x, center.y + y, z, 1, 0, 0, 0, 0); // 金色粒子
                 }
