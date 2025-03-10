@@ -225,7 +225,15 @@ public class Arcblade {
                 .addCondition(new StackCondition(1, 8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
 
-        ComboNode Arctest = ComboNode.createNode(() -> WOMAnimations.ANTITHEUS_PULL);
+        ComboNode Arctest = ComboNode.createNode(() -> WOMAnimations.SOLAR_HORNO)
+                .setConvertTime(0.3F)
+                .setPlaySpeed(0.1F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible groundSlam @s 2 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "invincible groundSlam @s 5 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "effect give @s arc:stellaris_arcbladetransformeffect 20 1", false))
+                .addTimeEvent(new TimeStampedEvent(1.1F, (entityPatch) -> {
+                    entityPatch.playAnimationSynchronized(WOMAnimations.RUINE_REDEMPTION, 0.0F);
+                }));
 
 
         ComboNode ArcbasicAttack = ComboNode.create().addConditionAnimation(ArcJump)
