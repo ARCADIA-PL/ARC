@@ -1,9 +1,7 @@
 package com.arc.arc;
 
 import com.arc.arc.command.HurtCounterCommand;
-import com.arc.arc.events.ParryCounterEffectHandler;
-import com.arc.arc.events.PlayerAttackCounterHandler;
-import com.arc.arc.events.MobHurtCounterHandler;
+import com.arc.arc.events.*;
 import com.arc.arc.gameassets.Arcblade;
 import com.arc.arc.gameassets.Skills;
 import com.arc.arc.init.ArcEffectsRegistry;
@@ -38,7 +36,7 @@ public class ArcMod {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
         MinecraftForge.EVENT_BUS.register(this);
-        ItemRegistry.ITEMS.register(bus);
+        ArcItemRegistry.ITEMS.register(bus);
         ArcEffectsRegistry.EFFECTS.register(bus);
         MinecraftForge.EVENT_BUS.register(new MobHurtCounterHandler());
         SoundRegistry.SOUNDS.register(bus);
@@ -46,6 +44,8 @@ public class ArcMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(ParryCounterEffectHandler.class);
         MinecraftForge.EVENT_BUS.register(PlayerAttackCounterHandler.class);
+        MinecraftForge.EVENT_BUS.register(ItemTickHandler.class);
+        MinecraftForge.EVENT_BUS.register(PotionEffectHandler.class);
 
 
 

@@ -7,8 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = "arc")
-public class ArcbladeAttributeHandlers {
-
+public class TransformedArcbladeAttributeHandlers {
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent event) {
         Player player = event.player;
@@ -28,3 +27,4 @@ public class ArcbladeAttributeHandlers {
         }
     }
 }
+

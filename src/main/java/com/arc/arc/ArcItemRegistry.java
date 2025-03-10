@@ -10,9 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.rmi.registry.Registry;
-
-public class ItemRegistry {
+public class ArcItemRegistry {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, "arc");
     // 注册 ArcbladeMini
@@ -51,6 +49,19 @@ public class ItemRegistry {
     // 注册 Arcblade
     public static final RegistryObject<Item> ARCBLADE = ITEMS.register(
             "arcblade",
+            () -> new ArcbladeItem(
+                    Tiers.NETHERITE,
+                    3,
+                    -2.4F,
+                    new Item.Properties()
+                            .tab(CreativeModeTab.TAB_COMBAT) // 放在创造模式“战斗”标签页
+            )
+
+
+    );
+    // 注册 变形Arcblade
+    public static final RegistryObject<Item> ARCBLADETransformed = ITEMS.register(
+            "arcbladetransformed",
             () -> new ArcbladeItem(
                     Tiers.NETHERITE,
                     3,
