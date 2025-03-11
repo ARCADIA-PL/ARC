@@ -1,29 +1,19 @@
 package com.arc.arc.gameassets;
 
 import com.arc.arc.ArcMod;
-import com.arc.arc.init.ArcEffectsRegistry;
-import com.arc.arc.skill.ArcbladeSkill;
 import com.arc.arc.skill.ArcbladeTransformedSkill;
-import com.dfdyz.epicacg.registry.MyAnimations;
-import com.guhao.star.Star;
 import com.guhao.star.efmex.StarAnimations;
-import com.guhao.star.regirster.Sounds;
-import com.p1nero.invincible.api.events.BiEvent;
 import com.p1nero.invincible.api.events.TimeStampedEvent;
 import com.p1nero.invincible.conditions.*;
 import com.p1nero.invincible.skill.api.ComboNode;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
-import reascer.wom.gameasset.WOMSounds;
 import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
-import yesman.epicfight.api.utils.math.ValueModifier;
-import yesman.epicfight.gameasset.Animations;
-import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.Skill;
-import yesman.epicfight.world.damagesource.StunType;
+import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
 public class ArcbladeTransformed {
@@ -31,8 +21,28 @@ public class ArcbladeTransformed {
 
     public static void registerSkills() {
         ComboNode ArcbladeTransformedroot = ComboNode.create();
-        ComboNode ArcbladeTransformedAirSlash = ComboNode.createNode(() -> StarAnimations.LONGSWORD_OLD_AIRSLASH)
-                .setPriority(4).addCondition(new JumpCondition());
+        ComboNode ArcbladeTransformedAirSlash1 = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_4_POLVORA)
+                .setPriority(4).setConvertTime(-0.05F).setPlaySpeed(1.1F)
+                .addCondition(new CustomCondition() {
+                    @Override
+                    public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                        // 获取玩家实体
+                        LivingEntity livingEntity = entityPatch.getOriginal();
+                        // 检测玩家是否滞空
+                        return !livingEntity.isOnGround();
+                    }
+                });
+        ComboNode ArcbladeTransformedAirSlash2 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_4)
+                .setPriority(4).setConvertTime(-0.25F).addCondition(new UpCondition())
+                .addCondition(new CustomCondition() {
+                    @Override
+                    public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                        // 获取玩家实体
+                        LivingEntity livingEntity = entityPatch.getOriginal();
+                        // 检测玩家是否滞空
+                        return !livingEntity.isOnGround();
+                    }
+                });
         ComboNode ArcbladeTransformedDashSlash = ComboNode.createNode(() -> WOMAnimations.RUINE_DASH)
                 .setPriority(4).addCondition(new SprintingCondition());
         ComboNode ArcbladeTransformedAuto1 = ComboNode.createNode(() -> StarAnimations.GREATSWORD_OLD_AUTO3)
@@ -49,29 +59,41 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "invincible groundSlam @s 2 false false false", true));
 
         ComboNode ArcbladeTransformedBasicAttack =ComboNode.create()
-                .addConditionAnimation(ArcbladeTransformedAirSlash)
+                .addConditionAnimation(ArcbladeTransformedAirSlash1)
+                .addConditionAnimation(ArcbladeTransformedDashSlash)
+                .addConditionAnimation(ArcbladeTransformedAuto1);
+        ComboNode ArcbladeTransformedBasicAttack2 =ComboNode.create()
+                .addConditionAnimation(ArcbladeTransformedDashSlash)
+                .addConditionAnimation(ArcbladeTransformedAirSlash1)
+                .addConditionAnimation(ArcbladeTransformedAuto1);
+        ComboNode ArcbladeTransformedBasicAttack3 =ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedDashSlash)
                 .addConditionAnimation(ArcbladeTransformedAuto1);
         ComboNode ArcbladeTransformedAutoAttack2=ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAuto2)
-                .addConditionAnimation(ArcbladeTransformedDashSlash)
-                .addConditionAnimation(ArcbladeTransformedAirSlash);
+                .addConditionAnimation(ArcbladeTransformedAirSlash1)
+                .addConditionAnimation(ArcbladeTransformedDashSlash);
         ComboNode ArcbladeTransformedAutoAttack3=ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAuto3)
-                .addConditionAnimation(ArcbladeTransformedDashSlash)
-                .addConditionAnimation(ArcbladeTransformedAirSlash);
+                .addConditionAnimation(ArcbladeTransformedAirSlash1)
+                .addConditionAnimation(ArcbladeTransformedDashSlash);
         ComboNode ArcbladeTransformedAutoAttack4=ComboNode.create()
+                .addConditionAnimation(ArcbladeTransformedAirSlash1)
                 .addConditionAnimation(ArcbladeTransformedAuto4)
-                .addConditionAnimation(ArcbladeTransformedDashSlash)
-                .addConditionAnimation(ArcbladeTransformedAirSlash);
+                .addConditionAnimation(ArcbladeTransformedDashSlash);
         ComboNode ArcbladeTransformedAutoAttack5=ComboNode.create()
+                .addConditionAnimation(ArcbladeTransformedAirSlash1)
                 .addConditionAnimation(ArcbladeTransformedAuto5)
-                .addConditionAnimation(ArcbladeTransformedDashSlash)
-                .addConditionAnimation(ArcbladeTransformedAirSlash);
+                .addConditionAnimation(ArcbladeTransformedDashSlash);
+
+        ComboNode ArcbladeTransformedAirAuto=ComboNode.create()
+                .addConditionAnimation(ArcbladeTransformedAirSlash2)
+                .addConditionAnimation(ArcbladeTransformedAuto1);
 
         ArcbladeTransformedroot.key1(ArcbladeTransformedBasicAttack);
-        ArcbladeTransformedDashSlash.key1(ArcbladeTransformedBasicAttack);
-        ArcbladeTransformedAirSlash.key1(ArcbladeTransformedBasicAttack);
+        ArcbladeTransformedDashSlash.key1(ArcbladeTransformedBasicAttack2);
+        ArcbladeTransformedAirSlash1.key1(ArcbladeTransformedAirAuto);
+        ArcbladeTransformedAirSlash2.key1(ArcbladeTransformedBasicAttack3);
         ArcbladeTransformedAuto1.key1(ArcbladeTransformedAutoAttack2);
         ArcbladeTransformedAuto2.key1(ArcbladeTransformedAutoAttack3);
         ArcbladeTransformedAuto3.key1(ArcbladeTransformedAutoAttack4);

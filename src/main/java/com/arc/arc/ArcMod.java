@@ -49,7 +49,7 @@ public class ArcMod {
         MinecraftForge.EVENT_BUS.register(ItemTickHandler.class);
         MinecraftForge.EVENT_BUS.register(PotionEffectHandler.class);
         MinecraftForge.EVENT_BUS.register(ArcbladeAttributeHandlers.class);
-        MinecraftForge.EVENT_BUS.register(ArcbladeTransformedAttributeHandlers.class);
+        MinecraftForge.EVENT_BUS.register(TransformedArcbladeHandlers.class);
 
 
 

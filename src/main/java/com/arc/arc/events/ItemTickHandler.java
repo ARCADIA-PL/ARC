@@ -7,6 +7,8 @@ import com.p1nero.invincible.api.events.TimeStampedEvent;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -55,8 +57,13 @@ public class ItemTickHandler {
                     transformationEndTimes.remove(playerUUID);
                     hexagramCenters.remove(playerUUID); // 移除法阵中心点
                     LOGGER.info("Reverted Arcblade for player: " + player.getName().getString());
+                } else {
+                    // 在变形期间添加跳跃提升和缓降效果
+                    player.addEffect(new MobEffectInstance(MobEffects.JUMP, 40, 2, false, false)); // 跳跃提升
+                    player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 40, 0, false, false)); // 缓降
                 }
             }
+
 
             // 检查玩家是否在粒子效果持续时间内
             if (particleEffectEndTimes.containsKey(playerUUID)) {
