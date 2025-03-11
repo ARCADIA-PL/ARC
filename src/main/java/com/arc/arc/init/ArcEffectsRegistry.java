@@ -30,4 +30,7 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect>ArcbladeTransformEffect =
             EFFECTS.register("stellaris_arcbladetransformeffect",ArcbladeTransformEffect::new);
 
+    public static final RegistryObject<MobEffect>HOVEREFFECT =
+            EFFECTS.register("hover_effect",HoverEffect::new);
+
 }

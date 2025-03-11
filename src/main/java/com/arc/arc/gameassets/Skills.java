@@ -31,6 +31,7 @@ public class Skills {
     public static Skill UchigatanaPower;
     public static Skill Arcblade;
     public static Skill ArcbladeMini;
+    public static Skill ArcbladeTransformed;
 
     public static void registerSkills() {
         ComboNode Tachiroot = ComboNode.create();
@@ -877,6 +878,7 @@ public class Skills {
         UchigatanaPower = event.build(ArcMod.MOD_ID, "combo1");
         Arcblade = event.build(ArcMod.MOD_ID, "combo2");
         ArcbladeMini = event.build(ArcMod.MOD_ID, "combo3");
+        ArcbladeTransformed = event.build(ArcMod.MOD_ID, "combo4");
         //注意和上面对应上
     }
 

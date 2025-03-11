@@ -3,6 +3,7 @@ package com.arc.arc;
 import com.arc.arc.command.HurtCounterCommand;
 import com.arc.arc.events.*;
 import com.arc.arc.gameassets.Arcblade;
+import com.arc.arc.gameassets.ArcbladeTransformed;
 import com.arc.arc.gameassets.Skills;
 import com.arc.arc.init.ArcEffectsRegistry;
 import com.arc.arc.network.ComboSoundPacket;
@@ -33,6 +34,7 @@ public class ArcMod {
     public ArcMod() {
         Skills.registerSkills();
         Arcblade.registerSkills();
+        ArcbladeTransformed.registerSkills();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
         MinecraftForge.EVENT_BUS.register(this);
@@ -46,6 +48,8 @@ public class ArcMod {
         MinecraftForge.EVENT_BUS.register(PlayerAttackCounterHandler.class);
         MinecraftForge.EVENT_BUS.register(ItemTickHandler.class);
         MinecraftForge.EVENT_BUS.register(PotionEffectHandler.class);
+        MinecraftForge.EVENT_BUS.register(ArcbladeAttributeHandlers.class);
+        MinecraftForge.EVENT_BUS.register(ArcbladeTransformedAttributeHandlers.class);
 
 
 

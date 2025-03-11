@@ -2,6 +2,7 @@ package com.arc.arc.gameassets;
 
 import com.arc.arc.ArcMod;
 import com.arc.arc.init.ArcEffectsRegistry;
+import com.guhao.star.efmex.StarAnimations;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -115,6 +116,22 @@ public class WeaponCapabilityPresets {
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.RUN, Animations.BIPED_RUN_UCHIGATANA)
                     .comboCancel((style) -> false);
 
+    public static final Function<Item, CapabilityItem.Builder> ARC4 = (item) ->
+            (CapabilityItem.Builder) WeaponCapability.builder().category(CapabilityItem.WeaponCategories.GREATSWORD)//蹭格挡，用别的也行
+                    .styleProvider((entityPatch) -> CapabilityItem.Styles.TWO_HAND)
+                    .collider(ColliderPreset.GREATSWORD)//这里可以用预设的，也可以new 一个
+                    .swingSound(EpicFightSounds.WHOOSH_BIG)
+                    .hitSound(EpicFightSounds.BLADE_HIT)
+                    .hitParticle(WOMParticles.ANTITHEUS_HIT.get())
+                    .canBePlacedOffhand(false)
+                    .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
+                    .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Skills.ArcbladeTransformed)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.BLOCK, Animations.GREATSWORD_GUARD)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.IDLE, WOMAnimations.RUINE_IDLE)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.WALK, StarAnimations.GREATSWORD_OLD_WALK)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.RUN, WOMAnimations.RUINE_RUN)
+                    .comboCancel((style) -> false);
+
 
         @SubscribeEvent
         public static void register(WeaponCapabilityPresetRegistryEvent event) {
@@ -122,6 +139,7 @@ public class WeaponCapabilityPresets {
             event.getTypeEntry().put("uchigatanapower", ARC1);
             event.getTypeEntry().put("arcblade", ARC2);
             event.getTypeEntry().put("arcblademini", ARC3);
+            event.getTypeEntry().put("arcbladetransformed", ARC4);
         }
     }
 
