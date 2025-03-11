@@ -15,6 +15,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
+import reascer.wom.gameasset.WOMSounds;
 import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
@@ -226,14 +227,14 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false));
 
         ComboNode Arctest = ComboNode.createNode(() -> WOMAnimations.SOLAR_HORNO)
-                .setConvertTime(0.4F)
-                .setPlaySpeed(0.1F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "invincible groundSlam @s 2 false false false", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "invincible groundSlam @s 5 false false false", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "effect give @s arc:stellaris_arcbladetransformeffect 20 1", false))
-                .addTimeEvent(new TimeStampedEvent(1F, (entityPatch) -> {
-                    entityPatch.playAnimationSynchronized(WOMAnimations.RUINE_REDEMPTION, 0.0F);
-                }));
+                .setConvertTime(0.35F)
+                .setPlaySpeed(0.7F)
+                .addTimeEvent(new TimeStampedEvent(0.35F, (entityPatch) -> {
+                    entityPatch.playSound(WOMSounds.SOLAR_HIT,0,0);
+                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "particle epicfight:force_field ~ ~0.5 ~ 0 0 0 1 1", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "invincible groundSlam @s 2 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.15F, "effect give @s arc:stellaris_arcbladetransformeffect 20 1", false));
 
 
         ComboNode ArcbasicAttack = ComboNode.create().addConditionAnimation(ArcJump)

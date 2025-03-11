@@ -2,9 +2,11 @@ package com.arc.arc.events;
 
 import com.arc.arc.ArcItemRegistry;
 import com.arc.arc.init.ArcEffectsRegistry;
+import com.guhao.star.efmex.StarAnimations;
 import com.p1nero.invincible.api.events.TimeStampedEvent;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -16,10 +18,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import reascer.wom.gameasset.WOMAnimations;
 import reascer.wom.gameasset.WOMSounds;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
+import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -110,18 +115,32 @@ public class ItemTickHandler {
                 long transformationDuration = effectLevel * 10L * 1000; // 持续时间 = 等级 * 10 秒
                 long endTime = System.currentTimeMillis() + transformationDuration;
                 transformationEndTimes.put(player.getUUID(), endTime);
-                particleEffectEndTimes.put(player.getUUID(), System.currentTimeMillis() + 2000); // 粒子效果持续 2 秒
+                particleEffectEndTimes.put(player.getUUID(), System.currentTimeMillis() + 2000); // 粒子效果持续 1 秒
+
                 // 记录法阵的中心点
                 Vec3 center = player.position().add(0, 0.1, 0);
                 hexagramCenters.put(player.getUUID(), center);
-                transformArcblade(player);
-                spawnHexagramParticles(player, center); // 生成六芒星粒子法阵
-                LOGGER.info("Transformed Arcblade for player: " + player.getName().getString() + " for " + transformationDuration / 1000 + " seconds");
-                player.playSound(EpicFightSounds.GROUND_SLAM, 1.0F, 1.0F);
 
+
+                // 执行形态切换逻辑
+                transformArcblade(player);
+
+                // 生成六芒星粒子法阵
+                spawnHexagramParticles(player, center);
+
+                // 播放动画
+                if (player instanceof ServerPlayer serverPlayer) {
+                    ServerPlayerPatch playerPatch = EpicFightCapabilities.getEntityPatch(serverPlayer, ServerPlayerPatch.class);
+                    if (playerPatch != null) {
+                        playerPatch.playAnimationSynchronized(WOMAnimations.SOLAR_AUTO_4_POLVORA, 0.2F);
+                    }
+                }
+
+                LOGGER.info("Transformed Arcblade for player: " + player.getName().getString() + " for " + transformationDuration / 1000 + " seconds");
             }
         }
     }
+
 
     @SubscribeEvent
     public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
@@ -165,6 +184,13 @@ public class ItemTickHandler {
                 normalStack.setTag(stack.getTag());
                 player.getInventory().setItem(slot, normalStack);
                 LOGGER.info("Successfully reverted ARCBLADETransformed to ARCBLADE for player: " + player.getName().getString());
+                // 播放动画
+                if (player instanceof ServerPlayer serverPlayer) {
+                    ServerPlayerPatch playerPatch = EpicFightCapabilities.getEntityPatch(serverPlayer, ServerPlayerPatch.class);
+                    if (playerPatch != null) {
+                        playerPatch.playAnimationSynchronized(WOMAnimations.MOONLESS_REWINDER, 0.0F);
+                    }
+                }
                 break;
             }
         }
