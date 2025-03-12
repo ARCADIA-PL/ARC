@@ -1,13 +1,17 @@
 package com.arc.arc.gameassets;
 
 import com.arc.arc.ArcMod;
+import com.arc.arc.init.ParticleRegistry;
 import com.arc.arc.skill.ArcbladeTransformedSkill;
 import com.guhao.star.efmex.StarAnimations;
 import com.p1nero.invincible.api.events.TimeStampedEvent;
 import com.p1nero.invincible.conditions.*;
 import com.p1nero.invincible.skill.api.ComboNode;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
@@ -70,7 +74,27 @@ public class ArcbladeTransformed {
                         return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
                     }
                 })
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 2 false false false", true));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 2 false false false", true))
+                .addTimeEvent(new TimeStampedEvent(1.2F, (entityPatch) -> {
+                    // 获取实体
+                    if (entityPatch.getOriginal() instanceof Player player) {
+                        Level level = player.level;
+                        if (level instanceof ServerLevel serverLevel) {
+                            double x = player.getX();
+                            double y = player.getY(); // 玩家脚底的位置
+                            double z = player.getZ();
+
+                            // 在玩家脚底生成粒子
+                            serverLevel.sendParticles(
+                                    ParticleRegistry.ARCBLADE_HEXAGRAM.get(), // 粒子类型
+                                    x, y, z, // 粒子生成位置
+                                    10, // 粒子数量
+                                    0.5, 0.0, 0.5, // 随机偏移
+                                    0.0 // 速度
+                            );
+                        }
+                    }
+                }));
         ComboNode ArcbladeTransformedAuto2 = ComboNode.createNode(() -> StarAnimations.GREATSWORD_OLD_AUTO1)
                 .setConvertTime(0.15F).setPlaySpeed(0.8F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1.5 false false false", true));;
