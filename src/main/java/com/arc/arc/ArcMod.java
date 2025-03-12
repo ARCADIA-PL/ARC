@@ -6,6 +6,7 @@ import com.arc.arc.gameassets.Arcblade;
 import com.arc.arc.gameassets.ArcbladeTransformed;
 import com.arc.arc.gameassets.Skills;
 import com.arc.arc.init.ArcEffectsRegistry;
+import com.arc.arc.init.ParticleRegistry;
 import com.arc.arc.network.ComboSoundPacket;
 import com.arc.arc.sound.SoundRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +37,9 @@ public class ArcMod {
         Arcblade.registerSkills();
         ArcbladeTransformed.registerSkills();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        // 注册粒子类型
+        ParticleRegistry.PARTICLE_TYPES.register(bus);
         MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
         MinecraftForge.EVENT_BUS.register(this);
         ArcItemRegistry.ITEMS.register(bus);
@@ -51,16 +55,6 @@ public class ArcMod {
         MinecraftForge.EVENT_BUS.register(ArcbladeAttributeHandlers.class);
         MinecraftForge.EVENT_BUS.register(TransformedArcbladeHandlers.class);
 
-
-
-
-
-
-
-
-
-
-
         int packetId = 0; // 每个包需唯一ID
         CHANNEL.registerMessage(
                 packetId++,
@@ -69,15 +63,11 @@ public class ArcMod {
                 ComboSoundPacket::new,
                 ComboSoundPacket::handle // 使用 .consumer 而非 .consumerMainThread
         );
-
-
-
-        ;}
-
+    }
 
     private void registerCommands(RegisterCommandsEvent event) {
         HurtCounterCommand.register(event.getDispatcher());
     }
-
 }
+
 
