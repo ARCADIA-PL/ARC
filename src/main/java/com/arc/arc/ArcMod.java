@@ -55,7 +55,7 @@ public class ArcMod {
         MinecraftForge.EVENT_BUS.register(TransformedArcbladeHandlers.class);
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBlockEntities.BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ArcModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         int packetId = 0; // 每个包需唯一ID
         CHANNEL.registerMessage(

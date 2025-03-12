@@ -65,16 +65,16 @@ public class MagicCircleRenderer extends EntityRenderer<MagicCircleEntity> {
         double z = entity.getZ();
 
         // 粒子圈的半径
-        float radius = 3.5F;
+        float radius = 4F;
 
         // 生成粒子
-        for (int i = 0; i < 5; i++) { // 每帧生成 10 个粒子
+        for (int i = 0; i < 2; i++) { // 每帧生成 2 个粒子
             float angle = (float) (random.nextFloat() * 2 * Math.PI); // 随机角度
             double offsetX = radius * Math.cos(angle);
             double offsetZ = radius * Math.sin(angle);
 
             // 第一种粒子（默认粒子）
-            level.addParticle(ParticleTypes.PORTAL, x + offsetX, y, z + offsetZ, 0, 0, 0);
+            level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x + offsetX, y, z + offsetZ, 0, 0, 0);
 
             // 第二种粒子（自定义粒子）
             level.addParticle(ParticleTypes.LAVA, x - offsetX, y, z - offsetZ, 0, 0, 0);

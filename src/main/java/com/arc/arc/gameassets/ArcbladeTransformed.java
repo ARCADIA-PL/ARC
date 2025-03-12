@@ -97,9 +97,35 @@ public class ArcbladeTransformed {
                 }));
         ComboNode ArcbladeTransformedAuto2 = ComboNode.createNode(() -> StarAnimations.GREATSWORD_OLD_AUTO1)
                 .setConvertTime(0.15F).setPlaySpeed(0.8F)
+                .addCondition(new CustomCondition() {
+                    @Override
+                    public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                        LivingEntity livingEntity = entityPatch.getOriginal();
+                        // 检测玩家是否处于非滞空状态
+                        boolean isOnGround = livingEntity.isOnGround();      // 在地面
+                        boolean isInWater = livingEntity.isInWater();       // 在水中
+                        boolean isOnClimbable = livingEntity.onClimbable(); // 在梯子上
+                        boolean isRiding = livingEntity.isPassenger();      // 骑乘
+                        boolean isGliding = livingEntity.isFallFlying();    // 滑翔
+                        return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
+                    }
+                })
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1.5 false false false", true));;
         ComboNode ArcbladeTransformedAuto3 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_4)
-                .setConvertTime(-0.2F).setPlaySpeed(0.8F);
+                .setConvertTime(-0.2F).setPlaySpeed(0.8F)
+                .addCondition(new CustomCondition() {
+                    @Override
+                    public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                        LivingEntity livingEntity = entityPatch.getOriginal();
+                        // 检测玩家是否处于非滞空状态
+                        boolean isOnGround = livingEntity.isOnGround();      // 在地面
+                        boolean isInWater = livingEntity.isInWater();       // 在水中
+                        boolean isOnClimbable = livingEntity.onClimbable(); // 在梯子上
+                        boolean isRiding = livingEntity.isPassenger();      // 骑乘
+                        boolean isGliding = livingEntity.isFallFlying();    // 滑翔
+                        return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
+                    }
+                });
         ComboNode ArcbladeTransformedAuto4 = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_3)
                 .addCondition(new CustomCondition() {
                     @Override
@@ -116,6 +142,19 @@ public class ArcbladeTransformed {
                 })
                         .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 2 false false false", true));
         ComboNode ArcbladeTransformedAuto5 = ComboNode.createNode(() -> WOMAnimations.RUINE_AUTO_3)
+                .addCondition(new CustomCondition() {
+                    @Override
+                    public boolean predicate(LivingEntityPatch<?> entityPatch) {
+                        LivingEntity livingEntity = entityPatch.getOriginal();
+                        // 检测玩家是否处于非滞空状态
+                        boolean isOnGround = livingEntity.isOnGround();      // 在地面
+                        boolean isInWater = livingEntity.isInWater();       // 在水中
+                        boolean isOnClimbable = livingEntity.onClimbable(); // 在梯子上
+                        boolean isRiding = livingEntity.isPassenger();      // 骑乘
+                        boolean isGliding = livingEntity.isFallFlying();    // 滑翔
+                        return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
+                    }
+                })
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "invincible groundSlam @s 2 false false false", true));
 
         ComboNode ArcbladeTransformedBasicAttack =ComboNode.create()

@@ -10,11 +10,11 @@ import net.minecraftforge.network.NetworkHooks;
 
 public class MagicCircleEntity extends Entity {
     private int lifeTime = 0; // 法阵的生存时间
-    private static final int MAX_LIFE_TIME = 100; // 5秒（20 ticks = 1秒）
+    private static final int MAX_LIFE_TIME = 160; // 5秒（20 ticks = 1秒）
 
     // 法阵和粒子圈的旋转速度（度/秒）
-    private float magicCircleRotationSpeed = 10.0F; // 法阵旋转速度
-    private float particleRingRotationSpeed = -260.0F; // 粒子圈旋转速度
+    private float magicCircleRotationSpeed = 1.0F; // 法阵旋转速度
+    private float particleRingRotationSpeed = -277.0F; // 粒子圈旋转速度
 
     // 当前旋转角度
     private float magicCircleRotation = 0.0F;
@@ -75,12 +75,12 @@ public class MagicCircleEntity extends Entity {
 
     public float getScale() {
         // 生成动画：从小变大
-        if (this.lifeTime < 20) {
-            return this.lifeTime / 20.0F;
+        if (this.lifeTime < 40) {
+            return this.lifeTime / 40.0F;
         }
         // 消失动画：从大变小
-        if (this.lifeTime > MAX_LIFE_TIME - 20) {
-            return (MAX_LIFE_TIME - this.lifeTime) / 20.0F;
+        if (this.lifeTime > MAX_LIFE_TIME - 40) {
+            return (MAX_LIFE_TIME - this.lifeTime) / 40.0F;
         }
         return 1.0F; // 正常大小
     }
