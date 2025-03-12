@@ -5,9 +5,7 @@ import com.arc.arc.events.*;
 import com.arc.arc.gameassets.Arcblade;
 import com.arc.arc.gameassets.ArcbladeTransformed;
 import com.arc.arc.gameassets.Skills;
-import com.arc.arc.init.ArcEffectsRegistry;
-import com.arc.arc.init.ModEntities;
-import com.arc.arc.init.ParticleRegistry;
+import com.arc.arc.init.*;
 import com.arc.arc.network.ComboSoundPacket;
 import com.arc.arc.sound.SoundRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -47,7 +45,6 @@ public class ArcMod {
         ArcEffectsRegistry.EFFECTS.register(bus);
         MinecraftForge.EVENT_BUS.register(new MobHurtCounterHandler());
         SoundRegistry.SOUNDS.register(bus);
-        ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         List<PlayerEventListener> PLAYER_EVENT_LISTENERS = new ArrayList<>();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(ParryCounterEffectHandler.class);
@@ -56,6 +53,8 @@ public class ArcMod {
         MinecraftForge.EVENT_BUS.register(PotionEffectHandler.class);
         MinecraftForge.EVENT_BUS.register(ArcbladeAttributeHandlers.class);
         MinecraftForge.EVENT_BUS.register(TransformedArcbladeHandlers.class);
+        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlockEntities.BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         int packetId = 0; // 每个包需唯一ID

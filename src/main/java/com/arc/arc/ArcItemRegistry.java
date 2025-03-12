@@ -1,8 +1,10 @@
 package com.arc.arc;
+import com.arc.arc.init.ModBlocks;
 import com.arc.arc.item.ArcbladeItem;
 import com.arc.arc.item.YomibladeItem;
 import com.arc.arc.item.ArcbladeMiniItem;
 import com.arc.arc.item.ArcbladeMini2Item;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -72,4 +74,8 @@ public class ArcItemRegistry {
 
 
     );
+    // 注册法阵方块的物品形式
+    public static final RegistryObject<Item> MAGIC_CIRCLE = ITEMS.register("magic_circle",
+                                                                           () -> new BlockItem(ModBlocks.MAGIC_CIRCLE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+
 }
