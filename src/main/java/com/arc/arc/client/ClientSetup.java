@@ -1,8 +1,9 @@
 package com.arc.arc.client;
 
 import com.arc.arc.ArcMod;
+import com.arc.arc.ParticleEffect.ArcbladeHexagram;
+import com.arc.arc.ParticleEffect.ArcbladeHexagram2;
 import com.arc.arc.init.ParticleRegistry;
-import com.arc.arc.ParticleEffect.TextureParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,6 +17,17 @@ public class ClientSetup {
     @SubscribeEvent
     public static void onParticleFactoryRegistration(ParticleFactoryRegisterEvent event) {
         ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
-        particleEngine.register(ParticleRegistry.TEXTURE_PARTICLE.get(), TextureParticle.Factory::new);
+
+        // 注册第一个粒子工厂
+        particleEngine.register(
+                ParticleRegistry.TEXTURE_PARTICLE_EXAMPLE.get(),
+                ArcbladeHexagram.Factory::new
+        );
+
+        // 注册第二个粒子工厂
+        particleEngine.register(
+                ParticleRegistry.ANOTHER_TEXTURE_PARTICLE.get(),
+                ArcbladeHexagram2.Factory::new
+        );
     }
 }
