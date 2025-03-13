@@ -74,27 +74,7 @@ public class ArcbladeTransformed {
                         return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
                     }
                 })
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 2 false false false", true))
-                .addTimeEvent(new TimeStampedEvent(1.2F, (entityPatch) -> {
-                    // 获取实体
-                    if (entityPatch.getOriginal() instanceof Player player) {
-                        Level level = player.level;
-                        if (level instanceof ServerLevel serverLevel) {
-                            double x = player.getX();
-                            double y = player.getY(); // 玩家脚底的位置
-                            double z = player.getZ();
-
-                            // 在玩家脚底生成粒子
-                            serverLevel.sendParticles(
-                                    ParticleRegistry.ARCBLADE_HEXAGRAM.get(), // 粒子类型
-                                    x, y, z, // 粒子生成位置
-                                    10, // 粒子数量
-                                    0.5, 0.0, 0.5, // 随机偏移
-                                    0.0 // 速度
-                            );
-                        }
-                    }
-                }));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 2 false false false", true));
         ComboNode ArcbladeTransformedAuto2 = ComboNode.createNode(() -> StarAnimations.GREATSWORD_OLD_AUTO1)
                 .setConvertTime(0.15F).setPlaySpeed(0.8F)
                 .addCondition(new CustomCondition() {

@@ -19,7 +19,7 @@ public class ArcModEntities {
     // 注册法阵实体类型
     public static final RegistryObject<EntityType<ArcbladeHexagramEntity>> ARCBLADE_HEXAGRAM = ENTITIES.register("arcblade_hexagram", () ->
             EntityType.Builder.of(ArcbladeHexagramEntity::new, MobCategory.MISC)
-                    .sized(3.0F, 0.1F) // 设置实体大小
+                    .sized(1.0F, 1.0F) // 设置实体大小
                     .build("arcblade_hexagram"));
 
 }
