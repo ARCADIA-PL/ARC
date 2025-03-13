@@ -1,0 +1,53 @@
+{
+  "loader": "forge:separate-perspective",
+  "base":
+  {
+    "loader": "forge:obj",
+    "model": "arc:models/item/obj/arcblademini2.obj",
+    "flip-v": true,
+    "materialLibraryOverride": "arcblademini2.mtl",
+    "display":
+    {
+      "thirdperson_righthand":
+      {
+        "translation": [6, -7.5, 7.5],
+        "rotation": [90, 0, 0],
+        "scale": [0.75, 0.75, 0.75]
+      },
+      "firstperson_righthand":
+      {
+        "translation": [10,-1,-5],
+        "rotation": [75,0,0],
+        "scale": [0.75, 0.75, 0.75]
+      }
+    }
+  },
+  "perspectives":
+  {
+    "ground":
+    {
+      "parent": "item/generated",
+      "textures":
+      {
+        "layer0": "arc:item/arcblademini2"
+      }
+    },
+    "gui":
+    {
+      "parent": "item/generated",
+      "textures":
+      {
+        "layer0": "arc:item/arcblademini2"
+      },
+      "gui_light": "front"
+    },
+    "fixed":
+    {
+      "parent": "item/generated",
+      "textures":
+      {
+        "layer0": "arc:item/arcblademini2"
+      }
+    }
+  }
+}

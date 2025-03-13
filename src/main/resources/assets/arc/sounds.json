@@ -1,0 +1,10 @@
+{
+  "combo_5": {
+    "sounds": ["arc:combo_5"],
+    "subtitle": "subtitles.arc.combo_5"
+  },
+  "combo_10": {
+    "sounds": ["arc:combo_10"],
+    "subtitle": "subtitles.arc.combo_10"
+  }
+}

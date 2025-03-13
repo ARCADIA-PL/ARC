@@ -1,0 +1,9 @@
+
+["Spell Overlay position"]
+	x = 0
+	y = 0
+
+["Animation Filter"]
+	#cancel the EF render when casting magic, will play default animation of ISB
+	filter = true
+

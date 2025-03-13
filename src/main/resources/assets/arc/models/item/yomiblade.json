@@ -1,0 +1,53 @@
+{
+  "loader": "forge:separate-perspective",
+  "base":
+  {
+    "loader": "forge:obj",
+    "model": "arc:models/item/obj/yomiblade.obj",
+    "flip-v": true,
+    "materialLibraryOverride": "yomiblade.mtl",
+    "display":
+    {
+      "thirdperson_righthand":
+      {
+        "translation": [10, -7.0, 7.6],
+        "rotation": [90, 0, 0],
+        "scale": [1.3, 0.82, 0.7]
+      },
+      "firstperson_righthand":
+      {
+        "translation": [10,-1,-5],
+        "rotation": [75,0,0],
+        "scale": [0.75, 0.75, 0.75]
+      }
+    }
+  },
+  "perspectives":
+  {
+    "ground":
+    {
+      "parent": "item/generated",
+      "textures":
+      {
+        "layer0": "arc:item/yomiblade"
+      }
+    },
+    "gui":
+    {
+      "parent": "item/generated",
+      "textures":
+      {
+        "layer0": "arc:item/yomiblade"
+      },
+      "gui_light": "front"
+    },
+    "fixed":
+    {
+      "parent": "item/generated",
+      "textures":
+      {
+        "layer0": "arc:item/yomiblade"
+      }
+    }
+  }
+}

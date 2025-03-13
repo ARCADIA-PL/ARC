@@ -1,0 +1,11 @@
+{"type": "star:s_greatsword", "attributes": {"common": {"impact": 0.7, "armor_negation": 25.0, "max_strikes": 3, "damage_bonus": 3.5,
+"speed_bonus": 0.1}
+	},
+	"collider":
+	{
+		"number": 3,
+		"center": [0.0, 0.0, -1.02],
+		"size": [0.4, 0.4, 1.2]
+	}
+}
+
