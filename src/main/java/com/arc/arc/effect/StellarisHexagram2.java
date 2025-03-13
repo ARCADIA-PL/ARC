@@ -20,8 +20,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
     }
 
 
-    static int d;
-    static int ans=30;
+    static int ans=0;
     static int p=1;
 
 
@@ -30,15 +29,15 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
 
-            d=amplifier+1;
+
             Vec3 vec = player.position().add(0, 0.1, 0);
 
             //实现呼吸效果
-            if(ans==230||ans==30)p=(p^1);
+            if(ans==130||ans==0)p=(p^1);
             if(p==0)ans++;
             else ans--;
 
-            spawnHexagramParticles(player,vec,6,0.2);
+            spawnHexagramParticles(player,vec,(amplifier+1)*3,0.2);
         }
     }
 
@@ -71,7 +70,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = 20; // 两点之间的粒子数量
+                    int steps = ((int)radii[2])*Math.min(10,Math.max(0,ans/6-layer*4-1)); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -89,7 +88,8 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = 20; // 两点之间的粒子数量
+                    //int steps = 20; // 两点之间的粒子数量
+                    int steps = ((int)radii[2])*Math.min(10,Math.max(0,ans/6-layer*4-1));
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
