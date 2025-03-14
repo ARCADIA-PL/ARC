@@ -17,6 +17,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
 import reascer.wom.gameasset.WOMSounds;
+import reascer.wom.particle.WOMParticles;
 import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
@@ -73,9 +74,6 @@ public class Arcblade {
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.45F, (entityPatch) -> {
-                    entityPatch.playSound(ArcSoundRegistry.VoidSlash.get(),0,0);
                 }))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 14", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s irons_spellbooks:rend", false))
@@ -285,14 +283,11 @@ public class Arcblade {
         ArcAuto4.key1(ArcAutoDash5);//4A后接5A
         ArcPowerAuto4.key1(ArcPowerAuto5);//强化4A后接5A
 
-
         ArcAuto5.key1(ArcAutoDash6);//5A后接6A
         ArcPowerAuto5.key1(ArcPowerAuto6);//强化5A后接6A
 
-
         ArcAuto6.key1(ArcbasicAttack);//6A后可使用1A 疾跑攻击 跳跃攻击
         ArcPowerAuto6.key1(ArcbasicAttack);//强化6A后可使用1A 疾跑攻击 跳跃攻击
-
 
         ComboNode ArcGP1 = ComboNode.createNode(() -> Animations.BIPED_STEP_BACKWARD)
                 .setPriority(3)
@@ -308,21 +303,18 @@ public class Arcblade {
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.3 0.6", true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:abyssal_shroud 2 0", false));
         ;
-
-
-        ComboNode ArcGP1extendA = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER0_2)
+        ComboNode ArcGP1extendA = ComboNode.createNode(() -> WOMAnimations.KATANA_SHEATHED_AUTO_2)
                 .addCondition(new StackCondition(1, 8))
                 .addCondition(new PlayerPhaseCondition(1,2))
                 .setPriority(4)
                 .addCondition(new DodgeSuccessCondition())
                 .setCanBeInterrupt(false)
-                .setPlaySpeed(1.3F)
                 .addCondition(new StackCondition(0, 8))
                 .addTimeEvent(new TimeStampedEvent(0.35F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_STRIKE1, -0.07F);
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch) -> {
-                    entityPatch.playSound(ArcSoundRegistry.JudgementCut.get(),0,0);
+                    entityPatch.playSound(ArcSoundRegistry.JudgementCut.get(),0.9F,0,0);
                 }))
                 .setDamageMultiplier(ValueModifier.multiplier(0.5F));
         ComboNode ArcGP1extendA1 = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER2)
@@ -332,11 +324,11 @@ public class Arcblade {
                 .setStunTypeModifier(StunType.SHORT)
                 .setNotCharge(true)
                 .setCanBeInterrupt(false)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(ArcSoundRegistry.Slash.get(), 0, 0);
+                }))
                 .addTimeEvent(new TimeStampedEvent(1.65F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW, -0.6F);
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.28F, (entityPatch) -> {
-                    entityPatch.playSound(ArcSoundRegistry.VoidSlash.get(),0,0);
                 }));
 
         ComboNode ArcGP1extendS1 = ComboNode.createNode(() -> StarAnimations.YAMATO_STRIKE1)
@@ -348,19 +340,17 @@ public class Arcblade {
                 .setPlaySpeed(1.2F)
                 .setCanBeInterrupt(false)
                 .addCondition(new DodgeSuccessCondition())
-                .setDamageMultiplier(ValueModifier.multiplier(0.7F));
-        ;
+                .setDamageMultiplier(ValueModifier.multiplier(0.7F))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(ArcSoundRegistry.Slash.get(), 0, 0);
+                }));
 
         ComboNode ArcGP1extendS2 = ComboNode.createNode(() -> StarAnimations.YAMATO_STRIKE2)
                 .setPlaySpeed(1.2F)
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(0.7F));
         ;
-
         ComboNode ArcGP1extendS3 = ComboNode.createNode(() -> StarAnimations.YAMATO_AUTO4)
-                .addTimeEvent(new TimeStampedEvent(0.45F, (entityPatch) -> {
-                    entityPatch.playSound(ArcSoundRegistry.VoidSlash.get(),0,0);
-                }))
                 .addTimeEvent(new TimeStampedEvent(1F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_UCHIGATANA, 0.0F);
                 }))
@@ -443,9 +433,6 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .setDamageMultiplier(ValueModifier.multiplier(1.5F));
         ;
-        ;
-        ;
-
         ComboNode Arc2ASGP2 = ComboNode.createNode(() -> StarAnimations.YAMATO_STEP_FORWARD)
                 .setPriority(4)
                 .setPlaySpeed(1.3F)
@@ -461,18 +448,18 @@ public class Arcblade {
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 2", true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect clear @s irons_spellbooks:rend", true));;
 
-
-
         ComboNode GP2 = ComboNode.create().addConditionAnimation(Arc2ASGP2);
-
 
         ComboNode Arc3AS1 = ComboNode.createNode(() -> StarAnimations.YAMATO_COUNTER1)
                 .setPriority(3)
                 .setConvertTime(-0.07F)
                 .setPlaySpeed(1.1F)
                 .setNotCharge(true)
+                .addTimeEvent(new TimeStampedEvent(0.08F, (entityPatch) -> {
+                    entityPatch.playSound(ArcSoundRegistry.VoidSlash.get(),2F,0,0);
+                }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
+                    entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0,0);
                 }))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @2 minecraft:slowness 2 255", true))
@@ -604,6 +591,9 @@ public class Arcblade {
                 .setDamageMultiplier(ValueModifier.multiplier(2.5F))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.0F, (entityPatch) -> {
+                    entityPatch.playSound(ArcSoundRegistry.VoidSlash.get(),0,0);
                 }))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~", true))

@@ -11,8 +11,8 @@
     "sounds": ["arc:judgementcut"],
     "subtitle": "subtitles.arc.judgementcut"
   },
-  "voidslash": {
-    "sounds": ["arc:voidslash"],
-    "subtitle": "subtitles.arc.voidslash"
+  "slash": {
+    "sounds": ["arc:slash"],
+    "subtitle": "subtitles.arc.slash"
   }
 }

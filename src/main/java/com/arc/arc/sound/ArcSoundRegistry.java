@@ -23,6 +23,9 @@ public class ArcSoundRegistry {
     public static final RegistryObject<SoundEvent> VoidSlash =
             registerSound("voidslash");
 
+    public static final RegistryObject<SoundEvent> Slash =
+            registerSound("slash");
+
     /**
      * Forge 1.18 兼容的音效注册方法
      */
