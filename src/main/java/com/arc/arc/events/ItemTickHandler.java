@@ -78,7 +78,6 @@ public class ItemTickHandler {
                 // 播放第一个动画
                 playFirstAnimation(player);
                 LOGGER.info("Transformed Arcblade for player: " + player.getName().getString() + " for " + transformationDuration / 1000 + " seconds");
-
                 // 在 1 秒后播放第二个动画（打断第一个动画）
                 new Thread(() -> {
                     try {
@@ -145,7 +144,7 @@ public class ItemTickHandler {
         if (player instanceof ServerPlayer serverPlayer) {
             ServerPlayerPatch playerPatch = EpicFightCapabilities.getEntityPatch(serverPlayer, ServerPlayerPatch.class);
             if (playerPatch != null) {
-                playerPatch.playAnimationSynchronized(WOMAnimations.SOLAR_AUTO_4_POLVORA, 0.08F);
+                playerPatch.playAnimationSynchronized(WOMAnimations.SOLAR_AUTO_4_POLVORA, 0.2F);
             }
         }
     }

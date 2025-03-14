@@ -14,12 +14,20 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 public class StellarisHexagram2 extends InstantenousMobEffect {
     static int ans = 0;
     static int p = 1;
     static int p1 = 0;
+
+    // 存储每个玩家的法阵锚点位置
+    private static final Map<UUID, Vec3> anchorPositions = new HashMap<>();
+    // 存储每个玩家的锚点生成时间
+    private static final Map<UUID, Long> anchorTimestamps = new HashMap<>();
 
     public StellarisHexagram2() {
         super(MobEffectCategory.NEUTRAL, 0x00FF00);
@@ -28,9 +36,18 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
-            // 每次生成法阵时，基于玩家当前位置动态计算法阵的位置
-            Vec3 currentPosition = player.position().add(0, 0.1, 0);
-            Vec3 adjustedPosition = adjustPosition(currentPosition, player, 0);
+            UUID playerUUID = player.getUUID();
+
+            // 如果锚点未记录，则记录当前玩家位置作为锚点，并记录当前时间
+            if (!anchorPositions.containsKey(playerUUID)) {
+                Vec3 currentPosition = player.position().add(0, 0.1, 0);
+                Vec3 adjustedPosition = adjustPosition(currentPosition, player, 0);
+                anchorPositions.put(playerUUID, adjustedPosition);
+                anchorTimestamps.put(playerUUID, System.currentTimeMillis()); // 记录当前时间
+            }
+
+            // 获取锚点位置
+            Vec3 anchorPosition = anchorPositions.get(playerUUID);
 
             // 实现呼吸效果
             if (ans == 130 || ans == 0) p = (p ^ 1);
@@ -38,7 +55,15 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
             else ans--;
 
             // 生成法阵
-            spawnHexagramParticles(player, adjustedPosition, (amplifier + 1) * 3, 0.2);
+            spawnHexagramParticles(player, anchorPosition, (amplifier + 1) * 3, 0.2);
+
+            // 检查是否已经过了 0.5 秒
+            long currentTime = System.currentTimeMillis();
+            long anchorTime = anchorTimestamps.getOrDefault(playerUUID, currentTime);
+            if (currentTime - anchorTime >= 500) { // 500 毫秒 = 0.5 秒
+                anchorPositions.remove(playerUUID); // 移除锚点
+                anchorTimestamps.remove(playerUUID); // 移除时间记录
+            }
         }
     }
 
@@ -156,16 +181,6 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                     serverLevel.sendParticles(ParticleTypes.ENCHANT, x, center.y + y, z, 1, 0, 0, 0, 0); // 金色粒子
                 }
             }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onPotionExpire(PotionEvent.PotionExpiryEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) {
-            // 重置呼吸效果的状态
-            ans = 0;
-            p = 1;
-            p1 = 0;
         }
     }
 }
