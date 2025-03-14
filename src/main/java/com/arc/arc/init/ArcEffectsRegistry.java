@@ -1,7 +1,6 @@
 package com.arc.arc.init;
 import com.arc.arc.effect.*;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -30,12 +29,14 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect>ArcbladeTransformEffect =
             EFFECTS.register("stellaris_arcbladetransformeffect",ArcbladeTransformEffect::new);
 
+    public static final RegistryObject<MobEffect> LightningParticleEffect =
+            EFFECTS.register("lightningparticleeffect",LightningParticleEffect::new);
+
     public static final RegistryObject<MobEffect>CrownEffect =
             EFFECTS.register("crown",CrownEffect::new);
 
     public static final RegistryObject<MobEffect>StellarisHexagram =
             EFFECTS.register("crown2",StellarisHexagram::new);
-
 
     //ARC法阵
     public static final RegistryObject<MobEffect>StellarisHexagram2 =
