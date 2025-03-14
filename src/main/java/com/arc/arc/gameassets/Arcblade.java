@@ -1189,7 +1189,7 @@ public class Arcblade {
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .addTimeEvent(new TimeStampedEvent(1F, (entityPatch) -> {
-                    entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD, 0.0F);
+                    entityPatch.playAnimationSynchronized(StarAnimations.BLADE_RUSH_FINISHER, 0.0F);
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
@@ -1200,39 +1200,7 @@ public class Arcblade {
                 .setConvertTime(-0.3F)
                 .setPlaySpeed(1.4F);
 
-        ComboNode ArcGP3Attack10 = ComboNode.createNode(() -> WOMAnimations.AGONY_CLAWSTRIKE)
-                .setNotCharge(true)
-                .setConvertTime(-0.05F)
-                .setDamageMultiplier(ValueModifier.multiplier(2F))
-                .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
-                }))
-                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina -3", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 7", true))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 2", true))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 0.5 1.75", false));
-
-        ComboNode ArcGP3Attack11 = ComboNode.createNode(() ->  WOMAnimations.AGONY_PLUNGE_FORWARD)
-                .setNotCharge(true)
-                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
-                .addTimeEvent(new TimeStampedEvent(0.4F, (entityPatch) -> {
-                    entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD, 0.1F);
-                }))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 0.5", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s minecraft:levitation 2", false));
-
-        ComboNode ArcGP3Attack12 = ComboNode.createNode(() ->MyAnimations.DMC5_V_JC)
-                .setNotCharge(true)
-                .setDamageMultiplier(ValueModifier.multiplier(0.5F))
-                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina -3", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 1 0.5", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 1 10 force @s",false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 0.5 1.75", false));
-
-        ComboNode ArcGP3Attack13 = ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
+        ComboNode ArcGP3Attack10 = ComboNode.createNode(() -> WOMAnimations.RUINE_REDEMPTION)
                 .setNotCharge(true)
                 .setDamageMultiplier(ValueModifier.multiplier(2.2F))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
@@ -1288,18 +1256,12 @@ public class Arcblade {
         ArcGP3Attack7.key3(ArcGP3Attack8);
         ArcGP3Attack8.key3(ArcGP3Attack9);
         ArcGP3Attack9.key3(ArcGP3Attack10);
-        ArcGP3Attack10.key3(ArcGP3Attack11);
-        ArcGP3Attack11.key3(ArcGP3Attack12);
-        ArcGP3Attack12.key3(ArcGP3Attack13);
-        ArcGP3Attack13.key1(ArcAuto5);
-        ArcGP3Attack13.keyWeaponInnate(Arc2ASGP2);
+        ArcGP3Attack10.key1(ArcAuto5);
+        ArcGP3Attack10.keyWeaponInnate(Arc2ASGP2);
         ArcGP3Attack7.key1(ArcAuto5);
         ArcGP3Attack8.key1(ArcAuto5);
         ArcGP3Attack9.key1(ArcAuto5);
         ArcGP3Attack10.key1(ArcAuto5);
-        ArcGP3Attack11.key1(ArcAuto5);
-        ArcGP3Attack12.key1(ArcAuto5);
-        ArcGP3Attack13.key1(ArcAuto5);
         SkillManager.register(ArcbladeSkill::new, ArcbladeSkill.createComboBasicAttack().setCombo(Arcbladeroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo2");
     }
 
