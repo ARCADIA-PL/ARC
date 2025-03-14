@@ -1,14 +1,17 @@
 package com.arc.arc.events;
 
 import com.arc.arc.ArcItemRegistry;
+import com.arc.arc.ParticleEffect.WeaponParticleEffect;
 import com.arc.arc.init.ArcEffectsRegistry;
 import com.guhao.star.efmex.StarAnimations;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -74,19 +77,19 @@ public class ItemTickHandler {
                 particleEffectEndTimes.put(player.getUUID(), System.currentTimeMillis() + 2000); // 粒子效果持续 1 秒
                 // 执行形态切换逻辑
                 transformArcblade(player);
-                player.addEffect(new MobEffectInstance(ArcEffectsRegistry.StellarisHexagram2.get(), 30, 1, false, false)); // 跳跃提升
                 // 播放第一个动画
                 playFirstAnimation(player);
                 LOGGER.info("Transformed Arcblade for player: " + player.getName().getString() + " for " + transformationDuration / 1000 + " seconds");
                 // 在 1 秒后播放第二个动画（打断第一个动画）
                 new Thread(() -> {
                     try {
-                        Thread.sleep(1000); // 延迟 1 秒
+                        Thread.sleep(800); // 延迟 1 秒
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     playSecondAnimation(player);
                 }).start();
+
             }
         }
     }
@@ -118,7 +121,6 @@ public class ItemTickHandler {
             }
         }
     }
-
     private static void handleHeldItem(Player player, UUID playerUUID) {
         ItemStack heldItem = player.getMainHandItem();
         if (heldItem.is(ArcItemRegistry.ARCBLADETransformed.get())) {
@@ -129,17 +131,25 @@ public class ItemTickHandler {
             }
         }
     }
-
     private static void playFirstAnimation(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
             ServerPlayerPatch playerPatch = EpicFightCapabilities.getEntityPatch(serverPlayer, ServerPlayerPatch.class);
             if (playerPatch != null) {
+                // 播放第一个动画
                 playerPatch.playAnimationSynchronized(StarAnimations.YAMATO_COUNTER1, 0.2F);
                 player.playSound(EpicFightSounds.WHOOSH_SHARP, 1.0F, 1.0F); // 播放音效
+                // 获取当前世界（必须是 ServerLevel）
+                if (serverPlayer.level instanceof ServerLevel serverLevel) {
+                    // 获取玩家的当前位置
+                    Vec3 playerPos = serverPlayer.position();
+                    // 创建 WeaponParticleEffect 实例
+                    WeaponParticleEffect effect = WeaponParticleEffect.createExampleEffect(serverLevel, playerPos, serverPlayer);
+                    // 触发粒子效果
+                    effect.execute();
+                }
             }
         }
     }
-
     private static void playSecondAnimation(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
             ServerPlayerPatch playerPatch = EpicFightCapabilities.getEntityPatch(serverPlayer, ServerPlayerPatch.class);
