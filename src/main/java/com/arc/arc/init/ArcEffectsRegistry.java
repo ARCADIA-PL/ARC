@@ -35,11 +35,15 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect>CrownEffect =
             EFFECTS.register("crown",CrownEffect::new);
 
+    //hdk法阵
     public static final RegistryObject<MobEffect>StellarisHexagram =
             EFFECTS.register("crown2",StellarisHexagram::new);
 
     //ARC法阵
     public static final RegistryObject<MobEffect>StellarisHexagram2 =
             EFFECTS.register("crown3",StellarisHexagram2::new);
+
+    public static final RegistryObject<MobEffect>Stargaze =
+            EFFECTS.register("stargaze",Stargaze::new);
 
 }
