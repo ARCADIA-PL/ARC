@@ -13,38 +13,55 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-
 public class StellarisHexagram2 extends InstantenousMobEffect {
     public StellarisHexagram2() {
         super(MobEffectCategory.NEUTRAL, 0x00FF00);
     }
 
-
-    static int ans=0;
-    static int p=1;
-
-
+    static int ans = 0;
+    static int p = 1;
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
+            // 默认法阵位置在玩家脚下
+            Vec3 defaultPosition = player.position().add(0, 0.1, 0);
 
+            // 动态调整法阵位置（例如在玩家前方）
+            Vec3 adjustedPosition = adjustPosition(defaultPosition, player, amplifier);
 
-            Vec3 vec = player.position().add(0, 0.1, 0);
-
-            //实现呼吸效果
-            if(ans==130||ans==0)p=(p^1);
-            if(p==0)ans++;
+            // 实现呼吸效果
+            if (ans == 130 || ans == 0) p = (p ^ 1);
+            if (p == 0) ans++;
             else ans--;
 
-            spawnHexagramParticles(player,vec,(amplifier+1)*3,0.2);
+            // 生成法阵
+            spawnHexagramParticles(player, adjustedPosition, (amplifier + 1) * 3, 0.2);
         }
+    }
+
+    /**
+     * 动态调整法阵位置
+     *
+     * @param defaultPosition 默认位置（玩家脚下）
+     * @param player          玩家实体
+     * @param distance        法阵距离玩家的距离
+     * @return 调整后的位置
+     */
+    public static Vec3 adjustPosition(Vec3 defaultPosition, Player player, double distance) {
+        // 获取玩家的朝向
+        float yaw = player.getYRot(); // 水平朝向（yaw）
+
+        // 计算玩家前方的偏移量
+        double offsetX = -Math.sin(Math.toRadians(yaw)) * distance;
+        double offsetZ = Math.cos(Math.toRadians(yaw)) * distance;
+
+        // 调整法阵位置
+        return defaultPosition.add(offsetX, 0, offsetZ);
     }
 
 
     public static void spawnHexagramParticles(Player player, Vec3 center, double radius, double ringSpeed) {
-
-
         if (player.level instanceof ServerLevel serverLevel) {
             double[] radii = {radius * 0.5, radius * 0.75, radius}; // 三层六芒星的半径
             int points = 6; // 六芒星的顶点数
@@ -70,7 +87,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = ((int)radii[2])*Math.min(10,Math.max(0,ans/6-layer*4-1)); // 两点之间的粒子数量
+                    int steps = ((int) radii[2]) * Math.min(10, Math.max(0, ans / 6 - layer * 4 - 1)); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -88,8 +105,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    //int steps = 20; // 两点之间的粒子数量
-                    int steps = ((int)radii[2])*Math.min(10,Math.max(0,ans/6-layer*4-1));
+                    int steps = ((int) radii[2]) * Math.min(10, Math.max(0, ans / 6 - layer * 4 - 1));
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -117,6 +133,4 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
             }
         }
     }
-
 }
-
