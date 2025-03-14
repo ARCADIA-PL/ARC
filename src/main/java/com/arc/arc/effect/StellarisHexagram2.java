@@ -24,7 +24,9 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
     static int p = 1;
     static int p1 = 0;
     boolean pp=true;
-    int sum=0;
+    int sum=0;      //用于固定位置
+    static Vec3 []a=new Vec3[10];
+    static double []r=new double[10];
 
     // 存储每个玩家的法阵锚点位置
     private static final Map<UUID, Vec3> anchorPositions = new HashMap<>();
@@ -50,13 +52,19 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
 
             // 获取锚点位置
             Vec3 anchorPosition = anchorPositions.get(playerUUID);
-
             // 实现呼吸效果
             if (ans == 130 || ans == 0) p = (p ^ 1);
             if (p == 0) ans++;
             else ans--;
-
             if(pp){
+                a[1]=new Vec3(0,0,0);
+                a[2]=a[1].add(1.2,0,0);
+                a[3]=a[1].add(1.6,0,2.0);
+                a[4]=a[1].add(0.6,0,2.4);
+                a[5]=a[1].add(0.4,0,3.6);
+                a[6]=a[1].add(0.24,0,4.56);
+                a[7]=a[1].add(0.6,0,5.96);
+
                 for (MobEffectInstance effectInstance : entity.getActiveEffects()) {
                     if(effectInstance.getEffect() == ArcEffectsRegistry.StellarisHexagram2.get()) {
                         sum=effectInstance.getDuration();// 返回剩余时间
@@ -64,19 +72,17 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                 }
                 pp=false;
             }
-
-            // 检查是否已经过了 0.5 秒
+            //检查是否已经过了buff持续时间
             long currentTime = System.currentTimeMillis();
             long anchorTime = anchorTimestamps.getOrDefault(playerUUID, currentTime);
-            if (currentTime - anchorTime >= (50*(sum-3))) { // 500 毫秒 = 0.5 秒
+            if (currentTime - anchorTime >= (50*(sum-2))) { // 500 毫秒 = 0.5 秒
                 anchorPositions.remove(playerUUID); // 移除锚点
                 anchorTimestamps.remove(playerUUID); // 移除时间记录
                 pp=true;
                 return;
             }
             // 生成法阵
-            if(pp=false)spawnHexagramParticles(player, anchorPosition, (amplifier + 1) * 3, 0.2);
-
+            if(pp==false)spawnHexagramParticles(player, anchorPosition, (amplifier + 1) * 3, 0.2);
         }
     }
 
@@ -104,20 +110,13 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
             MobEffectInstance strengthEffect = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 2);
             player.addEffect(strengthEffect);
 
-            for (int k = 1; k <= 50; k++) {
-                // 生成北斗七星（待补全）
-                double x = new Random().nextDouble(radius / 2.0);
-                double y = new Random().nextDouble(3.0);
-                double z = new Random().nextDouble(radius / 2.0);
-                x -= radius / 2.0;
-                z -= radius / 2.0;
-                serverLevel.sendParticles(ParticleTypes.FIREWORK, vec.x + x, vec.y + y, vec.z + z, 5, 0, 0, 0, 0); // 火焰粒子
-                x = new Random().nextDouble(radius / 2.0);
-                y = new Random().nextDouble(3.0);
-                z = new Random().nextDouble(radius / 2.0);
-                x -= radius / 2.0;
-                z -= radius / 2.0;
-                serverLevel.sendParticles(ParticleTypes.FIREWORK, vec.x + x, vec.y + y, vec.z + z, 5, 0, 0, 0, 0); // 火焰粒子
+            // 生成北斗七星
+            for(int ii=2;ii<=7;ii++) {
+                double X = (a[ii].x - a[ii - 1].x) / 5.0, Z = (a[ii].z - a[ii - 1].z) / 5.0;
+                for (int jj = 0; jj <= 5; jj++) {
+                    serverLevel.sendParticles(ParticleTypes.FIREWORK, a[ii - 1].x + X *jj*1.0, a[ii].y, a[ii-1].z + Z * jj*1.0, 2, 0, 0, 0, 0); // 火焰粒子
+                }
+
             }
         }
     }
@@ -125,14 +124,31 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
     public static void spawnHexagramParticles(Player player, Vec3 center, double radius, double ringSpeed) {
         if (player.level instanceof ServerLevel serverLevel) {
 
-            if (ans <= 110 && ans >= 80 && p == 1 && p1 == 0) {
-                int p2 = new Random().nextInt(2);
-                if (p2 == 1) {
-                    plough(player, center, radius);
+            if ((ans <= 110 && ans >= 80 && p == 1 )|| p1 >0) {
+                int p2 = 0;
+                if(p1==0){
+                    p2=new Random().nextInt(2);
+                    double x = new Random().nextDouble(radius);
+                    double z = new Random().nextDouble(radius);
+                    x -= radius ;
+                    z -= radius ;
+                    double angle=new Random().nextDouble(Math.PI*2);
+                    for(int i=2;i<=7;i++){
+                        r[i]=Math.sqrt((a[i].x*a[i].x)*(a[i].x*a[i].x)+(a[i].z*a[i].z)*(a[i].z*a[i].z));
+                        a[i]=new Vec3(r[i]*Math.cos(angle),0,r[i]*Math.sin(angle));
+                    }
+                    a[1]=center.add(x,8.0,z);
+                    for(int i=2;i<=7;i++){
+                        a[i]=a[1].add(a[i].x,0,a[i].z);
+                    }
                 }
-                p1 = 1;
+                if (p1>0||p2==1) {
+                    plough(player, center, radius);
+                    p1++;
+                    if(p1>20)p1=0;
+                }
             }
-            if (ans <= 80) p1 = 0;
+
 
             double[] radii = {radius * 0.5, radius * 0.75, radius}; // 三层六芒星的半径
             int points = 6; // 六芒星的顶点数
@@ -156,7 +172,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                         double x = x1 + (x2 - x1) * t;
                         double z = z1 + (z2 - z1) * t;
                         serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
-                        serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
+                        //serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
                     }
                 }
                 // 生成六芒星的连线（倒三角形）
@@ -174,7 +190,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                         double x = x1 + (x2 - x1) * t;
                         double z = z1 + (z2 - z1) * t;
                         serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
-                        serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
+                        //serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
                     }
                 }
             }
