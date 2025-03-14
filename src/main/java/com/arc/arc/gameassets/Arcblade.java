@@ -3,6 +3,7 @@ package com.arc.arc.gameassets;
 import com.arc.arc.ArcMod;
 import com.arc.arc.init.ArcEffectsRegistry;
 import com.arc.arc.skill.ArcbladeSkill;
+import com.arc.arc.sound.ArcSoundRegistry;
 import com.dfdyz.epicacg.registry.MyAnimations;
 import com.guhao.star.Star;
 import com.guhao.star.efmex.StarAnimations;
@@ -72,6 +73,9 @@ public class Arcblade {
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.45F, (entityPatch) -> {
+                    entityPatch.playSound(ArcSoundRegistry.VoidSlash.get(),0,0);
                 }))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 14", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s irons_spellbooks:rend", false))
@@ -306,7 +310,7 @@ public class Arcblade {
         ;
 
 
-        ComboNode ArcGP1extendA = ComboNode.createNode(() -> WOMAnimations.KATANA_SHEATHED_AUTO_2)
+        ComboNode ArcGP1extendA = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER0_2)
                 .addCondition(new StackCondition(1, 8))
                 .addCondition(new PlayerPhaseCondition(1,2))
                 .setPriority(4)
@@ -316,6 +320,9 @@ public class Arcblade {
                 .addCondition(new StackCondition(0, 8))
                 .addTimeEvent(new TimeStampedEvent(0.35F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(StarAnimations.YAMATO_STRIKE1, -0.07F);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch) -> {
+                    entityPatch.playSound(ArcSoundRegistry.JudgementCut.get(),0,0);
                 }))
                 .setDamageMultiplier(ValueModifier.multiplier(0.5F));
         ComboNode ArcGP1extendA1 = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER2)
@@ -327,6 +334,9 @@ public class Arcblade {
                 .setCanBeInterrupt(false)
                 .addTimeEvent(new TimeStampedEvent(1.65F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(StarAnimations.FATAL_DRAW, -0.6F);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.28F, (entityPatch) -> {
+                    entityPatch.playSound(ArcSoundRegistry.VoidSlash.get(),0,0);
                 }));
 
         ComboNode ArcGP1extendS1 = ComboNode.createNode(() -> StarAnimations.YAMATO_STRIKE1)
@@ -348,6 +358,9 @@ public class Arcblade {
         ;
 
         ComboNode ArcGP1extendS3 = ComboNode.createNode(() -> StarAnimations.YAMATO_AUTO4)
+                .addTimeEvent(new TimeStampedEvent(0.45F, (entityPatch) -> {
+                    entityPatch.playSound(ArcSoundRegistry.VoidSlash.get(),0,0);
+                }))
                 .addTimeEvent(new TimeStampedEvent(1F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_UCHIGATANA, 0.0F);
                 }))

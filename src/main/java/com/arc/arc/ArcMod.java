@@ -7,7 +7,9 @@ import com.arc.arc.gameassets.ArcbladeTransformed;
 import com.arc.arc.gameassets.Skills;
 import com.arc.arc.init.*;
 import com.arc.arc.network.ComboSoundPacket;
-import com.arc.arc.sound.SoundRegistry;
+import com.arc.arc.sound.ArcSoundRegistry;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +18,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
 
 import java.util.ArrayList;
@@ -36,15 +41,15 @@ public class ArcMod {
         Arcblade.registerSkills();
         ArcbladeTransformed.registerSkills();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        // 注册粒子类型
         ParticleRegistry.PARTICLE_TYPES.register(bus);
+
+
         MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
         MinecraftForge.EVENT_BUS.register(this);
         ArcItemRegistry.ITEMS.register(bus);
         ArcEffectsRegistry.EFFECTS.register(bus);
         MinecraftForge.EVENT_BUS.register(new MobHurtCounterHandler());
-        SoundRegistry.SOUNDS.register(bus);
+        ArcSoundRegistry.SOUNDS.register(bus);
         List<PlayerEventListener> PLAYER_EVENT_LISTENERS = new ArrayList<>();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(ParryCounterEffectHandler.class);

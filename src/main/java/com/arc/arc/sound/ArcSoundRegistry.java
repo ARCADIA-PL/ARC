@@ -6,18 +6,22 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class SoundRegistry {
+public class ArcSoundRegistry {
     // 创建 SOUNDS 注册器
     public static final DeferredRegister<SoundEvent> SOUNDS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, "arc");
 
-    // 注册 5 级音效
     public static final RegistryObject<SoundEvent> COMBO_5 =
             registerSound("combo_5");
 
-    // 注册 10 级音效
     public static final RegistryObject<SoundEvent> COMBO_10 =
             registerSound("combo_10");
+
+    public static final RegistryObject<SoundEvent> JudgementCut =
+            registerSound("judgementcut");
+
+    public static final RegistryObject<SoundEvent> VoidSlash =
+            registerSound("voidslash");
 
     /**
      * Forge 1.18 兼容的音效注册方法

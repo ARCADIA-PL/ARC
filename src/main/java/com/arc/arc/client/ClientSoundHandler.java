@@ -1,6 +1,6 @@
 package com.arc.arc.client;
 
-import com.arc.arc.sound.SoundRegistry;
+import com.arc.arc.sound.ArcSoundRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +15,7 @@ public class ClientSoundHandler {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player; //
         Minecraft.getInstance().player.playSound(
-                SoundRegistry.COMBO_5.get(),
+                ArcSoundRegistry.COMBO_5.get(),
                 1.0f, // 音量
                 1.0f  // 音调
         );
@@ -34,7 +34,7 @@ public class ClientSoundHandler {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player; //
         Minecraft.getInstance().player.playSound(
-                SoundRegistry.COMBO_10.get(),
+                ArcSoundRegistry.COMBO_10.get(),
                 1.2f, // 更大音量
                 0.9f  // 更低音调
         );

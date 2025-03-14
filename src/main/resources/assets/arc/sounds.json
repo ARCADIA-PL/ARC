@@ -6,5 +6,13 @@
   "combo_10": {
     "sounds": ["arc:combo_10"],
     "subtitle": "subtitles.arc.combo_10"
+  },
+  "judgementcut": {
+    "sounds": ["arc:judgementcut"],
+    "subtitle": "subtitles.arc.judgementcut"
+  },
+  "voidslash": {
+    "sounds": ["arc:voidslash"],
+    "subtitle": "subtitles.arc.voidslash"
   }
 }
