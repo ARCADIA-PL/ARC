@@ -15,15 +15,12 @@ import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Random;
-import java.util.UUID;
 
 public class StellarisHexagram2 extends InstantenousMobEffect {
     static int ans = 0;
     static int p = 1;
     static int p1 = 0;
 
-    static Vec3 initial_position;
-    static boolean initial_position_p=true;
     public StellarisHexagram2() {
         super(MobEffectCategory.NEUTRAL, 0x00FF00);
     }
@@ -31,21 +28,17 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
-            //记录初始位置
-            if(initial_position_p) {
-                // 默认法阵位置在玩家脚下
-                Vec3 defaultPosition = player.position().add(0, 0.1, 0);
-                // 动态调整法阵位置（例如在玩家前方 2.5 格）
-                Vec3 adjustedPosition = adjustPosition(defaultPosition, player, 0);
-                initial_position = adjustedPosition;
-                initial_position_p=false;
-            }
+            // 每次生成法阵时，基于玩家当前位置动态计算法阵的位置
+            Vec3 currentPosition = player.position().add(0, 0.1, 0);
+            Vec3 adjustedPosition = adjustPosition(currentPosition, player, 0);
+
             // 实现呼吸效果
             if (ans == 130 || ans == 0) p = (p ^ 1);
             if (p == 0) ans++;
             else ans--;
+
             // 生成法阵
-            spawnHexagramParticles(player, initial_position, (amplifier + 1) * 3, 0.2);
+            spawnHexagramParticles(player, adjustedPosition, (amplifier + 1) * 3, 0.2);
         }
     }
 
@@ -97,7 +90,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
             if (ans <= 110 && ans >= 80 && p == 1 && p1 == 0) {
                 int p2 = new Random().nextInt(2);
                 if (p2 == 1) {
-                    plough(player,center, radius);
+                    plough(player, center, radius);
                 }
                 p1 = 1;
             }
@@ -165,12 +158,14 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
             }
         }
     }
+
     @SubscribeEvent
     public static void onPotionExpire(PotionEvent.PotionExpiryEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
-            if (event.getPotionEffect() == null /*&& event.getPotionEffect().getEffect() != ArcEffectsRegistry.StellarisHexagram2.get()*/) {
-                initial_position_p=true;
-            }
+            // 重置呼吸效果的状态
+            ans = 0;
+            p = 1;
+            p1 = 0;
         }
     }
 }
