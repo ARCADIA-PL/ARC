@@ -1,7 +1,9 @@
 package com.arc.arc.effect;
 
+import com.arc.arc.init.ArcEffectsRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.InstantenousMobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -9,34 +11,41 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class StellarisHexagram2 extends InstantenousMobEffect {
-    public StellarisHexagram2() {
-        super(MobEffectCategory.NEUTRAL, 0x00FF00);
-    }
-
     static int ans = 0;
     static int p = 1;
     static int p1 = 0;
 
+    static Vec3 initial_position;
+    static boolean initial_position_p=true;
+    public StellarisHexagram2() {
+        super(MobEffectCategory.NEUTRAL, 0x00FF00);
+    }
+
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
-            // 默认法阵位置在玩家脚下
-            Vec3 defaultPosition = player.position().add(0, 0.1, 0);
-
-            // 动态调整法阵位置（例如在玩家前方 2.5 格）
-            Vec3 adjustedPosition = adjustPosition(defaultPosition, player, 2.5);
-
+            //记录初始位置
+            if(initial_position_p) {
+                // 默认法阵位置在玩家脚下
+                Vec3 defaultPosition = player.position().add(0, 0.1, 0);
+                // 动态调整法阵位置（例如在玩家前方 2.5 格）
+                Vec3 adjustedPosition = adjustPosition(defaultPosition, player, 0);
+                initial_position = adjustedPosition;
+                initial_position_p=false;
+            }
             // 实现呼吸效果
             if (ans == 130 || ans == 0) p = (p ^ 1);
             if (p == 0) ans++;
             else ans--;
-
             // 生成法阵
-            spawnHexagramParticles(player, adjustedPosition, (amplifier + 1) * 3, 0.2);
+            spawnHexagramParticles(player, initial_position, (amplifier + 1) * 3, 0.2);
         }
     }
 
@@ -51,11 +60,9 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
     public static Vec3 adjustPosition(Vec3 defaultPosition, Player player, double distance) {
         // 获取玩家的朝向
         float yaw = player.getYRot(); // 水平朝向（yaw）
-
         // 计算玩家前方的偏移量
         double offsetX = -Math.sin(Math.toRadians(yaw)) * distance;
         double offsetZ = Math.cos(Math.toRadians(yaw)) * distance;
-
         // 调整法阵位置
         return defaultPosition.add(offsetX, 0, offsetZ);
     }
@@ -90,8 +97,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
             if (ans <= 110 && ans >= 80 && p == 1 && p1 == 0) {
                 int p2 = new Random().nextInt(2);
                 if (p2 == 1) {
-                    Vec3 vec = player.position().add(0, 0.1, 0);
-                    plough(player, vec, radius);
+                    plough(player,center, radius);
                 }
                 p1 = 1;
             }
@@ -152,10 +158,18 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                 serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 白色粒子
                 serverLevel.sendParticles(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 灵魂火焰粒子
                 // 生成粒子柱
-                for (double y = 0; y < 1.3; y += 0.2) { // 粒子柱高度为 1 格
+                for (double y = 0; y < 1.0; y += 0.2) { // 粒子柱高度为 0.8 格
                     serverLevel.sendParticles(ParticleTypes.LANDING_LAVA, x, center.y + y, z, 1, 0, 0, 0, 0); // 紫色粒子
                     serverLevel.sendParticles(ParticleTypes.ENCHANT, x, center.y + y, z, 1, 0, 0, 0, 0); // 金色粒子
                 }
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void onPotionExpire(PotionEvent.PotionExpiryEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            if (event.getPotionEffect() == null /*&& event.getPotionEffect().getEffect() != ArcEffectsRegistry.StellarisHexagram2.get()*/) {
+                initial_position_p=true;
             }
         }
     }
