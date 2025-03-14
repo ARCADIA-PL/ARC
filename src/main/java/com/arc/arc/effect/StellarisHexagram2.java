@@ -5,6 +5,8 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.InstantenousMobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -22,7 +24,7 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
 
     static int ans=0;
     static int p=1;
-
+    static int p1=0;
 
 
     @Override
@@ -41,11 +43,47 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
         }
     }
 
+    public static void plough(Player player, Vec3 vec,double radius) {             //形参为玩家对象，玩家坐标,最大半径
+        if (player.level instanceof ServerLevel serverLevel) {
+            //给玩家buff增益
+            MobEffectInstance strengthEffect = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 2);
+            player.addEffect(strengthEffect);
 
+            for(int k=1;k<=50;k++){
+                //生成北斗七星（待补全）
+                double x=new Random().nextDouble(radius/2.0);
+                double y=new Random().nextDouble(3.0);
+                double z=new Random().nextDouble(radius/2.0);
+                x-=radius/2.0;
+                z-=radius/2.0;
+                serverLevel.sendParticles(ParticleTypes.FIREWORK, vec.x+x, vec.y + y, vec.z+z, 5, 0, 0, 0, 0); // 火焰粒子
+                x=new Random().nextDouble(radius/2.0);
+                y=new Random().nextDouble(3.0);
+                z=new Random().nextDouble(radius/2.0);
+                x-=radius/2.0;
+                z-=radius/2.0;
+                serverLevel.sendParticles(ParticleTypes.FIREWORK, vec.x+x, vec.y + y, vec.z+z, 5, 0, 0, 0, 0); // 火焰粒子
+            }
+        }
+
+
+    }
     public static void spawnHexagramParticles(Player player, Vec3 center, double radius, double ringSpeed) {
 
 
         if (player.level instanceof ServerLevel serverLevel) {
+
+            if(ans<=110&&ans>=80&&p==1&&p1==0){
+                int p2=new Random().nextInt(2);
+                if(p2==1){
+                    Vec3 vec = player.position().add(0, 0.1, 0);
+                    plough(player,vec,radius);
+                }
+                p1=1;
+            }
+            if(ans<=80)p1=0;
+
+
             double[] radii = {radius * 0.5, radius * 0.75, radius}; // 三层六芒星的半径
             int points = 6; // 六芒星的顶点数
             double angleIncrement = 2 * Math.PI / points;
@@ -54,13 +92,13 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
                 double layerRadius = radii[layer]; // 当前层的半径
                 double layerHeight = 0.2 * layer; // 每层高度递增
                 // 生成六芒星的顶点
-                for (int i = 0; i < points; i++) {
-                    double angle = i * angleIncrement;
-                    double x = center.x + layerRadius * Math.cos(angle);
-                    double z = center.z + layerRadius * Math.sin(angle);
-                    serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + layerHeight, z, 5, 0, 0, 0, 0); // 火焰粒子
-                    serverLevel.sendParticles(ParticleTypes.ENCHANT, x, center.y + layerHeight, z, 5, 0, 0, 0, 0); // 附魔粒子
-                }
+//                for (int i = 0; i < points; i++) {
+//                    double angle = i * angleIncrement;
+//                    double x = center.x + layerRadius * Math.cos(angle);
+//                    double z = center.z + layerRadius * Math.sin(angle);
+//                    serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + layerHeight, z, 2, 0, 0, 0, 0); // 火焰粒子
+//                    serverLevel.sendParticles(ParticleTypes.ENCHANT, x, center.y + layerHeight, z, 2, 0, 0, 0, 0); // 附魔粒子
+//                }
                 // 生成六芒星的连线（正三角形）
                 for (int i = 0; i < points; i += 2) {
                     double angle1 = i * angleIncrement;
