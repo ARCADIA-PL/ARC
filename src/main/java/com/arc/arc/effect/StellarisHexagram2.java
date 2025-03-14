@@ -23,6 +23,8 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
     static int ans = 0;
     static int p = 1;
     static int p1 = 0;
+    boolean pp=true;
+    int sum=0;
 
     // 存储每个玩家的法阵锚点位置
     private static final Map<UUID, Vec3> anchorPositions = new HashMap<>();
@@ -54,16 +56,27 @@ public class StellarisHexagram2 extends InstantenousMobEffect {
             if (p == 0) ans++;
             else ans--;
 
-            // 生成法阵
-            spawnHexagramParticles(player, anchorPosition, (amplifier + 1) * 3, 0.2);
+            if(pp){
+                for (MobEffectInstance effectInstance : entity.getActiveEffects()) {
+                    if(effectInstance.getEffect() == ArcEffectsRegistry.StellarisHexagram2.get()) {
+                        sum=effectInstance.getDuration();// 返回剩余时间
+                    }
+                }
+                pp=false;
+            }
 
             // 检查是否已经过了 0.5 秒
             long currentTime = System.currentTimeMillis();
             long anchorTime = anchorTimestamps.getOrDefault(playerUUID, currentTime);
-            if (currentTime - anchorTime >= 500) { // 500 毫秒 = 0.5 秒
+            if (currentTime - anchorTime >= (50*(sum-3))) { // 500 毫秒 = 0.5 秒
                 anchorPositions.remove(playerUUID); // 移除锚点
                 anchorTimestamps.remove(playerUUID); // 移除时间记录
+                pp=true;
+                return;
             }
+            // 生成法阵
+            if(pp=false)spawnHexagramParticles(player, anchorPosition, (amplifier + 1) * 3, 0.2);
+
         }
     }
 
