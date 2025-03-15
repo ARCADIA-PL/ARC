@@ -1,22 +1,19 @@
 package com.arc.arc;
 
-import com.arc.arc.gameassets.Skills;
+import com.arc.arc.Registries.ArcBladeItemRegistry;
+import com.arc.arc.Registries.ArcSoundRegistry;
+import com.arc.arc.gameassets.Arcblade;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.client.model.obj.OBJLoader;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 @Mod(ArcMod.MOD_ID)
 public class ArcMod {
     public static final String MOD_ID = "arc";
     public ArcMod() {
-        Skills.registerSkills();
-
+        Arcblade.registerSkills();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        ItemRegistry.ITEMS.register(bus);}
+        ArcSoundRegistry.SOUNDS.register(bus);//音效注册表
+        ArcBladeItemRegistry.ITEMS.register(bus);}//物品注册表
 }
 
