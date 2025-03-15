@@ -1,6 +1,7 @@
 package com.arc.arc;
 
 import com.arc.arc.Registries.ArcBladeItemRegistry;
+import com.arc.arc.Registries.ArcEffectsRegistry;
 import com.arc.arc.Registries.ArcSoundRegistry;
 import com.arc.arc.events.ArcbladeAttributeHandlers;
 import com.arc.arc.gameassets.Arcblade;
@@ -27,6 +28,9 @@ public class ArcMod {
         Arcblade.registerSkills();//注册Arcblade的无坚不摧技能
         //注册表
         ArcSoundRegistry.SOUNDS.register(bus);//音效注册表
-        ArcBladeItemRegistry.ITEMS.register(bus);}//物品注册表
+        ArcBladeItemRegistry.ITEMS.register(bus);//物品注册表
+
+        ArcEffectsRegistry.EFFECTS.register(bus);//药水注册表
+    }
 }
 
