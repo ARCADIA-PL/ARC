@@ -1,0 +1,10 @@
+{
+  "judgementcut": {
+    "sounds": ["arc:judgementcut"],
+    "subtitle": "subtitles.arc.judgementcut"
+  },
+  "arcslash": {
+    "sounds": ["arc:arcslash"],
+    "subtitle": "subtitles.arc.arcslash"
+  }
+}

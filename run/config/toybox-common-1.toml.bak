@@ -1,0 +1,57 @@
+
+["level up exp cost multiply"]
+	xp_multiply = 0.5
+
+["imbue sword spell cooldown multiply"]
+	cooldown_multiply = 3
+
+["Attack animations that will definitely trigger a critical hit, player only"]
+	animations = []
+
+["disable right click using imbue sword,"]
+	"disable using imbue sword" = true
+
+["Apotheosis compat, if Apotheosis is installed use the apotheosis's built in attribute"]
+	"Apotheosis compat" = true
+
+["epic paraglider compat, if epic paraglider is installed will turn off the guard system and use the paragliders' stamina system instead of epic fight's one"]
+	"epic paraglider compat" = true
+	#Range: 0.0 ~ 1.7976931348623157E308
+	"Max paragliders' stamina bonus per point of attribute" = 100.0
+
+["Attribute multiply"]
+	#Range: 0.0 ~ 1000.0
+	"Melee damage bonus per point of attribute" = 0.05
+	#Range: 0.0 ~ 100.0
+	"Block rate bonus per point of attribute, will always be less than 100 in total" = 2.5
+	#Range: 0.0 ~ 1000.0
+	"Max health bonus per point of attribute" = 2.0
+	#Range: 0.0 ~ 1000.0
+	"Burden bonus per point of attribute" = 3.0
+	#Range: 0.0 ~ 1000.0
+	"Movement speed bonus per point of attribute" = 0.0015
+	#Range: 0.0 ~ 1000.0
+	"Attack speed bonus per point of attribute" = 0.02
+	#Range: 0.0 ~ 100.0
+	"Crit damage bonus per point of attribute" = 0.075
+	#Range: 0.0 ~ 1000.0
+	"Spell damage bonus per point of attribute" = 0.1
+	#Range: 0.0 ~ 1000.0
+	"Spell cooldown bonus per point of attribute" = 0.015
+	#Range: 0.0 ~ 1000.0
+	"Spell cast time bonus per point of attribute" = 0.025
+	#Range: 0.0 ~ 10.0
+	"Crit chance bonus per point of attribute" = 0.015
+	#Range: 0.0 ~ 1000.0
+	"Arrow Damage bonus per point of attribute" = 0.05
+	#Range: 0.0 ~ 1000.0
+	"Max mana bonus per point of attribute" = 10.0
+	#Range: 0.0 ~ 1000.0
+	"Spell resist bonus per point of attribute" = 0.015
+	#Range: 0.0 ~ 1000.0
+	"Max stamina bonus per point of attribute" = 0.75
+	#Range: 0.0 ~ 1000.0
+	"Stun armor bonus per point of attribute" = 0.4
+	#Range: 0.0 ~ 1000.0
+	"Luck bonus per point of attribute" = 0.5
+

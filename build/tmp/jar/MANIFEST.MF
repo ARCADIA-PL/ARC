@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: Epic Fight - Arcblade
+Specification-Vendor: ARC大帝傀儡
+Specification-Version: 1
+Implementation-Title: ArcbladeReborn
+Implementation-Version: 18.5.0
+Implementation-Vendor: ARC大帝傀儡
+Implementation-Timestamp: 2025-03-16T00:20:27+0800
+

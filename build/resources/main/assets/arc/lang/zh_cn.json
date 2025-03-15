@@ -1,0 +1,23 @@
+{
+  "skill.arc.combo0": "Stellaris太刀",
+  "skill.arc.combo1": "强化打刀",
+  "skill.arc.combo3": "§b§l§o旧世幻影之刃-印",
+  "item.arc.arcblade": "§5§l§o旧世幻影之刃-解",
+  "item.arc.arcbladetransformed": "§5§l§o旧世幻影之刃-滅",
+  "item.arc.yomiblade": "§5§l§o無",
+  "item.arc.arcblademini": "§b§l§o旧世幻影之刃-印",
+  "item.arc.arcblademini2": "§b§l§o旧世幻影之刃-封",
+  "effect.arc.hit_counter": "连击计数",
+  "effect.arc.hurt_counter": "被命中计数",
+  "effect.arc.stellaris_parrycounter": "招架计数",
+  "effect.arc.stellaris_arcbladetransformeffect": "§5§l§o滅",
+
+  "item.arc.arcblade.desc": "§o§4旧界终焉力量铸造的究极兵刃，其强大的力量使常人难以驾驭...",
+  "item.arc.arcblade.desc1": "§o§4终焉的气息侵蚀着你.....",
+
+
+
+
+  "skill.your_mod_id.demo_combo.tooltip1": "按下KEY1释放普通攻击，冲刺和跳跃状态亦可使用。§6测试§r",
+  "skill.your_mod_id.demo_combo.tooltip2": "1111"
+}

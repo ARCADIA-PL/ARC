@@ -1,0 +1,13 @@
+
+["Resurrection config"]
+	#enable dodge sound
+	enable_dodge_sound = false
+	#enable dodgesuccess effect
+	enable_dodgesuccess_effect = true
+	#enable dodgesuccess sound
+	enable_dodgesuccess_sound = true
+	#enable slow_time
+	slow_time = false
+	#enable execute_skill
+	execute_skill = true
+

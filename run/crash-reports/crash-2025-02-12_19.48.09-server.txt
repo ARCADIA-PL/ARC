@@ -1,0 +1,232 @@
+---- Minecraft Crash Report ----
+// My bad.
+
+Time: 2025/2/12 下午7:48
+Description: Ticking player
+
+java.lang.NullPointerException: Cannot invoke "java.lang.Boolean.booleanValue()" because "data" is null
+	at yesman.epicfight.skill.SkillDataManager$ValueType$BooleanType.writeToBuffer(SkillDataManager.java:202) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading}
+	at yesman.epicfight.network.server.SPModifySkillData.toBytes(SPModifySkillData.java:44) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading}
+	at net.minecraftforge.network.simple.IndexedMessageCodec.lambda$tryEncode$4(IndexedMessageCodec.java:121) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at java.util.Optional.ifPresent(Optional.java:178) ~[?:?] {re:mixin}
+	at net.minecraftforge.network.simple.IndexedMessageCodec.tryEncode(IndexedMessageCodec.java:119) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.IndexedMessageCodec.build(IndexedMessageCodec.java:134) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.SimpleChannel.encodeMessage(SimpleChannel.java:77) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.SimpleChannel.toBuffer(SimpleChannel.java:90) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.SimpleChannel.toVanillaPacket(SimpleChannel.java:121) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.SimpleChannel.send(SimpleChannel.java:116) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at yesman.epicfight.network.EpicFightNetworkManager.sendToClient(EpicFightNetworkManager.java:53) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading}
+	at yesman.epicfight.network.EpicFightNetworkManager.sendToPlayer(EpicFightNetworkManager.java:65) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading}
+	at yesman.epicfight.skill.SkillDataManager.syncData(SkillDataManager.java:97) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading,re:mixin}
+	at yesman.epicfight.skill.SkillDataManager.setDataSync(SkillDataManager.java:82) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading,re:mixin}
+	at reascer.wom.gameasset.WOMAnimations.lambda$build$5(WOMAnimations.java:613) ~[WeaponsOfMiracles-18.1.7.38_mapped_official_1.18.2.jar%2390!/:18.1.7.38] {re:mixin,re:classloading,pl:mixin:A}
+	at yesman.epicfight.api.animation.property.AnimationEvent.executeIfRightSide(AnimationEvent.java:20) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading,re:mixin}
+	at yesman.epicfight.api.animation.property.AnimationEvent$TimeStampedEvent.executeIfRightSide(AnimationEvent.java:43) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading}
+	at yesman.epicfight.api.animation.types.StaticAnimation.lambda$tick$4(StaticAnimation.java:206) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:invincible.mixins.json:StaticAnimationMixin,pl:mixin:APP:star.mixins.json:animation_types_mixin.StaticAnimationMixin,pl:mixin:A}
+	at java.util.Optional.ifPresent(Optional.java:178) ~[?:?] {re:mixin}
+	at yesman.epicfight.api.animation.types.StaticAnimation.tick(StaticAnimation.java:198) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:invincible.mixins.json:StaticAnimationMixin,pl:mixin:APP:star.mixins.json:animation_types_mixin.StaticAnimationMixin,pl:mixin:A}
+	at yesman.epicfight.api.animation.types.MainFrameAnimation.tick(MainFrameAnimation.java:43) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:mixins.indestructible.json:MainFrameAnimationMixin,pl:mixin:APP:mixins.toybox.json:epicfight.MainFrameAnimationMixin,pl:mixin:A}
+	at yesman.epicfight.api.animation.types.ActionAnimation.tick(ActionAnimation.java:72) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading,re:mixin}
+	at yesman.epicfight.api.animation.types.AttackAnimation.tick(AttackAnimation.java:156) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:star.mixins.json:animation_types_mixin.AttackAnimation,pl:mixin:APP:star.mixins.json:animation_types_mixin.ConcurrentLinkAnimationMixin,pl:mixin:APP:mixins.indestructible.json:AttackAnimationMixin,pl:mixin:A}
+	at yesman.epicfight.api.animation.ServerAnimator.tick(ServerAnimator.java:74) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading}
+	at yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch.tick(LivingEntityPatch.java:123) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading}
+	at yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch.tick(PlayerPatch.java:204) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:A}
+	at yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch.tick(ServerPlayerPatch.java:115) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:wukong.mixins.json:ServerPlayerPatchMixin,pl:mixin:APP:star.mixins.json:ServerPlayerPatchMixin,pl:mixin:A}
+	at yesman.epicfight.events.EntityEvents.updateEvent(EntityEvents.java:100) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:A}
+	at net.minecraftforge.eventbus.ASMEventHandler_406_EntityEvents_updateEvent_LivingUpdateEvent.invoke(.dynamic) ~[?:?] {}
+	at net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:85) ~[eventbus-5.0.7.jar%2311!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:302) ~[eventbus-5.0.7.jar%2311!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:283) ~[eventbus-5.0.7.jar%2311!/:?] {}
+	at net.minecraftforge.common.ForgeHooks.onLivingUpdate(ForgeHooks.java:324) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2214) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:unionlib.mixins.json:LivingEntityMixin,pl:mixin:APP:epicacg.mixins.json:MixinLivingEntity,pl:mixin:APP:caelus.mixins.json:MixinLivingEntity,pl:mixin:APP:curios.mixins.json:MixinLivingEntity,pl:mixin:APP:epicfight.mixins.json:MixinLivingEntity,pl:mixin:APP:citadel.mixins.json:LivingEntityMixin,pl:mixin:APP:mixins.irons_spellbooks.json:LivingEntityMixin,pl:mixin:APP:star.mixins.json:LivingEntityMixin,pl:mixin:APP:lodestone.mixins.json:LivingEntityMixin,pl:mixin:APP:mobifier.mixins.json:MixinLivingEntity,pl:mixin:A}
+	at net.minecraft.world.entity.player.Player.tick(Player.java:235) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A,re:computing_frames,pl:accesstransformer:B}
+	at net.minecraft.server.level.ServerPlayer.doTick(ServerPlayer.java:439) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:unionlib.mixins.json:ServerPlayerMixin,pl:mixin:APP:epicfight.mixins.json:MixinServerPlayer,pl:mixin:APP:yungsapi.mixins.json:ServerPlayerEntityTickMixin,pl:mixin:APP:star.mixins.json:ServerPlayerMixin,pl:mixin:APP:tiered.mixins.json:ServerPlayerEntityMixin,pl:mixin:A}
+	at net.minecraft.server.network.ServerGamePacketListenerImpl.tick(ServerGamePacketListenerImpl.java:207) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,re:classloading}
+	at net.minecraft.network.Connection.tick(Connection.java:245) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,re:classloading}
+	at net.minecraft.server.network.ServerConnectionListener.tick(ServerConnectionListener.java:143) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:classloading}
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:916) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:842) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:84) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:685) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:261) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at java.lang.Thread.run(Thread.java:842) [?:?] {re:mixin}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Suspected Mods: 
+	Epic Fight (epicfight), Version: 18.5.26
+		at TRANSFORMER/epicfight@18.5.26/yesman.epicfight.skill.SkillDataManager$ValueType$BooleanType.writeToBuffer(SkillDataManager.java:202)
+
+	Weapons of Minecraft (wom), Version: 18.1.7.38
+		at TRANSFORMER/wom@18.1.7.38/reascer.wom.gameasset.WOMAnimations.lambda$build$5(WOMAnimations.java:613)
+Stacktrace:
+	at yesman.epicfight.skill.SkillDataManager$ValueType$BooleanType.writeToBuffer(SkillDataManager.java:202) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading}
+	at yesman.epicfight.network.server.SPModifySkillData.toBytes(SPModifySkillData.java:44) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading}
+	at net.minecraftforge.network.simple.IndexedMessageCodec.lambda$tryEncode$4(IndexedMessageCodec.java:121) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at java.util.Optional.ifPresent(Optional.java:178) ~[?:?] {re:mixin}
+	at net.minecraftforge.network.simple.IndexedMessageCodec.tryEncode(IndexedMessageCodec.java:119) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.IndexedMessageCodec.build(IndexedMessageCodec.java:134) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.SimpleChannel.encodeMessage(SimpleChannel.java:77) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.SimpleChannel.toBuffer(SimpleChannel.java:90) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.SimpleChannel.toVanillaPacket(SimpleChannel.java:121) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraftforge.network.simple.SimpleChannel.send(SimpleChannel.java:116) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at yesman.epicfight.network.EpicFightNetworkManager.sendToClient(EpicFightNetworkManager.java:53) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading}
+	at yesman.epicfight.network.EpicFightNetworkManager.sendToPlayer(EpicFightNetworkManager.java:65) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading}
+	at yesman.epicfight.skill.SkillDataManager.syncData(SkillDataManager.java:97) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading,re:mixin}
+	at yesman.epicfight.skill.SkillDataManager.setDataSync(SkillDataManager.java:82) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading,re:mixin}
+	at reascer.wom.gameasset.WOMAnimations.lambda$build$5(WOMAnimations.java:613) ~[WeaponsOfMiracles-18.1.7.38_mapped_official_1.18.2.jar%2390!/:18.1.7.38] {re:mixin,re:classloading,pl:mixin:A}
+	at yesman.epicfight.api.animation.property.AnimationEvent.executeIfRightSide(AnimationEvent.java:20) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading,re:mixin}
+	at yesman.epicfight.api.animation.property.AnimationEvent$TimeStampedEvent.executeIfRightSide(AnimationEvent.java:43) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading}
+	at yesman.epicfight.api.animation.types.StaticAnimation.lambda$tick$4(StaticAnimation.java:206) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:invincible.mixins.json:StaticAnimationMixin,pl:mixin:APP:star.mixins.json:animation_types_mixin.StaticAnimationMixin,pl:mixin:A}
+	at java.util.Optional.ifPresent(Optional.java:178) ~[?:?] {re:mixin}
+	at yesman.epicfight.api.animation.types.StaticAnimation.tick(StaticAnimation.java:198) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:invincible.mixins.json:StaticAnimationMixin,pl:mixin:APP:star.mixins.json:animation_types_mixin.StaticAnimationMixin,pl:mixin:A}
+	at yesman.epicfight.api.animation.types.MainFrameAnimation.tick(MainFrameAnimation.java:43) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:mixins.indestructible.json:MainFrameAnimationMixin,pl:mixin:APP:mixins.toybox.json:epicfight.MainFrameAnimationMixin,pl:mixin:A}
+	at yesman.epicfight.api.animation.types.ActionAnimation.tick(ActionAnimation.java:72) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading,re:mixin}
+	at yesman.epicfight.api.animation.types.AttackAnimation.tick(AttackAnimation.java:156) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:star.mixins.json:animation_types_mixin.AttackAnimation,pl:mixin:APP:star.mixins.json:animation_types_mixin.ConcurrentLinkAnimationMixin,pl:mixin:APP:mixins.indestructible.json:AttackAnimationMixin,pl:mixin:A}
+	at yesman.epicfight.api.animation.ServerAnimator.tick(ServerAnimator.java:74) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:classloading}
+	at yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch.tick(LivingEntityPatch.java:123) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading}
+	at yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch.tick(PlayerPatch.java:204) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:A}
+	at yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch.tick(ServerPlayerPatch.java:115) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:APP:wukong.mixins.json:ServerPlayerPatchMixin,pl:mixin:APP:star.mixins.json:ServerPlayerPatchMixin,pl:mixin:A}
+	at yesman.epicfight.events.EntityEvents.updateEvent(EntityEvents.java:100) ~[epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_official_1.18.2.jar%2391!/:18.5.26] {re:mixin,re:classloading,pl:mixin:A}
+	at net.minecraftforge.eventbus.ASMEventHandler_406_EntityEvents_updateEvent_LivingUpdateEvent.invoke(.dynamic) ~[?:?] {}
+	at net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:85) ~[eventbus-5.0.7.jar%2311!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:302) ~[eventbus-5.0.7.jar%2311!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:283) ~[eventbus-5.0.7.jar%2311!/:?] {}
+	at net.minecraftforge.common.ForgeHooks.onLivingUpdate(ForgeHooks.java:324) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2379%2386!/:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2214) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:unionlib.mixins.json:LivingEntityMixin,pl:mixin:APP:epicacg.mixins.json:MixinLivingEntity,pl:mixin:APP:caelus.mixins.json:MixinLivingEntity,pl:mixin:APP:curios.mixins.json:MixinLivingEntity,pl:mixin:APP:epicfight.mixins.json:MixinLivingEntity,pl:mixin:APP:citadel.mixins.json:LivingEntityMixin,pl:mixin:APP:mixins.irons_spellbooks.json:LivingEntityMixin,pl:mixin:APP:star.mixins.json:LivingEntityMixin,pl:mixin:APP:lodestone.mixins.json:LivingEntityMixin,pl:mixin:APP:mobifier.mixins.json:MixinLivingEntity,pl:mixin:A}
+	at net.minecraft.world.entity.player.Player.tick(Player.java:235) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A,re:computing_frames,pl:accesstransformer:B}
+-- Player being ticked --
+Details:
+	Entity Type: minecraft:player (net.minecraft.server.level.ServerPlayer)
+	Entity ID: 2
+	Entity Name: Dev
+	Entity's Exact location: -25.80, 199.19, 64.12
+	Entity's Block location: World: (-26,199,64), Section: (at 6,7,0 in -2,12,4; chunk contains blocks -32,-64,64 to -17,319,79), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,-64,0 to -1,319,511)
+	Entity's Momentum: 0.00, -0.30, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: null
+Stacktrace:
+	at net.minecraft.server.level.ServerPlayer.doTick(ServerPlayer.java:439) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:unionlib.mixins.json:ServerPlayerMixin,pl:mixin:APP:epicfight.mixins.json:MixinServerPlayer,pl:mixin:APP:yungsapi.mixins.json:ServerPlayerEntityTickMixin,pl:mixin:APP:star.mixins.json:ServerPlayerMixin,pl:mixin:APP:tiered.mixins.json:ServerPlayerEntityMixin,pl:mixin:A}
+	at net.minecraft.server.network.ServerGamePacketListenerImpl.tick(ServerGamePacketListenerImpl.java:207) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,re:classloading}
+	at net.minecraft.network.Connection.tick(Connection.java:245) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,re:classloading}
+	at net.minecraft.server.network.ServerConnectionListener.tick(ServerConnectionListener.java:143) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:classloading}
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:916) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:842) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:84) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:685) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:261) ~[forge-1.18.2-40.2.17_mapped_official_1.18.2.jar%2380!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:A}
+	at java.lang.Thread.run(Thread.java:842) [?:?] {re:mixin}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.18.2
+	Minecraft Version ID: 1.18.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.10, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode, sharing), Oracle Corporation
+	Memory: 2165864480 bytes (2065 MiB) / 3072327680 bytes (2930 MiB) up to 4227858432 bytes (4032 MiB)
+	CPUs: 16
+	Processor Vendor: GenuineIntel
+	Processor Name: 12th Gen Intel(R) Core(TM) i7-12650H
+	Identifier: Intel64 Family 6 Model 154 Stepping 3
+	Microarchitecture: unknown
+	Frequency (GHz): 2.69
+	Number of physical packages: 1
+	Number of physical CPUs: 10
+	Number of logical CPUs: 16
+	Graphics card #0 name: OrayIddDriver Device
+	Graphics card #0 vendor: Shanghai Best Oray Information Technology Co., Ltd.
+	Graphics card #0 VRAM (MB): 0.00
+	Graphics card #0 deviceId: unknown
+	Graphics card #0 versionInfo: DriverVersion=17.1.58.818
+	Graphics card #1 name: NVIDIA GeForce RTX 4060 Laptop GPU
+	Graphics card #1 vendor: NVIDIA (0x10de)
+	Graphics card #1 VRAM (MB): 4095.00
+	Graphics card #1 deviceId: 0x28a0
+	Graphics card #1 versionInfo: DriverVersion=32.0.15.6614
+	Memory slot #0 capacity (MB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 3.20
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MB): 8192.00
+	Memory slot #1 clockSpeed (GHz): 3.20
+	Memory slot #1 type: DDR4
+	Virtual memory max (MB): 40155.80
+	Virtual memory used (MB): 38502.36
+	Swap memory total (MB): 24033.52
+	Swap memory used (MB): 4935.29
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayer['Dev'/2, l='ServerLevel[新的世界111]', x=-25.80, y=199.19, z=64.12]]
+	Data Packs: vanilla, mod:mowziesmobs (incompatible), mod:damage_number (incompatible), mod:unionlib (incompatible), mod:invincible (incompatible), mod:wukong, mod:tickrate_changer_reborn, mod:jade, mod:guhao, mod:epicacg, mod:shouldersurfing (incompatible), mod:playeranimator, mod:summoningrituals, mod:stellariscraft, mod:caelus (incompatible), mod:paxi, mod:curios (incompatible), mod:nanhealthfixer (incompatible), mod:falchionmoveset, mod:weaponthrow (incompatible), mod:citadel (incompatible), mod:alexsmobs (incompatible), mod:cataclysm (incompatible), mod:rank_system, mod:yungsapi, mod:mixinextras (incompatible), mod:star, mod:tiered (incompatible), mod:toybox, mod:irons_spellbooks (incompatible), mod:indestructible, mod:wom, mod:epicfight, mod:arc (incompatible), mod:omnis (incompatible), mod:lodestone, mod:forge, mod:dummmmmmy (incompatible), mod:geckolib3 (incompatible), mod:structure_gel, mod:ibeeditor (incompatible), mod:mobifier (incompatible)
+	World Generation: Experimental
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'forge'; Server brand changed to 'forge'
+	ModLauncher: 9.1.3+9.1.3+main.9b69c82a
+	ModLauncher launch target: forgeclientuserdev
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		 mixin PLUGINSERVICE 
+		 eventbus PLUGINSERVICE 
+		 slf4jfixer PLUGINSERVICE 
+		 object_holder_definalize PLUGINSERVICE 
+		 runtime_enum_extender PLUGINSERVICE 
+		 capability_token_subclass PLUGINSERVICE 
+		 accesstransformer PLUGINSERVICE 
+		 runtimedistcleaner PLUGINSERVICE 
+		 mixin TRANSFORMATIONSERVICE 
+		 fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		minecraft@1.0
+		lowcodefml@null
+		javafml@null
+	Mod List: 
+		forge-1.18.2-40.2.17_mapped_official_1.18.2.jar   |Minecraft                     |minecraft                     |1.18.2              |DONE      |Manifest: a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		mowziesmobs-1.6.3-1.0.0_mapped_official_1.18.2.jar|Mowzie's Mobs                 |mowziesmobs                   |1.6.3               |DONE      |Manifest: NOSIGNATURE
+		1.18.2-damage_number-1.3.1-1.0.0.0_mapped_official|Damage Number                 |damage_number                 |1.3.1               |DONE      |Manifest: NOSIGNATURE
+		UnionLib-1.18.2-7.2.4-Forge-EpicFight_mapped_offic|UnionLib                      |unionlib                      |7.2.4               |DONE      |Manifest: NOSIGNATURE
+		invincible1739350553-18.5.3_mapped_official_1.18.2|Epic Fight - Invincible       |invincible                    |18.5.3              |DONE      |Manifest: NOSIGNATURE
+		wukong_moveset-duel-forge1.18.2-18.0.1.12beta-1.1_|Epic Fight - Wukong Moveset   |wukong                        |0.0NONE             |DONE      |Manifest: NOSIGNATURE
+		TickChanger-1.18.2-1.0-1.0_mapped_official_1.18.2.|TickChanger:Reborn            |tickrate_changer_reborn       |1.18.2-1.0          |DONE      |Manifest: NOSIGNATURE
+		Jade-1.18.2-forge-5.2.6-EpicFight_mapped_official_|Jade                          |jade                          |5.2.6               |DONE      |Manifest: NOSIGNATURE
+		guhao-V1.0.1-all-1.0.0_mapped_official_1.18.2.jar |GuHao_                        |guhao                         |1.0.0.0             |DONE      |Manifest: NOSIGNATURE
+		epicacg-18.5.21.3.fix3-forge-1.18.2-1.0.3_mapped_o|Epic ACG                      |epicacg                       |18.5.21.3.fix3      |DONE      |Manifest: NOSIGNATURE
+		ShoulderSurfing-Forge-1.18.2-2.4.1-Forge-1.18.2-2.|Shoulder Surfing              |shouldersurfing               |1.18.2-2.4.1        |DONE      |Manifest: NOSIGNATURE
+		player-animation-lib-forge-1.0.2-1.0.2_mapped_offi|Player Animator               |playeranimator                |1.0.2+1.18          |DONE      |Manifest: NOSIGNATURE
+		summoningrituals-1.18.2-1.1.8_mapped_official_1.18|Summoning Rituals             |summoningrituals              |1.18.2-1.1.8        |DONE      |Manifest: NOSIGNATURE
+		StellarisCraft-1.3.0-3.0.57_mapped_official_1.18.2|stellariscraft                |stellariscraft                |1.2.3               |DONE      |Manifest: NOSIGNATURE
+		caelus-forge-1.18.1-3.0.0.2-18.5.3_mapped_official|Caelus API                    |caelus                        |1.18.1-3.0.0.2      |DONE      |Manifest: NOSIGNATURE
+		Paxi-1.18.2-Forge-2.1.1-1.0_mapped_official_1.18.2|Paxi                          |paxi                          |1.18.2-Forge-2.1.1  |DONE      |Manifest: NOSIGNATURE
+		curios-forge-1.18.2-5.0.9.1_mapped_official_1.18.2|Curios API                    |curios                        |1.18.2-5.0.9.1      |DONE      |Manifest: NOSIGNATURE
+		nanhealthfixer-1.18.2-0.0.1-1.1_mapped_official_1.|NaNHealthFixer                |nanhealthfixer                |1.18.2-0.0.1        |DONE      |Manifest: NOSIGNATURE
+		falchionmoveset-1_mapped_official_1.18.2.jar      |falchion moveset              |falchionmoveset               |18.0.2              |DONE      |Manifest: NOSIGNATURE
+		WeaponThrow-1.18.2-5.7-1.0.0.0_mapped_official_1.1|Weapon Throw                  |weaponthrow                   |1.18.2-5.7          |DONE      |Manifest: NOSIGNATURE
+		citadel-1.11.3-1.18.2-1.0.0_mapped_official_1.18.2|Citadel                       |citadel                       |1.11.3              |DONE      |Manifest: NOSIGNATURE
+		alexsmobs-1.18.6-1.1_mapped_official_1.18.2.jar   |Alex's Mobs                   |alexsmobs                     |1.18.6              |DONE      |Manifest: NOSIGNATURE
+		L_EndersCataclysm-0.51-hotfix-1.18.2-1.0.0.0_mappe|Cataclysm Mod                 |cataclysm                     |1.0                 |DONE      |Manifest: NOSIGNATURE
+		Rank-System-1.0-1.0_mapped_official_1.18.2.jar    |Rank System                   |rank_system                   |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		YungsApi-1.18.2-Forge-2.2.9-1.0_mapped_official_1.|YUNG's API                    |yungsapi                      |1.18.2-Forge-2.2.9  |DONE      |Manifest: NOSIGNATURE
+		mixinextras-forge-0.2.0.jar                       |MixinExtras                   |mixinextras                   |0.2.0               |DONE      |Manifest: NOSIGNATURE
+		Star-1.18.2-V2.0.0_mapped_official_1.18.2.jar     |Stars                         |star                          |1.18.2-V2.0.0       |DONE      |Manifest: NOSIGNATURE
+		Tiered-1.18.2-4.1.2-Forge-EpicFight_mapped_officia|Tiered                        |tiered                        |0.0NONE             |DONE      |Manifest: NOSIGNATURE
+		PlayerExReimagined-18.5.3-18.5.3_mapped_official_1|PlayerEx Reimagined           |toybox                        |18.5.3              |DONE      |Manifest: NOSIGNATURE
+		irons_spellbooks-1.18.2-1.1.4.2-1.1.4.2_mapped_off|Iron's Spells 'n Spellbooks   |irons_spellbooks              |1.18.2-1.1.4.2      |DONE      |Manifest: NOSIGNATURE
+		indestructible-18.5.14_mapped_official_1.18.2.jar |Indestructible                |indestructible                |18.5.14             |DONE      |Manifest: NOSIGNATURE
+		WeaponsOfMiracles-18.1.7.38_mapped_official_1.18.2|Weapons of Minecraft          |wom                           |18.1.7.38           |DONE      |Manifest: NOSIGNATURE
+		epicfight-forge-18.5.26-1.18.2--EpicFight_mapped_o|Epic Fight                    |epicfight                     |18.5.26             |DONE      |Manifest: NOSIGNATURE
+		main                                              |Epic Fight - arc              |arc                           |0.0NONE             |DONE      |Manifest: NOSIGNATURE
+		omnis-1.18.2-1.4_mapped_official_1.18.2.jar       |Omnis                         |omnis                         |1.16.5-1.0          |DONE      |Manifest: NOSIGNATURE
+		lodestone-1.18.2-1.2_mapped_official_1.18.2.jar   |Lodestone                     |lodestone                     |1.18.2-1.2          |DONE      |Manifest: NOSIGNATURE
+		                                                  |Forge                         |forge                         |40.2.17             |DONE      |Manifest: NOSIGNATURE
+		MmmMmmMmmMmm-1.18.2-1.5.2_mapped_official_1.18.2.j|MmmMmmMmmMmm                  |dummmmmmy                     |1.18-1.5.2          |DONE      |Manifest: NOSIGNATURE
+		geckolib-forge-1.18-3.0.57-3.0.57_mapped_official_|GeckoLib                      |geckolib3                     |3.0.57              |DONE      |Manifest: NOSIGNATURE
+		structure_gel-1.18.2-2.4.7-1.18.2-2.4.7_mapped_off|Structure Gel API             |structure_gel                 |2.4.7               |DONE      |Manifest: NOSIGNATURE
+		IBEEditor-1.18.2-2.2.0-forge_mapped_official_1.18.|IBE Editor                    |ibeeditor                     |2.2.0               |DONE      |Manifest: NOSIGNATURE
+		Mobifier-forge-1.18.2-1.0.3-forge-1.18.2-1.0.3_map|Mobifier                      |mobifier                      |1.0.3               |DONE      |Manifest: NOSIGNATURE
+	Crash Report UUID: 68e753c0-991d-44eb-aefd-5a625a84a516
+	FML: 40.2
+	Forge: net.minecraftforge:40.2.17

@@ -1,0 +1,8 @@
+#items considered as katana
+#example: minecraft:apple 0
+katana_items = []
+#slow time.
+"Multiplayer please turn off" = true
+#Is open text?
+"true/false" = false
+

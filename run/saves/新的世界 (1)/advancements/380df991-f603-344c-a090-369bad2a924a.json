@@ -1,0 +1,21 @@
+{
+  "mowziesmobs:root": {
+    "criteria": {
+      "custom_test_name": "2025-02-11 22:20:20 +0800"
+    },
+    "done": true
+  },
+  "cataclysm:root": {
+    "criteria": {
+      "custom_test_name": "2025-02-11 22:20:20 +0800"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:plains": "2025-02-11 22:20:20 +0800"
+    },
+    "done": false
+  },
+  "DataVersion": 2975
+}
