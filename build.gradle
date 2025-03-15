@@ -5,6 +5,7 @@ buildscript {
         maven { url = "https://repo.spongepowered.org/maven" }
         maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://maven.blamejared.com' }
+        maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
         mavenCentral()
     }
     dependencies {
@@ -165,7 +166,7 @@ dependencies {
     implementation fg.deobf("libs:indestructible:18.5.14")
 
 
-    implementation fg.deobf("libs:invincible1739975381:18.5.11")
+    implementation fg.deobf("libs:invincible1741722427:18.5.15")
 
     implementation fg.deobf("libs:MmmMmmMmmMmm:1.18.2-1.5.2")
     implementation fg.deobf("libs:WeaponsOfMiracles:18.1.7.38")

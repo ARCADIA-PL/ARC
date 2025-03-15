@@ -14,5 +14,9 @@
   "slash": {
     "sounds": ["arc:slash"],
     "subtitle": "subtitles.arc.slash"
+  },
+  "arcslash": {
+    "sounds": ["arc:arcslash"],
+    "subtitle": "subtitles.arc.arcslash"
   }
 }

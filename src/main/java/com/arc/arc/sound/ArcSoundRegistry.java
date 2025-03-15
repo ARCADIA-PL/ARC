@@ -26,6 +26,9 @@ public class ArcSoundRegistry {
     public static final RegistryObject<SoundEvent> Slash =
             registerSound("slash");
 
+    public static final RegistryObject<SoundEvent> ArcSlash =
+            registerSound("arcslash");
+
     /**
      * Forge 1.18 兼容的音效注册方法
      */
