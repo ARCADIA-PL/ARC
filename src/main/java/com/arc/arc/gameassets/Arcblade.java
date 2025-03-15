@@ -77,7 +77,7 @@ public class Arcblade {
                 .addTimeEvent(new TimeStampedEvent(0.36F, entityPatch -> {
                     entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP, 1F,0, 0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "invincible groundSlam @s 2 false true false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "invincible groundSlam @s 1 false true false", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:rend 4 14", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s irons_spellbooks:rend", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 6", false))
@@ -117,7 +117,7 @@ public class Arcblade {
                 .addTimeEvent(new TimeStampedEvent(0.57F, entityPatch -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1F,0, 0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible groundSlam @s 1.5 false true false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible groundSlam @s 1 false true false", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.3F, "invincible setPlayerPhase 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:absorption 10 8", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible consumeStack -1", false))
@@ -195,7 +195,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 50", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
@@ -223,7 +223,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 3", false))
                 .setDamageMultiplier(ValueModifier.multiplier(3F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -1", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3.8 false true false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 2.5 false true false", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2.5 0.5", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 3 15", true));
 
@@ -403,7 +403,7 @@ public class Arcblade {
                 .addTimeEvent(new TimeStampedEvent(0.3F, entityPatch -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1.1F,0, 0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 2 false true false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 1.5 false true false", true))
                 .addTimeEvent(new TimeStampedEvent(0.8F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(Animations.RUSHING_TEMPO3, 0.1F);
                 }))
@@ -425,7 +425,7 @@ public class Arcblade {
                 .addTimeEvent(new TimeStampedEvent(0.13F, entityPatch -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1F,0, 0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3 false true false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 2 false true false", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 4", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 4", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:resistance 3 3", false))
@@ -486,7 +486,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 50", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
@@ -615,7 +615,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 20 force", false))
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 50", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^ ^0 ^-7", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))
@@ -826,7 +826,7 @@ public class Arcblade {
                 .addTimeEvent(new TimeStampedEvent(0.8F, entityPatch -> {
                     entityPatch.playAnimationSynchronized(WOMAnimations.DODGEMASTER_BACKWARD,0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 2 false true false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 1 false true false", true))
                 .setDamageMultiplier(ValueModifier.multiplier(0.7F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5", true))
@@ -1037,7 +1037,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 50", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
@@ -1110,7 +1110,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 20 force", false))
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 50", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^ ^0 ^-7", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))
@@ -1288,7 +1288,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 20 force", false))
 
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 50", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "summon minecraft:lightning_bolt ^ ^0 ^-7", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))

@@ -16,7 +16,7 @@ public class ArcBladeItemRegistry {
             "arcblade",
             () -> new ArcbladeItem(
                     Tiers.NETHERITE,
-                    3,
+                    7,
                     -2.8F,
                     new Item.Properties()
                             .tab(CreativeModeTab.TAB_COMBAT) // 放在创造模式“战斗”标签页
