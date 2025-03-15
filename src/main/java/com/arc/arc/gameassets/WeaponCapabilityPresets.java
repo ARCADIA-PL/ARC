@@ -6,6 +6,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.particle.WOMParticles;
 import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.api.collider.Collider;
+import yesman.epicfight.api.collider.MultiOBBCollider;
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.ColliderPreset;
@@ -20,7 +22,7 @@ public class WeaponCapabilityPresets {
     public static final Function<Item, CapabilityItem.Builder> ARC = (item) ->
             (CapabilityItem.Builder) WeaponCapability.builder().category(CapabilityItem.WeaponCategories.TACHI)//蹭格挡，用别的也行
                     .styleProvider((entityPatch) -> CapabilityItem.Styles.TWO_HAND)
-                    .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
+                    .collider(new MultiOBBCollider(8, 0.4, 0.4, 0.95, 0.0, 0.0, -0.95))//这里可以用预设的，也可以new 一个
                     .swingSound(EpicFightSounds.WHOOSH)
                     .hitSound(EpicFightSounds.BLADE_HIT)
                     .hitParticle(WOMParticles.OVERBLOOD_HIT.get())

@@ -1,11 +1,11 @@
-{"type": "arcblade", "attributes": {"twohand": {"impact": 1.2, "armor_negation": 35.0, "max_strikes": 3, "damage_bonus": -2,
-"speed_bonus": -0.5}
-	},
-	"collider":
-	{
-		"number": 3,
-		"center": [0.0, 0.0, -1.02],
-		"size": [0.4, 0.4, 1.2]
+{"type": "arcblade",
+	"attributes":
+	{"twohand":
+	{"impact": 1.2,
+		"armor_negation": 35.0,
+		"max_strikes": 3,
+		"damage_bonus": -2,
+        "speed_bonus": -0.8}
 	}
 }
 
