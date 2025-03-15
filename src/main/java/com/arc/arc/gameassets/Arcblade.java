@@ -173,7 +173,7 @@ public class Arcblade {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1.3F,0, 0);
                 }))
                 .setCanBeInterrupt(false)
-                .setDamageMultiplier(ValueModifier.multiplier(1.1F))
+                .setDamageMultiplier(ValueModifier.multiplier(1.2F))
                 .setNotCharge(true)
                 .setPriority(4)
                 .setPlaySpeed(1.5F)
