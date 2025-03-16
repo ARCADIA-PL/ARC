@@ -105,13 +105,13 @@ public class MagicCircle extends InstantenousMobEffect {
     }
 
     //北斗七星的生成
-    public static void plough(Player player, Vec3 vec, double radius) {
+    public static void plough(Player player, Vec3 vec, double radius,int Level) {
         if (player.level instanceof ServerLevel serverLevel) {
-            // 给玩家力量3buff，5秒
-            MobEffectInstance strengthEffect = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 2);
+            // 给玩家力量buff，6秒，等级为Level
+            MobEffectInstance strengthEffect = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 120, Level-1);
             player.addEffect(strengthEffect);
 
-            MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinkling.get(), 40, 2);
+            MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinkling.get(), 40, 0);
             player.addEffect(StarsTwinklingEffect);
             // 生成北斗七星
             for(int ii=2;ii<=7;ii++) {
@@ -124,12 +124,12 @@ public class MagicCircle extends InstantenousMobEffect {
     }
 
     //    六芒星的生成
-    private static void liu1(Player player,Vec3 center) {
-        // 给玩家 抗性3buff，5秒
-        MobEffectInstance resistanceEffect = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 2);
+    private static void liu1(Player player,Vec3 center,int Level) {
+        // 给玩家 抗性buff，6秒,等级为Level
+        MobEffectInstance resistanceEffect = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 120, Level-1);
         player.addEffect(resistanceEffect);
 
-        MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinkling.get(), 40, 2);
+        MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinkling.get(), 40, 0);
         player.addEffect(StarsTwinklingEffect);
 
 
@@ -214,11 +214,11 @@ public class MagicCircle extends InstantenousMobEffect {
                 }
                 if (p1>0&&p2==1) {      //生成北斗七星
                     p1++;
-                    plough(player, coordinate[1], radius);
+                    plough(player, coordinate[1], radius,3);
                 }
                 if (p1>0&&p2==2) {      //生成六芒星
                     p1++;
-                    liu1(player,hexagram_coordinate);
+                    liu1(player,hexagram_coordinate,3);
                 }
             }
             //星图生成后重置状态
@@ -330,11 +330,11 @@ public class MagicCircle extends InstantenousMobEffect {
                 }
                 if (p1>0&&p2==1) {      //生成北斗七星
                     p1++;
-                    plough(player, coordinate[1], radius);
+                    plough(player, coordinate[1], radius,4);
                 }
                 if (p1>0&&p2==2) {      //生成六芒星
                     p1++;
-                    liu1(player,hexagram_coordinate);
+                    liu1(player,hexagram_coordinate,3);
                 }
             }
             //星图生成后重置状态
