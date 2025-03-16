@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17\bin\java.exe
-Arguments: '--in-jar, C:\Users\Administrator\Desktop\无坚不摧模组开发\ArcbladeReborn\build\libs\Arcblade-1742122664-18.5.0.jar, --out-jar, C:\Users\Administrator\Desktop\无坚不摧模组开发\ArcbladeReborn\build\reobfJar\output.jar, --srg-in, C:\Users\Administrator\Desktop\无坚不摧模组开发\ArcbladeReborn\build\createMcpToSrg\output.tsrg, --live'
+Arguments: '--in-jar, C:\Users\Administrator\Desktop\无坚不摧模组开发\ArcbladeReborn\build\libs\Arcblade-1742126300-18.5.0.jar, --out-jar, C:\Users\Administrator\Desktop\无坚不摧模组开发\ArcbladeReborn\build\reobfJar\output.jar, --srg-in, C:\Users\Administrator\Desktop\无坚不摧模组开发\ArcbladeReborn\build\createMcpToSrg\output.tsrg, --live'
 Classpath:
  - C:\Users\Administrator\.gradle\caches\forge_gradle\maven_downloader\net\md-5\SpecialSource\1.11.0\SpecialSource-1.11.0-shaded.jar
  - C:\Users\Administrator\.gradle\caches\forge_gradle\deobf_dependencies\libs\indestructible\18.5.14_mapped_official_1.18.2\indestructible-18.5.14_mapped_official_1.18.2.jar

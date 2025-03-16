@@ -730,13 +730,14 @@ public class Arcblade {
 
         ComboNode ArcGP2extendAttack4 = ComboNode.createNode(() -> WOMAnimations.MOONLESS_FULLMOON)
                 .setNotCharge(true)
+                .setConvertTime(-0.05F)
                 .setPlaySpeed(1.6F)
                 .setDamageMultiplier(ValueModifier.multiplier(1.3F))
-                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 0.5", true))
-                .addTimeEvent(new TimeStampedEvent(0.45F, (entityPatch) -> {
+                .addTimeEvent(new TimeStampedEvent(0.5F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_LONGSWORD, 0.0F);
-                }));
+                }))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 0.5", true));
 
         ComboNode ArcGP2extendAttack5 = ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
@@ -749,7 +750,6 @@ public class Arcblade {
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5", true));
 
         ComboNode ArcGP2extendAttack6 = ComboNode.createNode(() -> StarAnimations.YAMATO_STRIKE1)
-                .setPlaySpeed(0.9F)
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.5 0.5", true))
                 .setNotCharge(true)
@@ -765,8 +765,8 @@ public class Arcblade {
                 }))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.3 0.5", true))
                 .setDamageMultiplier(ValueModifier.multiplier(1.2F))
-                .setPlaySpeed(1.1F)
-                .setConvertTime(-0.1F)
+                .setPlaySpeed(1.2F)
+                .setConvertTime(-0.15F)
                 .addTimeEvent(new TimeStampedEvent(0.18F, (entityPatch) -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(),1F,0,0);
                 }));
