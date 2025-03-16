@@ -71,7 +71,7 @@ public class MagicCircle extends InstantenousMobEffect {
             //检查是否已经过了buff持续时间
             long currentTime = System.currentTimeMillis();
             long anchorTime = anchorTimestamps.getOrDefault(playerUUID, currentTime);
-            if (currentTime - anchorTime >= (50*(sum-1))) { // 500 毫秒 = 0.5 秒
+            if (currentTime - anchorTime >= 90000||currentTime - anchorTime>=50*(sum-1)) { // 500 毫秒 = 0.5 秒
                 anchorPositions.remove(playerUUID); // 移除锚点
                 anchorTimestamps.remove(playerUUID); // 移除时间记录
                 pp=true;
@@ -79,7 +79,9 @@ public class MagicCircle extends InstantenousMobEffect {
             }
             // 生成法阵
             if(pp==false){
-                spawnHexagramParticles_flow(player, anchorPosition, (amplifier + 1) * 3, 0.2);
+                MobEffectInstance effectInstance = player.getEffect(ArcEffectsRegistry.Stargazing.get());
+                if(effectInstance==null||effectInstance.getAmplifier()<3)spawnHexagramParticles_breath(player, anchorPosition, (amplifier + 1) * 3, 0.2);
+                else spawnHexagramParticles_flow(player, anchorPosition, (amplifier + 1) * 3, 0.2);
             }
         }
     }
@@ -211,8 +213,6 @@ public class MagicCircle extends InstantenousMobEffect {
                     z-=radius/2.0;
                     hexagram_coordinate=center.add(x,12,z);
                 }
-
-
                 if (p1>0&&p2==1) {      //生成北斗七星
                     p1++;
                     plough(player, coordinate[1], radius);
@@ -250,7 +250,7 @@ public class MagicCircle extends InstantenousMobEffect {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
                         double z = z1 + (z2 - z1) * t;
-                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + 0.2, z, 1, 0, 0, 0, 0); // 闪电粒子
                         //serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
                     }
                 }
@@ -268,7 +268,7 @@ public class MagicCircle extends InstantenousMobEffect {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
                         double z = z1 + (z2 - z1) * t;
-                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + 0.2, z, 1, 0, 0, 0, 0); // 闪电粒子
                         //serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
                     }
                 }
