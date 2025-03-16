@@ -30,7 +30,7 @@ public class MagicCircle extends InstantenousMobEffect {
     static Vec3 hexagram_coordinate;
 
     static int loop_i=0;       //用于减少环的粒子
-    static int flowi1=0,flowi2=0,flowj1=0,flowj2=0;
+    static int flowi1=0,flowi2=1,flowj1=0,flowj2=0;
 
     // 存储每个玩家的法阵锚点位置
     private static final Map<UUID, Vec3> anchorPositions = new HashMap<>();
@@ -78,7 +78,9 @@ public class MagicCircle extends InstantenousMobEffect {
                 return;
             }
             // 生成法阵
-            if(pp==false)spawnHexagramParticles(player, anchorPosition, (amplifier + 1) * 3, 0.2);
+            if(pp==false){
+                spawnHexagramParticles_flow(player, anchorPosition, (amplifier + 1) * 3, 0.2);
+            }
         }
     }
 
@@ -170,60 +172,16 @@ public class MagicCircle extends InstantenousMobEffect {
         }
     }
 
-    //生成八芒星
-    private static void ba(Player player,Vec3 center) {
-        // 给玩家 力量3buff 增益
-        MobEffectInstance resistanceEffect = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 2);
-        player.addEffect(resistanceEffect);
-        double r = 4; // 小八芒星的半径
-        if (player.level instanceof ServerLevel serverLevel) {
-            int points = 8; // 六芒星的顶点数
-            double angleIncrement = 2 * Math.PI / points;
-            //方位3的六芒星（正上方）
-            // 生成六芒星的连线（正三角形）
-            for (int i = 0; i < points-2; i += 3) {
-                double angle1 = i * angleIncrement;
-                double angle2 = (i + 2) % points * angleIncrement;
-                double x1 = center.x + r * Math.cos(angle1);
-                double z1 = center.z + r * Math.sin(angle1);
-                double x2 = center.x + r * Math.cos(angle2);
-                double z2 = center.z + r * Math.sin(angle2);
-                // 在两点之间生成粒子
-                int steps = 7; // 两点之间的粒子数量
-                for (int j = 0; j <= steps; j++) {
-                    double t = (double) j / steps;
-                    double x = x1 + (x2 - x1) * t;
-                    double z = z1 + (z2 - z1) * t;
-                    serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y, z, 1, 0, 0, 0, 0); // 地狱门粒子
-                }
-            }
-            // 生成六芒星的连线（倒三角形）
-            for (int i = 1; i < points-3; i += 2) {
-                double angle1 = i * angleIncrement;
-                double angle2 = (i + 2) % points * angleIncrement;
-                double x1 = center.x + r * Math.cos(angle1);
-                double z1 = center.z + r * Math.sin(angle1);
-                double x2 = center.x + r * Math.cos(angle2);
-                double z2 = center.z + r * Math.sin(angle2);
-                // 在两点之间生成粒子
-                int steps = 7; // 两点之间的粒子数量
-                for (int j = 0; j <= steps; j++) {
-                    double t = (double) j / steps;
-                    double x = x1 + (x2 - x1) * t;
-                    double z = z1 + (z2 - z1) * t;
-                    serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y, z, 1, 0, 0, 0, 0); // 闪电粒子
-                }
-            }
-        }
-    }
 
 
-    public static void spawnHexagramParticles(Player player, Vec3 center, double radius, double ringSpeed) {
+
+    //呼吸法阵
+    public static void spawnHexagramParticles_breath(Player player, Vec3 center, double radius, double ringSpeed) {
         if (player.level instanceof ServerLevel serverLevel) {
 
             if ((ans <= 350 && ans >= 320 && p == 1 )|| p1 >0) {
                 if(p1==0) {
-                    p2 =new Random().nextInt(2)+1;    //1为七星，2为六芒星,0为八芒星
+                    p2 =new Random().nextInt(2)+1;    //1为七星，2为六芒星
                 }
                 if(p1==0&&p2==1){               //控制北斗七星生成
                     p1=1;        //开始生成
@@ -246,21 +204,13 @@ public class MagicCircle extends InstantenousMobEffect {
                 }
                 if(p1==0&&p2==2){       //控制小六芒星生成
                     p1=1;               //开始生成
-                    double x = new Random().nextDouble(ringSpeed/2.0);
-                    double z = new Random().nextDouble(ringSpeed/2.0);
-                    x-=ringSpeed;
-                    z-=ringSpeed;
+                    double x = new Random().nextDouble(radius);
+                    double z = new Random().nextDouble(radius);
+                    double y=new Random().nextDouble();
+                    x-=radius/2.0;
+                    z-=radius/2.0;
                     hexagram_coordinate=center.add(x,12,z);
                 }
-//                if(p1==0&&p2==0){       //控制小八芒星生成
-//                    p1=1;
-//                    double x = new Random().nextDouble(ringSpeed);
-//                    double z = new Random().nextDouble(ringSpeed);
-//                    x-=ringSpeed/2.0;
-//                    z-=ringSpeed/2.0;
-//                    hexagram_coordinate=center.add(x,12,z);
-//                }
-
 
 
                 if (p1>0&&p2==1) {      //生成北斗七星
@@ -271,10 +221,6 @@ public class MagicCircle extends InstantenousMobEffect {
                     p1++;
                     liu1(player,hexagram_coordinate);
                 }
-//                if (p1>0&&p2==0) {      //生成八芒星
-//                    p1++;
-//
-//                }
             }
             //星图生成后重置状态
             if(p1>=20){
@@ -287,71 +233,149 @@ public class MagicCircle extends InstantenousMobEffect {
             int points = 6; // 六芒星的顶点数
             double angleIncrement = 2 * Math.PI / points;
             // 生成多层六芒星
-//            for (int layer = 0; layer < radii.length; layer++) {
-//                double layerRadius = radii[layer]; // 当前层的半径
-//                double layerHeight = 0.2 * layer; // 每层高度递增
-//                // 生成六芒星的连线（正三角形）
-//                for (int i = 0; i < points; i += 2) {
-//                    double angle1 = i * angleIncrement;
-//                    double angle2 = (i + 2) % points * angleIncrement;
-//                    double x1 = center.x + layerRadius * Math.cos(angle1);
-//                    double z1 = center.z + layerRadius * Math.sin(angle1);
-//                    double x2 = center.x + layerRadius * Math.cos(angle2);
-//                    double z2 = center.z + layerRadius * Math.sin(angle2);
-//                    // 在两点之间生成粒子
-//                    int steps = ((int) radii[2]) * Math.min(8, Math.max(0, ans / 20 - layer * 4 - 1)); // 两点之间的粒子数量
-//                    for (int j = 0; j <= steps; j++) {
-//                        double t = (double) j / steps;
-//                        double x = x1 + (x2 - x1) * t;
-//                        double z = z1 + (z2 - z1) * t;
-//                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
-//                        //serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
-//                    }
-//                }
-//                // 生成六芒星的连线（倒三角形）
-//                for (int i = 1; i < points; i += 2) {
-//                    double angle1 = i * angleIncrement;
-//                    double angle2 = (i + 2) % points * angleIncrement;
-//                    double x1 = center.x + layerRadius * Math.cos(angle1);
-//                    double z1 = center.z + layerRadius * Math.sin(angle1);
-//                    double x2 = center.x + layerRadius * Math.cos(angle2);
-//                    double z2 = center.z + layerRadius * Math.sin(angle2);
-//                    // 在两点之间生成粒子
-//                    int steps = ((int) radii[2]) * Math.min(8, Math.max(0, ans / 20 - layer * 4 - 1));
-//                    for (int j = 0; j <= steps; j++) {
-//                        double t = (double) j / steps;
-//                        double x = x1 + (x2 - x1) * t;
-//                        double z = z1 + (z2 - z1) * t;
-//                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
-//                        //serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
-//                    }
-//                }
-//            }
+            for (int layer = 0; layer < radii.length; layer++) {
+                double layerRadius = radii[layer]; // 当前层的半径
+                double layerHeight = 0.2 * layer; // 每层高度递增
+                // 生成六芒星的连线（正三角形）
+                for (int i = 0; i < points; i += 2) {
+                    double angle1 = i * angleIncrement;
+                    double angle2 = (i + 2) % points * angleIncrement;
+                    double x1 = center.x + layerRadius * Math.cos(angle1);
+                    double z1 = center.z + layerRadius * Math.sin(angle1);
+                    double x2 = center.x + layerRadius * Math.cos(angle2);
+                    double z2 = center.z + layerRadius * Math.sin(angle2);
+                    // 在两点之间生成粒子
+                    int steps = ((int) radii[2]) * Math.min(8, Math.max(0, ans / 20 - layer * 4 - 1)); // 两点之间的粒子数量
+                    for (int j = 0; j <= steps; j++) {
+                        double t = (double) j / steps;
+                        double x = x1 + (x2 - x1) * t;
+                        double z = z1 + (z2 - z1) * t;
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
+                        //serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
+                    }
+                }
+                // 生成六芒星的连线（倒三角形）
+                for (int i = 1; i < points; i += 2) {
+                    double angle1 = i * angleIncrement;
+                    double angle2 = (i + 2) % points * angleIncrement;
+                    double x1 = center.x + layerRadius * Math.cos(angle1);
+                    double z1 = center.z + layerRadius * Math.sin(angle1);
+                    double x2 = center.x + layerRadius * Math.cos(angle2);
+                    double z2 = center.z + layerRadius * Math.sin(angle2);
+                    // 在两点之间生成粒子
+                    int steps = ((int) radii[2]) * Math.min(8, Math.max(0, ans / 20 - layer * 4 - 1));
+                    for (int j = 0; j <= steps; j++) {
+                        double t = (double) j / steps;
+                        double x = x1 + (x2 - x1) * t;
+                        double z = z1 + (z2 - z1) * t;
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
+                        //serverLevel.sendParticles(ParticleTypes.PORTAL, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
+                    }
+                }
+            }
             // 生成粒子环
+            int ringSteps = 20; // 粒子环的粒子数量
+            double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
+            for(int i=0;i<ringSteps;i++) {
+                double angle = ringAngle+i * (2 * Math.PI / ringSteps);
+                double x = center.x + radius * Math.cos(angle);
+                double z = center.z + radius * Math.sin(angle);
+                // 生成粒子环的粒子
+                serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 白色粒子
+                serverLevel.sendParticles(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, x, center.y + 0.1, z, 1, 0, 0, 0, 0); // 灵魂火焰粒子
+                // 生成粒子柱
+                for (double y = 0; y < 1.0; y += 0.2) { // 粒子柱高度为 0.8 格
+                    serverLevel.sendParticles(ParticleTypes.ENCHANT, x, center.y + y, z, 1, 0, 0, 0, 0); // 紫色粒子
+                }
+                i++;
+                i %= ringSteps;
+            }
 
+        }
+    }
+
+
+    //流动法阵
+    public static void spawnHexagramParticles_flow(Player player, Vec3 center, double radius, double ringSpeed) {
+        if (player.level instanceof ServerLevel serverLevel) {
+            if ((ans%40==0 &&p1==0 )|| p1 >0) {
+                if(p1==0) {
+                    p2 =new Random().nextInt(2)+1;    //1为七星，2为六芒星
+                }
+                if(p1==0&&p2==1){               //控制北斗七星生成
+                    p1=1;        //开始生成
+                    double x = new Random().nextDouble(radius);
+                    double z = new Random().nextDouble(radius);
+                    double y = new Random().nextDouble(12)+12;
+                    x -= radius/2.0 ;
+                    z -= radius/2.0 ;
+                    coordinate[1]=center.add(x,y,z);
+                    coordinate[2]=coordinate[1].add(1.2,0,0);
+                    coordinate[3]=coordinate[1].add(1.6,0,2.0);
+                    coordinate[4]=coordinate[1].add(0.6,0,2.4);
+                    coordinate[5]=coordinate[1].add(0.4,0,3.6);
+                    coordinate[6]=coordinate[1].add(0.24,0,4.56);
+                    coordinate[7]=coordinate[1].add(0.6,0,5.96);
+                    int angle=new Random().nextInt(2);
+                    for(int i=2;i<=7;i++){
+                        if(angle==1) coordinate[i]=coordinate[1].add((coordinate[i].x-coordinate[1].x)*Math.cos(0)-(coordinate[i].z-coordinate[1].z)*Math.sin(0),0,(coordinate[i].x*-coordinate[1].x)*Math.sin(0)+(coordinate[i].z-coordinate[1].z)*Math.cos(0));
+                        else coordinate[i]=coordinate[1].add((coordinate[i].x-coordinate[1].x)*Math.cos(Math.PI)-(coordinate[i].z-coordinate[1].z)*Math.sin(Math.PI),0,(coordinate[i].x*-coordinate[1].x)*Math.sin(Math.PI)+(coordinate[i].z-coordinate[1].z)*Math.cos(Math.PI));
+                    }
+                }
+                if(p1==0&&p2==2){       //控制小六芒星生成
+                    p1=1;               //开始生成
+                    double x = new Random().nextDouble(radius);
+                    double z = new Random().nextDouble(radius);
+                    double y = new Random().nextDouble(12)+12;
+                    x-=radius/2.0;
+                    z-=radius/2.0;
+                    hexagram_coordinate=center.add(x,y,z);
+                }
+
+
+                if (p1>0&&p2==1) {      //生成北斗七星
+                    p1++;
+                    plough(player, coordinate[1], radius);
+                }
+                if (p1>0&&p2==2) {      //生成六芒星
+                    p1++;
+                    liu1(player,hexagram_coordinate);
+                }
+            }
+            //星图生成后重置状态
+            if(p1>=20){
+                p1=0;
+                p2=10;
+            }
+
+            double[] radii = {radius * 0.5, radius * 0.75, radius}; // 三层六芒星的半径
+            int points = 6; // 六芒星的顶点数
+            double angleIncrement = 2 * Math.PI / points;
 
             for(int layer = 0; layer < radii.length; layer++) {
-                int flowi_=flowi1;
-                int flowj_=flowj1;
-                for (int i=1;i<=8;i++) {
+                int flowi_1=flowi1;
+                int flowj_1=flowj1;
+                int flowj_2=flowj2;
+                int flowi_2=flowi2;
+                for (int i=1;i<=3;i++) {
                     double layerRadius = radii[layer]; // 当前层的半径
                     double layerHeight = 0.2 * layer; // 每层高度递增
                     // 生成六芒星的连线（正三角形）
                     for (; flowi1<points; ) {
-                        double angle1 = i * angleIncrement;
-                        double angle2 = (i + 2) % points * angleIncrement;
+                        double angle1 = flowi1 * angleIncrement;
+                        double angle2 = (flowi1 + 2) % points * angleIncrement;
                         double x1 = center.x + layerRadius * Math.cos(angle1);
                         double z1 = center.z + layerRadius * Math.sin(angle1);
                         double x2 = center.x + layerRadius * Math.cos(angle2);
                         double z2 = center.z + layerRadius * Math.sin(angle2);
                         // 在两点之间生成粒子
-                        int steps = ((int) radii[2]) * Math.min(8, Math.max(4, ans / 20 - layer * 4 - 1)); // 两点之间的粒子数量
+                        int steps = ((int) radii[2]*8); // 两点之间的粒子数量
                         for ( ;flowj1 <= steps; ) {
                             double t = (double) flowj1 / steps;
                             double x = x1 + (x2 - x1) * t;
                             double z = z1 + (z2 - z1) * t;
                             serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
-                            serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
+                            serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + 0.2, z, 1, 0, 0, 0, 0); // 金色粒子
                             flowj1++;
                             if(flowj1>steps)flowi1+=2;
                             flowj1%=(steps+1);
@@ -362,31 +386,33 @@ public class MagicCircle extends InstantenousMobEffect {
                     }
                     // 生成六芒星的连线（倒三角形）
                     for (; flowi2< points; ) {
-                        double angle1 = i * angleIncrement;
-                        double angle2 = (i + 2) % points * angleIncrement;
+                        double angle1 = flowi2 * angleIncrement;
+                        double angle2 = (flowi2 + 2) % points * angleIncrement;
                         double x1 = center.x + layerRadius * Math.cos(angle1);
                         double z1 = center.z + layerRadius * Math.sin(angle1);
                         double x2 = center.x + layerRadius * Math.cos(angle2);
                         double z2 = center.z + layerRadius * Math.sin(angle2);
                         // 在两点之间生成粒子
-                        int steps = ((int) radii[2]) * Math.min(8, Math.max(4, ans / 20 - layer * 4 - 1));
+                        int steps = ((int) radii[2] * 8);
                         for (;flowj2 <= steps; ) {
                             double t = (double) flowj2 / steps;
                             double x = x1 + (x2 - x1) * t;
                             double z = z1 + (z2 - z1) * t;
                             serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 闪电粒子
-                            serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + layerHeight, z, 1, 0, 0, 0, 0); // 金色粒子
+                            serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y + 0.2, z, 1, 0, 0, 0, 0); // 金色粒子
                             flowj2++;
                             if(flowj2>steps)flowi2+=2;
-                            flowj2%=(steps+1);
+                            flowj2%=steps+1;
                             if(flowi2>=points)flowi2=1;
                             break;
                         }
                         break;
                     }
                     if(layer!=2){
-                        flowj1=flowj2=flowj_;
-                        flowi1=flowi2=flowi_;
+                        flowj1=flowj_1;
+                        flowi1=flowi_1;
+                        flowj2=flowj_2;
+                        flowi2=flowi_2;
                     }
                 }
             }
@@ -411,6 +437,4 @@ public class MagicCircle extends InstantenousMobEffect {
             }
         }
     }
-
-
 }
