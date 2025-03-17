@@ -1,0 +1,11 @@
+{"type": "arcbladetransformed", "attributes": {"common": {"impact": 3, "armor_negation": 60.0, "max_strikes": 3, "damage_bonus": 1,
+"speed_bonus": -0.5}
+	},
+	"collider":
+	{
+		"number": 3,
+		"center": [0.0, 0.0, -1.02],
+		"size": [0.6, 0.6, 1.7]
+	}
+}
+
