@@ -74,7 +74,7 @@ public class ArcbladeTransformed {
                 })
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 1 false true false", true));
         ComboNode ArcbladeTransformedAuto2 = ComboNode.createNode(() -> StarAnimations.GREATSWORD_OLD_AUTO1)
-                .setConvertTime(0.15F).setPlaySpeed(0.8F)
+                .setConvertTime(0.15F).setPlaySpeed(0.77F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
