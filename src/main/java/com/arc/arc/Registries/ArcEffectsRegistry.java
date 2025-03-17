@@ -22,6 +22,7 @@ public class ArcEffectsRegistry {
             EFFECTS.register("stars_twinkling", StarsTwinkling::new);
 
     //闪光时调用的buff
+
     public static final RegistryObject<MobEffect> SuperFlash =
             EFFECTS.register("super_flash", SuperFlash::new);
 
