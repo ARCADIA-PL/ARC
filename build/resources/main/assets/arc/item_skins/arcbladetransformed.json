@@ -1,0 +1,11 @@
+{
+    "trail": {
+    	"color": [103, 75, 227],
+    	"begin_pos": [0.0, 0.0, -1.0],
+    	"end_pos": [0.0, 0.24, -2.90],
+    	"lifetime": 8,
+		"interpolations": 8,
+    	"texture_path": "arc:textures/trail/trail20.png",
+    	"particle_type": "epicacg:bloom_trail"
+    }
+}
