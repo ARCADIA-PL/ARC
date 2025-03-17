@@ -6,5 +6,10 @@
   "arcslash": {
     "sounds": ["arc:arcslash"],
     "subtitle": "subtitles.arc.arcslash"
+  },
+  "laststardust": {
+    "sounds": ["arc:laststardust"],
+    "subtitle": "subtitles.arc.laststardust",
+    "stream": true
   }
 }
