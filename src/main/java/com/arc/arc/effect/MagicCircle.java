@@ -86,9 +86,17 @@ public class MagicCircle extends InstantenousMobEffect {
                 if(currentTime - anchorTime >= 56000&&currentTime - anchorTime <= 57000){
                     if (player.level instanceof ServerLevel serverLevel) {
                         Vec3 currentPosition = player.position().add(0, 0.1, 0);
-                        serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD_END.get(), currentPosition.x, currentPosition.y,currentPosition.z, 1, 0, 0, 0, 0);
+                        serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD.get(), currentPosition.x, currentPosition.y,currentPosition.z, 1, 0, 0, 0, 0);
                         MobEffectInstance absorptionEffect = new MobEffectInstance(MobEffects.ABSORPTION, 240, 9);
                         player.addEffect(absorptionEffect);
+                    }
+                }
+                if(currentTime - anchorTime >= 56500&&currentTime - anchorTime <= 57000){
+                    if (player.level instanceof ServerLevel serverLevel) {
+                        Vec3 currentPosition = player.position().add(0, 0.1, 0);
+                        serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD_END.get(), currentPosition.x, currentPosition.y,currentPosition.z, 1, 0, 0, 0, 0);
+                        MobEffectInstance SuperFlashEffect = new MobEffectInstance(ArcEffectsRegistry.SuperFlash.get(), 200, 0);
+                        player.addEffect(SuperFlashEffect);
                     }
                 }
 

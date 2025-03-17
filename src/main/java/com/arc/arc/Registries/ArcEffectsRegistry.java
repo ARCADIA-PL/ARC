@@ -21,5 +21,9 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect> StarsTwinkling =
             EFFECTS.register("stars_twinkling", StarsTwinkling::new);
 
+    public static final RegistryObject<MobEffect> SuperFlash =
+            EFFECTS.register("super_flash", SuperFlash::new);
+
+
 
 }
