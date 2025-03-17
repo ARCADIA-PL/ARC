@@ -72,7 +72,7 @@ public class ArcbladeTransformed {
                         return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
                     }
                 })
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 2 false false false", true));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 1 false true false", true));
         ComboNode ArcbladeTransformedAuto2 = ComboNode.createNode(() -> StarAnimations.GREATSWORD_OLD_AUTO1)
                 .setConvertTime(0.15F).setPlaySpeed(0.8F)
                 .addCondition(new CustomCondition() {
@@ -88,7 +88,7 @@ public class ArcbladeTransformed {
                         return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
                     }
                 })
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1.5 false false false", true));;
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1.5 false true false", true));;
         ComboNode ArcbladeTransformedAuto3 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_4)
                 .setConvertTime(-0.2F).setPlaySpeed(0.8F)
                 .addCondition(new CustomCondition() {
@@ -118,7 +118,7 @@ public class ArcbladeTransformed {
                         return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
                     }
                 })
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 2 false false false", true));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1 false true false", true));
         ComboNode ArcbladeTransformedAuto5 = ComboNode.createNode(() -> WOMAnimations.RUINE_AUTO_3)
                 .addCondition(new CustomCondition() {
                     @Override
@@ -133,7 +133,7 @@ public class ArcbladeTransformed {
                         return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
                     }
                 })
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "invincible groundSlam @s 2 false false false", true));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "invincible groundSlam @s 1 false true false", true));
 
         ComboNode ArcbladeTransformedBasicAttack =ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAirStrikeAuto1)
