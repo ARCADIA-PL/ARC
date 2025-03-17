@@ -10,7 +10,9 @@ import com.guhao.star.regirster.Sounds;
 import com.p1nero.invincible.api.events.BiEvent;
 import com.p1nero.invincible.api.events.TimeStampedEvent;
 import com.p1nero.invincible.conditions.*;
+import com.p1nero.invincible.skill.ComboBasicAttack;
 import com.p1nero.invincible.skill.api.ComboNode;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
@@ -21,6 +23,7 @@ import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.Skill;
+import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.damagesource.StunType;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
@@ -223,14 +226,8 @@ public class Arcblade {
 
         ComboNode Arctest = ComboNode.createNode(() -> WOMAnimations.SOLAR_HORNO)
                 .setConvertTime(0.35F)
-                .setPlaySpeed(0.7F)
-                .addTimeEvent(new TimeStampedEvent(0.35F, (entityPatch) -> {
-                    entityPatch.playSound(WOMSounds.SOLAR_HIT,0,0);
-                }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "particle epicfight:force_field ~ ~0.5 ~ 0 0 0 1 1", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "invincible groundSlam @s 2 false true false", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.15F, "effect give @s arc:stellaris_arcbladetransformeffect 20 1", false));
-
+                .setPlaySpeed(0.7F);
+        ComboNode Arctest1 = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_1);
 
         ComboNode ArcbasicAttack = ComboNode.create().addConditionAnimation(ArcJump)
                 .addConditionAnimation(ArcDash)
@@ -261,6 +258,7 @@ public class Arcblade {
 
         Arcbladeroot.key1(ArcbasicAttack);//初始无条件使用1A 疾跑攻击 跳跃攻击
         Arcbladeroot.key4(Arctest);
+        Arctest.key1(Arctest1);
         ArcDash.key1(ArcAuto1);//疾跑攻击后接1A
         ArcdashSkill.key1(ArcAutoDash2);//疾跑技能后接2A
         ArcJump.key1(ArcAutoDash2);//跳跃攻击后接2A
@@ -1328,7 +1326,6 @@ public class Arcblade {
         ArcGP3Attack10.key1(ArcAuto5);
         SkillManager.register(ArcbladeSkill::new, ArcbladeSkill.createComboBasicAttack().setCombo(Arcbladeroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
     }
-
     @SubscribeEvent
     public static void BuildSkills(SkillBuildEvent event) {
         Arcblade = event.build(ArcMod.MOD_ID, "combo0");

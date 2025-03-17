@@ -5,6 +5,7 @@ import com.arc.arc.Registries.ArcEffectsRegistry;
 import com.arc.arc.Registries.ArcSoundRegistry;
 import com.arc.arc.events.ArcbladeAttributeHandlers;
 import com.arc.arc.gameassets.Arcblade;
+import com.arc.arc.gameassets.ArcbladeTransformed;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,6 +27,7 @@ public class ArcMod {
         MinecraftForge.EVENT_BUS.register(ArcbladeAttributeHandlers.class);
         //无坚不摧技能注册
         Arcblade.registerSkills();//注册Arcblade的无坚不摧技能
+        ArcbladeTransformed.registerSkills();//注册ArcbladeTransformed的无坚不摧技能
         //注册表
         ArcSoundRegistry.SOUNDS.register(bus);//音效注册表
         ArcBladeItemRegistry.ITEMS.register(bus);//物品注册表
