@@ -4,7 +4,6 @@ import com.arc.arc.ArcMod;
 import com.arc.arc.Registries.ArcSoundRegistry;
 import com.arc.arc.skill.ArcbladeSkill;
 import com.dfdyz.epicacg.registry.MyAnimations;
-import com.guhao.GuHaoAnimations;
 import com.guhao.star.efmex.StarAnimations;
 import com.guhao.star.regirster.Sounds;
 import com.p1nero.invincible.api.events.BiEvent;
@@ -16,14 +15,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
-import reascer.wom.gameasset.WOMSounds;
 import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.Skill;
-import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.damagesource.StunType;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
@@ -226,9 +223,11 @@ public class Arcblade {
 
         ComboNode Arctest = ComboNode.createNode(() -> WOMAnimations.SOLAR_HORNO)
                 .setConvertTime(0.35F)
-                .setPlaySpeed(0.7F);
-        ComboNode Arctest1 = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_1);
-
+                .setPlaySpeed(0.7F)
+                .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_1);
+                    }}));
         ComboNode ArcbasicAttack = ComboNode.create().addConditionAnimation(ArcJump)
                 .addConditionAnimation(ArcDash)
                 .addConditionAnimation(ArcAuto1)
@@ -258,7 +257,6 @@ public class Arcblade {
 
         Arcbladeroot.key1(ArcbasicAttack);//初始无条件使用1A 疾跑攻击 跳跃攻击
         Arcbladeroot.key4(Arctest);
-        Arctest.key1(Arctest1);
         ArcDash.key1(ArcAuto1);//疾跑攻击后接1A
         ArcdashSkill.key1(ArcAutoDash2);//疾跑技能后接2A
         ArcJump.key1(ArcAutoDash2);//跳跃攻击后接2A
@@ -362,7 +360,7 @@ public class Arcblade {
                 .addConditionAnimation(ArcGP1extendA)
                 .addConditionAnimation(ArcAuto1);
 
-        Arcbladeroot.key2(ArcGP1);//常态按技能消耗一层技能后瞬步尝试GP，若为极限闪避则GP成功，则给予敌人1S晕眩
+        Arcbladeroot.keyWeaponInnate(ArcGP1);//常态按技能消耗一层技能后瞬步尝试GP，若为极限闪避则GP成功，则给予敌人1S晕眩
         ArcGP1.key3(Free);//无论GP成功与否，可按key3消耗一层充能使用后跨步重置普攻
         Free.key1(ArcbasicAttack);//key3跨步重置普攻
 
@@ -370,9 +368,9 @@ public class Arcblade {
         ArcGP1extendA.key1(ArcGP1extendA1);//后瞬步GP成功后可按KEY1接A追击2
         ArcGP1extendA1.key1(ArcAutoDash3);//A1追击后接普攻3A
 
-        ArcGP1.key2(ArcGP1extendS1);//后瞬步GP成功后可消耗技能按key2接S1追击第一段
-        ArcGP1extendS1.key2(ArcGP1extendS2);//GP成功发动S1追击后衔接S2第二段追击
-        ArcGP1extendS2.key2(ArcGP1extendS3);//S2追击后衔接S3第三段追击
+        ArcGP1.keyWeaponInnate(ArcGP1extendS1);//后瞬步GP成功后可消耗技能按keyWeaponInnate接S1追击第一段
+        ArcGP1extendS1.keyWeaponInnate(ArcGP1extendS2);//GP成功发动S1追击后衔接S2第二段追击
+        ArcGP1extendS2.keyWeaponInnate(ArcGP1extendS3);//S2追击后衔接S3第三段追击
         ArcGP1extendS1.key1(ArcAutoDash3);//S1追击后接普攻3A
         ArcGP1extendS3.key1(ArcAutoDash4);//S3追击后接普攻4A;
 
@@ -617,46 +615,46 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s irons_spellbooks:abyssal_shroud 5 0", false));
         ;
 
-        ArcAuto1.key2(Arc1AS);//普攻一段派生一段
-        Arc1AS.key2(Arc1AS1);//派生一段接二段
+        ArcAuto1.keyWeaponInnate(Arc1AS);//普攻一段派生一段
+        Arc1AS.keyWeaponInnate(Arc1AS1);//派生一段接二段
         Arc1AS.key1(ArcAutoDash2);//一段派生接2A
         Arc1AS1.key1(ArcAuto2);//二段派生接2A
 
-        ArcAuto2.key2(GP2);//普攻二段派生，特殊GP
-        ArcPowerAuto4.key2(GP2);
-        ArcPowerAuto5.key2(GP2);
-        ArcPowerAuto6.key2(GP2);
+        ArcAuto2.keyWeaponInnate(GP2);//普攻二段派生，特殊GP
+        ArcPowerAuto4.keyWeaponInnate(GP2);
+        ArcPowerAuto5.keyWeaponInnate(GP2);
+        ArcPowerAuto6.keyWeaponInnate(GP2);
 
         GP2.key3(Free);//普攻二段派生失败紧急逃生
 
-        ArcAuto3.key2(Arc3AS1);//普攻三段派生一段
-        ArcPowerAuto4.key2(Arc3AS2);
-        ArcPowerAuto5.key2(Arc3AS2);
-        ArcPowerAuto6.key2(Arc6As);
-        Arc3AS1.key2(Arc3AS2);//普攻三段派生二段
+        ArcAuto3.keyWeaponInnate(Arc3AS1);//普攻三段派生一段
+        ArcPowerAuto4.keyWeaponInnate(Arc3AS2);
+        ArcPowerAuto5.keyWeaponInnate(Arc3AS2);
+        ArcPowerAuto6.keyWeaponInnate(Arc6As);
+        Arc3AS1.keyWeaponInnate(Arc3AS2);//普攻三段派生二段
 
         Arc3AS1.key1(ArcAutoDash4);//普攻三段派生一段接4A
         Arc3AS2.key1(ArcAutoDash2);//普攻三段派生二段接2A
 
-        ArcAuto4.key2(Arc4AS);//普攻四段派生一段
-        Arc4AS.key2(Arc4AS1);//普攻四段派生二段
+        ArcAuto4.keyWeaponInnate(Arc4AS);//普攻四段派生一段
+        Arc4AS.keyWeaponInnate(Arc4AS1);//普攻四段派生二段
         Arc4AS.key1(ArcAutoDash5);//普攻四段派生一段接5A
         Arc4AS1.key1(ArcAutoDash4);//普攻四段派生二段接4A
 
-        ArcAuto5.key2(Arc5As);//普攻五段派生1 阎魔刀2A
-        Arc5As.key2(Arc5As2);//普攻五段派生2 人斩1A
-        Arc5As2.key2(Arc5As3);//普攻五段派生3 人斩2A
-        Arc5As3.key2(Arc5As4);//普攻五段派生4 人斩3A
+        ArcAuto5.keyWeaponInnate(Arc5As);//普攻五段派生1 阎魔刀2A
+        Arc5As.keyWeaponInnate(Arc5As2);//普攻五段派生2 人斩1A
+        Arc5As2.keyWeaponInnate(Arc5As3);//普攻五段派生3 人斩2A
+        Arc5As3.keyWeaponInnate(Arc5As4);//普攻五段派生4 人斩3A
         Arc5As.key1(ArcAutoDash6);//普攻五段派生1接6A
         Arc5As2.key1(ArcAutoDash6);//普攻五段派生2接6A
         Arc5As3.key1(ArcAutoDash6);//普攻五段派生3接6A
         Arc5As4.key1(ArcAutoDash6);//普攻五段派生4接6A
 
-        ArcAuto6.key2(Arc6As);//普攻六段派生，次元斩绝
+        ArcAuto6.keyWeaponInnate(Arc6As);//普攻六段派生，次元斩绝
         Arc6As.key1(ArcbasicAttack);//普攻六段派生重置平A
 
-        ArcGP1extendA1.key2(Arc2ASGP2);//GP1A追击后key2发动GP2
-        ArcGP1extendS3.key2(Arc2ASGP2);//GP1S追击后key2发动GP2
+        ArcGP1extendA1.keyWeaponInnate(Arc2ASGP2);//GP1A追击后keyWeaponInnate发动GP2
+        ArcGP1extendS3.keyWeaponInnate(Arc2ASGP2);//GP1S追击后keyWeaponInnate发动GP2
 
 
         ComboNode ArcGP2extendAttack1 = ComboNode.createNode(() ->StarAnimations.YAMATO_POWER1)
@@ -783,19 +781,19 @@ public class Arcblade {
 
         ComboNode ArcGP2AttackAfter = ComboNode.create().addConditionAnimation(ArcGP1).addConditionAnimation(ArcGP2extendAttack1);
 
-        Arc2ASGP2.key2(ArcGP2AttackAfter);//特殊GP成功后消耗一层技能按KEY1挑飞敌人，消耗一层技能,给予漂浮
+        Arc2ASGP2.keyWeaponInnate(ArcGP2AttackAfter);//特殊GP成功后消耗一层技能按KEY1挑飞敌人，消耗一层技能,给予漂浮
 
         Arc2ASGP2.key3(Free);//特殊GP无论成功与否可按key3消耗充能，后撤重置普攻
 
-        ArcGP2extendAttack1.key2(ArcGP2extendAttack2);//
-        ArcGP2extendAttack2.key2(ArcGP2extendAttack3);//
-        ArcGP2extendAttack3.key2(ArcGP2extendAttack4);//
-        ArcGP2extendAttack4.key2(ArcGP2extendAttack5);//
-        ArcGP2extendAttack5.key2(ArcGP2extendAttack6);//
-        ArcGP2extendAttack6.key2(ArcGP2extendAttack7);//
-        ArcGP2extendAttack7.key2(ArcGP2extendAttack8);//
+        ArcGP2extendAttack1.keyWeaponInnate(ArcGP2extendAttack2);//
+        ArcGP2extendAttack2.keyWeaponInnate(ArcGP2extendAttack3);//
+        ArcGP2extendAttack3.keyWeaponInnate(ArcGP2extendAttack4);//
+        ArcGP2extendAttack4.keyWeaponInnate(ArcGP2extendAttack5);//
+        ArcGP2extendAttack5.keyWeaponInnate(ArcGP2extendAttack6);//
+        ArcGP2extendAttack6.keyWeaponInnate(ArcGP2extendAttack7);//
+        ArcGP2extendAttack7.keyWeaponInnate(ArcGP2extendAttack8);//
         ArcGP2extendAttack8.key1(ArcAuto5);//空中下砸落地后KEY1接普攻5A
-        ArcGP2extendAttack8.key2(ArcGP1);//
+        ArcGP2extendAttack8.keyWeaponInnate(ArcGP1);//
 
         ComboNode ArcGP2extendSkill1 = ComboNode.createNode(() -> StarAnimations.YAMATO_COUNTER1)
                 .setPriority(5)
@@ -922,7 +920,7 @@ public class Arcblade {
         ArcGP2extendSkill5.key1(ArcGP2extendSkill6);//
         ArcGP2extendSkill6.key1(ArcGP2extendSkill7);//
         ArcGP2extendSkill7.key1(ArcAuto4);//
-        ArcGP2extendSkill7.key2(ArcGP1);//
+        ArcGP2extendSkill7.keyWeaponInnate(ArcGP1);//
 
         ComboNode ArcParryStrike1 = ComboNode.createNode(() -> StarAnimations.YAMATO_COUNTER1)
                 .setPriority(5)
@@ -985,9 +983,9 @@ public class Arcblade {
 
         ArcParryStrike1.key3(ArcParryStrike2);//招架反击1段后按下key3使用二段
         ArcParryStrike1.key1(ArcAutoDash2);//招架反击1段后按下key1，接普攻二段
-        ArcParryStrike1.key2(ArcGP1);//招架反击1段后按下key2，使用GP1
+        ArcParryStrike1.keyWeaponInnate(ArcGP1);//招架反击1段后按下keyWeaponInnate，使用GP1
         ArcParryStrike2.key1(ArcAutoDash3);//招架反击2段后按下key1，接普攻三段
-        ArcParryStrike2.key2(Arc2ASGP2);//招架反击2段后按下key2，使用GP2
+        ArcParryStrike2.keyWeaponInnate(Arc2ASGP2);//招架反击2段后按下keyWeaponInnate，使用GP2
         ArcParryStrike2.key3(ArcParryStrike1);//招架反击2段后可继续触发招架反击
 
         ComboNode ArcGP3Skill1 = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER1)
@@ -1137,19 +1135,19 @@ public class Arcblade {
                 .addConditionAnimation(Arc3AS1)
                 .addConditionAnimation(ArcGP3Skill1);
 
-        ArcAuto3.key2(ArcAuto3extend2);//普攻三段完美闪避派生S
-        Arc3AS2.key2(ArcGP3Skill1);
-        ArcjumpSkill.key2(ArcGP3Skill1);
+        ArcAuto3.keyWeaponInnate(ArcAuto3extend2);//普攻三段完美闪避派生S
+        Arc3AS2.keyWeaponInnate(ArcGP3Skill1);
+        ArcjumpSkill.keyWeaponInnate(ArcGP3Skill1);
 
 
-        ArcGP3Skill1.key2(ArcGP3Skill2);
-        ArcGP3Skill2.key2(ArcGP3Skill3);
-        ArcGP3Skill3.key2(ArcGP3Skill4);
-        ArcGP3Skill4.key2(ArcGP3Skill5);
-        ArcGP3Skill5.key2(ArcGP3Skill6);
-        ArcGP3Skill6.key2(ArcGP3Skill7);
+        ArcGP3Skill1.keyWeaponInnate(ArcGP3Skill2);
+        ArcGP3Skill2.keyWeaponInnate(ArcGP3Skill3);
+        ArcGP3Skill3.keyWeaponInnate(ArcGP3Skill4);
+        ArcGP3Skill4.keyWeaponInnate(ArcGP3Skill5);
+        ArcGP3Skill5.keyWeaponInnate(ArcGP3Skill6);
+        ArcGP3Skill6.keyWeaponInnate(ArcGP3Skill7);
         ArcGP3Skill7.key1(ArcAuto5);
-        ArcGP3Skill7.key2(Arc2ASGP2);
+        ArcGP3Skill7.keyWeaponInnate(Arc2ASGP2);
 
 
         ComboNode ArcGP3Attack1 = ComboNode.createNode(() -> WOMAnimations.AGONY_CLAWSTRIKE)
@@ -1319,12 +1317,12 @@ public class Arcblade {
         ArcGP3Attack8.key3(ArcGP3Attack9);
         ArcGP3Attack9.key3(ArcGP3Attack10);
         ArcGP3Attack10.key1(ArcAuto5);
-        ArcGP3Attack10.key2(Arc2ASGP2);
+        ArcGP3Attack10.keyWeaponInnate(Arc2ASGP2);
         ArcGP3Attack7.key1(ArcAuto5);
         ArcGP3Attack8.key1(ArcAuto5);
         ArcGP3Attack9.key1(ArcAuto5);
         ArcGP3Attack10.key1(ArcAuto5);
-        SkillManager.register(ArcbladeSkill::new, ArcbladeSkill.createComboBasicAttack().setCombo(Arcbladeroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo0");
+        SkillManager.register(ArcbladeSkill::new, ArcbladeSkill.createComboBasicAttack().setCombo(Arcbladeroot).setShouldDrawGui(true).disableSkillState(true), ArcMod.MOD_ID, "combo0");
     }
     @SubscribeEvent
     public static void BuildSkills(SkillBuildEvent event) {
