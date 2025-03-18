@@ -190,7 +190,6 @@ public class ArcbladeTransformed {
                     }}));
         ComboNode ArcbladeTransformedRevelationAirThird = ComboNode.createNode(() -> WukongAnimations.SMASH_CHARGED4)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0F, "invincible groundSlam @s 1 false false false", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.9F, "execute as @a at @s run particle irons_spellbooks:electricity ~ ~ ~ 3 3 3 0.1 30", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force", false))
