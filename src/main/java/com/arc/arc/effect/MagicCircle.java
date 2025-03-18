@@ -91,22 +91,30 @@ public class MagicCircle extends InstantenousMobEffect {
                         player.addEffect(absorptionEffect);
                     }
                 }
-                if(currentTime - anchorTime >= 56500&&currentTime - anchorTime <= 57000){
-                    if (player.level instanceof ServerLevel serverLevel) {
-                        Vec3 currentPosition = player.position().add(0, 0.1, 0);
-                        serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD_END.get(), currentPosition.x, currentPosition.y,currentPosition.z, 1, 0, 0, 0, 0);
-                        MobEffectInstance SuperFlashEffect = new MobEffectInstance(ArcEffectsRegistry.SuperFlash.get(), 200, 0);
-                        player.addEffect(SuperFlashEffect);
-                    }
-                }
-
             }
             // 生成法阵
             if(pp==false){
                 MobEffectInstance effectInstance = player.getEffect(ArcEffectsRegistry.Stargazing.get());
+                if(effectInstance!=null&&effectInstance.getAmplifier()==1){
+                    MobEffectInstance RecorderAhEffect = new MobEffectInstance(ArcEffectsRegistry.RecorderA.get(), 1800, 0);
+                    player.addEffect(RecorderAhEffect);
+                    MobEffectInstance RecorderBhEffect = new MobEffectInstance(ArcEffectsRegistry.RecorderB.get(), 1800, 0);
+                    player.addEffect(RecorderBhEffect);
+                    RecorderA.top=0;    //重置st
+                    //给ABbuff用于启动
+                }
                 if(Math.abs(Y_-7)>=0.01||effectInstance==null||effectInstance.getAmplifier()<3){       //Y未到6时调用呼吸法阵
                     int v;
-                    if(effectInstance!=null&&effectInstance.getAmplifier()>=3)v=1;
+                    if(effectInstance!=null&&effectInstance.getAmplifier()>=3){
+                        v=1;
+                        if(Y_-7<=0.01){
+                            if (player.level instanceof ServerLevel serverLevel) {
+                                serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD_END.get(), anchorPosition.x, anchorPosition.y,anchorPosition.z, 1, 0, 0, 0, 0);
+                                MobEffectInstance SuperFlashEffect = new MobEffectInstance(ArcEffectsRegistry.SuperFlash.get(), 200, 0);
+                                player.addEffect(SuperFlashEffect);
+                            }
+                        }
+                    }
                     else {
                         v=0;
                         Y_=0;
@@ -144,7 +152,7 @@ public class MagicCircle extends InstantenousMobEffect {
             MobEffectInstance strengthEffect = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 120, Level-1);
             player.addEffect(strengthEffect);
 
-            MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinkling.get(), 40, 0);
+            MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinklingA.get(), 40, 0);
             player.addEffect(StarsTwinklingEffect);
             // 生成北斗七星
             for(int ii=2;ii<=7;ii++) {
@@ -170,7 +178,7 @@ public class MagicCircle extends InstantenousMobEffect {
         MobEffectInstance resistanceEffect = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 120, Level-1);
         player.addEffect(resistanceEffect);
 
-        MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinkling.get(), 40, 0);
+        MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinklingB.get(), 40, 0);
         player.addEffect(StarsTwinklingEffect);
 
 
