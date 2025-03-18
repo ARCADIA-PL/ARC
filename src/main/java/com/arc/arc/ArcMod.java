@@ -4,7 +4,7 @@ import com.arc.arc.Registries.ArcBladeItemRegistry;
 import com.arc.arc.Registries.ArcEffectsRegistry;
 import com.arc.arc.Registries.ArcSoundRegistry;
 import com.arc.arc.events.ArcbladeAttributeHandlers;
-import com.arc.arc.events.StarWeaponMechanic;
+//import com.arc.arc.events.StarWeaponMechanic;
 import com.arc.arc.gameassets.Arcblade;
 import com.arc.arc.gameassets.ArcbladeTransformed;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,8 +28,8 @@ public class ArcMod {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(ArcbladeAttributeHandlers.class);
-        MinecraftForge.EVENT_BUS.register(StarWeaponMechanic.class);
-        //无坚不摧技能注册
+//        MinecraftForge.EVENT_BUS.register(StarWeaponMechanic.class);
+//        无坚不摧技能注册
         Arcblade.registerSkills();//注册Arcblade的无坚不摧技能
         ArcbladeTransformed.registerSkills();//注册ArcbladeTransformed的无坚不摧技能
         //注册表

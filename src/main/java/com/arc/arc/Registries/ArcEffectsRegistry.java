@@ -16,9 +16,12 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect> Stargazing =
             EFFECTS.register("stargazing", Stargazing::new);
 
-    //星星出现状态
-    public static final RegistryObject<MobEffect> StarsTwinkling =
-            EFFECTS.register("stars_twinkling", StarsTwinkling::new);
+    //北斗七星出现状态
+    public static final RegistryObject<MobEffect> StarsTwinklingA =
+            EFFECTS.register("stars_twinklinga", StarsTwinklingA::new);
+
+    public static final RegistryObject<MobEffect> StarsTwinklingB =
+            EFFECTS.register("stars_twinklingb", StarsTwinklingB::new);
 
     //记录器A
     public static final RegistryObject<MobEffect> RecorderA =
@@ -28,12 +31,16 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect> RecorderB =
             EFFECTS.register("stars_recorderb", RecorderB::new);
     //记录器
-    public static final RegistryObject<MobEffect> StarWeaponMechanic =
-            EFFECTS.register("recorder", StarWeaponMechanic::new);
+//    public static final RegistryObject<MobEffect> StarWeaponMechanic =
+//            EFFECTS.register("recorder", StarWeaponMechanic::new);
 
     //闪光时调用的buff
     public static final RegistryObject<MobEffect> SuperFlash =
             EFFECTS.register("super_flash", SuperFlash::new);
+
+    //大招buff
+    public static final RegistryObject<MobEffect> StarCraker =
+            EFFECTS.register("star_craker", StarCraker::new);
 
 
 
