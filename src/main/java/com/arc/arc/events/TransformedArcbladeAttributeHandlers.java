@@ -22,9 +22,9 @@ public class TransformedArcbladeAttributeHandlers {
             // 如果手持 TransformedArcbladeItem，添加 BUFF
             if (isHoldingArcblade) {
                 // 添加跳跃提升效果（等级 1，持续 2 秒）
-                player.addEffect(new MobEffectInstance(MobEffects.JUMP, 40, 0, true, true));
+                player.addEffect(new MobEffectInstance(MobEffects.JUMP, 40, 1, true, true));
                 // 添加缓降效果（等级 0，持续 2 秒）
-                player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 40, 0, true, true));
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 0, true, true));
             } else {
                 // 如果不手持 TransformedArcbladeItem，移除 BUFF
                 player.removeEffect(MobEffects.JUMP);
