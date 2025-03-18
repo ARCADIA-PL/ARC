@@ -31,7 +31,6 @@ public class ArcMod {
         //注册表
         ArcSoundRegistry.SOUNDS.register(bus);//音效注册表
         ArcBladeItemRegistry.ITEMS.register(bus);//物品注册表
-
         ArcEffectsRegistry.EFFECTS.register(bus);//药水注册表
     }
 }
