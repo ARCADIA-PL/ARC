@@ -15,7 +15,6 @@ public class BuffEventListener {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             MobEffectInstance effect = event.getPotionEffect();
-
             // 检查是否为 StarWeaponMechanic BUFF
             if (effect.getEffect() instanceof StarWeaponMechanic) {
                 StarWeaponMechanic mechanic = (StarWeaponMechanic) effect.getEffect();
