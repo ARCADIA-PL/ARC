@@ -14,15 +14,7 @@ public class StarWeaponMechanic {
     private final List<String> skillSequence = new ArrayList<>(); // 存储技能使用顺序
     private final Map<String, Integer> combinationToLevel = new HashMap<>(); // 组合到等级的映射
     private final StarCraker starCrakerEffect = new StarCraker(); // StarCraker Buff 实例
-
-    // BUFF 与技能的映射
-    private static final Map<Class<?>, String> BUFF_TO_SKILL = new HashMap<>();
-
-    static {
-        // 初始化 BUFF 与技能映射
-        BUFF_TO_SKILL.put(RecorderA.class, "A"); // RecorderA 对应技能 A
-        BUFF_TO_SKILL.put(RecorderB.class, "B"); // RecorderB 对应技能 B
-    }
+    private static final Map<Class<?>, String> BUFF_TO_SKILL = new HashMap<>(); // BUFF 与技能的映射
 
     public StarWeaponMechanic() {
         // 初始化组合映射
@@ -91,6 +83,13 @@ public class StarWeaponMechanic {
      * @param buffClass 获得的 BUFF 类
      */
     public void onBuffGained(Class<?> buffClass) {
+        // 动态初始化 BUFF_TO_SKILL
+        if (BUFF_TO_SKILL.isEmpty()) {
+            BUFF_TO_SKILL.put(RecorderA.class, "A"); // RecorderA 对应技能 A
+            BUFF_TO_SKILL.put(RecorderB.class, "B"); // RecorderB 对应技能 B
+            System.out.println("BUFF_TO_SKILL 映射已动态初始化。");
+        }
+
         // 检查 BUFF 是否在映射中
         if (BUFF_TO_SKILL.containsKey(buffClass)) {
             String skillName = BUFF_TO_SKILL.get(buffClass);

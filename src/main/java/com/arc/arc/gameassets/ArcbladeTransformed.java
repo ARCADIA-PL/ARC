@@ -30,8 +30,8 @@ public class ArcbladeTransformed {
 
     public static void registerSkills() {
         ComboNode ArcbladeTransformedroot = ComboNode.create();
-        ComboNode ArcbladeTransformedAirStrikeAuto1 = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_4_POLVORA)
-                .setPriority(4).setConvertTime(0.05F).setPlaySpeed(0.9F)
+        ComboNode ArcbladeTransformedAirStrikeAuto1 = ComboNode.createNode(() -> Animations.SPEAR_TWOHAND_AIR_SLASH)
+                .setPriority(4).setConvertTime(0.1F).setPlaySpeed(0.9F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
