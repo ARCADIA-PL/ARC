@@ -91,14 +91,7 @@ public class MagicCircle extends InstantenousMobEffect {
                         player.addEffect(absorptionEffect);
                     }
                 }
-                if(currentTime - anchorTime >= 56500&&currentTime - anchorTime <= 57000){
-                    if (player.level instanceof ServerLevel serverLevel) {
-                        Vec3 currentPosition = player.position().add(0, 0.1, 0);
-                        serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD_END.get(), currentPosition.x, currentPosition.y,currentPosition.z, 1, 0, 0, 0, 0);
-                        MobEffectInstance SuperFlashEffect = new MobEffectInstance(ArcEffectsRegistry.SuperFlash.get(), 200, 0);
-                        player.addEffect(SuperFlashEffect);
-                    }
-                }
+
 
             }
             // 生成法阵
@@ -106,7 +99,18 @@ public class MagicCircle extends InstantenousMobEffect {
                 MobEffectInstance effectInstance = player.getEffect(ArcEffectsRegistry.Stargazing.get());
                 if(Math.abs(Y_-7)>=0.01||effectInstance==null||effectInstance.getAmplifier()<3){       //Y未到6时调用呼吸法阵
                     int v;
-                    if(effectInstance!=null&&effectInstance.getAmplifier()>=3)v=1;
+                    if(effectInstance!=null&&effectInstance.getAmplifier()>=3){
+                        v=1;
+                        if(Y_-7<=0.01){
+                            if (player.level instanceof ServerLevel serverLevel) {
+                                serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD_END.get(), anchorPosition.x, anchorPosition.y,anchorPosition.z, 1, 0, 0, 0, 0);
+                                MobEffectInstance SuperFlashEffect = new MobEffectInstance(ArcEffectsRegistry.SuperFlash.get(), 200, 0);
+                                player.addEffect(SuperFlashEffect);
+                            }
+                        }
+
+
+                    }
                     else {
                         v=0;
                         Y_=0;
