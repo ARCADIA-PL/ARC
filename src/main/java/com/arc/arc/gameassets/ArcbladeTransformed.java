@@ -1,32 +1,37 @@
 package com.arc.arc.gameassets;
 
 import com.arc.arc.ArcMod;
-import com.arc.arc.gameassets.ArcbladeTransformed;
+import com.arc.arc.Registries.ArcEffectsRegistry;
 import com.arc.arc.skill.ArcbladeTransformedSkill;
 import com.guhao.star.efmex.StarAnimations;
+import com.p1nero.invincible.api.events.BiEvent;
 import com.p1nero.invincible.api.events.TimeStampedEvent;
-import com.p1nero.invincible.conditions.*;
+import com.p1nero.invincible.conditions.CustomCondition;
+import com.p1nero.invincible.conditions.MobEffectCondition;
+import com.p1nero.invincible.conditions.SprintingCondition;
+import com.p1nero.invincible.conditions.UpCondition;
+import com.p1nero.invincible.skill.ComboBasicAttack;
 import com.p1nero.invincible.skill.api.ComboNode;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
 import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
 public class ArcbladeTransformed {
     public static Skill ArcbladeTransformed;
+
     public static void registerSkills() {
         ComboNode ArcbladeTransformedroot = ComboNode.create();
-        ComboNode ArcbladeTransformedAirStrikeAuto1 = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_4_POLVORA)
-                .setPriority(4).setConvertTime(0.05F).setPlaySpeed(0.9F)
+        ComboNode ArcbladeTransformedAirStrikeAuto1 = ComboNode.createNode(() -> Animations.SPEAR_TWOHAND_AIR_SLASH)
+                .setPriority(4).setConvertTime(0.1F).setPlaySpeed(0.9F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -37,7 +42,7 @@ public class ArcbladeTransformed {
                         boolean isOnClimbable = livingEntity.onClimbable();//梯子
                         boolean isRiding = livingEntity.isPassenger();//骑乘
                         boolean isGliding = livingEntity.isFallFlying();//滑翔
-                        return !isOnGround&&!isInWater&&!isOnClimbable&&!isRiding&&!isGliding;
+                        return !isOnGround && !isInWater && !isOnClimbable && !isRiding && !isGliding;
                     }
                 });
         ComboNode ArcbladeTransformedAirStrikeAuto2 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_4)
@@ -52,13 +57,34 @@ public class ArcbladeTransformed {
                         boolean isOnClimbable = livingEntity.onClimbable();//梯子
                         boolean isRiding = livingEntity.isPassenger();//骑乘
                         boolean isGliding = livingEntity.isFallFlying();//滑翔
-                        return !isOnGround&&!isInWater&&!isOnClimbable&&!isRiding&&!isGliding;
+                        return !isOnGround && !isInWater && !isOnClimbable && !isRiding && !isGliding;
                     }
-                });;
+                });
         ComboNode ArcbladeTransformedDashSlash = ComboNode.createNode(() -> WOMAnimations.RUINE_DASH)
-                .setPriority(4).addCondition(new SprintingCondition());
+                .setPriority(4).setConvertTime(0.1F).setPlaySpeed(0.75F).addCondition(new SprintingCondition());
+
+        ComboNode ArcbladeTransformedDashStrikeNormal = ComboNode.createNode(() -> WOMAnimations.TORMENT_CHARGED_ATTACK_2)
+                .setPriority(4).setConvertTime(0.2F).setPlaySpeed(0.7F)
+                .addCondition(new SprintingCondition())
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 3 4", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 3", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s minecraft:levitation 1 4", false));
+
+        ComboNode ArcbladeTransformedDashStrikeEnhancedAuto2 = ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
+                .setConvertTime(-0.1F).setPlaySpeed(2F)
+                .addTimeEvent(new TimeStampedEvent(1.25F, entityPatch -> {
+                    entityPatch.playAnimationSynchronized(Animations.BIPED_WALK_UCHIGATANA, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(1.25F, (entity) -> {
+                    if (entity.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.RecorderA.get(), 1, 0))) ;
+                }))
+                .addTimeEvent(new TimeStampedEvent(1.25F, (entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_2);}
+                }));
+
         ComboNode ArcbladeTransformedAuto1 = ComboNode.createNode(() -> StarAnimations.GREATSWORD_OLD_AUTO3)
-                .setPriority(1).setPlaySpeed(0.9F)
+                .setPriority(1).setPlaySpeed(0.7F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -74,7 +100,7 @@ public class ArcbladeTransformed {
                 })
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 1 false true false", true));
         ComboNode ArcbladeTransformedAuto2 = ComboNode.createNode(() -> StarAnimations.GREATSWORD_OLD_AUTO1)
-                .setConvertTime(0.15F).setPlaySpeed(0.77F)
+                .setConvertTime(0.1F).setPlaySpeed(0.7F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -88,9 +114,9 @@ public class ArcbladeTransformed {
                         return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
                     }
                 })
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1.5 false true false", true));;
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1.5 false true false", true));
         ComboNode ArcbladeTransformedAuto3 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_4)
-                .setConvertTime(-0.2F).setPlaySpeed(0.8F)
+                .setConvertTime(-0.2F).setPlaySpeed(0.7F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -104,7 +130,8 @@ public class ArcbladeTransformed {
                         return isOnGround || isInWater || isOnClimbable || isRiding || isGliding;
                     }
                 });
-        ComboNode ArcbladeTransformedAuto4 = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_3)
+        ComboNode ArcbladeTransformedAuto4 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_1)
+                .setPlaySpeed(0.6F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -120,6 +147,8 @@ public class ArcbladeTransformed {
                 })
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1 false true false", true));
         ComboNode ArcbladeTransformedAuto5 = ComboNode.createNode(() -> WOMAnimations.RUINE_AUTO_3)
+                .setPlaySpeed(0.7F)
+                .setConvertTime(-0.1F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -135,41 +164,43 @@ public class ArcbladeTransformed {
                 })
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "invincible groundSlam @s 1 false true false", true));
 
-        ComboNode ArcbladeTransformedBasicAttack =ComboNode.create()
+        ComboNode ArcbladeTransformedBasicAttack = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAirStrikeAuto1)
                 .addConditionAnimation(ArcbladeTransformedDashSlash)
                 .addConditionAnimation(ArcbladeTransformedAuto1);
-        ComboNode ArcbladeTransformedBasicAttack2 =ComboNode.create()
+        ComboNode ArcbladeTransformedBasicStrike = ComboNode.create()
+                .addConditionAnimation(ArcbladeTransformedDashStrikeNormal);
+        ComboNode ArcbladeTransformedBasicAttack2 = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedDashSlash)
                 .addConditionAnimation(ArcbladeTransformedAirStrikeAuto1)
                 .addConditionAnimation(ArcbladeTransformedAuto1);
-        ComboNode ArcbladeTransformedBasicAttack3 =ComboNode.create()
+        ComboNode ArcbladeTransformedBasicAttack3 = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedDashSlash)
                 .addConditionAnimation(ArcbladeTransformedAuto4);
 
-        ComboNode ArcbladeTransformedAutoAttack2=ComboNode.create()
+        ComboNode ArcbladeTransformedAutoAttack2 = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAuto2)
                 .addConditionAnimation(ArcbladeTransformedDashSlash);
-        ComboNode ArcbladeTransformedAutoAttack3=ComboNode.create()
+        ComboNode ArcbladeTransformedAutoAttack3 = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAuto3)
                 .addConditionAnimation(ArcbladeTransformedAirStrikeAuto1)
                 .addConditionAnimation(ArcbladeTransformedDashSlash);
-        ComboNode ArcbladeTransformedAutoAttack4=ComboNode.create()
+        ComboNode ArcbladeTransformedAutoAttack4 = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAirStrikeAuto1)
                 .addConditionAnimation(ArcbladeTransformedAuto4)
                 .addConditionAnimation(ArcbladeTransformedDashSlash);
-        ComboNode ArcbladeTransformedAutoAttack5=ComboNode.create()
+        ComboNode ArcbladeTransformedAutoAttack5 = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAirStrikeAuto1)
                 .addConditionAnimation(ArcbladeTransformedAuto5)
                 .addConditionAnimation(ArcbladeTransformedDashSlash);
 
-        ComboNode ArcbladeTransformedAirAuto=ComboNode.create()
-                .addConditionAnimation(ArcbladeTransformedAirStrikeAuto2)
-                .addConditionAnimation(ArcbladeTransformedAuto1);
 
         ArcbladeTransformedroot.key1(ArcbladeTransformedBasicAttack);
+        ArcbladeTransformedroot.keyWeaponInnate(ArcbladeTransformedBasicStrike);
+
         ArcbladeTransformedDashSlash.key1(ArcbladeTransformedBasicAttack2);
-        ArcbladeTransformedAirStrikeAuto1.key1(ArcbladeTransformedAirAuto);
+
+        ArcbladeTransformedAirStrikeAuto1.key1(ArcbladeTransformedAirStrikeAuto2);
         ArcbladeTransformedAirStrikeAuto2.key1(ArcbladeTransformedBasicAttack3);
 
         ArcbladeTransformedAuto1.key1(ArcbladeTransformedAutoAttack2);
@@ -180,6 +211,7 @@ public class ArcbladeTransformed {
 
         SkillManager.register(ArcbladeTransformedSkill::new, ArcbladeTransformedSkill.createComboBasicAttack().setCombo(ArcbladeTransformedroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo1");
     }
+
     @SubscribeEvent
     public static void BuildSkills(SkillBuildEvent event) {
         ArcbladeTransformed = event.build(ArcMod.MOD_ID, "combo1");
