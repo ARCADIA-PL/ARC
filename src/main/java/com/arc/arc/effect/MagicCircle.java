@@ -351,7 +351,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = ((int) radii[2]) * Math.min(7, Math.max(0, ans / 10 - layer * 4 - 1)); // 两点之间的粒子数量
+                    int steps = ((int) radii[0]) * Math.min(9, Math.max(0, ans / 10 - layer * 4 )); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -375,7 +375,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = ((int) radii[2]) * Math.min(7, Math.max(0, ans / 10 - layer * 4 - 1));
+                    int steps = ((int) radii[0]) * Math.min(9, Math.max(0, ans / 10 - layer *4 ));
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -497,7 +497,7 @@ public class MagicCircle extends InstantenousMobEffect {
                         double x2 = center.x + layerRadius * Math.cos(angle2);
                         double z2 = center.z + layerRadius * Math.sin(angle2);
                         // 在两点之间生成粒子
-                        int steps = ((int) radii[2]*6); // 两点之间的粒子数量
+                        int steps = ((int) radii[2]*5); // 两点之间的粒子数量
                         for ( ;flowj1 <= steps; ) {
                             double t = (double) flowj1 / steps;
                             double x = x1 + (x2 - x1) * t;
@@ -523,7 +523,7 @@ public class MagicCircle extends InstantenousMobEffect {
                         double x2 = center.x + layerRadius * Math.cos(angle2);
                         double z2 = center.z + layerRadius * Math.sin(angle2);
                         // 在两点之间生成粒子
-                        int steps = ((int) radii[2] * 6);
+                        int steps = ((int) radii[2] * 5);
                         for (;flowj2 <= steps; ) {
                             double t = (double) flowj2 / steps;
                             double x = x1 + (x2 - x1) * t;
