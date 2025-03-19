@@ -30,9 +30,10 @@ public class ArcEffectsRegistry {
     //记录器B
     public static final RegistryObject<MobEffect> RecorderB =
             EFFECTS.register("stars_recorderb", RecorderB::new);
-    //记录器
-//    public static final RegistryObject<MobEffect> StarWeaponMechanic =
-//            EFFECTS.register("recorder", StarWeaponMechanic::new);
+
+    //小法阵
+    public static final RegistryObject<MobEffect> Crown =
+            EFFECTS.register("crown", ParticlesAlpha::new);
 
     //闪光时调用的buff
     public static final RegistryObject<MobEffect> SuperFlash =
