@@ -19,21 +19,25 @@ public class ArcEffectsRegistry {
     //北斗七星出现状态
     public static final RegistryObject<MobEffect> StarsTwinklingA =
             EFFECTS.register("stars_twinklinga", StarsTwinklingA::new);
-
+    //六芒星出现状态
     public static final RegistryObject<MobEffect> StarsTwinklingB =
             EFFECTS.register("stars_twinklingb", StarsTwinklingB::new);
 
     //记录器A
     public static final RegistryObject<MobEffect> RecorderA =
-            EFFECTS.register("stars_recordera", RecorderA::new);
+            EFFECTS.register("alhpa", RecorderA::new);
 
     //记录器B
     public static final RegistryObject<MobEffect> RecorderB =
-            EFFECTS.register("stars_recorderb", RecorderB::new);
+            EFFECTS.register("beta", RecorderB::new);
 
     //小法阵
-    public static final RegistryObject<MobEffect> Crown =
-            EFFECTS.register("crown", ParticlesAlpha::new);
+    public static final RegistryObject<MobEffect> HEXAGRAM =
+            EFFECTS.register("hexagram", ParticlesAlpha::new);
+
+    //
+    public static final RegistryObject<MobEffect> Strike =
+            EFFECTS.register("strike", Strike::new);
 
     //闪光时调用的buff
     public static final RegistryObject<MobEffect> SuperFlash =

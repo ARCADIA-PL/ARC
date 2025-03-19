@@ -147,7 +147,7 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "invincible groundSlam @s 1 false true false", true));
 
         ComboNode ArcbladeTransformedRevelationAirFirst = ComboNode.createNode(() -> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_1)
-                .setPriority(4).setPlaySpeed(1.1F)
+                .setPriority(4).setConvertTime(0.1F).setPlaySpeed(0.9F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -162,7 +162,6 @@ public class ArcbladeTransformed {
                     }
                 })
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 2", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 1", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s minecraft:slow_falling 1",false))
                 .addTimeEvent(new TimeStampedEvent(0.29F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
@@ -212,12 +211,18 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s cofh_core:lightning_resistance 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.2F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "effect give @s arc:strike 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~3 ~ ~", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~-3 ~ ~", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~ ~ ~3", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~ ~ ~-3", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~4 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~-4 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~ ~ ~4", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~ ~ ~-4", false))
                 .addTimeEvent(new TimeStampedEvent(0.0F, entityPatch -> {
                     entityPatch.playSound(WuKongSounds.STACK1.get(), 1F, 0, 0);
                 }))
@@ -233,7 +238,8 @@ public class ArcbladeTransformed {
                 .addTimeEvent(new TimeStampedEvent(2.3F, entityPatch -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1F, 0, 0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.9F, "invincible groundSlam @s 3 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.65F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.8F, "invincible groundSlam @s 3 false false false", true))
                 .addTimeEvent(new TimeStampedEvent(3.1F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);

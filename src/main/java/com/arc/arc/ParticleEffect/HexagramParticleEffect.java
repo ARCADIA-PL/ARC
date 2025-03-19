@@ -21,7 +21,7 @@ public class HexagramParticleEffect {
             // 生成多层六芒星
             for (int layer = 0; layer < radii.length; layer++) {
                 double layerRadius = radii[layer]; // 当前层的半径
-                double layerHeight = 0.2 * layer; // 每层高度递增
+                double layerHeight = 0.3 * layer; // 每层高度递增
                 // 生成六芒星的顶点
                 for (int i = 0; i < points; i++) {
                     double angle = i * angleIncrement;
