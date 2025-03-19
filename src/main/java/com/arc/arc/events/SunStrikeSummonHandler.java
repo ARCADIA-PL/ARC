@@ -11,7 +11,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class PlayerTickHandler {
+public class SunStrikeSummonHandler {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) { // 确保在每 tick 结束时执行
@@ -20,7 +20,7 @@ public class PlayerTickHandler {
             // 检查玩家是否拥有自定义状态效果
             if (player.hasEffect(ArcEffectsRegistry.Strike.get())) {
                 // 计算玩家面前的指定位置
-                double spawnDistance = 3.0; // 距离玩家的距离
+                double spawnDistance = 4.0; // 距离玩家的距离
                 Vec3 spawnPos = player.getEyePosition().add(player.getLookAngle().scale(spawnDistance));
                 Entity entity = EntityHandler.SUNSTRIKE.get().create(world);
                 if (entity != null) {
