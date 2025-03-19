@@ -4,7 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.phys.Vec3;
-public class HexagramParticleEffect {
+public class HorizontalHexagramParticleEffect {
     /**
      * 生成六芒星法阵的粒子效果
      *

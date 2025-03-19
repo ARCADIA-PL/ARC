@@ -39,6 +39,10 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect> Strike =
             EFFECTS.register("strike", Strike::new);
 
+    //
+    public static final RegistryObject<MobEffect> Splash =
+            EFFECTS.register("splash", Splash::new);
+
     //闪光时调用的buff
     public static final RegistryObject<MobEffect> SuperFlash =
             EFFECTS.register("super_flash", SuperFlash::new);
