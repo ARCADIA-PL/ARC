@@ -7,10 +7,7 @@ import com.arc.arc.skill.ArcbladeTransformedSkill;
 import com.guhao.star.efmex.StarAnimations;
 import com.p1nero.invincible.api.events.BiEvent;
 import com.p1nero.invincible.api.events.TimeStampedEvent;
-import com.p1nero.invincible.conditions.CustomCondition;
-import com.p1nero.invincible.conditions.MobEffectCondition;
-import com.p1nero.invincible.conditions.SprintingCondition;
-import com.p1nero.invincible.conditions.UpCondition;
+import com.p1nero.invincible.conditions.*;
 import com.p1nero.invincible.skill.ComboBasicAttack;
 import com.p1nero.invincible.skill.api.ComboNode;
 import com.p1nero.wukong.client.WuKongSounds;
@@ -164,16 +161,29 @@ public class ArcbladeTransformed {
                         return !isOnGround && !isInWater && !isOnClimbable && !isRiding && !isGliding;
                     }
                 })
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 4 10", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 1", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s minecraft:slow_falling 1",false))
+                .addTimeEvent(new TimeStampedEvent(0.29F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}))
                 .addTimeEvent(new TimeStampedEvent(0.3F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}))
+                .addTimeEvent(new TimeStampedEvent(0.31F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}))
+                .addTimeEvent(new TimeStampedEvent(0.32F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));
         ComboNode ArcbladeTransformedRevelationAirSecond = ComboNode.createNode(() -> WukongAnimations.JUMP_ATTACK_LIGHT_HIT)
                 .setPlaySpeed(1.1F)
-                .addCondition(new MobEffectCondition(true,(MobEffectRegistry.REND),0,100))
+                .addCondition(new PlayerPhaseCondition(2,2))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"invincible setPlayerPhase 1",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force", false))
