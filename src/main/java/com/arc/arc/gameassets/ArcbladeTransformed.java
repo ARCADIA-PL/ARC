@@ -278,7 +278,6 @@ public class ArcbladeTransformed {
                     }}));
         ComboNode ArcbladeTransformedRevelationGroundSecond = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_3_POLVORA)
                 .addCondition(new PlayerPhaseCondition(2,2)).setConvertTime(0.3F).setPlaySpeed(0.9F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.65F, "effect give @s arc:splash 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"invincible setPlayerPhase 1",false))
                 .addTimeEvent(new TimeStampedEvent(0.3F,(entity) -> {
@@ -341,10 +340,10 @@ public class ArcbladeTransformed {
         ComboNode ArcbladeTransformedRevelationGroundEnd = ComboNode.createNode(() -> WukongAnimations.STAFF_AUTO5)
                 .setPlaySpeed(0.7F).setConvertTime(0.1F)
                 .addTimeEvent(new TimeStampedEvent(0.1F, entityPatch -> {
-                    entityPatch.playSound(WuKongSounds.STACK2.get(), 2F, 0, 0);
+                    entityPatch.playSound(WuKongSounds.STACK1.get(), 2F, 0, 0);
                 }))
-                .addTimeEvent(new TimeStampedEvent(0.7F, entityPatch -> {
-                    entityPatch.playSound(WuKongSounds.STACK3.get(), 2F, 0, 0);}))
+                .addTimeEvent(new TimeStampedEvent(0.55F, entityPatch -> {
+                    entityPatch.playSound(WuKongSounds.STACK2.get(), 2F, 0, 0);}))
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
@@ -363,7 +362,7 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "summon minecraft:lightning_bolt ~-1.5 ~ ~", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "summon minecraft:lightning_bolt ~ ~ ~1.5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "summon minecraft:lightning_bolt ~ ~ ~-1.5", false))
-                .addTimeEvent(new TimeStampedEvent(1.1F, entityPatch -> {
+                .addTimeEvent(new TimeStampedEvent(0.79F, entityPatch -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1F, 0, 0);
                 }));
         //初始基础攻击
