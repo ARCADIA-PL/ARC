@@ -278,7 +278,7 @@ public class ArcbladeTransformed {
                     }}));
         ComboNode ArcbladeTransformedRevelationGroundSecond = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_3_POLVORA)
                 .addCondition(new PlayerPhaseCondition(2,2)).setConvertTime(0.3F).setPlaySpeed(0.9F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"invincible setPlayerPhase 1",false))
                 .addTimeEvent(new TimeStampedEvent(0.3F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
@@ -297,10 +297,6 @@ public class ArcbladeTransformed {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
                 }))
-                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~3 ~ ~",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~-3 ~ ~",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~3",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~-3",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -328,14 +324,14 @@ public class ArcbladeTransformed {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
                 }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent
+                        (0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(new TimeStampedEvent(0.6F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));
         ComboNode ArcbladeTransformedRevelationGroundEnd = ComboNode.createNode(() -> WukongAnimations.STAFF_AUTO5)
                 .setPlaySpeed(0.7F).setConvertTime(0.1F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent
-                        (0.0F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(new TimeStampedEvent(0.1F, entityPatch -> {
                     entityPatch.playSound(WuKongSounds.STACK3.get(), 2F, 0, 0);
                 }))
