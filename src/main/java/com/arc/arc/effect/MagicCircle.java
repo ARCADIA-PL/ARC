@@ -25,7 +25,7 @@ public class MagicCircle extends InstantenousMobEffect {
     static double YY_=0;    //减慢过渡速度
 
     static int p1 = 0;  //用于记录某种星是否在生成
-    static int p2=10;  //用于确定某种星的生成
+    static int p2=0;  //用于确定某种星的生成
 
 
     boolean pp=true;    //用于标记锚点
@@ -278,9 +278,9 @@ public class MagicCircle extends InstantenousMobEffect {
             Y_=Math.min(Y_,7.0);
             if ((ans <= 160 && ans >= 130 && p == 1 )|| p1 >0) {
                 if(p1==0) {
-                    p2 =new Random().nextInt(2)+1;    //1为七星，2为六芒星
+                    p2 =new Random().nextInt(100)+1;    //1为七星，2为六芒星
                 }
-                if(p1==0&&p2==1){               //控制北斗七星生成
+                if(p1==0&&p2<=50){               //控制北斗七星生成
                     p1=1;        //开始生成
                     double x = new Random().nextDouble(radius/2.0);
                     double z = new Random().nextDouble(radius/2.0);
@@ -301,17 +301,20 @@ public class MagicCircle extends InstantenousMobEffect {
                     coordinate_1[5]=coordinate_1[1].add(0.4,0,3.6);
                     coordinate_1[6]=coordinate_1[1].add(0.24,0,4.56);
                     coordinate_1[7]=coordinate_1[1].add(0.6,0,5.96);
+
                     int angle=new Random().nextInt(2);
                     for(int i=2;i<=7;i++){
                         if(angle==1) {
                             coordinate[i]=coordinate[1].add((coordinate[i].x-coordinate[1].x)*Math.cos(0)-(coordinate[i].z-coordinate[1].z)*Math.sin(0),0,(coordinate[i].x*-coordinate[1].x)*Math.sin(0)+(coordinate[i].z-coordinate[1].z)*Math.cos(0));
+                            coordinate_1[i]=coordinate_1[1].add((coordinate_1[i].x-coordinate_1[1].x)*Math.cos(0)-(coordinate_1[i].z-coordinate_1[1].z)*Math.sin(0),0,(coordinate_1[i].x*-coordinate_1[1].x)*Math.sin(0)+(coordinate_1[i].z-coordinate_1[1].z)*Math.cos(0));
                         }
                         else {
+                            coordinate[i]=coordinate[1].add((coordinate[i].x-coordinate[1].x)*Math.cos(Math.PI)-(coordinate[i].z-coordinate[1].z)*Math.sin(Math.PI),0,(coordinate[i].x*-coordinate[1].x)*Math.sin(Math.PI)+(coordinate[i].z-coordinate[1].z)*Math.cos(Math.PI));
                             coordinate_1[i]=coordinate_1[1].add((coordinate_1[i].x-coordinate_1[1].x)*Math.cos(Math.PI)-(coordinate_1[i].z-coordinate_1[1].z)*Math.sin(Math.PI),0,(coordinate_1[i].x*-coordinate_1[1].x)*Math.sin(Math.PI)+(coordinate_1[i].z-coordinate_1[1].z)*Math.cos(Math.PI));
                         }
                     }
                 }
-                if(p1==0&&p2==2){       //控制小六芒星生成
+                if(p1==0&&p2>50){       //控制小六芒星生成
                     p1=1;               //开始生成
                     double x = new Random().nextDouble(radius/2.0);
                     double z = new Random().nextDouble(radius/2.0);
@@ -319,19 +322,19 @@ public class MagicCircle extends InstantenousMobEffect {
                     z-=radius/2.0;
                     hexagram_coordinate=center.add(x,5,z);
                 }
-                if (p1>0&&p2==1) {      //生成北斗七星
+                if (p1>0&&p2<=50) {      //生成北斗七星
                     p1++;
                     plough(player, center, radius,3,1);
                 }
-                if (p1>0&&p2==2) {      //生成六芒星
+                if (p1>0&&p2>50) {      //生成六芒星
                     p1++;
                     liu1(player,hexagram_coordinate,3,1,center);
                 }
             }
             //星图生成后重置状态
-            if(p1>=20||ans<100){        //强制重置状态
+            if(p1>=20||ans<100){            //强制重置状态
                 p1=0;
-                p2=10;
+                p2=0;
             }
 
 
@@ -351,7 +354,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = ((int) radii[0]) * Math.min(9, Math.max(0, ans / 10 - layer * 4 )); // 两点之间的粒子数量
+                    int steps = (int) ((radii[0]*(layer+1) * Math.min(9, Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -375,7 +378,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = ((int) radii[0]) * Math.min(9, Math.max(0, ans / 10 - layer *4 ));
+                    int steps = (int) ((radii[0]*(layer+1) * Math.min(9, Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -391,7 +394,7 @@ public class MagicCircle extends InstantenousMobEffect {
                 }
             }
             // 生成粒子环
-            int ringSteps = 20; // 粒子环的粒子数量
+            int ringSteps = 16; // 粒子环的粒子数量
             double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
             for(int i=0;i<ringSteps;i++) {
                 double angle = ringAngle+i * (2 * Math.PI / ringSteps);
@@ -430,9 +433,9 @@ public class MagicCircle extends InstantenousMobEffect {
         if (player.level instanceof ServerLevel serverLevel) {
             if ((ans%30==0 &&p1==0 )|| p1 >0) {
                 if(p1==0) {
-                    p2 =new Random().nextInt(2)+1;    //1为七星，2为六芒星
+                    p2 =new Random().nextInt(100)+1;    //1为七星，2为六芒星
                 }
-                if(p1==0&&p2==1){               //控制北斗七星生成
+                if(p1==0&&p2<=50){               //控制北斗七星生成
                     p1=1;        //开始生成
                     double x = new Random().nextDouble(radius);
                     double z = new Random().nextDouble(radius);
@@ -452,7 +455,7 @@ public class MagicCircle extends InstantenousMobEffect {
                         else coordinate[i]=coordinate[1].add((coordinate[i].x-coordinate[1].x)*Math.cos(Math.PI)-(coordinate[i].z-coordinate[1].z)*Math.sin(Math.PI),0,(coordinate[i].x*-coordinate[1].x)*Math.sin(Math.PI)+(coordinate[i].z-coordinate[1].z)*Math.cos(Math.PI));
                     }
                 }
-                if(p1==0&&p2==2){       //控制小六芒星生成
+                if(p1==0&&p2>50){       //控制小六芒星生成
                     p1=1;               //开始生成
                     double x = new Random().nextDouble(radius);
                     double z = new Random().nextDouble(radius);
@@ -461,11 +464,11 @@ public class MagicCircle extends InstantenousMobEffect {
                     z-=radius/2.0;
                     hexagram_coordinate=center.add(x,y,z);
                 }
-                if (p1>0&&p2==1) {      //生成北斗七星
+                if (p1>0&&p2<=50) {      //生成北斗七星
                     p1++;
                     plough(player, coordinate[1], radius,4,2);
                 }
-                if (p1>0&&p2==2) {      //生成六芒星
+                if (p1>0&&p2>50) {      //生成六芒星
                     p1++;
                     liu1(player,hexagram_coordinate,3,2,center);
                 }
@@ -473,7 +476,7 @@ public class MagicCircle extends InstantenousMobEffect {
             //星图生成后重置状态
             if(p1>=10||ans%40==20){     //防止buff结束时p1未置零
                 p1=0;
-                p2=10;
+                p2=0;
             }
 
             double[] radii = {radius * 0.5, radius * 0.75, radius}; // 三层六芒星的半径
