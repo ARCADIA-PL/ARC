@@ -3,7 +3,7 @@
   "skill.arc.combo1": "强化打刀",
   "skill.arc.combo3": "§b§l§o旧世幻影之刃-印",
   "item.arc.arcblade": "§5§l§o旧世幻影之刃-解",
-  "item.arc.arcbladetransformed": "§5§l§o旧世幻影之刃-滅",
+  "item.arc.arcbladetransformed": "§5§l§o霄衡",
   "item.arc.yomiblade": "§5§l§o無",
   "item.arc.arcblademini": "§b§l§o旧世幻影之刃-印",
   "item.arc.arcblademini2": "§b§l§o旧世幻影之刃-封",
@@ -11,9 +11,25 @@
   "effect.arc.hurt_counter": "被命中计数",
   "effect.arc.stellaris_parrycounter": "招架计数",
   "effect.arc.stellaris_arcbladetransformeffect": "§5§l§o滅",
-
   "item.arc.arcblade.desc": "§o§4旧界终焉力量铸造的究极兵刃，其强大的力量使常人难以驾驭...",
   "item.arc.arcblade.desc1": "§o§4终焉的气息侵蚀着你.....",
+
+  "effect.arc.magic_circle": "§l§o§b星盘",
+  "effect.arc.stargazing": "§l§o§6观星",
+  "effect.arc.stars_twinklinga": "§l§o§b北斗",
+  "effect.arc.stars_twinklingb": "§l§o§b六芒",
+  "effect.arc.alhpa": "§l§o§2天权",
+  "effect.arc.beta": "§l§o§3地柄",
+  "effect.arc.hexagram": "武器特效法阵1",
+  "effect.arc.hexagram1": "武器特效法阵2",
+  "effect.arc.strike": "太阳光束",
+  "effect.arc.splash": "没做完",
+  "effect.arc.timer": "延迟BUFF触发",
+  "effect.arc.verticalstop": "悬空",
+  "effect.arc.heavygravity": "超重力",
+  "effect.arc.super_flash": "闪光",
+  "effect.arc.star_craker": "§l§o§b碎星",
+
 
 
 

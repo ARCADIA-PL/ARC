@@ -466,7 +466,7 @@ public class ArcbladeTransformed {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
                 }))
-                .addTimeEvent(new TimeStampedEvent(0.74F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.77F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));
