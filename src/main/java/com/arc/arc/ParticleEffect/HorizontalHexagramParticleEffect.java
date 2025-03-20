@@ -39,7 +39,7 @@ public class HorizontalHexagramParticleEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = 15; // 两点之间的粒子数量
+                    int steps = 30; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -57,7 +57,7 @@ public class HorizontalHexagramParticleEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = 15; // 两点之间的粒子数量
+                    int steps = 30; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -68,7 +68,7 @@ public class HorizontalHexagramParticleEffect {
                 }
             }
             // 生成粒子环
-            int ringSteps = 15; // 粒子环的粒子数量
+            int ringSteps = 8; // 粒子环的粒子数量
             double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
             for (int i = 0; i < ringSteps; i++) {
                 double angle = ringAngle + i * (2 * Math.PI / ringSteps);
