@@ -32,7 +32,5 @@ public class ArcBladeItemRegistry {
                     new Item.Properties()
                             .tab(CreativeModeTab.TAB_COMBAT) // 放在创造模式“战斗”标签页
             )
-
-
     );
 }

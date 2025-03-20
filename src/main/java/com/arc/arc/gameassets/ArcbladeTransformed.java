@@ -4,6 +4,7 @@ import com.arc.arc.ArcMod;
 import com.arc.arc.Registries.ArcEffectsRegistry;
 import com.arc.arc.Registries.ArcSoundRegistry;
 import com.arc.arc.skill.ArcbladeTransformedSkill;
+import com.dfdyz.epicacg.registry.MobEffects;
 import com.guhao.star.efmex.StarAnimations;
 import com.nameless.toybox.ToyBox;
 import com.p1nero.invincible.api.events.BiEvent;
@@ -13,6 +14,7 @@ import com.p1nero.invincible.skill.ComboBasicAttack;
 import com.p1nero.invincible.skill.api.ComboNode;
 import com.p1nero.wukong.client.WuKongSounds;
 import com.p1nero.wukong.epicfight.animation.WukongAnimations;
+import com.sammy.omnis.core.registry.effects.EffectRegistry;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -26,6 +28,8 @@ import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
+import yesman.epicfight.world.damagesource.StunType;
+
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
 public class ArcbladeTransformed {
     public static Skill ArcbladeTransformed;
@@ -365,6 +369,99 @@ public class ArcbladeTransformed {
                 .addTimeEvent(new TimeStampedEvent(0.79F, entityPatch -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1F, 0, 0);
                 }));
+
+
+        ComboNode StarCrakerFinalSkillAlaphaAuto1= ComboNode.createNode(() -> WOMAnimations.MOONLESS_LUNAR_ECHO)
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:timer 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 7", true))
+                .setStunTypeModifier(StunType.HOLD)
+                .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));;
+        ComboNode StarCrakerFinalSkillAlaphaAuto2= ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent
+                        (0.45F, "effect give @s arc:verticalstop 10", false))
+                .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto3= ComboNode.createNode(() -> StarAnimations.YAMATO_AUTO4)
+                .setConvertTime(-0.2F).setPlaySpeed(1.3F)
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(1F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto4= ComboNode.createNode(() -> WOMAnimations.MOB_ENDERSTEP_OBSCURIS)
+                .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto5= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_2)
+                .setPlaySpeed(1.1F)
+                .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto6= ComboNode.createNode(() -> WOMAnimations.MOB_ENDERSTEP_OBSCURIS)
+                .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto7= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_1)
+                .setPlaySpeed(1.1F)
+                .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto8= ComboNode.createNode(() -> WOMAnimations.MOB_ENDERSTEP_OBSCURIS)
+                .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto9= ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_4_POLVORA)
+                .setPlaySpeed(1.2F)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(1F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto10= ComboNode.createNode(() -> WOMAnimations.AGONY_AUTO_2)
+                .setPlaySpeed(1.2F)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.6F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect clear @s arc:verticalstop", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s arc:verticalstop", true));
+        ComboNode StarCrakerFinalSkillAlaphaAuto11= ComboNode.createNode(() -> WukongAnimations.SMASH_CHARGED4)
+                .addTimeEvent(new TimeStampedEvent(0.0F, entityPatch -> {
+                    entityPatch.playSound(WuKongSounds.STACK1.get(), 1F, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.7F, entityPatch -> {
+                    entityPatch.playSound(WuKongSounds.STACK2.get(), 1F, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(1.4F, entityPatch -> {
+                    entityPatch.playSound(WuKongSounds.STACK3.get(), 1F, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(2F, entityPatch -> {
+                    entityPatch.playSound(WuKongSounds.STACK4.get(), 1F, 0, 0);
+                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2F, "effect give @s arc:heavygravity 1", false))
+                .addTimeEvent(new TimeStampedEvent(2.3F, entityPatch -> {
+                    entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1F, 0, 0);
+                }));
+
         //初始基础攻击
         ComboNode ArcbladeTransformedBasicAttack = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedAirStrikeAuto1)
@@ -391,6 +488,9 @@ public class ArcbladeTransformed {
         ComboNode ArcbladeTransformedRevelation = ComboNode.create()
                 .addConditionAnimation(ArcbladeTransformedRevelationAirFirst)
                 .addConditionAnimation(ArcbladeTransformedRevelationGroundFirst);
+        //大招
+        ComboNode StarCrashFinal =ComboNode.create()
+                .addConditionAnimation(StarCrakerFinalSkillAlaphaAuto1);
         //普攻以及重置普攻
         ArcbladeTransformedroot.key1(ArcbladeTransformedBasicAttack);
         ArcbladeTransformedAuto5.key1(ArcbladeTransformedBasicAttack);
@@ -400,6 +500,7 @@ public class ArcbladeTransformed {
         ArcbladeTransformedRevelationGroundFirst.key1(ArcbladeTransformedAutoAttack2);
         //常态可释放的技能
         ArcbladeTransformedroot.keyWeaponInnate(ArcbladeTransformedRevelation);//使用识破
+        ArcbladeTransformedroot.key3(StarCrakerFinalSkillAlaphaAuto1);
         //疾跑攻击后续派生
         ArcbladeTransformedDashSlash.key1(ArcbladeTransformedAutoAttack2);
         //跳跃攻击以及后续派生
@@ -416,6 +517,17 @@ public class ArcbladeTransformed {
         ArcbladeTransformedRevelationGroundSecond.keyWeaponInnate(ArcbladeTransformedRevelationGroundThird);
         ArcbladeTransformedRevelationGroundThird.keyWeaponInnate(ArcbladeTransformedRevelationGroundForth);
         ArcbladeTransformedRevelationGroundForth.keyWeaponInnate(ArcbladeTransformedRevelationGroundEnd);
+        //大招1
+        StarCrakerFinalSkillAlaphaAuto1.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto2);
+        StarCrakerFinalSkillAlaphaAuto2.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto3);
+        StarCrakerFinalSkillAlaphaAuto3.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto4);
+        StarCrakerFinalSkillAlaphaAuto4.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto5);
+        StarCrakerFinalSkillAlaphaAuto5.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto6);
+        StarCrakerFinalSkillAlaphaAuto6.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto7);
+        StarCrakerFinalSkillAlaphaAuto7.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto8);
+        StarCrakerFinalSkillAlaphaAuto8.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto9);
+        StarCrakerFinalSkillAlaphaAuto9.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto10);
+        StarCrakerFinalSkillAlaphaAuto10.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto11);
         //普攻
         ArcbladeTransformedAuto1.key1(ArcbladeTransformedAutoAttack2);
         ArcbladeTransformedAuto2.key1(ArcbladeTransformedAutoAttack3);

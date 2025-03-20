@@ -110,7 +110,7 @@ public class Arcblade {
                 .setPriority(4)
                 .addCondition(new PlayerPhaseCondition(2, 2))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible groundSlam @s 1 false true false", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.3F, "invincible setPlayerPhase 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible setPlayerPhase 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:absorption 10 8", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible consumeStack -1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 0.2 0.5", true));
