@@ -375,25 +375,40 @@ public class ArcbladeTransformed {
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:timer 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 7", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
                 .setStunTypeModifier(StunType.HOLD)
-                .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.9F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));;
         ComboNode StarCrakerFinalSkillAlaphaAuto2= ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent
                         (0.45F, "effect give @s arc:verticalstop 10", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));
-        ComboNode StarCrakerFinalSkillAlaphaAuto3= ComboNode.createNode(() -> StarAnimations.YAMATO_AUTO4)
-                .setConvertTime(-0.2F).setPlaySpeed(1.3F)
+        ComboNode StarCrakerFinalSkillAlaphaAuto3= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_1)
+                .setConvertTime(0.1F)
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
                 }))
-                .addTimeEvent(new TimeStampedEvent(1F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));
@@ -401,9 +416,24 @@ public class ArcbladeTransformed {
                 .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
-                    }}));
+                    }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));
         ComboNode StarCrakerFinalSkillAlaphaAuto5= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_2)
-                .setPlaySpeed(1.1F)
+                .setConvertTime(0.1F)
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false))
                 .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
@@ -412,10 +442,28 @@ public class ArcbladeTransformed {
                 .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
-                    }}));
-        ComboNode StarCrakerFinalSkillAlaphaAuto7= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_1)
-                .setPlaySpeed(1.1F)
-                .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
+                    }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));
+        ComboNode StarCrakerFinalSkillAlaphaAuto7= ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_2)
+                .setConvertTime(-0.2F).setPlaySpeed(1.1F)
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.65F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));
@@ -423,28 +471,96 @@ public class ArcbladeTransformed {
                 .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
-                    }}));
+                    }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));
         ComboNode StarCrakerFinalSkillAlaphaAuto9= ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_4_POLVORA)
-                .setPlaySpeed(1.2F)
+                .setPlaySpeed(0.8F)
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
+                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
                 }))
-                .addTimeEvent(new TimeStampedEvent(1F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.69F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));
-        ComboNode StarCrakerFinalSkillAlaphaAuto10= ComboNode.createNode(() -> WOMAnimations.AGONY_AUTO_2)
-                .setPlaySpeed(1.2F)
-                .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.6F,(entity) -> {
+        ComboNode StarCrakerFinalSkillAlaphaAuto10= ComboNode.createNode(() -> WOMAnimations.MOB_ENDERSTEP_OBSCURIS)
+                .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect clear @s arc:verticalstop", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect clear @s arc:verticalstop", true));
-        ComboNode StarCrakerFinalSkillAlaphaAuto11= ComboNode.createNode(() -> WukongAnimations.SMASH_CHARGED4)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));
+        ComboNode StarCrakerFinalSkillAlaphaAuto11= ComboNode.createNode(() -> StarAnimations.WIND_SLASH)
+                .setConvertTime(-0.25F)
+                .setStunTypeModifier(StunType.HOLD)
+
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
+                }))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 10", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "summon minecraft:lightning_bolt ~1.5 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.5F, "summon minecraft:lightning_bolt ~-1.5 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.1F, "summon minecraft:lightning_bolt ~1.5 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "effect clear @s arc:verticalstop", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "effect give @s arc:heavygravity 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "effect clear @s arc:verticalstop", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false))
+                .addTimeEvent(new TimeStampedEvent(2.35F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto12= ComboNode.createNode(() -> WukongAnimations.SMASH_CHARGED4)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0F, "invincible groundSlam @s 1 false false false", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s cofh_core:lightning_resistance 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.2F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "effect give @s arc:strike 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~4 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~-4 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~ ~ ~4", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~ ~ ~-4", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.65F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.8F, "invincible groundSlam @s 3 false false false", true))
                 .addTimeEvent(new TimeStampedEvent(0.0F, entityPatch -> {
                     entityPatch.playSound(WuKongSounds.STACK1.get(), 1F, 0, 0);
                 }))
@@ -457,10 +573,15 @@ public class ArcbladeTransformed {
                 .addTimeEvent(new TimeStampedEvent(2F, entityPatch -> {
                     entityPatch.playSound(WuKongSounds.STACK4.get(), 1F, 0, 0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2F, "effect give @s arc:heavygravity 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.9F, "effect give @s arc:heavygravity 1", false))
                 .addTimeEvent(new TimeStampedEvent(2.3F, entityPatch -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 1F, 0, 0);
-                }));
+                }))
+                .addTimeEvent(new TimeStampedEvent(2.75F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
+        ComboNode StarCrakerFinalSkillAlaphaAuto13= ComboNode.createNode(() -> WOMAnimations.AGONY_AUTO_2);
 
         //初始基础攻击
         ComboNode ArcbladeTransformedBasicAttack = ComboNode.create()
@@ -528,6 +649,8 @@ public class ArcbladeTransformed {
         StarCrakerFinalSkillAlaphaAuto8.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto9);
         StarCrakerFinalSkillAlaphaAuto9.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto10);
         StarCrakerFinalSkillAlaphaAuto10.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto11);
+        StarCrakerFinalSkillAlaphaAuto11.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto12);
+        StarCrakerFinalSkillAlaphaAuto12.keyWeaponInnate(StarCrakerFinalSkillAlaphaAuto13);
         //普攻
         ArcbladeTransformedAuto1.key1(ArcbladeTransformedAutoAttack2);
         ArcbladeTransformedAuto2.key1(ArcbladeTransformedAutoAttack3);

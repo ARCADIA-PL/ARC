@@ -27,8 +27,11 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect> RecorderB =
             EFFECTS.register("beta", RecorderB::new);
     //小法阵
-    public static final RegistryObject<MobEffect> HEXAGRAM =
+    public static final RegistryObject<MobEffect> HEXAGRAMAlapha =
             EFFECTS.register("hexagram", ParticlesAlpha::new);
+    //小法阵2
+    public static final RegistryObject<MobEffect> HEXAGRAMBeta =
+            EFFECTS.register("hexagram1", ParticlesBeta::new);
     //
     public static final RegistryObject<MobEffect> Strike =
             EFFECTS.register("strike", Strike::new);

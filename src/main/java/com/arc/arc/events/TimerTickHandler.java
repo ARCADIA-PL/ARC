@@ -1,7 +1,6 @@
 package com.arc.arc.events;
 
 import com.arc.arc.Registries.ArcEffectsRegistry;
-import com.dfdyz.epicacg.registry.MobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +10,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber
-public class EntityTickHandler {
+public class TimerTickHandler {
     private static final double RANGE = 15.0; // 检测范围：15 格
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
