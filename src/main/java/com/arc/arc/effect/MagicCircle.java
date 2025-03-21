@@ -551,7 +551,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     }
                 }
             }
-            int ringSteps = 60; // 粒子环的粒子数量
+            int ringSteps = 40; // 粒子环的粒子数量
 //            double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
             for(int i=1;i<=3;i++) {
                 for (; loop_i >=0; ) {
