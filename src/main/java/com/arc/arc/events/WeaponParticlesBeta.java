@@ -17,12 +17,13 @@ public class WeaponParticlesBeta {
         if (event.getEntity() instanceof Player player && event.getPotionEffect().getEffect() == ArcEffectsRegistry.HEXAGRAMBeta.get()) {
             if (!player.getLevel().isClientSide()) { // 确保在服务端运行
                 // 计算玩家前方两格的位置
-                double distance = 0.1; // 距离玩家两格
+                double distance = 1.5; // 距离玩家两格
                 double forwardX = -Math.sin(Math.toRadians(player.getYRot())) * distance; // 计算 X 方向偏移
                 double forwardZ = Math.cos(Math.toRadians(player.getYRot())) * distance; // 计算 Z 方向偏移
+                double height = player.getY() + 2.0;
                 Vec3 frontCenter = new Vec3(player.getX() + forwardX, player.getY(), player.getZ() + forwardZ); // 新的中心点
                 // 生成六芒星法阵
-                VerticalStellarisParticleEffect.spawnVerticalStellarisParticles(player, frontCenter, 4, 0.2); // 调用封装好的法阵粒子效果
+                VerticalStellarisParticleEffect.spawnVerticalHexagramInFrontOfPlayer(player, 1.5, 2.0, 0.01, height);
             }
         }
     }

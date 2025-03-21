@@ -14,8 +14,9 @@ public class VerticalStellarisParticleEffect {
      * @param center     法阵的中心点
      * @param radius     法阵的最大半径（六芒星顶点与粒子环的半径）
      * @param ringSpeed  粒子环的旋转速度
+     * @param height     法阵的生成高度（Y 坐标）
      */
-    public static void spawnVerticalStellarisParticles(Player player, Vec3 center, double radius, double ringSpeed) {
+    public static void spawnVerticalStellarisParticles(Player player, Vec3 center, double radius, double ringSpeed, double height) {
         if (player.level instanceof ServerLevel serverLevel) {
             double[] radii = {radius * 0.5, radius * 0.75, radius}; // 三层六芒星的半径
             int points = 6; // 六芒星的顶点数
@@ -41,13 +42,14 @@ public class VerticalStellarisParticleEffect {
                     double rotatedY = y;
                     double rotatedZ = x * forwardZ;
 
-                    // 计算最终坐标
+                    // 计算最终坐标，并应用高度
                     double finalX = center.x + rotatedX;
-                    double finalY = center.y + rotatedY;
+                    double finalY = height + rotatedY; // 使用传入的高度值
                     double finalZ = center.z + rotatedZ;
 
-                    serverLevel.sendParticles(ParticleTypes.FIREWORK, finalX, finalY, finalZ, 5, 0, 0, 0, 0); // 火焰粒子
-                    serverLevel.sendParticles(ParticleTypes.ENCHANT, finalX, finalY, finalZ, 5, 0, 0, 0, 0); // 附魔粒子
+                    // 生成粒子，设置速度为 0 防止下落
+                    serverLevel.sendParticles(ParticleTypes.FLAME, finalX, finalY, finalZ, 5, 0, 0, 0, 0); // 火焰粒子
+                    serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, finalX, finalY, finalZ, 5, 0, 0, 0, 0); // 灵魂火焰粒子
                 }
 
                 // 生成六芒星的连线（正三角形）
@@ -68,7 +70,7 @@ public class VerticalStellarisParticleEffect {
                     double rotatedZ2 = x2 * forwardZ;
 
                     // 在两点之间生成粒子
-                    int steps = 30; // 两点之间的粒子数量
+                    int steps = 15; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = rotatedX1 + (rotatedX2 - rotatedX1) * t;
@@ -76,11 +78,12 @@ public class VerticalStellarisParticleEffect {
                         double z = rotatedZ1 + (rotatedZ2 - rotatedZ1) * t;
 
                         double finalX = center.x + x;
-                        double finalY = center.y + y;
+                        double finalY = height + y; // 使用传入的高度值
                         double finalZ = center.z + z;
 
-                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 闪电粒子
-                        serverLevel.sendParticles(ParticleTypes.PORTAL, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 金色粒子
+                        // 生成粒子，设置速度为 0 防止下落
+                        serverLevel.sendParticles(ParticleTypes.SOUL, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂粒子
+                        serverLevel.sendParticles(ParticleTypes.GLOW, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 发光粒子
                     }
                 }
 
@@ -102,7 +105,7 @@ public class VerticalStellarisParticleEffect {
                     double rotatedZ2 = x2 * forwardZ;
 
                     // 在两点之间生成粒子
-                    int steps = 30; // 两点之间的粒子数量
+                    int steps = 15; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = rotatedX1 + (rotatedX2 - rotatedX1) * t;
@@ -110,17 +113,18 @@ public class VerticalStellarisParticleEffect {
                         double z = rotatedZ1 + (rotatedZ2 - rotatedZ1) * t;
 
                         double finalX = center.x + x;
-                        double finalY = center.y + y;
+                        double finalY = height + y; // 使用传入的高度值
                         double finalZ = center.z + z;
 
-                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 闪电粒子
-                        serverLevel.sendParticles(ParticleTypes.PORTAL, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 金色粒子
+                        // 生成粒子，设置速度为 0 防止下落
+                        serverLevel.sendParticles(ParticleTypes.SOUL, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂粒子
+                        serverLevel.sendParticles(ParticleTypes.GLOW, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 发光粒子
                     }
                 }
             }
 
             // 生成粒子环
-            int ringSteps = 8; // 粒子环的粒子数量
+            int ringSteps = 15; // 粒子环的粒子数量
             double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
             for (int i = 0; i < ringSteps; i++) {
                 double angle = ringAngle + i * (2 * Math.PI / ringSteps);
@@ -133,19 +137,19 @@ public class VerticalStellarisParticleEffect {
                 double rotatedZ = x * forwardZ;
 
                 double finalX = center.x + rotatedX;
-                double finalY = center.y + rotatedY;
+                double finalY = height + rotatedY; // 使用传入的高度值
                 double finalZ = center.z + rotatedZ;
 
-                // 生成粒子环的粒子
-                serverLevel.sendParticles(ParticleTypes.FIREWORK, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 白色粒子
-                serverLevel.sendParticles(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂火焰粒子
+                // 生成粒子环的粒子，设置速度为 0 防止下落
+                serverLevel.sendParticles(ParticleTypes.FLAME, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 火焰粒子
+                serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂火焰粒子
 
                 // 生成粒子柱
                 for (double depth = 0; depth < 1.3; depth += 0.2) { // 粒子柱深度为 1 格
                     double offsetX = depth * forwardX;
                     double offsetZ = depth * forwardZ;
-                    serverLevel.sendParticles(ParticleTypes.LANDING_LAVA, finalX + offsetX, finalY, finalZ + offsetZ, 1, 0, 0, 0, 0); // 紫色粒子
-                    serverLevel.sendParticles(ParticleTypes.ENCHANT, finalX + offsetX, finalY, finalZ + offsetZ, 1, 0, 0, 0, 0); // 金色粒子
+                    serverLevel.sendParticles(ParticleTypes.SOUL, finalX + offsetX, height, finalZ + offsetZ, 1, 0, 0, 0, 0); // 灵魂粒子
+                    serverLevel.sendParticles(ParticleTypes.GLOW, finalX + offsetX, height, finalZ + offsetZ, 1, 0, 0, 0, 0); // 发光粒子
                 }
             }
         }
@@ -158,14 +162,15 @@ public class VerticalStellarisParticleEffect {
      * @param distance   法阵距离玩家的距离
      * @param radius     法阵的最大半径
      * @param ringSpeed  粒子环的旋转速度
+     * @param height     法阵的生成高度（Y 坐标）
      */
-    public static void spawnVerticalHexagramInFrontOfPlayer(Player player, double distance, double radius, double ringSpeed) {
+    public static void spawnVerticalHexagramInFrontOfPlayer(Player player, double distance, double radius, double ringSpeed, double height) {
         // 计算玩家前方位置
         double forwardX = -Math.sin(Math.toRadians(player.getYRot())) * distance;
         double forwardZ = Math.cos(Math.toRadians(player.getYRot())) * distance;
-        Vec3 frontCenter = new Vec3(player.getX() + forwardX, player.getY(), player.getZ() + forwardZ);
+        Vec3 frontCenter = new Vec3(player.getX() + forwardX, height, player.getZ() + forwardZ); // 使用传入的高度值
 
         // 生成法阵
-        spawnVerticalStellarisParticles(player, frontCenter, radius, ringSpeed);
+        spawnVerticalStellarisParticles(player, frontCenter, radius, ringSpeed, height);
     }
 }
