@@ -589,8 +589,9 @@ public class ArcbladeTransformed {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 6", true))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 1", false));;
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 5", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 2", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1", false));;
         ComboNode StarCrakerFinalSkillBetaAuto1= ComboNode.createNode(() -> WOMAnimations.AGONY_AUTO_2)
                 .setConvertTime(-0.05F).setPlaySpeed(1.2F)
                 .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
@@ -630,7 +631,9 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true));;
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 2", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 2", true));;
         ComboNode StarCrakerFinalSkillBetaAuto7= ComboNode.createNode(() -> WOMAnimations.MOB_ENDERSTEP_OBSCURIS)
                 .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
@@ -665,7 +668,7 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true));
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true));
         ComboNode StarCrakerFinalSkillBetaAuto12= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_2)
                 .setPlaySpeed(0.9F).setConvertTime(0.2F)
                 .setStunTypeModifier(StunType.HOLD)
@@ -673,16 +676,17 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true));;
-        ComboNode StarCrakerFinalSkillBetaAuto13= ComboNode.createNode(() -> WOMAnimations.TORMENT_CHARGED_ATTACK_3)
-                .setConvertTime(-0.1F)
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true));;
+        ComboNode StarCrakerFinalSkillBetaAuto13= ComboNode.createNode(() -> WOMAnimations.TORMENT_CHARGED_ATTACK_2)
+                .setConvertTime(0.1F).setPlaySpeed(0.9F)
                 .setStunTypeModifier(StunType.HOLD)
-                .addTimeEvent(new TimeStampedEvent(0.95F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true));;
         ComboNode StarCrakerFinalSkillBetaAuto14= ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
+                .setConvertTime(-0.05F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent
                         (0.55F, "effect give @s arc:verticalstop 10", false))
                 .addTimeEvent(new TimeStampedEvent(0.55F, (entityPatch) -> {
@@ -698,15 +702,18 @@ public class ArcbladeTransformed {
         ComboNode StarCrakerFinalSkillBetaAuto15= ComboNode.createNode(() -> WOMAnimations.GESETZ_SPRENGKOPF)
                 .setConvertTime(8F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(6.1F, "effect clear @s arc:verticalstop", false))
-                .addTimeEvent(new TimeStampedEvent(6F, (entityPatch) -> {
-                    entityPatch.playSound(EpicFightSounds.ENDER_DRAGON_BREATH_FINALE,0,0);}))
-                .addTimeEvent(new TimeStampedEvent(6.5F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(6.1F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true));;
         ComboNode StarCrakerFinalSkillBetaAuto16= ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
-                .setConvertTime(-0.6F)
+                .setConvertTime(-0.65F)
+                .addTimeEvent(new TimeStampedEvent(0.66F, (entityPatch) -> {
+                    entityPatch.playSound(EpicFightSounds.ENDER_DRAGON_BREATH_FINALE,1.5F,0,0);}))
+                .addTimeEvent(new TimeStampedEvent(0.74F, (entityPatch) -> {
+                    entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(),0,0);}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.66F, "particle epicfight:force_field_end", false))
                 .addTimeEvent(new TimeStampedEvent(1.3F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
@@ -720,22 +727,22 @@ public class ArcbladeTransformed {
                     }}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true));
         ComboNode StarCrakerFinalSkillBetaAuto18= ComboNode.createNode(() -> Animations.WRATHFUL_LIGHTING)
-                .setConvertTime(0.1F).setPlaySpeed(0.8F)
+                .setConvertTime(0.1F).setPlaySpeed(0.9F)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
-                .addTimeEvent(new TimeStampedEvent(1.1F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.85F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));
         ComboNode StarCrakerFinalSkillBetaAuto19= ComboNode.createNode(() -> Animations.WRATHFUL_LIGHTING)
-                .setConvertTime(0.2F).setPlaySpeed(0.8F)
+                .setConvertTime(0.15F).setPlaySpeed(0.9F)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
-                .addTimeEvent(new TimeStampedEvent(1.2F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.9F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}));;
         ComboNode StarCrakerFinalSkillBetaAuto20= ComboNode.createNode(() -> Animations.WRATHFUL_LIGHTING)
-                .setConvertTime(0.3F).setPlaySpeed(0.8F)
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .setConvertTime(0.25F).setPlaySpeed(0.8F)
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 1", true))
                 .addTimeEvent(new TimeStampedEvent(1.3F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);

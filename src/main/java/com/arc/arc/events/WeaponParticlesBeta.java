@@ -1,7 +1,6 @@
 package com.arc.arc.events;
 
-import com.arc.arc.ParticleEffect.HorizontalHexagramParticleEffect;
-import com.arc.arc.ParticleEffect.VerticalHexagramParticleEffect;
+import com.arc.arc.ParticleEffect.VerticalStellarisParticleEffect;
 import com.arc.arc.Registries.ArcEffectsRegistry;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -23,7 +22,7 @@ public class WeaponParticlesBeta {
                 double forwardZ = Math.cos(Math.toRadians(player.getYRot())) * distance; // 计算 Z 方向偏移
                 Vec3 frontCenter = new Vec3(player.getX() + forwardX, player.getY(), player.getZ() + forwardZ); // 新的中心点
                 // 生成六芒星法阵
-                VerticalHexagramParticleEffect.spawnVerticalHexagramParticles(player, frontCenter, 4, 0.2); // 调用封装好的法阵粒子效果
+                VerticalStellarisParticleEffect.spawnVerticalStellarisParticles(player, frontCenter, 4, 0.2); // 调用封装好的法阵粒子效果
             }
         }
     }
