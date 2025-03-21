@@ -391,7 +391,6 @@ public class ArcbladeTransformed {
                     }}));
         ComboNode StarCrakerFinalSkillAlaphaAuto3= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_1)
                 .setConvertTime(0.2F).setPlaySpeed(0.8F)
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
@@ -421,7 +420,6 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));
         ComboNode StarCrakerFinalSkillAlaphaAuto5= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_2)
                 .setConvertTime(0.2F).setPlaySpeed(0.8F)
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
@@ -448,7 +446,6 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));
         ComboNode StarCrakerFinalSkillAlaphaAuto7= ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_2)
                 .setConvertTime(-0.18F).setPlaySpeed(0.95F)
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
@@ -478,7 +475,6 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));
         ComboNode StarCrakerFinalSkillAlaphaAuto9= ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_4_POLVORA)
                 .setPlaySpeed(0.8F)
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
@@ -514,7 +510,7 @@ public class ArcbladeTransformed {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
                 }))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram1 1", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram 1", false))
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 10", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "summon minecraft:lightning_bolt ~1.5 ~ ~", false))
@@ -560,10 +556,10 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "effect give @s arc:strike 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~4 ~ ~", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~-4 ~ ~", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~ ~ ~4", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.7F, "summon minecraft:lightning_bolt ~ ~ ~-4", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.9F, "summon minecraft:lightning_bolt ~4 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.9F, "summon minecraft:lightning_bolt ~-4 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.9F, "summon minecraft:lightning_bolt ~ ~ ~4", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.9F, "summon minecraft:lightning_bolt ~ ~ ~-4", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.65F, "effect give @s arc:hexagram 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.8F, "invincible groundSlam @s 3 false false false", true))
                 .addTimeEvent(new TimeStampedEvent(0.0F, entityPatch -> {
