@@ -14,6 +14,9 @@ public class ArcEffectsRegistry {
     //星星出现后玩家根据星星做出了相应行为
     public static final RegistryObject<MobEffect> Stargazing =
             EFFECTS.register("stargazing", Stargazing::new);
+    //观星记录器
+    public static final RegistryObject<MobEffect> StarCounter =
+            EFFECTS.register("starcounter", StarCounter::new);
     //北斗七星出现状态
     public static final RegistryObject<MobEffect> StarsTwinklingA =
             EFFECTS.register("stars_twinklinga", StarsTwinklingA::new);

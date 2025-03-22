@@ -156,6 +156,8 @@ public class ArcbladeTransformed {
 
         ComboNode ArcbladeTransformedRevelationAirFirst = ComboNode.createNode(() -> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_1)
                 .setPriority(4).setConvertTime(0.1F).setPlaySpeed(0.9F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:alhpa 30",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:starcounter 1",false))
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -258,6 +260,8 @@ public class ArcbladeTransformed {
 
         ComboNode ArcbladeTransformedRevelationGroundFirst = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_3_POLVORA)
                 .setConvertTime(0.3F).setPlaySpeed(0.7F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:beta 30",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:starcounter 1",false))
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -757,6 +761,9 @@ public class ArcbladeTransformed {
                 .setConvertTime(-0.25F)
                 .setPlaySpeed(1.2F)
                 .setStunTypeModifier(StunType.HOLD)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
+                }))
                 .addTimeEvent(new TimeStampedEvent(2F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
@@ -842,6 +849,8 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
 
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slowness 15 255",true))
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 20 ",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
@@ -875,17 +884,29 @@ public class ArcbladeTransformed {
         ComboNode StarCrakerFinalSkillBetaAuto15= ComboNode.createNode(() -> WOMAnimations.GESETZ_SPRENGKOPF)
                 .setConvertTime(8F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.5F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.5F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(3F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(3F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(3.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(3.5F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(4F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(4F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(4.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(4.5F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(5F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(5.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(5.5F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(6F, "effect clear @s arc:verticalstop", false))
                 .addTimeEvent(new TimeStampedEvent(6F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
