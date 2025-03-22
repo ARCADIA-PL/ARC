@@ -100,7 +100,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     player.addEffect(RecorderAhEffect);
                     MobEffectInstance RecorderBhEffect = new MobEffectInstance(ArcEffectsRegistry.RecorderB.get(), 1800, 0);
                     player.addEffect(RecorderBhEffect);
-                    RecorderA.top=0;    //重置st
+                       //重置st
                     //给ABbuff用于启动
                 }
                 if(Math.abs(Y_-7)>=0.01||effectInstance==null||effectInstance.getAmplifier()<3){       //Y未到6时调用呼吸法阵

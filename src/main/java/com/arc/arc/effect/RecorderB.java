@@ -10,21 +10,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.nbt.CompoundTag;
 
 public class RecorderB extends MobEffect {
-    public static final String HAS_RECORDED_KEY = "hasRecordedB"; // 标志位的键
+    private boolean hasBeenCounted = false;
 
     public RecorderB() {
-        super(MobEffectCategory.BENEFICIAL, 0x0000FF); // 设置 BUFF 类型和颜色
+        super(MobEffectCategory.BENEFICIAL, 0x0000FF); // 颜色可以自定义
     }
 
-    @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if (entity instanceof Player) {
-            Player player = (Player) entity;
-        }
+    public boolean hasBeenCounted() {
+        return hasBeenCounted;
     }
 
-    @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true; // 每 tick 都执行逻辑
+    public void setCounted(boolean counted) {
+        this.hasBeenCounted = counted;
     }
 }
+
