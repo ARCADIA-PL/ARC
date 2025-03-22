@@ -17,7 +17,7 @@ public class WeaponParticlesAlpha {
         if (event.getEntity() instanceof Player player && event.getPotionEffect().getEffect() == ArcEffectsRegistry.HEXAGRAMAlapha.get()) {
             if (!player.getLevel().isClientSide()) { // 确保在服务端运行
                 // 计算玩家前方两格的位置
-                double distance = 2; // 距离玩家两格
+                double distance = 0.5; // 距离玩家两格
                 double forwardX = -Math.sin(Math.toRadians(player.getYRot())) * distance; // 计算 X 方向偏移
                 double forwardZ = Math.cos(Math.toRadians(player.getYRot())) * distance; // 计算 Z 方向偏移
                 Vec3 frontCenter = new Vec3(player.getX() + forwardX, player.getY(), player.getZ() + forwardZ); // 新的中心点

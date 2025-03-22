@@ -41,7 +41,7 @@ public class WeaponCapabilityPresets {
                     .styleProvider((entityPatch) -> CapabilityItem.Styles.TWO_HAND)
                     .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
                     .swingSound(EpicFightSounds.WHOOSH_BIG)
-                    .hitSound(EpicFightSounds.EVISCERATE)
+                    .hitSound(EpicFightSounds.BLADE_HIT)
                     .hitParticle(WOMParticles.OVERBLOOD_HIT.get())
                     .canBePlacedOffhand(false)
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)

@@ -1,5 +1,6 @@
 package com.arc.arc.ParticleEffect;
 
+import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
@@ -48,8 +49,8 @@ public class VerticalStellarisParticleEffect {
                     double finalZ = center.z + rotatedZ;
 
                     // 生成粒子，设置速度为 0 防止下落
-                    serverLevel.sendParticles(ParticleTypes.FLAME, finalX, finalY, finalZ, 5, 0, 0, 0, 0); // 火焰粒子
-                    serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, finalX, finalY, finalZ, 5, 0, 0, 0, 0); // 灵魂火焰粒子
+                    serverLevel.sendParticles(ParticleTypes.END_ROD, finalX, finalY, finalZ, 5, 0, 0, 0, 0); // 火焰粒子
+                    serverLevel.sendParticles(ParticleTypes.WAX_ON, finalX, finalY, finalZ, 5, 0, 0, 0, 0); // 灵魂火焰粒子
                 }
 
                 // 生成六芒星的连线（正三角形）
@@ -82,8 +83,8 @@ public class VerticalStellarisParticleEffect {
                         double finalZ = center.z + z;
 
                         // 生成粒子，设置速度为 0 防止下落
-                        serverLevel.sendParticles(ParticleTypes.SOUL, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂粒子
-                        serverLevel.sendParticles(ParticleTypes.GLOW, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 发光粒子
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂粒子
+                        serverLevel.sendParticles(ParticleTypes.ENCHANT, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 发光粒子
                     }
                 }
 
@@ -117,39 +118,9 @@ public class VerticalStellarisParticleEffect {
                         double finalZ = center.z + z;
 
                         // 生成粒子，设置速度为 0 防止下落
-                        serverLevel.sendParticles(ParticleTypes.SOUL, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂粒子
-                        serverLevel.sendParticles(ParticleTypes.GLOW, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 发光粒子
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂粒子
+                        serverLevel.sendParticles(ParticleTypes.ENCHANT, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 发光粒子
                     }
-                }
-            }
-
-            // 生成粒子环
-            int ringSteps = 15; // 粒子环的粒子数量
-            double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
-            for (int i = 0; i < ringSteps; i++) {
-                double angle = ringAngle + i * (2 * Math.PI / ringSteps);
-                double x = radius * Math.cos(angle);
-                double y = radius * Math.sin(angle);
-
-                // 将法阵旋转到垂直地面并面向玩家左侧
-                double rotatedX = x * forwardX;
-                double rotatedY = y;
-                double rotatedZ = x * forwardZ;
-
-                double finalX = center.x + rotatedX;
-                double finalY = height + rotatedY; // 使用传入的高度值
-                double finalZ = center.z + rotatedZ;
-
-                // 生成粒子环的粒子，设置速度为 0 防止下落
-                serverLevel.sendParticles(ParticleTypes.FLAME, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 火焰粒子
-                serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, finalX, finalY, finalZ, 1, 0, 0, 0, 0); // 灵魂火焰粒子
-
-                // 生成粒子柱
-                for (double depth = 0; depth < 1.3; depth += 0.2) { // 粒子柱深度为 1 格
-                    double offsetX = depth * forwardX;
-                    double offsetZ = depth * forwardZ;
-                    serverLevel.sendParticles(ParticleTypes.SOUL, finalX + offsetX, height, finalZ + offsetZ, 1, 0, 0, 0, 0); // 灵魂粒子
-                    serverLevel.sendParticles(ParticleTypes.GLOW, finalX + offsetX, height, finalZ + offsetZ, 1, 0, 0, 0, 0); // 发光粒子
                 }
             }
         }

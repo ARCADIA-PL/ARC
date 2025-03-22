@@ -68,7 +68,7 @@ public class HorizontalHexagramParticleEffect {
                 }
             }
             // 生成粒子环
-            int ringSteps = 8; // 粒子环的粒子数量
+            int ringSteps = 9; // 粒子环的粒子数量
             double ringAngle = System.currentTimeMillis() * ringSpeed % (2 * Math.PI); // 根据时间计算旋转角度
             for (int i = 0; i < ringSteps; i++) {
                 double angle = ringAngle + i * (2 * Math.PI / ringSteps);

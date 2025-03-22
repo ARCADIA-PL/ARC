@@ -309,7 +309,8 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.3F, "summon minecraft:lightning_bolt ~-1.5 ~ ~", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.9F, "summon minecraft:lightning_bolt ~1.5 ~ ~", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -396,7 +397,8 @@ public class ArcbladeTransformed {
                 .setConvertTime(0.2F).setPlaySpeed(0.8F)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -425,7 +427,8 @@ public class ArcbladeTransformed {
                 .setConvertTime(0.2F).setPlaySpeed(0.8F)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -451,7 +454,8 @@ public class ArcbladeTransformed {
                 .setConvertTime(-0.18F).setPlaySpeed(0.95F)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -480,7 +484,8 @@ public class ArcbladeTransformed {
                 .setPlaySpeed(0.8F)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -522,7 +527,8 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "effect give @s arc:heavygravity 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.3F, "effect clear @s arc:verticalstop", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -597,25 +603,38 @@ public class ArcbladeTransformed {
 
 
         ComboNode StarCrakerFinalSkillBetaAuto= ComboNode.createNode(() -> WOMAnimations.MOONLESS_LUNAR_ECHO)
-                .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
-                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
-                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
-                    }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.77F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~-2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "particle minecraft:wax_off ~ ~1 ~2 0 1.5 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1 5", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slow_falling 2", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:levitation 1", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram 1", false));;
+                .addHitEvent(BiEvent.createBiCommandEvent("effect give @s arc:hexagram 1", false))
+                .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
+                    }}));
         ComboNode StarCrakerFinalSkillBetaAuto1= ComboNode.createNode(() -> WOMAnimations.AGONY_AUTO_2)
                 .setConvertTime(-0.05F).setPlaySpeed(1.2F)
                 .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
-
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -629,17 +648,21 @@ public class ArcbladeTransformed {
                 .addTimeEvent(new TimeStampedEvent(0.25F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
-                    }}));
+                    }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));
         ComboNode StarCrakerFinalSkillBetaAuto3= ComboNode.createNode(() -> WOMAnimations.AGONY_AIR_SLASH)
                 .setConvertTime(-0.1F).setPlaySpeed(0.7F)
                 .addTimeEvent(new TimeStampedEvent(0.6F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.11F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound arc:judgementcut block @s", false))
 
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -654,18 +677,23 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));;
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "effect give @s arc:hexagram1 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "playsound arc:judgementcut player @s", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));;;
         ComboNode StarCrakerFinalSkillBetaAuto5= ComboNode.createNode(() -> Animations.TSUNAMI_REINFORCED)
                 .setStunTypeModifier(StunType.HOLD)
                 .setConvertTime(-0.2F)
-                .addTimeEvent(new TimeStampedEvent(0.4F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.45F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.22F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
 
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
+
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -682,13 +710,17 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.1F, "playsound arc:arcslash block @s", false))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
+                }))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicfight:stun_immunity 2", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:really_stun_immunity 2", true))
-
-                .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -703,7 +735,9 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));;
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "effect give @s arc:hexagram1 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "playsound arc:judgementcut player @s", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));;
         ComboNode StarCrakerFinalSkillBetaAuto8= ComboNode.createNode(() -> Animations.TSUNAMI_REINFORCED)
                 .setStunTypeModifier(StunType.HOLD)
                 .setConvertTime(-0.2F)
@@ -711,10 +745,13 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.22F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
 
-                .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -732,11 +769,16 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 10", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "summon minecraft:lightning_bolt ~1.5 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.3F, "summon minecraft:lightning_bolt ~-1.5 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.9F, "summon minecraft:lightning_bolt ~1.5 ~ ~", false))
 
-                .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -745,13 +787,13 @@ public class ArcbladeTransformed {
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false));;;
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false));
         ComboNode StarCrakerFinalSkillBetaAuto10=ComboNode.createNode(() -> WOMAnimations.MOB_ENDERSTEP_OBSCURIS)
                 .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));;;
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));;;
         ComboNode StarCrakerFinalSkillBetaAuto11= ComboNode.createNode(() -> WOMAnimations.TORMENT_BERSERK_AUTO_1)
                 .setPlaySpeed(0.9F).setConvertTime(0.2F)
                 .setStunTypeModifier(StunType.HOLD)
@@ -759,10 +801,14 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "playsound arc:arcslash block @s", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.12F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
 
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -779,10 +825,12 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "playsound arc:arcslash block @s", false))
 
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -799,10 +847,13 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
 
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
+
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -816,11 +867,14 @@ public class ArcbladeTransformed {
                 .setConvertTime(-0.05F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent
                         (0.55F, "effect give @s arc:verticalstop 10", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
                 .addTimeEvent(new TimeStampedEvent(0.55F, (entityPatch) -> {
                     entityPatch.playSound(EpicFightSounds.ENDER_DRAGON_CRYSTAL_LINK,0,0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.56F, "particle epicfight:force_field ~ ~ ~", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.56F, "particle epicfight:force_field ~ ~0.5 ~", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.56F, "particle epicfight:force_field ~ ~-0.5 ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.56F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.59F, "effect give @s arc:hexagram 1", false))
                 .addTimeEvent(new TimeStampedEvent(0.6F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
@@ -828,20 +882,34 @@ public class ArcbladeTransformed {
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true));;
         ComboNode StarCrakerFinalSkillBetaAuto15= ComboNode.createNode(() -> WOMAnimations.GESETZ_SPRENGKOPF)
                 .setConvertTime(8F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(6.1F, "effect clear @s arc:verticalstop", false))
-                .addTimeEvent(new TimeStampedEvent(6.1F,(entity) -> {
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(2.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(3F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(3.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(4F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(4.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(5.5F, "effect give @s arc:hexagram 1", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(6F, "effect clear @s arc:verticalstop", false))
+                .addTimeEvent(new TimeStampedEvent(6F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true));;
         ComboNode StarCrakerFinalSkillBetaAuto16= ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .setConvertTime(-0.65F)
-                .addTimeEvent(new TimeStampedEvent(0.66F, (entityPatch) -> {
+                .addTimeEvent(new TimeStampedEvent(0.655F, (entityPatch) -> {
                     entityPatch.playSound(EpicFightSounds.ENDER_DRAGON_BREATH_FINALE,2F,0,0);}))
                 .addTimeEvent(new TimeStampedEvent(0.85F, (entityPatch) -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(),0,0);}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.66F, "particle epicfight:force_field_end", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.66F, "playsound minecraft:entity.wither.hurt block @p ~ ~ ~ 3.5 0.5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.655F, "particle epicfight:force_field_end", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.655F, "particle minecraft:totem_of_undying ~ ~ ~ 0 1 0 1 150", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.655F, "playsound minecraft:item.totem.use voice @s ~ ~ ~ 10", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.85F, "playsound minecraft:entity.wither.hurt block @p ~ ~ ~ 3.5 0.5", false))
                 .addTimeEvent(new TimeStampedEvent(1.3F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
@@ -861,8 +929,14 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "summon minecraft:lightning_bolt ~3 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "summon minecraft:lightning_bolt ~-3 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "summon minecraft:lightning_bolt ~ ~ ~3", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "summon minecraft:lightning_bolt ~ ~ ~-3", false))
+
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 10 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -880,8 +954,14 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "summon minecraft:lightning_bolt ~2.121 ~ ~2.121", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "summon minecraft:lightning_bolt ~-2.121 ~ ~2.121", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "summon minecraft:lightning_bolt ~2.121 ~ ~-2.121", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "summon minecraft:lightning_bolt ~-2.121 ~ ~-2.121", false))
+
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 30 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 30 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -899,8 +979,18 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~2.121 ~ ~2.121", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~-2.121 ~ ~2.121", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~2.121 ~ ~-2.121", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~-2.121 ~ ~-2.121", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~3 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~-3 ~ ~", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~ ~ ~3", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~ ~ ~-3", false))
+
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 50 force",false))
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 50 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound minecraft:item.trident.thunder block @s ~ ~ ~ 2 2 1",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
