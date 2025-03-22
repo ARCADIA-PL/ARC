@@ -156,7 +156,7 @@ public class ArcbladeTransformed {
 
         ComboNode ArcbladeTransformedRevelationAirFirst = ComboNode.createNode(() -> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_1)
                 .setPriority(4).setConvertTime(0.1F).setPlaySpeed(0.9F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:alhpa 30",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:alhpa 1",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:starcounter 1",false))
                 .addCondition(new CustomCondition() {
                     @Override
@@ -260,7 +260,7 @@ public class ArcbladeTransformed {
 
         ComboNode ArcbladeTransformedRevelationGroundFirst = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_3_POLVORA)
                 .setConvertTime(0.3F).setPlaySpeed(0.7F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:beta 30",false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:beta 1",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:starcounter 1",false))
                 .addCondition(new CustomCondition() {
                     @Override

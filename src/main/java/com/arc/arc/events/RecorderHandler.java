@@ -77,6 +77,25 @@ public class RecorderHandler {
                     // 获取总计数
                     int totalCount = counts[0] + counts[1];
 
+                    // 提升 Stargazing 的等级
+                    if (totalCount > 0 && totalCount <= 4) {
+                        // 移除旧的 Stargazing 效果（如果有）
+                        player.removeEffect(ArcEffectsRegistry.Stargazing.get());
+
+                        // 添加新的 Stargazing 效果
+                        player.addEffect(new MobEffectInstance(
+                                ArcEffectsRegistry.Stargazing.get(),
+                                600, // 持续时间固定为 30 秒（600 ticks）
+                                totalCount - 1, // 等级从 0 开始
+                                false, // 是否显示粒子效果
+                                false, // 是否显示图标
+                                true   // 是否保存到 NBT
+                        ));
+
+                        // 发送 Stargazing 等级提升消息
+                        player.sendMessage(new TextComponent("§eStargazing 等级提升至 " + totalCount + " 级！"), Util.NIL_UUID);
+                    }
+
                     // 记录第三和第四次的组合
                     MobEffect[] combination = playerCombination.getOrDefault(playerId, new MobEffect[2]);
                     if (totalCount == 3) {
