@@ -105,7 +105,7 @@ public class ArcbladeTransformed {
                 })
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1.5 false true false", true));
         ComboNode ArcbladeTransformedAuto3 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_4)
-                .setConvertTime(-0.2F).setPlaySpeed(0.7F)
+                .setConvertTime(-0.2F).setPlaySpeed(0.7F).setImpactMultiplier(0.1F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -138,6 +138,7 @@ public class ArcbladeTransformed {
         ComboNode ArcbladeTransformedAuto5 = ComboNode.createNode(() -> WOMAnimations.RUINE_AUTO_3)
                 .setPlaySpeed(0.7F)
                 .setConvertTime(-0.1F)
+                .setImpactMultiplier(0.1F)
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -592,17 +593,8 @@ public class ArcbladeTransformed {
                     }}));
         ComboNode StarCrakerFinalSkillAlaphaAuto13= ComboNode.createNode(() -> WOMAnimations.AGONY_AUTO_2);
 
-
-
-
-
-
-
-
-
-
-
         ComboNode StarCrakerFinalSkillBetaAuto= ComboNode.createNode(() -> WOMAnimations.MOONLESS_LUNAR_ECHO)
+                .setImpactMultiplier(0.1F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.77F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
@@ -677,7 +669,6 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "effect give @s arc:hexagram1 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "playsound arc:judgementcut player @s", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));;;
         ComboNode StarCrakerFinalSkillBetaAuto5= ComboNode.createNode(() -> Animations.TSUNAMI_REINFORCED)
@@ -687,6 +678,7 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.22F, "effect give @s arc:hexagram1 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.22F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
 
@@ -735,7 +727,6 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "effect give @s arc:hexagram1 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.45F, "playsound arc:judgementcut player @s", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false));;
         ComboNode StarCrakerFinalSkillBetaAuto8= ComboNode.createNode(() -> Animations.TSUNAMI_REINFORCED)
@@ -745,6 +736,7 @@ public class ArcbladeTransformed {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.22F, "effect give @s arc:hexagram1 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.22F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
 
@@ -1001,8 +993,6 @@ public class ArcbladeTransformed {
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false));;;
-
-
 
         //初始基础攻击
         ComboNode ArcbladeTransformedBasicAttack = ComboNode.create()
