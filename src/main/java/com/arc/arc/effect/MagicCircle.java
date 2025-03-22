@@ -1,6 +1,7 @@
 package com.arc.arc.effect;
 
 import com.arc.arc.ArcMod;
+import com.arc.arc.ParticleEffect.VerticalHexagramParticleEffect;
 import com.arc.arc.Registries.ArcEffectsRegistry;
 import com.arc.arc.Registries.ArcSoundRegistry;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
@@ -95,14 +96,6 @@ public class MagicCircle extends InstantenousMobEffect {
             // 生成法阵
             if(pp==false){
                 MobEffectInstance effectInstance = player.getEffect(ArcEffectsRegistry.Stargazing.get());
-                if(effectInstance!=null&&effectInstance.getAmplifier()==1){
-                    MobEffectInstance RecorderAhEffect = new MobEffectInstance(ArcEffectsRegistry.RecorderA.get(), 1800, 0);
-                    player.addEffect(RecorderAhEffect);
-                    MobEffectInstance RecorderBhEffect = new MobEffectInstance(ArcEffectsRegistry.RecorderB.get(), 1800, 0);
-                    player.addEffect(RecorderBhEffect);
-                       //重置st
-                    //给ABbuff用于启动
-                }
                 if(Math.abs(Y_-7)>=0.01||effectInstance==null||effectInstance.getAmplifier()<3){       //Y未到6时调用呼吸法阵
                     int v;
                     if(effectInstance!=null&&effectInstance.getAmplifier()>=3){
