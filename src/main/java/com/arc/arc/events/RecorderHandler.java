@@ -85,7 +85,7 @@ public class RecorderHandler {
                         // 添加新的 Stargazing 效果
                         player.addEffect(new MobEffectInstance(
                                 ArcEffectsRegistry.Stargazing.get(),
-                                600, // 持续时间固定为 30 秒（600 ticks）
+                                1200, // 持续时间固定为 60 秒（1200 ticks）
                                 totalCount - 1, // 等级从 0 开始
                                 false, // 是否显示粒子效果
                                 false, // 是否显示图标
@@ -144,7 +144,6 @@ public class RecorderHandler {
         if (event == null || event.getPotionEffect() == null || event.getEntityLiving() == null) {
             return;
         }
-
         LivingEntity entity = event.getEntityLiving();
         MobEffectInstance removedEffect = event.getPotionEffect();
 

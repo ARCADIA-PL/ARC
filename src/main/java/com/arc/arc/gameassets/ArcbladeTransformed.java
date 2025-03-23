@@ -157,7 +157,6 @@ public class ArcbladeTransformed {
         ComboNode ArcbladeTransformedRevelationAirFirst = ComboNode.createNode(() -> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_1)
                 .setPriority(4).setConvertTime(0.1F).setPlaySpeed(0.9F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:alhpa 1",false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:starcounter 1",false))
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -261,7 +260,6 @@ public class ArcbladeTransformed {
         ComboNode ArcbladeTransformedRevelationGroundFirst = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_3_POLVORA)
                 .setConvertTime(0.3F).setPlaySpeed(0.7F)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:beta 1",false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:starcounter 1",false))
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -946,6 +944,7 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "summon minecraft:lightning_bolt ~-3 ~ ~", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "summon minecraft:lightning_bolt ~ ~ ~3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "summon minecraft:lightning_bolt ~ ~ ~-3", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.5F, "effect give @s arc:hexagram 1", false))
 
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 10 force",false))
@@ -971,6 +970,7 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "summon minecraft:lightning_bolt ~-2.121 ~ ~2.121", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "summon minecraft:lightning_bolt ~2.121 ~ ~-2.121", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.55F, "summon minecraft:lightning_bolt ~-2.121 ~ ~-2.121", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect give @s arc:hexagram 1", false))
 
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 30 force",false))
@@ -1000,6 +1000,7 @@ public class ArcbladeTransformed {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~-3 ~ ~", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~ ~ ~3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.65F, "summon minecraft:lightning_bolt ~ ~ ~-3", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "effect give @s arc:hexagram 1", false))
 
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 50 force",false))
@@ -1013,7 +1014,7 @@ public class ArcbladeTransformed {
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-3 ~1 ~ 0 0.2 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~3 ~1 ~ 0 0.2 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~-3 0 0.2 0 2 10 force",false))
-                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false));;;
+                .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force",false));
 
         //初始基础攻击
         ComboNode ArcbladeTransformedBasicAttack = ComboNode.create()

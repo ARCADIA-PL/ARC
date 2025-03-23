@@ -13,7 +13,7 @@ public class RecorderB extends MobEffect {
     private boolean hasBeenCounted = false;
 
     public RecorderB() {
-        super(MobEffectCategory.BENEFICIAL, 0x0000FF); // 颜色可以自定义
+        super(MobEffectCategory.NEUTRAL, 0x0000FF); // 颜色可以自定义
     }
 
     public boolean hasBeenCounted() {
