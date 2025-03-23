@@ -39,7 +39,7 @@ public class HorizontalHexagramParticleEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = 15; // 两点之间的粒子数量
+                    int steps = 30; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -57,7 +57,7 @@ public class HorizontalHexagramParticleEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = 15; // 两点之间的粒子数量
+                    int steps = 30; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
