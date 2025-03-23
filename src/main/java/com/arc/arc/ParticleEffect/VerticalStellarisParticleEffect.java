@@ -71,7 +71,7 @@ public class VerticalStellarisParticleEffect {
                     double rotatedZ2 = x2 * forwardZ;
 
                     // 在两点之间生成粒子
-                    int steps = 15; // 两点之间的粒子数量
+                    int steps = 10; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = rotatedX1 + (rotatedX2 - rotatedX1) * t;
@@ -106,7 +106,7 @@ public class VerticalStellarisParticleEffect {
                     double rotatedZ2 = x2 * forwardZ;
 
                     // 在两点之间生成粒子
-                    int steps = 15; // 两点之间的粒子数量
+                    int steps = 10; // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = rotatedX1 + (rotatedX2 - rotatedX1) * t;
