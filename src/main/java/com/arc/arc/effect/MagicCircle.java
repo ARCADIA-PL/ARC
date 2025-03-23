@@ -83,7 +83,7 @@ public class MagicCircle extends InstantenousMobEffect {
             //检查是否已经过了buff持续时间
             long currentTime = System.currentTimeMillis();
             long anchorTime = anchorTimestamps.getOrDefault(playerUUID, currentTime);
-            if (currentTime - anchorTime >= 90000||currentTime - anchorTime>=50*(sum-1)) { // 500 毫秒 = 0.5 秒
+            if (currentTime - anchorTime >= 90000||currentTime - anchorTime>=50*sum-5) { // 500 毫秒 = 0.5 秒
                 anchorPositions.remove(playerUUID); // 移除锚点
                 anchorTimestamps.remove(playerUUID); // 移除时间记录
                 pp=true;
@@ -138,7 +138,7 @@ public class MagicCircle extends InstantenousMobEffect {
             MobEffectInstance strengthEffect = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 120, Level-1);
             player.addEffect(strengthEffect);
 
-            MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinklingA.get(), 40, 0);
+            MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinklingA.get(), 80, 0);
             player.addEffect(StarsTwinklingEffect);
             // 生成北斗七星
             for(int ii=2;ii<=7;ii++) {
@@ -164,7 +164,7 @@ public class MagicCircle extends InstantenousMobEffect {
         MobEffectInstance resistanceEffect = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 120, Level-1);
         player.addEffect(resistanceEffect);
 
-        MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinklingB.get(), 40, 0);
+        MobEffectInstance StarsTwinklingEffect = new MobEffectInstance(ArcEffectsRegistry.StarsTwinklingB.get(), 80, 0);
         player.addEffect(StarsTwinklingEffect);
 
 
@@ -262,7 +262,7 @@ public class MagicCircle extends InstantenousMobEffect {
                 else YY_++;
             }
             Y_=Math.min(Y_,7.0);
-            if ((ans <= 160 && ans >= 130 && p == 1 )|| p1 >0) {
+            if ((ans <= 150 && ans >= 140 &&p==1 )|| p1 >0) {
                 if(p1==0) {
                     p2 =new Random().nextInt(100)+1;    //1为七星，2为六芒星
                 }
@@ -338,7 +338,8 @@ public class MagicCircle extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = (int) ((radii[0]*(layer+1) * Math.min(4*layer, Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
+                    int steps = (int) ((layer+1)*radii[0]* Math.min(9, Math.max(0, ans / 10 - layer * 4 -1))/(3.0*Math.min(3,Math.max(2,layer+1)))); // 两点之间的粒子数量
+//                    int steps = (int) ((radii[0]*(layer+2) * Math.min(5*Math.min(1,layer), Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -362,7 +363,8 @@ public class MagicCircle extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = (int) ((radii[0]*(layer+1) * Math.min(4*layer, Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
+                    int steps = (int) ((layer+1)*radii[0]* Math.min(9, Math.max(0, ans / 10 - layer * 4 -1))/(3.0*Math.min(3,Math.max(2,layer+1)))); // 两点之间的粒子数量
+//                    int steps = (int) ((radii[0]*Math.min(2,(layer+1)) * Math.min(5*Math.min(1,layer), Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
