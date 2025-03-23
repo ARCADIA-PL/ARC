@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.RegistryObject;
 import yesman.epicfight.particle.EpicFightParticles;
@@ -47,6 +48,11 @@ public class MagicCircle extends InstantenousMobEffect {
         super(MobEffectCategory.NEUTRAL, 0x00FF00);
     }
 
+
+
+
+
+
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
@@ -81,18 +87,12 @@ public class MagicCircle extends InstantenousMobEffect {
                 anchorPositions.remove(playerUUID); // 移除锚点
                 anchorTimestamps.remove(playerUUID); // 移除时间记录
                 pp=true;
+                if( player.getEffect(ArcEffectsRegistry.Stargazing.get())!=null){
+                    player.removeEffect(ArcEffectsRegistry.Stargazing.get());
+                }
                 return;
             }
-            else {
-                if(currentTime - anchorTime >= 56000&&currentTime - anchorTime <= 57000){
-                    if (player.level instanceof ServerLevel serverLevel) {
-                        Vec3 currentPosition = player.position().add(0, 0.1, 0);
-                        serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD.get(), currentPosition.x, currentPosition.y,currentPosition.z, 1, 0, 0, 0, 0);
-                        MobEffectInstance absorptionEffect = new MobEffectInstance(MobEffects.ABSORPTION, 240, 9);
-                        player.addEffect(absorptionEffect);
-                    }
-                }
-            }
+
             // 生成法阵
             if(pp==false){
                 MobEffectInstance effectInstance = player.getEffect(ArcEffectsRegistry.Stargazing.get());
@@ -100,13 +100,6 @@ public class MagicCircle extends InstantenousMobEffect {
                     int v;
                     if(effectInstance!=null&&effectInstance.getAmplifier()>=3){
                         v=1;
-                        if(Y_-7<=0.01){
-                            if (player.level instanceof ServerLevel serverLevel) {
-                                serverLevel.sendParticles(EpicFightParticles.FORCE_FIELD_END.get(), anchorPosition.x, anchorPosition.y,anchorPosition.z, 1, 0, 0, 0, 0);
-                                MobEffectInstance SuperFlashEffect = new MobEffectInstance(ArcEffectsRegistry.SuperFlash.get(), 200, 0);
-                                player.addEffect(SuperFlashEffect);
-                            }
-                        }
                     }
                     else {
                         v=0;
@@ -284,7 +277,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     coordinate[2]=coordinate[1].add(1.2,0,0);
                     coordinate[3]=coordinate[1].add(1.6,0,2.0);
                     coordinate[4]=coordinate[1].add(0.6,0,2.4);
-                    coordinate[5]=coordinate[1].add(0.4,0,3.6);
+                    coordinate[5]=coordinate[1].add( 0.4,0,3.6);
                     coordinate[6]=coordinate[1].add(0.24,0,4.56);
                     coordinate[7]=coordinate[1].add(0.6,0,5.96);
 
@@ -325,12 +318,10 @@ public class MagicCircle extends InstantenousMobEffect {
                 }
             }
             //星图生成后重置状态
-            if(p1>=20||ans<100){            //强制重置状态
+            if(p1>=10||ans<100){            //强制重置状态
                 p1=0;
                 p2=0;
             }
-
-
             double[] radii = {radius * 0.5, radius * 0.75, radius}; // 三层六芒星的半径
             int points = 6; // 六芒星的顶点数
             double angleIncrement = 2 * Math.PI / points;
@@ -347,7 +338,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = (int) ((radii[0]*(layer+1) * Math.min(9, Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
+                    int steps = (int) ((radii[0]*(layer+1) * Math.min(4*layer, Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
@@ -371,7 +362,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     double x2 = center.x + layerRadius * Math.cos(angle2);
                     double z2 = center.z + layerRadius * Math.sin(angle2);
                     // 在两点之间生成粒子
-                    int steps = (int) ((radii[0]*(layer+1) * Math.min(9, Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
+                    int steps = (int) ((radii[0]*(layer+1) * Math.min(4*layer, Math.max(0, ans / 10 - layer * 4 -1)))/3.0); // 两点之间的粒子数量
                     for (int j = 0; j <= steps; j++) {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
