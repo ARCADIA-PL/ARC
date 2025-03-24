@@ -688,12 +688,11 @@ public class ArcbladeTransformed {
                     }}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.22F, "effect give @s arc:hexagram1 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.22F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
 
+                .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 5 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("execute as @s at @s run particle irons_spellbooks:electricity ~ ~1.0 ~ 0.1 0.3 0.1 1.0 32",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle irons_spellbooks:electricity ~ ~ ~ 0 1 0 1 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:end_rod ~ ~ ~ 0 1 0 1 20 force",false))
-
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 20 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~-2 ~1 ~ 0 1.5 0 2 10 force",false))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle minecraft:wax_off ~2 ~1 ~ 0 1.5 0 2 10 force",false))
@@ -851,7 +850,6 @@ public class ArcbladeTransformed {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
                     }}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
-
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 20 1", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:slowness 15 255",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 20 ",true))
@@ -1068,7 +1066,7 @@ public class ArcbladeTransformed {
         //跳跃攻击以及后续派生
         ArcbladeTransformedAirStrikeAuto1.key1(ArcbladeTransformedAirStrikeAuto2);
         ArcbladeTransformedAirStrikeAuto1.keyWeaponInnate(ArcbladeTransformedRevelationAirFirst);//空中1A后使用空中识破
-        ArcbladeTransformedAirStrikeAuto2.key1(ArcbladeTransformedAutoAttack3);
+        ArcbladeTransformedAirStrikeAuto2.key1(ArcbladeTransformedAutoAttack4);
         //空中识破
         ArcbladeTransformedRevelationAirFirst.keyWeaponInnate(ArcbladeTransformedRevelationAirSecond);
         ArcbladeTransformedRevelationAirSecond.keyWeaponInnate(ArcbladeTransformedRevelationAirThird);
@@ -1122,49 +1120,33 @@ public class ArcbladeTransformed {
 
 
 //.addCondition(new MobEffectCondition(false,ArcEffectsRegistry.StarCraker,3,3))
-        ComboNode ab_1= ComboNode.createNode(()-> WOMAnimations.RUINE_AUTO_2).setPriority(20)
-                .setPlaySpeed(0.8F)
-                .setDamageMultiplier(ValueModifier.multiplier(2.7F))
-                .setNotCharge(true);
+        ComboNode ab= ComboNode.createNode(()-> WOMAnimations.TORMENT_AUTO_2).setPriority(20);
+        ComboNode ab_1 = ComboNode.createNode(()-> WOMAnimations.RUINE_AUTO_2);
         ComboNode ab_2= ComboNode.createNode(()-> WOMAnimations.TORMENT_CHARGED_ATTACK_1)
-                .setConvertTime(0.1F)
-                .setPlaySpeed(1.1F)
-                .setDamageMultiplier(ValueModifier.multiplier(2.1F))
-                .setDamageMultiplier(ValueModifier.multiplier(2.1F))
-                .setNotCharge(true);
-        ComboNode ab_3= ComboNode.createNode(()-> WOMAnimations.TORMENT_AUTO_1)
-                .setPlaySpeed(1.2F)
-                .setDamageMultiplier(ValueModifier.multiplier(2.5F))
-                .setNotCharge(true);
-        ComboNode ab_41= ComboNode.createNode(()-> WOMAnimations.AGONY_PLUNGE_FORWARD)
-                .setPlaySpeed(1.3F)
-                .addTimeEvent(new TimeStampedEvent(0.2F,(entity) ->{     //0.5-0.7
-                    if(entity.getOriginal() instanceof ServerPlayer serverPlayer){
-                        ComboBasicAttack.executeOnServer(serverPlayer,ComboNode.ComboTypes.KEY_1);
-                    }
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.23F,(entity) ->{     //0.5-0.7
-                    if(entity.getOriginal() instanceof ServerPlayer serverPlayer){
-                        ComboBasicAttack.executeOnServer(serverPlayer,ComboNode.ComboTypes.KEY_1);
-                    }
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.26F,(entity) ->{     //0.5-0.7
-                    if(entity.getOriginal() instanceof ServerPlayer serverPlayer){
-                        ComboBasicAttack.executeOnServer(serverPlayer,ComboNode.ComboTypes.KEY_1);
-                    }
-                }))
-                .setNotCharge(true);
-        ComboNode ab_42= ComboNode.createNode(()-> WOMAnimations.AGONY_AIR_SLASH)
-                .setPriority(2)
-                .setPlaySpeed(0.5F)
-                .setDamageMultiplier(ValueModifier.multiplier(3.1F))
-                .setNotCharge(true);
-//        ArcbladeTransformedroot.key1(ab_1);
+                .setConvertTime(0.15F).setPlaySpeed(1.1F);
+        ComboNode ab_3= ComboNode.createNode(()-> WOMAnimations.SOLAR_AUTO_4_POLVORA)
+                .setConvertTime(0.1F);
+        ComboNode ab_4= ComboNode.createNode(()-> WOMAnimations.TORMENT_BERSERK_AUTO_1)
+                .setConvertTime(0.25F).setPlaySpeed(0.8F);
+        ComboNode ab_5= ComboNode.createNode(()-> WOMAnimations.TORMENT_BERSERK_AUTO_2)
+                .setConvertTime(0.1F).setPlaySpeed(0.8F);
+        ComboNode ab_6= ComboNode.createNode(()-> WOMAnimations.AGONY_PLUNGE_FORWARD)
+                .addTimeEvent(new TimeStampedEvent(0.25F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_1);
+                    }}));
+        ComboNode ab_6_1= ComboNode.createNode(()-> WOMAnimations.TORMENT_BERSERK_AIRSLAM)
+                .setConvertTime(0.2F).setPlaySpeed(0.9F);
+        ArcbladeTransformedroot.key1(ab);
+        ab.key1(ab_1);
         ab_1.key1(ab_2);
         ab_2.key1(ab_3);
-        ab_3.key1(ab_41);
-        ab_41.key1(ab_42);
-        ab_42.key1(ab_1);
+        ab_3.key1(ab_4);
+        ab_4.key1(ab_5);
+        ab_5.key1(ab_6);
+        ab_6.key1(ab_6_1);
+
+        ab_6_1.key1(ab);
 
 
 
