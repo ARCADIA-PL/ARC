@@ -27,6 +27,7 @@ import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
 import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
+import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.Skill;
@@ -1118,6 +1119,57 @@ public class ArcbladeTransformed {
         ArcbladeTransformedAuto2.key1(ArcbladeTransformedAutoAttack3);
         ArcbladeTransformedAuto3.key1(ArcbladeTransformedAutoAttack4);
         ArcbladeTransformedAuto4.key1(ArcbladeTransformedAutoAttack5);
+
+
+//.addCondition(new MobEffectCondition(false,ArcEffectsRegistry.StarCraker,3,3))
+        ComboNode ab_1= ComboNode.createNode(()-> WOMAnimations.RUINE_AUTO_2).setPriority(20)
+                .setPlaySpeed(0.8F)
+                .setDamageMultiplier(ValueModifier.multiplier(2.7F))
+                .setNotCharge(true);
+        ComboNode ab_2= ComboNode.createNode(()-> WOMAnimations.TORMENT_CHARGED_ATTACK_1)
+                .setConvertTime(0.1F)
+                .setPlaySpeed(1.1F)
+                .setDamageMultiplier(ValueModifier.multiplier(2.1F))
+                .setDamageMultiplier(ValueModifier.multiplier(2.1F))
+                .setNotCharge(true);
+        ComboNode ab_3= ComboNode.createNode(()-> WOMAnimations.TORMENT_AUTO_1)
+                .setPlaySpeed(1.2F)
+                .setDamageMultiplier(ValueModifier.multiplier(2.5F))
+                .setNotCharge(true);
+        ComboNode ab_41= ComboNode.createNode(()-> WOMAnimations.AGONY_PLUNGE_FORWARD)
+                .setPlaySpeed(1.3F)
+                .addTimeEvent(new TimeStampedEvent(0.2F,(entity) ->{     //0.5-0.7
+                    if(entity.getOriginal() instanceof ServerPlayer serverPlayer){
+                        ComboBasicAttack.executeOnServer(serverPlayer,ComboNode.ComboTypes.KEY_1);
+                    }
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.23F,(entity) ->{     //0.5-0.7
+                    if(entity.getOriginal() instanceof ServerPlayer serverPlayer){
+                        ComboBasicAttack.executeOnServer(serverPlayer,ComboNode.ComboTypes.KEY_1);
+                    }
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.26F,(entity) ->{     //0.5-0.7
+                    if(entity.getOriginal() instanceof ServerPlayer serverPlayer){
+                        ComboBasicAttack.executeOnServer(serverPlayer,ComboNode.ComboTypes.KEY_1);
+                    }
+                }))
+                .setNotCharge(true);
+        ComboNode ab_42= ComboNode.createNode(()-> WOMAnimations.AGONY_AIR_SLASH)
+                .setPriority(2)
+                .setPlaySpeed(0.5F)
+                .setDamageMultiplier(ValueModifier.multiplier(3.1F))
+                .setNotCharge(true);
+//        ArcbladeTransformedroot.key1(ab_1);
+        ab_1.key1(ab_2);
+        ab_2.key1(ab_3);
+        ab_3.key1(ab_41);
+        ab_41.key1(ab_42);
+        ab_42.key1(ab_1);
+
+
+
+
+
 
         SkillManager.register(ArcbladeTransformedSkill::new, ArcbladeTransformedSkill.createComboBasicAttack().setCombo(ArcbladeTransformedroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo1");
     }
