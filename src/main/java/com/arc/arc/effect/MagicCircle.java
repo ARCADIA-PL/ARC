@@ -142,16 +142,22 @@ public class MagicCircle extends InstantenousMobEffect {
             player.addEffect(StarsTwinklingEffect);
             // 生成北斗七星
             for(int ii=2;ii<=7;ii++) {
-                double X = (coordinate[ii].x - coordinate[ii - 1].x) / 3.0, Z = (coordinate[ii].z - coordinate[ii - 1].z) / 3.0;
-                for (int jj = 0; jj <= 3; jj++) {
-                    serverLevel.sendParticles(ParticleTypes.FIREWORK, coordinate[ii - 1].x + X *jj*1.0, coordinate[ii].y, coordinate[ii-1].z + Z * jj*1.0, 1, 0, 0, 0, 0); // 火焰粒子
+                double X = (coordinate[ii].x - coordinate[ii - 1].x) / 4.0, Z = (coordinate[ii].z - coordinate[ii - 1].z) / 4.0;
+                for (int jj = 0; jj <= 4; jj++) {
+                    if(jj==0||jj==4){
+                        serverLevel.sendParticles(ParticleTypes.FIREWORK, coordinate[ii - 1].x + X *jj*1.0, coordinate[ii].y, coordinate[ii-1].z + Z * jj*1.0, 1, 0, 0, 0, 0); // 火焰粒子
+                    }
+                    serverLevel.sendParticles(ParticleTypes.WAX_OFF, coordinate[ii - 1].x + X *jj*1.0, coordinate[ii].y, coordinate[ii-1].z + Z * jj*1.0, 1, 0, 0, 0, 0); // 火焰粒子
                 }
             }
             if(v==1){
                 for(int ii=2;ii<=7;ii++) {
-                    double X = (coordinate[ii].x - coordinate[ii - 1].x) / 3.0, Z = (coordinate[ii].z - coordinate[ii - 1].z) / 3.0;
-                    for (int jj = 0; jj <= 3; jj++) {
-                        serverLevel.sendParticles(ParticleTypes.FIREWORK, coordinate_1[ii - 1].x + X *jj*1.0, coordinate_1[ii].y+0.2, coordinate_1[ii-1].z + Z * jj*1.0, 1, 0, 0, 0, 0); // 火焰粒子
+                    double X = (coordinate[ii].x - coordinate[ii - 1].x) / 4.0, Z = (coordinate[ii].z - coordinate[ii - 1].z) / 4.0;
+                    for (int jj = 0; jj <= 4; jj++) {
+                        if(jj==0||jj==4){
+                            serverLevel.sendParticles(ParticleTypes.FIREWORK, coordinate_1[ii - 1].x + X *jj*1.0, coordinate_1[ii].y+0.2, coordinate_1[ii-1].z + Z * jj*1.0, 1, 0, 0, 0, 0); // 火焰粒子
+                        }
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, coordinate_1[ii - 1].x + X *jj*1.0, coordinate_1[ii].y+0.2, coordinate_1[ii-1].z + Z * jj*1.0, 1, 0, 0, 0, 0); // 火焰粒子
                     }
                 }
             }
@@ -186,7 +192,9 @@ public class MagicCircle extends InstantenousMobEffect {
                     double t = (double) j / steps;
                     double x = x1 + (x2 - x1) * t;
                     double z = z1 + (z2 - z1) * t;
-                    serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y, z, 1, 0, 0, 0, 0); // 地狱门粒子
+//                    WAX_OFF
+
+                    serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y, z, 1, 0, 0, 0, 0); // 地狱门粒子
                 }
             }
             // 生成六芒星的连线（倒三角形）
@@ -203,7 +211,7 @@ public class MagicCircle extends InstantenousMobEffect {
                     double t = (double) j / steps;
                     double x = x1 + (x2 - x1) * t;
                     double z = z1 + (z2 - z1) * t;
-                    serverLevel.sendParticles(ParticleTypes.FIREWORK, x, center.y, z, 1, 0, 0, 0, 0); // 闪电粒子
+                    serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, center.y, z, 1, 0, 0, 0, 0); // 闪电粒子
                 }
             }
             if(v==1){
@@ -221,7 +229,7 @@ public class MagicCircle extends InstantenousMobEffect {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
                         double z = z1 + (z2 - z1) * t;
-                        serverLevel.sendParticles(ParticleTypes.FIREWORK, x, vec.y+0.2, z, 1, 0, 0, 0, 0); // 地狱门粒子
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, vec.y+0.2, z, 1, 0, 0, 0, 0); // 地狱门粒子
                     }
                 }
                 // 生成六芒星的连线（倒三角形）
@@ -238,7 +246,7 @@ public class MagicCircle extends InstantenousMobEffect {
                         double t = (double) j / steps;
                         double x = x1 + (x2 - x1) * t;
                         double z = z1 + (z2 - z1) * t;
-                        serverLevel.sendParticles(ParticleTypes.FIREWORK, x, vec.y+0.2, z, 1, 0, 0, 0, 0); // 闪电粒子
+                        serverLevel.sendParticles(ParticleTypes.WAX_OFF, x, vec.y+0.2, z, 1, 0, 0, 0, 0); // 闪电粒子
                     }
                 }
             }
