@@ -1138,11 +1138,7 @@ public class ArcbladeTransformed {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_1);
                     }}));
         ComboNode ab_6_1= ComboNode.createNode(()-> WOMAnimations.TORMENT_BERSERK_AIRSLAM)
-                .setConvertTime(0.2F).setPlaySpeed(0.9F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStamina 2",false))
-                .addTimeEvent(new TimeStampedEvent(0.01F, livingEntityPatch -> {
-                    livingEntityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 40));
-                }));
+                .setConvertTime(0.2F).setPlaySpeed(0.9F);
         ArcbladeTransformedroot.key1(ab);
         ab.key1(ab_1);
         ab_1.key1(ab_2);
