@@ -33,6 +33,7 @@ import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.damagesource.StunType;
+import yesman.epicfight.world.effect.EpicFightMobEffects;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
 public class ArcbladeTransformed {
@@ -54,6 +55,7 @@ public class ArcbladeTransformed {
                         return !isOnGround && !isInWater && !isOnClimbable && !isRiding && !isGliding;
                     }
                 })
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStamina 3",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:slow_falling 2",false));
         ComboNode ArcbladeTransformedAirStrikeAuto2 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_4)
                 .setPriority(4).setConvertTime(-0.25F).addCondition(new UpCondition())
@@ -1126,17 +1128,21 @@ public class ArcbladeTransformed {
                 .setConvertTime(0.15F).setPlaySpeed(1.1F);
         ComboNode ab_3= ComboNode.createNode(()-> WOMAnimations.SOLAR_AUTO_4_POLVORA)
                 .setConvertTime(0.1F);
-        ComboNode ab_4= ComboNode.createNode(()-> WOMAnimations.TORMENT_BERSERK_AUTO_1)
-                .setConvertTime(0.25F).setPlaySpeed(0.8F);
-        ComboNode ab_5= ComboNode.createNode(()-> WOMAnimations.TORMENT_BERSERK_AUTO_2)
-                .setConvertTime(0.1F).setPlaySpeed(0.8F);
+        ComboNode ab_4= ComboNode.createNode(()-> StarAnimations.GREATSWORD_OLD_AUTO3)
+                .setConvertTime(0.2F).setPlaySpeed(0.7F);
+        ComboNode ab_5= ComboNode.createNode(()-> StarAnimations.GREATSWORD_OLD_AUTO1)
+                .setConvertTime(0.1F).setPlaySpeed(0.7F);
         ComboNode ab_6= ComboNode.createNode(()-> WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .addTimeEvent(new TimeStampedEvent(0.25F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_1);
                     }}));
         ComboNode ab_6_1= ComboNode.createNode(()-> WOMAnimations.TORMENT_BERSERK_AIRSLAM)
-                .setConvertTime(0.2F).setPlaySpeed(0.9F);
+                .setConvertTime(0.2F).setPlaySpeed(0.9F)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStamina 2",false))
+                .addTimeEvent(new TimeStampedEvent(0.01F, livingEntityPatch -> {
+                    livingEntityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 40));
+                }));
         ArcbladeTransformedroot.key1(ab);
         ab.key1(ab_1);
         ab_1.key1(ab_2);

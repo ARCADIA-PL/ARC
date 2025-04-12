@@ -28,7 +28,6 @@ public class TransformedArcbladeAttributeHandlers {
             } else {
                 // 如果不手持 TransformedArcbladeItem，移除 BUFF
                 player.removeEffect(MobEffects.JUMP);
-                player.removeEffect(MobEffects.SLOW_FALLING);
             }
         }
     }
