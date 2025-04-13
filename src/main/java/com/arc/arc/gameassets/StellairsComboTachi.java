@@ -1,7 +1,7 @@
 package com.arc.arc.gameassets;
 import com.arc.arc.ArcMod;
 import com.arc.arc.Registries.ArcEffectsRegistry;
-import com.arc.arc.skill.ArcTachiSkill;
+import com.arc.arc.skill.TachiSkill;
 import com.guhao.star.efmex.StarAnimations;
 import com.guhao.star.regirster.Sounds;
 import com.p1nero.invincible.api.events.BiEvent;
@@ -312,7 +312,7 @@ public class StellairsComboTachi {
         Auto3_1.keyWeaponInnate(ComboSkill_3_B);
 
 
-        SkillManager.register(ArcTachiSkill::new, ArcTachiSkill.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo2");
+        SkillManager.register(TachiSkill::new, TachiSkill.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo2");
     }
     @SubscribeEvent
     public static void BuildSkills(SkillBuildEvent event) {
