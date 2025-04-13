@@ -1,7 +1,6 @@
 package com.arc.arc.gameassets;
 import com.arc.arc.ArcMod;
 import com.arc.arc.Registries.ArcEffectsRegistry;
-import com.arc.arc.Registries.ArcSoundRegistry;
 import com.arc.arc.skill.ArcTachiSkill;
 import com.guhao.star.efmex.StarAnimations;
 import com.guhao.star.regirster.Sounds;
@@ -17,10 +16,10 @@ import net.minecraftforge.fml.common.Mod;
 import reascer.wom.gameasset.WOMAnimations;
 import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
-import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.Skill;
+import yesman.epicfight.world.damagesource.StunType;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
 public class StellairsComboTachi {
@@ -59,7 +58,7 @@ public class StellairsComboTachi {
                 }));
 
         ComboNode Skill_LethalSlicing_Start = ComboNode.createNode(() -> StarAnimations.LETHAL_SLICING_START)
-                .addCondition(new StackCondition(1, 6))
+                .addCondition(new StackCondition(1, 3))
                 .setPlaySpeed(0.8F).setConvertTime(0.15F).setPlaySpeed(0.6F).setNotCharge(true).setPriority(2)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0,"invincible consumeStack 1", false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {if (entityPatch.getOriginal()instanceof ServerPlayer serverPlayer) {
@@ -78,10 +77,15 @@ public class StellairsComboTachi {
 
         ComboNode Skill_UpperSlash_Once = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER1)
                 .addCondition(new PlayerPhaseCondition(2,2))
+                .addCondition(new StackCondition(1, 3))
                 .setPriority(3).setNotCharge(true).setConvertTime(-0.15F).setPlaySpeed(1.3F).setNewPhase(1)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,  0,0);
                 }))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get(), 400));
+                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible consumeStack 1", false))
                 .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -89,12 +93,17 @@ public class StellairsComboTachi {
         ComboNode Skill_UpperSlash_Twice = ComboNode.createNode(() -> Animations.RUSHING_TEMPO3)
                 .setNotCharge(true).setConvertTime(0.1F).setPlaySpeed(0.9F)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get(), 400));
+                }))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
                 }));
 
         ComboNode Skill_DodgeCounter_Dodge = ComboNode.createNode(() -> WOMAnimations.KNIGHT_ROLL_BACKWARD)
                 .addCondition(new PlayerPhaseCondition(2,2))
+                .addCondition(new StackCondition(1, 3))
                 .setNotCharge(true).setPriority(3).setNewPhase(1)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
                 .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(Sounds.FORESIGHT, 0, 0))))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s", true))
                 .addDodgeSuccessEvent(new BiEvent((entityPatch, entity) -> {
@@ -106,12 +115,20 @@ public class StellairsComboTachi {
                     }}));
         ComboNode Skill_DodgeCounter_Counter_1 = ComboNode.createNode(() -> StarAnimations.FATAL_DRAW_DASH)
                 .setConvertTime(-0.5F).setNotCharge(true)
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.DodgeSuccess),0,10));
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.DodgeSuccess),0,10))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLB.get(), 400));
+                }));
 
         ComboNode Skill_LethalSlicing_Start_Combo = ComboNode.createNode(() -> StarAnimations.LETHAL_SLICING_START)
+                .addCondition(new StackCondition(2, 3))
                 .addCondition(new PlayerPhaseCondition(2,2))
                 .setPlaySpeed(0.8F).setConvertTime(0.15F).setPlaySpeed(0.75F).setNotCharge(true).setPriority(3)
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 3", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible consumeStack 2", false))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLC.get(), 400));
+                }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {if (entityPatch.getOriginal()instanceof ServerPlayer serverPlayer) {
                     ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                 }}));
@@ -135,8 +152,67 @@ public class StellairsComboTachi {
                 }));
 
         ComboNode Skill_BladeRushFinisher = ComboNode.createNode(() -> StarAnimations.BLADE_RUSH_FINISHER)
+                .addCondition(new StackCondition(1, 3))
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.DodgeSuccess),0,10))
-                .setPriority(3).setNotCharge(true).setConvertTime(0.2F).setNewPhase(1);
+                .setPriority(3).setNotCharge(true).setConvertTime(0.2F).setNewPhase(1)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible consumeStack 1", false))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLC.get(), 400));
+                }));
+
+        ComboNode Final_Skill_RushingTempo_Once = ComboNode.createNode(()-> StarAnimations.YAMATO_POWER1)
+                .addCondition(new ParrySuccessCondition())
+                .addCondition(new StackCondition(2, 3))
+                .addCondition(new MobEffectCondition(false, (ArcEffectsRegistry.TACHIFINALSKILLA), 0, 10))
+                .setPriority(4).setNotCharge(true).setStunTypeModifier(StunType.HOLD)
+                .setImpactMultiplier(3).setConvertTime(-0.15F).setPlaySpeed(1.3F).setCanBeInterrupt(false)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
+                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect clear @s arc:tachifinalskilla", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "invincible consumeStack 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 1.5 false true false", true))
+                .addTimeEvent(new TimeStampedEvent(0.65F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
+                    }}));
+        ComboNode Final_Skill_RushingTempo_Twice = ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
+                .setNotCharge(true).setStunTypeModifier(StunType.LONG).setImpactMultiplier(3).setConvertTime(0.2F).setPlaySpeed(0.8F).setCanBeInterrupt(false)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 2.5 false false false", true))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.4F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
+                    }}));
+        ComboNode Final_Skill_RushingTempo_Thrid = ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
+                .setNotCharge(true).setStunTypeModifier(StunType.LONG).setImpactMultiplier(3).setConvertTime(0.15F).setPlaySpeed(0.95F).setCanBeInterrupt(false)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,  0,0);
+                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3.5 false false false", true));
+
+        ComboNode Final_Skill_CrossSlash_Once = ComboNode.createNode(()->StarAnimations.FATAL_DRAW)
+                .addCondition(new DodgeSuccessCondition())
+                .addCondition(new StackCondition(2, 3))
+                .addCondition(new MobEffectCondition(false, (ArcEffectsRegistry.TACHIFINALSKILLB), 0, 10))
+                .setNotCharge(true).setStunTypeModifier(StunType.HOLD).setPriority(4).setConvertTime(-0.5F).setPlaySpeed(1.15F).setCanBeInterrupt(false)
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
+                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "effect clear @s arc:tachifinalskillb", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible consumeStack 2", false))
+                .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
+                    }}));
+        ComboNode Final_Skill_CrossSlash_Twice = ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
+                .setNotCharge(true).setStunTypeModifier(StunType.LONG).setImpactMultiplier(3).setCanBeInterrupt(false)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 2.5 false false false", true))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,  0,0);
+                }));
 
 
         ComboNode BasicAttack = ComboNode.create()
@@ -154,23 +230,33 @@ public class StellairsComboTachi {
                 .addConditionAnimation(Auto3_1);
 
         ComboNode DefeatSkills = ComboNode.create()
-                .addConditionAnimation(Skill_LethalSlicing_Start);
+                .addConditionAnimation(Skill_LethalSlicing_Start)
+                .addConditionAnimation(Final_Skill_CrossSlash_Once)
+                .addConditionAnimation(Final_Skill_RushingTempo_Once);
 
         ComboNode ComboSkill_1 = ComboNode.create()
                 .addConditionAnimation(Skill_LethalSlicing_Start)
-                .addConditionAnimation(Skill_UpperSlash_Once);
+                .addConditionAnimation(Skill_UpperSlash_Once)
+                .addConditionAnimation(Final_Skill_CrossSlash_Once)
+                .addConditionAnimation(Final_Skill_RushingTempo_Once);
 
         ComboNode ComboSkill_2 = ComboNode.create()
                 .addConditionAnimation(Skill_LethalSlicing_Start)
-                .addConditionAnimation(Skill_DodgeCounter_Dodge);
+                .addConditionAnimation(Skill_DodgeCounter_Dodge)
+                .addConditionAnimation(Final_Skill_CrossSlash_Once)
+                .addConditionAnimation(Final_Skill_RushingTempo_Once);
 
         ComboNode ComboSkill_3_A = ComboNode.create()
                 .addConditionAnimation(Skill_LethalSlicing_Start)
-                .addConditionAnimation(Skill_LethalSlicing_Start_Combo);
+                .addConditionAnimation(Skill_LethalSlicing_Start_Combo)
+                .addConditionAnimation(Final_Skill_CrossSlash_Once)
+                .addConditionAnimation(Final_Skill_RushingTempo_Once);
 
         ComboNode ComboSkill_3_B = ComboNode.create()
                 .addConditionAnimation(Skill_LethalSlicing_Start)
-                .addConditionAnimation(Skill_BladeRushFinisher);
+                .addConditionAnimation(Skill_BladeRushFinisher)
+                .addConditionAnimation(Final_Skill_CrossSlash_Once)
+                .addConditionAnimation(Final_Skill_RushingTempo_Once);
 
         ComboNode Dodgecounter = ComboNode.create()
                 .addConditionAnimation(Dash)
@@ -189,6 +275,9 @@ public class StellairsComboTachi {
         Skill_LethalSlicing_Once_Combo.key4(Skill_LethalSlicing_Twice_Combo);
         Skill_UpperSlash_Once.key4(Skill_UpperSlash_Twice);
         Skill_DodgeCounter_Dodge.key4(Skill_DodgeCounter_Counter_1);
+        Final_Skill_RushingTempo_Once.key4(Final_Skill_RushingTempo_Twice);
+        Final_Skill_RushingTempo_Twice.key4(Final_Skill_RushingTempo_Thrid);
+        Final_Skill_CrossSlash_Once.key4(Final_Skill_CrossSlash_Twice);
         //闭环
         Auto3_1.key1(BasicAttack);
         Dash.key1(Auto1);
@@ -207,6 +296,10 @@ public class StellairsComboTachi {
         Skill_LethalSlicing_Twice_Combo.keyWeaponInnate(DefeatSkills);
         Skill_BladeRushFinisher.key1(BasicAttack);
         Skill_BladeRushFinisher.keyWeaponInnate(DefeatSkills);
+        Final_Skill_RushingTempo_Twice.key1(BasicAttack);
+        Final_Skill_RushingTempo_Twice.keyWeaponInnate(DefeatSkills);
+        Final_Skill_RushingTempo_Thrid.key1(BasicAttack);
+        Final_Skill_RushingTempo_Thrid.keyWeaponInnate(DefeatSkills);
         //普通攻击一段及其派生
         Auto1.key1(Attack2);
         Auto1.keyWeaponInnate(ComboSkill_1);

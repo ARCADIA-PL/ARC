@@ -53,6 +53,15 @@ public class ArcEffectsRegistry {
     //
     public static final RegistryObject<MobEffect> DodgeSuccess =
             EFFECTS.register("dodgesuccess", DodgeSuccess::new);
+    //
+    public static final RegistryObject<MobEffect> TACHIFINALSKILLA =
+            EFFECTS.register("tachifinalskilla", TachiFinalSkill_A::new);
+    //
+    public static final RegistryObject<MobEffect> TACHIFINALSKILLB =
+            EFFECTS.register("tachifinalskillb", TachiFinalSkill_B::new);
+    //
+    public static final RegistryObject<MobEffect> TACHIFINALSKILLC =
+            EFFECTS.register("tachifinalskillc", TachiFinalSkill_C::new);
     //闪光时调用的buff
     public static final RegistryObject<MobEffect> SuperFlash =
             EFFECTS.register("super_flash", SuperFlash::new);
