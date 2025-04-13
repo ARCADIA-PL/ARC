@@ -51,10 +51,27 @@ public class WeaponCapabilityPresets {
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.WALK, StarAnimations.GREATSWORD_OLD_WALK)
                     .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.RUN, WOMAnimations.RUINE_RUN)
                     .comboCancel((style) -> false);
+
+    public static final Function<Item, CapabilityItem.Builder> STELLARISCOMBOTACHI = (item) ->
+            (CapabilityItem.Builder) WeaponCapability.builder().category(CapabilityItem.WeaponCategories.LONGSWORD)//蹭格挡，用别的也行
+                    .styleProvider((entityPatch) -> CapabilityItem.Styles.TWO_HAND)
+                    .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
+                    .swingSound(EpicFightSounds.WHOOSH)
+                    .hitSound(EpicFightSounds.BLADE_HIT)
+                    .hitParticle(WOMParticles.OVERBLOOD_HIT.get())
+                    .canBePlacedOffhand(false)
+                    .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
+                    .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> StellairsComboTachi.StellairsComboTachi)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.BLOCK, Animations.LONGSWORD_GUARD)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.IDLE, Animations.BIPED_HOLD_TACHI)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.WALK, Animations.BIPED_WALK_LONGSWORD)
+                    .livingMotionModifier(CapabilityItem.Styles.TWO_HAND, LivingMotions.RUN, Animations.BIPED_RUN_UCHIGATANA)
+                    .comboCancel((style) -> false);
     @SubscribeEvent
         public static void register(WeaponCapabilityPresetRegistryEvent event) {
             event.getTypeEntry().put("arcblade", ARCBLADE);
             event.getTypeEntry().put("arcbladetransformed", ARCBLADETRANSFORMED);
+            event.getTypeEntry().put("stellairscombotachi", STELLARISCOMBOTACHI);
         }
     }
 

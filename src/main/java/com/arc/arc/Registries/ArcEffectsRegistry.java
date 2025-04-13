@@ -50,6 +50,9 @@ public class ArcEffectsRegistry {
     //
     public static final RegistryObject<MobEffect> HeavyGravity =
             EFFECTS.register("heavygravity", HeavyGravityEffect::new);
+    //
+    public static final RegistryObject<MobEffect> DodgeSuccess =
+            EFFECTS.register("dodgesuccess", DodgeSuccess::new);
     //闪光时调用的buff
     public static final RegistryObject<MobEffect> SuperFlash =
             EFFECTS.register("super_flash", SuperFlash::new);

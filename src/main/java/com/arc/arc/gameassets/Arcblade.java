@@ -81,9 +81,6 @@ public class Arcblade {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s minecraft:instant_health 1 10", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 6 18", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:blight 10 0", true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.0 0.0 0.02 1 force @s", false))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3", true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 0.5", true))
                 .setPlaySpeed(1.4F)
                 .setCanBeInterrupt(false)
                 .setDamageMultiplier(ValueModifier.multiplier(1.2F))
@@ -145,9 +142,6 @@ public class Arcblade {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
                 }))
-                .addTimeEvent(new TimeStampedEvent(0.1F, entityPatch -> {
-                    entityPatch.playSound(ArcSoundRegistry.JudgementCut.get(), 1F,0, 0);
-                }))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStack -1", false))
                 .setCanBeInterrupt(false)
@@ -184,7 +178,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.97F, "summon minecraft:lightning_bolt ~ ~ ~", true));
         ;
         ComboNode ArcdashSkill = ComboNode.createNode(() -> StarAnimations.YAMATO_STRIKE1)
@@ -424,7 +418,6 @@ public class Arcblade {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0,0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s minecraft:slowness 2 255", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.73F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addTimeEvent(new TimeStampedEvent(0.73F, (entityPatch) -> {
@@ -447,7 +440,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false));
         ComboNode Arc3AS2 = ComboNode.createNode(() -> StarAnimations.YAMATO_STEP_FORWARD)
                 .addCondition(new StackCondition(1, 8))
                 .setCanBeInterrupt(false)
@@ -456,7 +449,6 @@ public class Arcblade {
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3", true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible consumeStack -3", true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 0.8 0.5", true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.5 0.0 0.02 1 force @s", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack -1", false));
         ;
         ComboNode Arc4AS = ComboNode.createNode(() -> WOMAnimations.KATANA_SHEATHED_AUTO_2)
@@ -494,9 +486,6 @@ public class Arcblade {
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:rend 6 18", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s irons_spellbooks:blight 10 0", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("particle epicacg:dmc_jc_blade_trail ~0 ~0.0 ~0 0.0 1.0 0.0 0.02 1 force @s", false))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s cataclysm:stun 3", true))
-                .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 1 0.5", true))
                 .setPlaySpeed(1.4F)
                 .setNotCharge(true)
                 .setCanBeInterrupt(false)
@@ -587,7 +576,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "summon minecraft:lightning_bolt ~ ~ ~3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "summon minecraft:lightning_bolt ~ ~ ~-3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false));
         ;
 
         ComboNode Arc6As = ComboNode.createNode(() -> MyAnimations.DMC5_V_JC)
@@ -672,7 +661,7 @@ public class Arcblade {
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s arc:verticalstop", false))
-                .setDamageMultiplier(ValueModifier.multiplier(1F))
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .addTimeEvent(new TimeStampedEvent(0.35F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
@@ -681,14 +670,11 @@ public class Arcblade {
         ComboNode ArcGP2extendAttack3 = ComboNode.createNode(() -> StarAnimations.YAMATO_COUNTER1)
                 .setConvertTime(-0.1F)
                 .setPlaySpeed(1.4F)
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .setNotCharge(true)
-                .addTimeEvent(new TimeStampedEvent(0.15F, (entityPatch) -> {
-                    entityPatch.playSound(ArcSoundRegistry.JudgementCut.get(),0.6F,0,0);
-                }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0,0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s minecraft:slowness 2 255", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.73F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .setDamageMultiplier(ValueModifier.multiplier(1.7F))
@@ -706,7 +692,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 150", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false))
                 .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
@@ -715,6 +701,7 @@ public class Arcblade {
         ComboNode ArcGP2extendAttack4 = ComboNode.createNode(() -> WOMAnimations.HERRSCHER_AUSROTTUNG)
                 .setNotCharge(true)
                 .setPlaySpeed(1.3F)
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .setDamageMultiplier(ValueModifier.multiplier(1.3F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "effect clear @s arc:verticalstop", false))
@@ -731,6 +718,7 @@ public class Arcblade {
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .setDamageMultiplier(ValueModifier.multiplier(1.1F))
                 .setConvertTime(-0.75F)
+                .setDamageMultiplier(ValueModifier.multiplier(1.2F))
                 .setNotCharge(true)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5", true))
                 .addTimeEvent(new TimeStampedEvent(1.25F,(entity) -> {
@@ -740,6 +728,7 @@ public class Arcblade {
 
         ComboNode ArcGP2extendAttack6 = ComboNode.createNode(() -> WOMAnimations.KATANA_SHEATHED_AUTO_2)
                 .setNotCharge(true)
+                .setDamageMultiplier(ValueModifier.multiplier(1.1F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
@@ -754,6 +743,7 @@ public class Arcblade {
         ComboNode ArcGP2extendAttack7 = ComboNode.createNode(() -> StarAnimations.FATAL_DRAW_DASH)
                 .setNotCharge(true)
                 .setConvertTime(-0.55F)
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch) -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(),0.6F,0,0);
                 }))
@@ -778,6 +768,7 @@ public class Arcblade {
 
         ComboNode ArcGP2extendSkill1 = ComboNode.createNode(() -> StarAnimations.YAMATO_COUNTER1)
                 .setPriority(5)
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .addCondition(new PlayerPhaseCondition(2,2))
                 .addCondition(new StackCondition(2, 8))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 2", false))
@@ -786,13 +777,9 @@ public class Arcblade {
                 .setConvertTime(-0.07F)
                 .setPlaySpeed(1.1F)
                 .setNotCharge(true)
-                .addTimeEvent(new TimeStampedEvent(0.15F, (entityPatch) -> {
-                    entityPatch.playSound(ArcSoundRegistry.JudgementCut.get(),0.6F,0,0);
-                }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0,0);
                 }))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s minecraft:slowness 2 255", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.73F, "effect give @s irons_spellbooks:abyssal_shroud 1 0", false))
                 .addCondition(new StackCondition(1, 8))
@@ -812,7 +799,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false))
                 .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_1);
@@ -821,6 +808,7 @@ public class Arcblade {
         ComboNode ArcGP2extendSkill2 = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER1)
                 .setConvertTime(0.1F)
                 .setPlaySpeed(1.2F)
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .setNotCharge(true)
                 .setCanBeInterrupt(false)
                 .addTimeEvent(new TimeStampedEvent(0.18F, entityPatch -> {
@@ -839,6 +827,7 @@ public class Arcblade {
         ComboNode ArcGP2extendSkill3 = ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .setConvertTime(-0.1F)
                 .setPlaySpeed(1.3F)
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .setDamageMultiplier(ValueModifier.multiplier(1.2F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_short\" 2 0.5", true))
@@ -850,6 +839,7 @@ public class Arcblade {
 
         ComboNode ArcGP2extendSkill4 = ComboNode.createNode(() ->StarAnimations.YAMATO_COUNTER1)
                 .setConvertTime(-0.07F)
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .setPlaySpeed(1.1F)
                 .setNotCharge(true)
                 .addTimeEvent(new TimeStampedEvent(0.15F, (entityPatch) -> {
@@ -876,9 +866,9 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "particle minecraft:wax_off ~ ~1 ~3 0 0.2 0 2 10 force", false))
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.3F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.75F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
                 .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_1);
@@ -890,9 +880,6 @@ public class Arcblade {
 
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.04F, entityPatch -> {
-                    entityPatch.playSound(ArcSoundRegistry.JudgementCut.get(), 0.4F,0, 0);
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.5F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
@@ -914,6 +901,7 @@ public class Arcblade {
         ComboNode ArcGP2extendSkill7 = ComboNode.createNode(() -> StarAnimations.FATAL_DRAW_DASH)
                 .setNotCharge(true)
                 .setConvertTime(-0.5F)
+                .setDamageMultiplier(ValueModifier.multiplier(1.2F))
                 .addTimeEvent(new TimeStampedEvent(0.53F, entityPatch -> {
                     entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 0.6F,0, 0);
                 }))
@@ -949,9 +937,8 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s minecraft:absorption 5 2", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "effect give @s epicfight:stun_immunity 5 2", false))
-                .addTimeEvent(new TimeStampedEvent(0.01F, entityPatch -> {
-                    entityPatch.playSound(ArcSoundRegistry.ArcSlash.get(), 0.5F,0, 0);
-                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
                 }));
@@ -1007,6 +994,7 @@ public class Arcblade {
                 .setConvertTime(0.1F)
                 .setPlaySpeed(1.2F)
                 .setPriority(5)
+                .setDamageMultiplier(ValueModifier.multiplier(3F))
                 .setNotCharge(true)
                 .setCanBeInterrupt(false)
                 .addCondition(new DodgeSuccessCondition())
@@ -1048,6 +1036,7 @@ public class Arcblade {
                 .setConvertTime(0.15F)
                 .setPlaySpeed(1.2F)
                 .setNotCharge(true)
+                .setDamageMultiplier(ValueModifier.multiplier(2F))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
@@ -1072,7 +1061,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 100", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "effect give @s cofh_core:lightning_resistance 5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.8F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.0F, "indestructible @s play 'epicfight:biped/living/hold_longsword' 0.1 1", false))
                 .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
@@ -1081,7 +1070,7 @@ public class Arcblade {
 
         ComboNode ArcGP3Skill4 = ComboNode.createNode(() -> WOMAnimations.AGONY_PLUNGE_FORWARD)
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
-                .setDamageMultiplier(ValueModifier.multiplier(1.1F))
+                .setDamageMultiplier(ValueModifier.multiplier(1.5F))
                 .setConvertTime(-0.6F)
                 .setNotCharge(true)
                 .addHitEvent(BiEvent.createBiCommandEvent("indestructible @s play \"epicfight:biped/combat/hit_long\" 2 0.5", true))
@@ -1127,12 +1116,8 @@ public class Arcblade {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE, 0, 0);
                 }))
-                .addTimeEvent(new TimeStampedEvent(0.13F, entityPatch -> {
-                    entityPatch.playSound(ArcSoundRegistry.JudgementCut.get(), 0.6F,0, 0);
-                }))
                 .addHitEvent(BiEvent.createBiCommandEvent("summon minecraft:lightning_bolt ~ ~ ~", true))
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible consumeStamina 2", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F,"particle epicacg:genshin_bow_landing ~0.0 ~0.0 ~0 0.0 0.0 0.0 0.3 5 force @s",false))
 
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle isleofberk:lightning_aoe_emitter ~ ~1.5 ~ 0 2.5 0 0.1 160 force", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "particle minecraft:wax_off ~ ~1 ~ 0 4 0 2 50 force", false))
@@ -1151,7 +1136,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "summon minecraft:lightning_bolt ^-3 ^0 ^-5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.7F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false));
         ;
 
 
@@ -1338,7 +1323,7 @@ public class Arcblade {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "summon minecraft:lightning_bolt ^3 ^0 ^-5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "summon minecraft:lightning_bolt ^-3 ^0 ^-5", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "particle minecraft:explosion ~ ~1.5 ~ 0 1 0 1 1 force", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.1F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 5", false));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.1F, "playsound minecraft:entity.generic.explode ambient @s ~ ~ ~ 10", false));
 
 
         ComboNode ArcAuto3extend1 = ComboNode.create()
