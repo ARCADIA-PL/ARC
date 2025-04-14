@@ -23,17 +23,16 @@ public class TachiSkill extends ComboBasicAttack{
         List<Component> list = Lists.newArrayList();
         list.add(new TranslatableComponent(this.getTranslationKey()).withStyle(ChatFormatting.GOLD).append(new TextComponent(String.format("[%.0f]", this.consumption)).withStyle(ChatFormatting.AQUA)));
         list.add(new TextComponent("§5§l§o连击流太刀"));
-        list.add(new TranslatableComponent("共有3段普通攻击；§7其中普攻二段与三段为两次攻击;§b常态技能命中§6解锁三种普攻后的派生技能；§b三种派生技能命中§6解锁对应的强化技能"));
+        list.add(new TranslatableComponent("§b常态技能命中§6解锁三种普攻后的技能派生；§b三种派生可§6解锁对应的强化技能"));
+        list.add(new TextComponent(""));
         list.add(new TranslatableComponent("§b常态技能：§7消耗一层技能按")
                          .withStyle(ChatFormatting.YELLOW)
                          .append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage())
-                         .append(new TextComponent("发动体术攻击；§7若命中则§6发动斩击；§7同时后续普攻后可消耗一层技能按")
-                         .withStyle(ChatFormatting.YELLOW)
-                         .append(EpicFightKeyMappings.WEAPON_INNATE_SKILL.getTranslatedKeyMessage())
-                         .append(new TextComponent("§b派生技能"))));
-        list.add(new TranslatableComponent("普攻一段派生：§b上挑斩击；§6命中派生强化技能(消耗两层技能)：§b招架反击"));
-        list.add(new TranslatableComponent("普攻二段派生：§b后翻滚,§6若完美闪避则发动突进;§6闪避成功派生强化技能(消耗两层技能)：§b闪避反击"));
-        list.add(new TranslatableComponent("普攻三段派生：§b第一段攻击后消耗一层技能§6发动强化版体术攻击；§b第二段攻击后消耗一层技能§6发动突刺;§7普攻三段派生强化技能(消耗两层技能)：§b还没做完嘻嘻"));
+                         .append(new TextComponent("发动体术攻击；§7若命中则§6发动斩击，§b可回复一层技能并增加第四段普攻：击中会追加突刺攻击")));
+        list.add(new TextComponent(""));
+        list.add(new TranslatableComponent("1AS消耗一层技能，若命中则后续可§b消耗两层技能§5发动招架反击"));
+        list.add(new TranslatableComponent("2AS消耗一层技能主动后翻滚,§6若完美闪避则发动突进;§7且后续常态技能变为§b消耗两层技能的主动后翻滚,§6若完美闪避则发动§5强力突进"));
+        list.add(new TranslatableComponent("3AS消耗两层技能释放§5强化版体术攻击，§6若3AS或4A命中则（没做完）；"));
         return list;
     }
 }

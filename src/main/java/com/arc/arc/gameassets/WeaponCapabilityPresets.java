@@ -53,7 +53,7 @@ public class WeaponCapabilityPresets {
                     .comboCancel((style) -> false);
 
     public static final Function<Item, CapabilityItem.Builder> STELLARISCOMBOTACHI = (item) ->
-            (CapabilityItem.Builder) WeaponCapability.builder().category(CapabilityItem.WeaponCategories.LONGSWORD)//蹭格挡，用别的也行
+            (CapabilityItem.Builder) WeaponCapability.builder().category(CapabilityItem.WeaponCategories.TACHI)//蹭格挡，用别的也行
                     .styleProvider((entityPatch) -> CapabilityItem.Styles.TWO_HAND)
                     .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
                     .swingSound(EpicFightSounds.WHOOSH)
