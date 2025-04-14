@@ -198,7 +198,7 @@ dependencies {
     implementation fg.deobf("libs:Rank-System-1.0:1.0")
 
     implementation fg.deobf("libs:mowziesmobs-1.6.3:1.0.0")
-    implementation fg.deobf("libs:Star:1.18.2-V2.0.0")
+    implementation fg.deobf("libs:Star1742622620:1.18.2")
 
     implementation fg.deobf("libs:wukong_moveset-duel-forge1.18.2-18.0.1.12beta:1.1")
     implementation fg.deobf("libs:nanhealthfixer-1.18.2-0.0.1:1.1")
