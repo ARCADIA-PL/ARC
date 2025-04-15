@@ -51,8 +51,11 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect> HeavyGravity =
             EFFECTS.register("heavygravity", HeavyGravityEffect::new);
     //
-    public static final RegistryObject<MobEffect> DodgeSuccess =
-            EFFECTS.register("dodgesuccess", DodgeSuccess::new);
+    public static final RegistryObject<MobEffect> Success =
+            EFFECTS.register("dodgesuccess", Success::new);
+    //
+    public static final RegistryObject<MobEffect> TACHI_ENHANCED_PHASE =
+            EFFECTS.register("tachienhancedphase", TachiEnhancedPhase::new);
     //
     public static final RegistryObject<MobEffect> TACHIFINALSKILLA =
             EFFECTS.register("tachifinalskilla", TachiFinalSkill_A::new);
