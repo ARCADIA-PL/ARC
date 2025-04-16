@@ -40,39 +40,22 @@ public class StellairsComboTachi {
                 .addCondition(new JumpCondition())
                 .setPriority(5)
                 .setConvertTime(-0.1F).setPlaySpeed(1.3F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStamina 2", false))
-                .addTimeEvent(new TimeStampedEvent(0.11F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.ComboTimer.get(),40));
-                }));;
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStamina 2", false));
         ComboNode Dash = ComboNode.createNode(() -> StarAnimations.YAMATO_DASH)
                 .addCondition(new SprintingCondition())
                 .setPriority(5)
-                .setConvertTime(-0.15F).setPlaySpeed(1.3F)
-                .addTimeEvent(new TimeStampedEvent(0.16F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.ComboTimer.get(),40));
-                }));;
+                .setConvertTime(-0.15F).setPlaySpeed(1.3F);
 
         ComboNode Auto1 = ComboNode.createNode(() -> StarAnimations.TACHI_TWOHAND_AUTO_1)
-                .setConvertTime(0.05F).setPriority(1)
-                .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.ComboTimer.get(),40));
-                }));
+                .setConvertTime(0.05F).setPriority(1);
         ComboNode Auto2 = ComboNode.createNode(() -> StarAnimations.YAMATO_AUTO3)
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.ComboTimer),0,10))
-                .setPriority(2).setStunTypeModifier(StunType.SHORT).setConvertTime(-0.1F).setPlaySpeed(1.2F)
-                .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.ComboTimer.get(),80));
-                }))
+                .setPriority(2).setStunTypeModifier(StunType.SHORT).setConvertTime(-0.2F).setPlaySpeed(1.2F)
                 //更改后摇
-                .addTimeEvent(new TimeStampedEvent(1.65F, (entityPatch) -> {
+                .addTimeEvent(new TimeStampedEvent(1.75F, (entityPatch) -> {
                     entityPatch.playAnimationSynchronized(Animations.TACHI_AUTO1, -0.9F);
                 }));
         ComboNode Auto3 = ComboNode.createNode(() -> StarAnimations.YAMATO_AUTO4)
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.ComboTimer),0,10))
-                .setPriority(2).setPlaySpeed(1.15F).setConvertTime(-0.15F).setStunTypeModifier(StunType.HOLD).setImpactMultiplier(2F)
-                .addTimeEvent(new TimeStampedEvent(0.2F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.ComboTimer.get(),40));
-                }))
+                .setPlaySpeed(1.15F).setConvertTime(-0.15F).setStunTypeModifier(StunType.HOLD).setImpactMultiplier(2F)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
                 }));
@@ -86,6 +69,9 @@ public class StellairsComboTachi {
                 }))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 2", false))
                 .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(Sounds.FORESIGHT, 0, 0))))
+                .addDodgeSuccessEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 40));
+                }))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s", true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s epicacg:stop 2", true))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("effect give @s star:slowtime 2", true))
@@ -97,8 +83,7 @@ public class StellairsComboTachi {
         ComboNode Skill_LethalSlicing_Start = ComboNode.createNode(() -> StarAnimations.LETHAL_SLICING_START)
                 .addCondition(new StackCondition(1, 4))
                 .setPlaySpeed(0.8F).setConvertTime(0.15F).setPlaySpeed(0.6F).setNotCharge(true).setPriority(2).setStunTypeModifier(StunType.LONG)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F,"invincible consumeStack 1", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 2", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStack 1", false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get(), MAX_VALUE));
                 }))
@@ -117,10 +102,9 @@ public class StellairsComboTachi {
                     }}));
 
         ComboNode Skill_UpperSlash_Once = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER1)
-                .addCondition(new PlayerPhaseCondition(2,2))
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.ComboTimer),0,10))
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,10))
                 .addCondition(new StackCondition(1, 4))
-                .setPriority(3).setNotCharge(true).setConvertTime(-0.15F).setPlaySpeed(1.3F).setNewPhase(1).setStunTypeModifier(StunType.LONG)
+                .setPriority(3).setNotCharge(true).setConvertTime(-0.15F).setPlaySpeed(1.3F).setStunTypeModifier(StunType.LONG)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get(), 400));
                 }))
@@ -148,10 +132,9 @@ public class StellairsComboTachi {
                 }));
 
         ComboNode Skill_DodgeCounter_Dodge = ComboNode.createNode(() -> WOMAnimations.KNIGHT_ROLL_BACKWARD)
-                .addCondition(new PlayerPhaseCondition(2,2))
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.ComboTimer),0,10))
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,10))
                 .addCondition(new StackCondition(1, 4))
-                .setNotCharge(true).setPriority(3).setNewPhase(1)
+                .setNotCharge(true).setPriority(3)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "invincible consumeStack 1", false))
                 .addDodgeSuccessEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().removeEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get()).getEffect());
@@ -179,8 +162,7 @@ public class StellairsComboTachi {
 
         ComboNode Skill_LethalSlicing_Start_Combo = ComboNode.createNode(() -> StarAnimations.LETHAL_SLICING_START)
                 .addCondition(new StackCondition(1, 4))
-                .addCondition(new PlayerPhaseCondition(2,2))
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.ComboTimer),0,10))
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,10))
                 .setNotCharge(true).setPriority(3).setStunTypeModifier(StunType.LONG)
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 3", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "invincible consumeStack 1", false))
@@ -206,7 +188,7 @@ public class StellairsComboTachi {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}));
         ComboNode Skill_LethalSlicing_Twice_Combo = ComboNode.createNode(() -> Animations.RUSHING_TEMPO2)
-                .setNotCharge(true).setConvertTime(-0.05F).setDamageMultiplier(ValueModifier.multiplier(1.5F)).setImpactMultiplier(2F)
+                .setNotCharge(true).setConvertTime(-0.05F).setNewPhase(1).setDamageMultiplier(ValueModifier.multiplier(1.5F)).setImpactMultiplier(2F)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().removeEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get()).getEffect());
                 }))
@@ -272,6 +254,7 @@ public class StellairsComboTachi {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3.5 false false false", true));
 
         ComboNode Final_Skill_CrossSlash_Once = ComboNode.createNode(()->StarAnimations.YAMATO_STRIKE1)
+                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.Success),0,10))
                 .addCondition(new DodgeSuccessCondition())
                 .setNotCharge(true).setStunTypeModifier(StunType.HOLD).setPriority(4).setConvertTime(-0.1F).setStunTypeModifier(StunType.LONG).setCanBeInterrupt(false)
                 .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch -> {
@@ -317,7 +300,7 @@ public class StellairsComboTachi {
 
         ComboNode Final_Skill_Execute = ComboNode.createNode(()-> StarAnimations.TACHI_EXECUTE)
                 .addCondition(new MobEffectCondition(true, (ArcEffectsRegistry.Success), 0, 10))
-                .setPriority(10).setNotCharge(true).setArmorNegation(100).setDamageMultiplier(ValueModifier.multiplier(0.5F))
+                .setPriority(10).setNotCharge(true).setArmorNegation(100).setNewPhase(1)
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s star:slowtime 2",true))
                 .addHitEvent(BiEvent.createBiCommandEvent("effect give @s epicacg:stop 2",true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "particle biomesoplenty:dripping_blood ~ ~1 ~ 1.9 1 1.9 1 45", false))
@@ -346,12 +329,10 @@ public class StellairsComboTachi {
         ComboNode Attack2 = ComboNode.create()
                 .addConditionAnimation(Dash)
                 .addConditionAnimation(Jump)
-                .addConditionAnimation(Auto1)
                 .addConditionAnimation(Auto2);
         ComboNode Attack3 = ComboNode.create()
                 .addConditionAnimation(Dash)
                 .addConditionAnimation(Jump)
-                .addConditionAnimation(Auto1)
                 .addConditionAnimation(Auto3);
 
         ComboNode DefeatSkills = ComboNode.create()
