@@ -44,7 +44,7 @@ public class TachiEnhancedPhaseParticle {
 
             // 圆环参数
             int particles = 20; // 粒子数量（增加平滑度）
-            double baseRadius = 2.0; // 基础半径
+            double baseRadius = 2.8; // 基础半径
             float baseAlpha = 0.7f; // 基础透明度
 
             // 动态参数
@@ -71,7 +71,7 @@ public class TachiEnhancedPhaseParticle {
                         true, // 强制渲染
                         x, pos.y + 0.1 + yOffset, z, // Y轴波动
                         flowSpeed * Math.cos(angle), // X方向流动
-                        0.05, // 轻微上升
+                        0.1, // 轻微上升
                         flowSpeed * Math.sin(angle)  // Z方向流动
                 );
             }

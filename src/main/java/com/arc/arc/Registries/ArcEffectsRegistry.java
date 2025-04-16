@@ -54,6 +54,9 @@ public class ArcEffectsRegistry {
     public static final RegistryObject<MobEffect> Success =
             EFFECTS.register("dodgesuccess", Success::new);
     //
+    public static final RegistryObject<MobEffect> ComboTimer =
+            EFFECTS.register("combotimer", ComboTimer::new);
+    //
     public static final RegistryObject<MobEffect> TACHI_ENHANCED_PHASE =
             EFFECTS.register("tachienhancedphase", TachiEnhancedPhase::new);
     //
