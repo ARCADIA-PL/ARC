@@ -140,7 +140,7 @@ public class StellairsComboTachi {
                     }}));;
 
         ComboNode Skill_LethalSlicing_Start = ComboNode.createNode(() -> StarAnimations.LETHAL_SLICING_START)
-                .addCondition(new StackCondition(1, 4))
+                .addCondition(new StackCondition(1, MAX_VALUE))
                 .setPlaySpeed(0.8F).setConvertTime(0.15F).setPlaySpeed(0.6F).setNotCharge(true).setPriority(2).setStunTypeModifier(StunType.HOLD).setImpactMultiplier(3)
                 .addTimeEvent(new TimeStampedEvent(0.15F, (entityPatch -> {
                     if (entityPatch instanceof ServerPlayerPatch serverPlayerPatch) {
@@ -174,7 +174,7 @@ public class StellairsComboTachi {
 
         ComboNode Skill_UpperSlash_Once = ComboNode.createNode(() -> StarAnimations.YAMATO_POWER1)
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,10))
-                .addCondition(new StackCondition(1, 4))
+                .addCondition(new StackCondition(1, MAX_VALUE))
                 .setPriority(3).setNotCharge(true).setConvertTime(-0.15F).setPlaySpeed(1.3F).setStunTypeModifier(StunType.LONG)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get(), 400));
@@ -204,7 +204,7 @@ public class StellairsComboTachi {
 
         ComboNode Skill_DodgeCounter_Dodge = ComboNode.createNode(() -> WOMAnimations.KNIGHT_ROLL_BACKWARD)
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,10))
-                .addCondition(new StackCondition(1, 4))
+                .addCondition(new StackCondition(1, MAX_VALUE))
                 .setNotCharge(true).setPriority(3)
                 .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
                     if (entityPatch instanceof ServerPlayerPatch serverPlayerPatch) {
@@ -247,7 +247,7 @@ public class StellairsComboTachi {
                 }));
 
         ComboNode Skill_LethalSlicing_Start_Combo = ComboNode.createNode(() -> StarAnimations.LETHAL_SLICING_START)
-                .addCondition(new StackCondition(1, 4))
+                .addCondition(new StackCondition(1, MAX_VALUE))
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,10))
                 .setNotCharge(true).setPriority(3).setStunTypeModifier(StunType.HOLD).setImpactMultiplier(3)
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 3", false))
