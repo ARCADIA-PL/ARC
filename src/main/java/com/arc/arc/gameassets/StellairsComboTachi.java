@@ -44,14 +44,7 @@ public class StellairsComboTachi {
         ComboNode Jump = ComboNode.createNode(() -> StarAnimations.YAMATO_AIRSLASH)
                 .addCondition(new JumpCondition())
                 .setPriority(5)
-                .setConvertTime(-0.1F).setPlaySpeed(1.3F)
-                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
-                    if (entityPatch instanceof ServerPlayerPatch serverPlayerPatch) {
-                        SkillContainer container = serverPlayerPatch.getSkill(SkillSlots.WEAPON_INNATE);
-                        container.getSkill().setStackSynchronize(serverPlayerPatch, container.getStack() - 1);
-                        container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 1);
-                    }
-                })));
+                .setConvertTime(-0.1F).setPlaySpeed(1.3F);
         ComboNode Dash = ComboNode.createNode(() -> StarAnimations.LONGSWORD_OLD_DASH)
                 .addCondition(new SprintingCondition())
                 .setPriority(5)
@@ -79,7 +72,7 @@ public class StellairsComboTachi {
 
         ComboNode Auto3_Enhanced = ComboNode.createNode(() -> StarAnimations.YAMATO_AUTO4)
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,10))
-                .setPriority(2).setConvertTime(-0.15F).setPlaySpeed(1.2F).setStunTypeModifier(StunType.HOLD).setHurtDamageMultiplier(1.3F)
+                .setPriority(2).setConvertTime(-0.15F).setPlaySpeed(1.2F).setDamageMultiplier(ValueModifier.multiplier(2)).setStunTypeModifier(StunType.HOLD).setHurtDamageMultiplier(1.3F)
                 .addTimeEvent(new TimeStampedEvent(0.5F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 20));
                 }))
@@ -94,7 +87,7 @@ public class StellairsComboTachi {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
                 }));
         ComboNode Auto3_1_Enhanced = ComboNode.createNode(() -> Animations.AXE_DASH)
-                .setHurtDamageMultiplier(1.3F).setPlaySpeed(1.1F).setConvertTime(-0.1F).setStunTypeModifier(StunType.HOLD).setHurtDamageMultiplier(1.3F)
+                .setHurtDamageMultiplier(1.3F).setDamageMultiplier(ValueModifier.multiplier(2)).setPlaySpeed(1.1F).setConvertTime(-0.1F).setStunTypeModifier(StunType.HOLD).setHurtDamageMultiplier(1.3F)
                 .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 20));
                 }))
@@ -146,11 +139,11 @@ public class StellairsComboTachi {
                     if (entityPatch instanceof ServerPlayerPatch serverPlayerPatch) {
                         SkillContainer container = serverPlayerPatch.getSkill(SkillSlots.WEAPON_INNATE);
                         container.getSkill().setStackSynchronize(serverPlayerPatch, container.getStack() - 1);
-                        container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 40);
+                        container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 1);
                     }
                 })))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get(), 600));
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get(), 1200));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {if (entityPatch.getOriginal()instanceof ServerPlayer serverPlayer) {
                     ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -161,7 +154,7 @@ public class StellairsComboTachi {
                     if (entityPatch instanceof ServerPlayerPatch serverPlayerPatch) {
                         SkillContainer container = serverPlayerPatch.getSkill(SkillSlots.WEAPON_INNATE);
                         container.getSkill().setStackSynchronize(serverPlayerPatch, container.getStack() + 1);
-                        container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 40);
+                        container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 1);
                     }
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
@@ -185,7 +178,7 @@ public class StellairsComboTachi {
                 .addTimeEvent(new TimeStampedEvent(0.2F, (entityPatch -> {
                     if (entityPatch instanceof ServerPlayerPatch serverPlayerPatch) {
                         SkillContainer container = serverPlayerPatch.getSkill(SkillSlots.WEAPON_INNATE);
-                        container.getSkill().setStackSynchronize(serverPlayerPatch, container.getStack() - 2);
+                        container.getSkill().setStackSynchronize(serverPlayerPatch, container.getStack() - 1);
                         container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 1);
                     }
                 })))
@@ -314,7 +307,6 @@ public class StellairsComboTachi {
         ComboNode Final_Skill_RushingTempo_Once = ComboNode.createNode(()-> StarAnimations.YAMATO_POWER1)
                 .addCondition(new ParrySuccessCondition())
                 .addCondition(new StackCondition(2, 4))
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,MAX_VALUE))
                 .addCondition(new MobEffectCondition(false, (ArcEffectsRegistry.TACHIFINALSKILLA), 0,MAX_VALUE))
                 .setPriority(6).setNotCharge(true).setStunTypeModifier(StunType.LONG)
                 .setImpactMultiplier(3).setConvertTime(-0.15F).setPlaySpeed(1.3F).setCanBeInterrupt(false)
@@ -369,7 +361,6 @@ public class StellairsComboTachi {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3.5 false false false", true));
 
         ComboNode Final_Skill_CrossSlash_Once = ComboNode.createNode(()->StarAnimations.YAMATO_STRIKE1)
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,MAX_VALUE))
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.Success),0,10))
                 .addCondition(new DodgeSuccessCondition())
                 .setNotCharge(true).setStunTypeModifier(StunType.LONG).setPriority(4).setConvertTime(-0.1F).setStunTypeModifier(StunType.LONG).setCanBeInterrupt(false)
@@ -404,9 +395,8 @@ public class StellairsComboTachi {
                     }}));
 
         ComboNode Final_Skill_Execute = ComboNode.createNode(()-> StarAnimations.TACHI_EXECUTE)
-                .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,MAX_VALUE))
                 .addCondition(new MobEffectCondition(true, (ArcEffectsRegistry.Success), 0,MAX_VALUE))
-                .setPriority(10).setNotCharge(true).setArmorNegation(110).setDamageMultiplier(ValueModifier.multiplier(0.7F)).setNewPhase(1).setStunTypeModifier(StunType.LONG)
+                .setPriority(10).setNotCharge(true).setArmorNegation(150).setDamageMultiplier(ValueModifier.setter(100)).setNewPhase(1).setStunTypeModifier(StunType.LONG)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
