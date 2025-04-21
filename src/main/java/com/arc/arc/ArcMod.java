@@ -8,6 +8,7 @@ import com.arc.arc.events.ArcbladeAttributeHandlers;
 //import com.arc.arc.events.StarWeaponMechanic;
 import com.arc.arc.gameassets.Arcblade;
 import com.arc.arc.gameassets.ArcbladeTransformed;
+import com.arc.arc.gameassets.StellairsComboTachi;
 import io.redspace.ironsspellbooks.registries.EntityRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,17 +32,16 @@ public class ArcMod {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(ArcbladeAttributeHandlers.class);
-
 //        MinecraftForge.EVENT_BUS.register(StarWeaponMechanic.class);
 //        无坚不摧技能注册
         Arcblade.registerSkills();//注册Arcblade的无坚不摧技能
         ArcbladeTransformed.registerSkills();//注册ArcbladeTransformed的无坚不摧技能
+        StellairsComboTachi.registerSkills();
         //注册表
         ArcSoundRegistry.SOUNDS.register(bus);//音效注册表
         ArcBladeItemRegistry.ITEMS.register(bus);//物品注册表
         ArcEffectsRegistry.EFFECTS.register(bus);//药水注册表
         ArcEntities.register(bus);      //实体注册表
-
     }
 }
 

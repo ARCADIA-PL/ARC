@@ -1,8 +1,5 @@
 package com.arc.arc.entity;
 
- // 根据你的实际包结构调整
-
-
 import com.arc.arc.Registries.ArcEntities;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;

@@ -110,7 +110,7 @@ public class StellairsComboTachi {
                     }
                 })))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get(), 1200));
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get(), 400));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {if (entityPatch.getOriginal()instanceof ServerPlayer serverPlayer) {
                     ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -179,20 +179,21 @@ public class StellairsComboTachi {
                 })))
                 .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> entityPatch.playSound(Sounds.FORESIGHT, 0, 0))))
                 .addDodgeSuccessEvent(BiEvent.createBiCommandEvent("invincible entityAfterImage @s", true))
+                .addDodgeSuccessEvent(new BiEvent(((entityPatch, entity) -> {
+                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
+                    if(targetPatch != null){
+                        targetPatch.playAnimationSynchronized(Animations.BIPED_HIT_LONG, 2);
+                    }
+                })))
                 .addDodgeSuccessEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),15));}
-                }))
-                .addDodgeSuccessEvent(new BiEvent((entityPatch, entity) -> {
-                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
-                    if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(com.dfdyz.epicacg.registry.MobEffects.STOP.get(),15));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(com.dfdyz.epicacg.registry.MobEffects.STOP.get(),40));}
                 }))
                 .addDodgeSuccessEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 30));
                 }))
-                .addTimeEvent(new TimeStampedEvent(0.2F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.13F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}));
@@ -224,7 +225,7 @@ public class StellairsComboTachi {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),40));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),30));}
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
@@ -246,12 +247,12 @@ public class StellairsComboTachi {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),20));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),30));}
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(com.dfdyz.epicacg.registry.MobEffects.STOP.get(), 20));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(com.dfdyz.epicacg.registry.MobEffects.STOP.get(), 30));}
                 }))
                 .addHitEvent(BiEvent.createBiCommandEvent("particle biomesoplenty:dripping_blood ~ ~1 ~ 1.9 1 1.9 1 45",false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
@@ -274,7 +275,7 @@ public class StellairsComboTachi {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 800));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 400));}
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch -> {
                     entityPatch.getOriginal().removeEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get()).getEffect());
@@ -297,7 +298,7 @@ public class StellairsComboTachi {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(),800));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(),400));}
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
@@ -326,6 +327,17 @@ public class StellairsComboTachi {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
                 }))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
+                    if(targetPatch != null){
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 400));}
+                }))
+                .addHitEvent(new BiEvent(((entityPatch, entity) -> {
+                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
+                    if(targetPatch != null){
+                        targetPatch.playAnimationSynchronized(Animations.BIPED_HIT_LONG, 0);
+                    }
+                })))
                 .addTimeEvent(new TimeStampedEvent(1F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -335,6 +347,17 @@ public class StellairsComboTachi {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,  0,0);
                 }))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
+                    if(targetPatch != null){
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 400));}
+                }))
+                .addHitEvent(new BiEvent(((entityPatch, entity) -> {
+                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
+                    if(targetPatch != null){
+                        targetPatch.playAnimationSynchronized(Animations.BIPED_HIT_LONG, 0);
+                    }
+                })))
                 .addTimeEvent(new TimeStampedEvent(0.8F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -342,21 +365,32 @@ public class StellairsComboTachi {
         ComboNode Final_Skill_CrossSlash_Thrid = ComboNode.createNode(()->Animations.RUSHING_TEMPO2)
                 .setNotCharge(true).setStunTypeModifier(StunType.LONG).setArmorNegation(70).setDamageMultiplier(ValueModifier.multiplier(1.2F)).setImpactMultiplier(2F).setConvertTime(0.2F).setCanBeInterrupt(false)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
+                    if(targetPatch != null){
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 400));}
+                }))
+                .addHitEvent(new BiEvent(((entityPatch, entity) -> {
+                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
+                    if(targetPatch != null){
+                        targetPatch.playAnimationSynchronized(Animations.BIPED_HIT_LONG, 0);
+                    }
+                })))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,  0,0);
                 }));
 
         ComboNode Final_Skill_Execute = ComboNode.createNode(()-> StarAnimations.TACHI_EXECUTE)
                 .addCondition(new MobEffectCondition(true, (ArcEffectsRegistry.Success), 0,MAX_VALUE))
-                .setPriority(10).setNotCharge(true).setArmorNegation(140).setDamageMultiplier(ValueModifier.multiplier(0.6F)).setNewPhase(1).setStunTypeModifier(StunType.LONG)
+                .setPriority(10).setNotCharge(true).setArmorNegation(150).setDamageMultiplier(ValueModifier.multiplier(0.7F)).setNewPhase(1)
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),40));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),30));}
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(com.dfdyz.epicacg.registry.MobEffects.STOP.get(), 40));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(com.dfdyz.epicacg.registry.MobEffects.STOP.get(), 30));}
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch -> {
                     if (entityPatch instanceof ServerPlayerPatch serverPlayerPatch) {

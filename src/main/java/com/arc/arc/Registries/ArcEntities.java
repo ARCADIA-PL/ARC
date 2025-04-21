@@ -23,6 +23,6 @@ public class ArcEntities {
             ENTITIES.register("sword_qi", () -> EntityType.Builder.<Sword>of(Sword::new, MobCategory.MISC)
                     .sized(2f, .5f)
                     .clientTrackingRange(64)
-                    .build(new ResourceLocation("hdk_mod", "sword_qi").toString()));
+                    .build(new ResourceLocation("arc", "sword_qi").toString()));
 
 }
