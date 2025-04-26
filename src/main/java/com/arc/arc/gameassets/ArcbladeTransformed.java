@@ -4,7 +4,6 @@ import com.arc.arc.ArcMod;
 import com.arc.arc.Registries.ArcEffectsRegistry;
 import com.arc.arc.Registries.ArcSoundRegistry;
 import com.arc.arc.skill.ArcbladeTransformedSkill;
-import com.dfdyz.epicacg.registry.MobEffects;
 import com.guhao.star.efmex.StarAnimations;
 import com.nameless.toybox.ToyBox;
 import com.p1nero.invincible.api.events.BiEvent;
@@ -20,6 +19,7 @@ import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.event.sound.SoundEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -56,7 +56,9 @@ public class ArcbladeTransformed {
                     }
                 })
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"invincible consumeStamina 3",false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"effect give @s minecraft:slow_falling 2",false));
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 40));
+                }));
         ComboNode ArcbladeTransformedAirStrikeAuto2 = ComboNode.createNode(() -> WOMAnimations.TORMENT_AUTO_4)
                 .setPriority(4).setConvertTime(-0.25F).addCondition(new UpCondition())
                 .addCondition(new CustomCondition() {
@@ -159,7 +161,9 @@ public class ArcbladeTransformed {
 
         ComboNode ArcbladeTransformedRevelationAirFirst = ComboNode.createNode(() -> WOMAnimations.ENDERBLASTER_ONEHAND_AUTO_1)
                 .setPriority(4).setConvertTime(0.1F).setPlaySpeed(0.9F)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s arc:alhpa 1",false))
+                .addTimeEvent(new TimeStampedEvent(0.2F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.HEXAGRAMAlapha.get(), 20));
+                }))
                 .addCondition(new CustomCondition() {
                     @Override
                     public boolean predicate(LivingEntityPatch<?> entityPatch) {
@@ -174,7 +178,9 @@ public class ArcbladeTransformed {
                     }
                 })
                 .addHitEvent(BiEvent.createBiCommandEvent("invincible setPlayerPhase 2", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F,"effect give @s minecraft:slow_falling 1",false))
+                .addTimeEvent(new TimeStampedEvent(0.2F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 20));
+                }))
                 .addTimeEvent(new TimeStampedEvent(0.29F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.WEAPON_INNATE);
@@ -258,7 +264,6 @@ public class ArcbladeTransformed {
                     }}));;
         ComboNode ArcbladeTransformedRevelationAirEnd = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_4_POLVORA)
                 .setConvertTime(0.2F);
-
 
         ComboNode ArcbladeTransformedRevelationGroundFirst = ComboNode.createNode(() -> WOMAnimations.SOLAR_AUTO_3_POLVORA)
                 .setConvertTime(0.3F).setPlaySpeed(0.7F)
@@ -1139,6 +1144,7 @@ public class ArcbladeTransformed {
                     }}));
         ComboNode ab_6_1= ComboNode.createNode(()-> WOMAnimations.TORMENT_BERSERK_AIRSLAM)
                 .setConvertTime(0.2F).setPlaySpeed(0.9F);
+
         ArcbladeTransformedroot.key1(ab);
         ab.key1(ab_1);
         ab_1.key1(ab_2);
@@ -1147,7 +1153,6 @@ public class ArcbladeTransformed {
         ab_4.key1(ab_5);
         ab_5.key1(ab_6);
         ab_6.key1(ab_6_1);
-
         ab_6_1.key1(ab);
 
 

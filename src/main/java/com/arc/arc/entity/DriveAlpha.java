@@ -3,32 +3,26 @@ package com.arc.arc.entity;
 import com.arc.arc.Registries.ArcEntities;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.entity.spells.AbstractShieldEntity;
-import io.redspace.ironsspellbooks.entity.spells.ShieldPart;
-import io.redspace.ironsspellbooks.entity.spells.blood_slash.BloodSlashProjectile;
 import io.redspace.ironsspellbooks.spells.SchoolType;
 import io.redspace.ironsspellbooks.spells.SpellType;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
-import net.minecraftforge.network.PlayMessages;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Sword extends Projectile {
+public class DriveAlpha extends Projectile {
     //     基础参数配置
-    private static final EntityDataAccessor<Float> DATA_RADIUS = SynchedEntityData.defineId(Sword.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_RADIUS = SynchedEntityData.defineId(DriveAlpha.class, EntityDataSerializers.FLOAT);
     public final int animationSeed;     //0-9998的随机数
     private final float maxRadius;      //最大半径
     private EntityDimensions dimensions;     //高度
@@ -41,18 +35,18 @@ public class Sword extends Projectile {
     private static final int EXPIRE_TIME = 8 * 20;      //存在4秒
 
     public int animationTime;
-    public float jiaodu;
+    public float Angle;
 
 
     // 定义同步数据
-    private static final EntityDataAccessor<Float> DATA_ANGLE = SynchedEntityData.defineId(Sword.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_ANGLE = SynchedEntityData.defineId(DriveAlpha.class, EntityDataSerializers.FLOAT);
 
 
 
 
 
     // 必须的构造函数
-    public Sword(EntityType<? extends Sword> entityType, Level level) {
+    public DriveAlpha(EntityType<? extends DriveAlpha> entityType, Level level) {
         super(entityType, level);
         animationSeed = level.random.nextInt(9999);
 
@@ -65,7 +59,7 @@ public class Sword extends Projectile {
     }
 
 
-    public Sword(EntityType<? extends Sword> entityType, Level levelIn, LivingEntity shooter) {
+    public DriveAlpha(EntityType<? extends DriveAlpha> entityType, Level levelIn, LivingEntity shooter) {
         this(entityType, levelIn);      //初始化基础属性
         setOwner(shooter);              //记录实体的发射者:
         setYRot(shooter.getYRot());     //设置旋转角度
@@ -76,8 +70,8 @@ public class Sword extends Projectile {
     }
 
 
-    public Sword(Level levelIn, LivingEntity shooter) {
-        this(ArcEntities.Sword_Qi.get(), levelIn, shooter);
+    public DriveAlpha(Level levelIn, LivingEntity shooter) {
+        this(ArcEntities.Drive.get(), levelIn, shooter);
     }
 
     public void setspeed(double speed) {                //速度构造函数
@@ -131,8 +125,8 @@ public class Sword extends Projectile {
         this.setPos(d0, d1, d2);
     }
 
-    public void setjiaodu(float jiaodu_){
-        this.jiaodu=jiaodu_;
+    public void setangle(float angle_){
+        this.Angle =angle_;
     }
 
     @Override
@@ -161,14 +155,10 @@ public class Sword extends Projectile {
 
         setPos(position().add(getDeltaMovement()));         //更新位置
     }
-
-
     public EntityDimensions getDimensions(Pose p_19721_) {
         this.getBoundingBox();
         return EntityDimensions.scalable(this.getRadius() + 2.0F,4.0F);
     }
-
-
     public void onSyncedDataUpdated(EntityDataAccessor<?> p_19729_) {   //响应实体同步数据的更新事件
         if (DATA_RADIUS.equals(p_19729_)) {
             this.refreshDimensions();
@@ -176,21 +166,15 @@ public class Sword extends Projectile {
 
         super.onSyncedDataUpdated(p_19729_);
     }
-
-
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {      //在击中方块时移除
         super.onHitBlock(blockHitResult);
         discard();
     }
-
-
-    private void damageEntity(Entity entity) {              ///照成伤害
+    private void damageEntity(Entity entity) {              ///伤害
         if (!victims.contains(entity)) {
             var hit = DamageSources.applyDamage(entity, damage, SpellType.BLOOD_SLASH_SPELL.getDamageSource(this, getOwner()), SchoolType.BLOOD);   //调用 DamageSources.applyDamage 方法对实体应用伤害
             victims.add(entity);
         }
     }
-
-
 }

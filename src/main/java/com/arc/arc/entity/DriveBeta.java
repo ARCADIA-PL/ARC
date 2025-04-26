@@ -17,8 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
-public class Sword2 extends EntityRenderer<Sword> {
-
+public class DriveBeta extends EntityRenderer<DriveAlpha> {
 
     public static ResourceLocation id(@NotNull String path) {
         return new ResourceLocation("hdk_mod", path);
@@ -29,14 +28,14 @@ public class Sword2 extends EntityRenderer<Sword> {
     };
 
 
-    public Sword2(Context context) {
+    public DriveBeta(Context context) {
         super(context);
     }
 
 
 
     @Override
-    public void render(Sword entity, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
+    public void render(DriveAlpha entity, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
         poseStack.pushPose();
 
         Pose pose = poseStack.last();
@@ -65,7 +64,7 @@ public class Sword2 extends EntityRenderer<Sword> {
     }
 
 
-    private void drawSlash(Pose pose, Sword entity, MultiBufferSource bufferSource, int light, float width, int offset) {
+    private void drawSlash(Pose pose, DriveAlpha entity, MultiBufferSource bufferSource, int light, float width, int offset) {
         Matrix4f poseMatrix = pose.pose();
         Matrix3f normalMatrix = pose.normal();
 
@@ -80,13 +79,13 @@ public class Sword2 extends EntityRenderer<Sword> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Sword entity) {
+    public ResourceLocation getTextureLocation(DriveAlpha entity) {
         int frame = (entity.animationTime / 4) % TEXTURES.length;
         return TEXTURES[frame];
         //return TEXTURE;
     }
 
-    private ResourceLocation getTextureLocation(Sword entity,int offset) {
+    private ResourceLocation getTextureLocation(DriveAlpha entity,int offset) {
         int frame = (entity.animationTime / 6 + offset) % TEXTURES.length;
         return TEXTURES[frame];
     }

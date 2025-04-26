@@ -12,7 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientModEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        EntityRenderers.register(ArcEntities.Sword_Qi.get(), Sword2::new);
+        EntityRenderers.register(ArcEntities.Drive.get(), DriveBeta::new);
 
     }
 }

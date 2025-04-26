@@ -1,0 +1,28 @@
+{
+	"trail_effects": [
+		{
+			"begin_pos": [0.0, 0.0, 0.7],
+    		"end_pos": [0.0, 0.0, -2.5],
+			"start_time": 0.6,
+			"end_time": 1,
+			"lifetime": 13,
+			"joint": "Tool_R",
+			"interpolations": 5,
+			"item_skin_hand": "main_hand",
+			 "texture_path": "epicfight:textures/particle/trail14.png",
+    		"particle_type": "epicacg:bloom_trail"
+		},
+		{
+			"begin_pos": [-0.25, 0.0, 0.8],
+    		"end_pos": [-0.5, -0.2, -5],
+			"start_time": 1.4,
+			"end_time": 2,
+			"lifetime": 13,
+			"joint": "Tool_R",
+			"interpolations": 5,
+			"item_skin_hand": "main_hand",
+			 "texture_path": "epicfight:textures/particle/trail14.png",
+    		"particle_type": "epicacg:bloom_trail"
+		}
+	]
+}

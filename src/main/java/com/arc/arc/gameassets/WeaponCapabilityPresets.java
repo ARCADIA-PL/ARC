@@ -13,6 +13,7 @@ import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.ColliderPreset;
 import yesman.epicfight.gameasset.EpicFightSounds;
+import yesman.epicfight.particle.EpicFightParticles;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.WeaponCapability;
 
@@ -26,7 +27,7 @@ public class WeaponCapabilityPresets {
                     .collider(new MultiOBBCollider(8, 0.4, 0.4, 0.95, 0.0, 0.0, -0.95))//这里可以用预设的，也可以new 一个
                     .swingSound(EpicFightSounds.WHOOSH)
                     .hitSound(EpicFightSounds.BLADE_HIT)
-                    .hitParticle(WOMParticles.OVERBLOOD_HIT.get())
+                    .hitParticle(WOMParticles.KATANA_SHEATHED_HIT.get())
                     .canBePlacedOffhand(false)
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
                     .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> Arcblade.Arcblade)
@@ -58,7 +59,7 @@ public class WeaponCapabilityPresets {
                     .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
                     .swingSound(EpicFightSounds.WHOOSH)
                     .hitSound(EpicFightSounds.BLADE_HIT)
-                    .hitParticle(WOMParticles.OVERBLOOD_HIT.get())
+                    .hitParticle(EpicFightParticles.HIT_BLADE.get())
                     .canBePlacedOffhand(false)
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
                     .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> StellairsComboTachi.StellairsComboTachi)
