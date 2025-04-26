@@ -34,10 +34,12 @@ import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.model.armature.HumanoidArmature;
 import yesman.epicfight.particle.EpicFightParticles;
+import yesman.epicfight.world.damagesource.SourceTags;
 import yesman.epicfight.world.damagesource.StunType;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -65,7 +67,7 @@ public class ArcAnimations {
                 .addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER, ((dynamicAnimation, livingEntityPatch, v, v1) -> 1.0F));
         Gesshoku = (new BasicAttackAnimation(0.05F, 2.05F, 2.1F, 5.65F,
                                              GESSHOKU, biped.rootJoint, "biped/combat/gesshoku", biped))
-                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
+                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                 .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(100.0F))
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(100.0F))
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.multiplier(10.0F))
@@ -73,6 +75,7 @@ public class ArcAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, EpicFightSounds.NO_SOUND)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, ArcSoundRegistry.Gesshoku.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, WOMParticles.ANTITHEUS_HIT_DOWN)
+                .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(SourceTags.WEAPON_INNATE, SourceTags.GUARD_PUNCTURE))
                 .addProperty(AnimationProperty.AttackAnimationProperty.ATTACK_SPEED_FACTOR, 0.0F)
                 .addEvents(
                 // 时间区间事件：0.05s-1.5s的粒子效果
@@ -111,7 +114,6 @@ public class ArcAnimations {
                                     41, 10, true, false, false
                             ));
                         }, AnimationEvent.Side.SERVER),
-
                         // 时间戳事件：2.05s施加伤害提升和护盾
                         AnimationEvent.TimeStampedEvent.create(2.05F, (entitypatch, self, params) -> {
                             entitypatch.getOriginal().addEffect(new MobEffectInstance(
@@ -122,7 +124,6 @@ public class ArcAnimations {
                                     MobEffects.ABSORPTION,
                                     21, 0, true, false, false
                             ));
-
                             // 爆发粒子效果
                             OpenMatrix4f baseRotation = new OpenMatrix4f();
                             for(int i = 0; i < 170; ++i) {
@@ -143,7 +144,6 @@ public class ArcAnimations {
                                         1, 0.0, 0.0, 0.0, 0.0
                                 );
                             }
-
                             // 地面冲击波粒子
                             for(int i = 0; i < 50; ++i) {
                                 Vec3f direction = new Vec3f(0.0F, 0.0F, 0.0F);
@@ -166,7 +166,6 @@ public class ArcAnimations {
                                 }
                             }
                         }, AnimationEvent.Side.SERVER),
-
                         // 在4.65秒事件中添加以下内容：
                         AnimationEvent.TimeStampedEvent.create(4.65F, (entitypatch, self, params) -> {
                             if (!entitypatch.getOriginal().getLevel().isClientSide() && entitypatch.getOriginal() instanceof Player attacker) {
@@ -181,9 +180,9 @@ public class ArcAnimations {
                                     level.sendParticles(
                                             WOMParticles.ANTITHEUS_BLACKHOLE_END.get(),
                                             target.getX(),
-                                            target.getY() + target.getBbHeight() * 0.5,
+                                            target.getY() + target.getBbHeight() * 0.7,
                                             target.getZ(),
-                                            1, 0.5, 0.3, 0.5, 0.2
+                                            1, 0, 0, 0, 0
                                     );
                                     // 伤害来源构造
                                     DamageSource damageSource;
@@ -198,10 +197,10 @@ public class ArcAnimations {
                                             target.getX(),
                                             target.getY() + target.getBbHeight() * 1,
                                             target.getZ(),
-                                            15, 0.3, 0.2, 0.3, 0.1
+                                            5, 0.3, 0.2, 0.3, 0.1
                                     );
                                     // 造成伤害（30点）
-                                    target.hurt(damageSource, 30.0F);
+                                    target.hurt(damageSource, 100.0F);
                                 }
                             }
                         }, AnimationEvent.Side.SERVER)
@@ -211,6 +210,7 @@ public class ArcAnimations {
                                                                      FUSHIGIRI_HAIRUI_SLASH, biped.toolR, "biped/skill/fushigiri_hairui_slash_1", biped))
                 .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(30.0F))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.LONG)
+                .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(SourceTags.WEAPON_INNATE, SourceTags.GUARD_PUNCTURE))
                 .addProperty(AnimationProperty.AttackAnimationProperty.EXTRA_COLLIDERS, 2)
                 .addProperty(AnimationProperty.AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.1F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
@@ -218,6 +218,7 @@ public class ArcAnimations {
                                                                      FUSHIGIRI_HAIRUI_SLASH, biped.toolR, "biped/skill/fushigiri_hairui_slash_2", biped))
                 .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(50.0F))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.LONG)
+                .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(SourceTags.WEAPON_INNATE, SourceTags.GUARD_PUNCTURE))
                 .addProperty(AnimationProperty.AttackAnimationProperty.EXTRA_COLLIDERS, 2)
                 .addProperty(AnimationProperty.AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.1F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);

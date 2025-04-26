@@ -199,7 +199,15 @@ public class StellairsComboTachi {
                         container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 1);
                     }
                 })))
+                .addTimeEvent(new TimeStampedEvent(0.69F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
+                    }}))
                 .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
+                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
+                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
+                    }}))
+                .addTimeEvent(new TimeStampedEvent(0.71F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}));
