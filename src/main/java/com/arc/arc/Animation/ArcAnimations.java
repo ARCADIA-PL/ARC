@@ -2,7 +2,9 @@ package com.arc.arc.Animation;
 
 import com.arc.arc.ArcMod;
 import com.arc.arc.Registries.ArcSoundRegistry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
@@ -11,6 +13,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -46,7 +49,7 @@ import java.util.stream.Collectors;
 public class ArcAnimations {
     //碰撞箱
     public static final Collider GESSHOKU = new OBBCollider(6.0, 6.0, 14.0, 0.0, 0.0, -11.0);
-    private static final Collider FUSHIGIRI_HAIRUI_SLASH = new MultiOBBCollider(3, 0.4, 0.4, 4.0, 0.0, 0.0, 0.0);
+    private static final Collider FUSHIGIRI_HAIRUI_SLASH = new MultiOBBCollider(4, 0.6, 0.6, 5.0, 0.0, 0.0, 0.0);
     private static final Collider SAKURA_DANCE_COLL = new MultiOBBCollider(4, 0.8, 0.8, 6.0, 0.0, 0.0, 0.0);
     //雪华尘
     public static StaticAnimation SnowSlash;
@@ -77,8 +80,7 @@ public class ArcAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, WOMParticles.ANTITHEUS_HIT_DOWN)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(SourceTags.WEAPON_INNATE, SourceTags.GUARD_PUNCTURE))
                 .addProperty(AnimationProperty.AttackAnimationProperty.ATTACK_SPEED_FACTOR, 0.0F)
-                .addEvents(
-                // 时间区间事件：0.05s-1.5s的粒子效果
+                .addEvents(// 时间区间事件：0.05s-1.5s的粒子效果
                 AnimationEvent.TimePeriodEvent.create(0.05F, 1.5F, (entitypatch, self, params) -> {
                     if (!entitypatch.getOriginal().getLevel().isClientSide()) {
                         AnimationPlayer player = entitypatch.getAnimator().getPlayerFor(self);
@@ -104,14 +106,60 @@ public class ArcAnimations {
                             );
                         }
                     }
-                }, AnimationEvent.Side.SERVER)
-        )
+                }, AnimationEvent.Side.SERVER))
                 .addEvents(
                         // 时间戳事件：0.05s施加减速效果
                         AnimationEvent.TimeStampedEvent.create(0.05F, (entitypatch, self, params) -> {
                             entitypatch.getOriginal().addEffect(new MobEffectInstance(
                                     MobEffects.MOVEMENT_SLOWDOWN,
                                     41, 10, true, false, false
+                            ));
+                        }, AnimationEvent.Side.SERVER),
+                        AnimationEvent.TimeStampedEvent.create(0.05F, (entitypatch, self, params) -> {
+                            if (!entitypatch.getOriginal().getLevel().isClientSide()) {
+                                LivingEntity attacker = entitypatch.getOriginal();
+                                ServerLevel level = (ServerLevel) attacker.getLevel();
+                                // 获取 10 格半径内的所有生物（排除玩家）
+                                List<LivingEntity> nearbyEntities = level.getEntitiesOfClass(
+                                        LivingEntity.class,
+                                        new AABB(
+                                                attacker.getX() - 10, attacker.getY() - 10, attacker.getZ() - 10,
+                                                attacker.getX() + 10, attacker.getY() + 10, attacker.getZ() + 10
+                                        ),
+                                        entity -> entity != attacker && !(entity instanceof Player)
+                                );
+                                // 施加 7s 晕眩
+                                for (LivingEntity target : nearbyEntities) {
+                                    target.addEffect(new MobEffectInstance(
+                                            com.dfdyz.epicacg.registry.MobEffects.STOP.get(),
+                                            140,  // 7s = 140 ticks
+                                            0,     // 效果等级
+                                            true,  // 显示粒子
+                                            false, // 不显示图标
+                                            false  // 不显示提示
+                                    ));
+                                    //播放粒子效果
+                                    level.sendParticles(
+                                            ParticleTypes.SMOKE,
+                                            target.getX(),
+                                            target.getY() + target.getBbHeight() * 0.5,
+                                            target.getZ(),
+                                            10,  // 粒子数量
+                                            0.3, 0.2, 0.3,  // 随机偏移
+                                            0.1   // 基础速度
+                                    );
+                                }
+                            }
+                        }, AnimationEvent.Side.SERVER),
+                        // 时间戳事件：0.6s播放音效
+                        AnimationEvent.TimeStampedEvent.create(0.6F, (entitypatch, self, params) -> {
+                            entitypatch.playSound(ArcSoundRegistry.Timer.get(),0,0);
+                        }, AnimationEvent.Side.SERVER),
+                        // 时间戳事件：1.9s施加短暂失明效果
+                        AnimationEvent.TimeStampedEvent.create(1.9F, (entitypatch, self, params) -> {
+                            entitypatch.getOriginal().addEffect(new MobEffectInstance(
+                                    MobEffects.BLINDNESS,
+                                    20, 0, true, false, false
                             ));
                         }, AnimationEvent.Side.SERVER),
                         // 时间戳事件：2.05s施加伤害提升和护盾
@@ -126,7 +174,7 @@ public class ArcAnimations {
                             ));
                             // 爆发粒子效果
                             OpenMatrix4f baseRotation = new OpenMatrix4f();
-                            for(int i = 0; i < 170; ++i) {
+                            for(int i = 0; i < 200; ++i) {
                                 Vec3f direction = new Vec3f(0.0F, 0.0F, 0.0F);
                                 OpenMatrix4f rotation = new OpenMatrix4f(baseRotation)
                                         .rotate(-((float)Math.toRadians(entitypatch.getOriginal().getYRot() + 90.0F)), new Vec3f(0.0F, 1.0F, 0.0F))
@@ -199,10 +247,14 @@ public class ArcAnimations {
                                             target.getZ(),
                                             5, 0.3, 0.2, 0.3, 0.1
                                     );
-                                    // 造成伤害（30点）
+                                    // 造成伤害（100点）
                                     target.hurt(damageSource, 100.0F);
                                 }
                             }
+                        }, AnimationEvent.Side.SERVER),
+                        // 时间戳事件：5.5s播放音效
+                        AnimationEvent.TimeStampedEvent.create(5.5F, (entitypatch, self, params) -> {
+                            entitypatch.playSound(EpicFightSounds.WHOOSH_SHARP,0.5F,0.6F);
                         }, AnimationEvent.Side.SERVER)
                 );
 
@@ -211,14 +263,20 @@ public class ArcAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(30.0F))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.LONG)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(SourceTags.WEAPON_INNATE, SourceTags.GUARD_PUNCTURE))
+                .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.multiplier(5.0F))
+                .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, WOMParticles.OVERBLOOD_HIT)
+                .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(Float.MAX_VALUE))
                 .addProperty(AnimationProperty.AttackAnimationProperty.EXTRA_COLLIDERS, 2)
                 .addProperty(AnimationProperty.AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.1F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
         FUSHIGIRI_HAIRUI_SLASH_2 = (new BasicMultipleAttackAnimation(0.15F, 1.5F, 1.7F, 1.8F,
                                                                      FUSHIGIRI_HAIRUI_SLASH, biped.toolR, "biped/skill/fushigiri_hairui_slash_2", biped))
-                .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(50.0F))
-                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.LONG)
+                .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(40.0F))
+                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(SourceTags.WEAPON_INNATE, SourceTags.GUARD_PUNCTURE))
+                .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.multiplier(5.0F))
+                .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, WOMParticles.OVERBLOOD_HIT)
+                .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(Float.MAX_VALUE))
                 .addProperty(AnimationProperty.AttackAnimationProperty.EXTRA_COLLIDERS, 2)
                 .addProperty(AnimationProperty.AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.1F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
@@ -226,13 +284,16 @@ public class ArcAnimations {
                                                          new AttackAnimation.Phase[]{new AttackAnimation.Phase(0.0F, 0.1F, 0.167F, 0.333F, 0.333F, InteractionHand.MAIN_HAND, biped.toolR, SAKURA_DANCE_COLL),
                                                                  new AttackAnimation.Phase(0.333F, 0.333F, 0.5F, 0.5F, 0.5F, InteractionHand.MAIN_HAND, biped.toolR, SAKURA_DANCE_COLL),
                                                                  new AttackAnimation.Phase(0.5F, 0.9F, 1.067F, 1.067F, 1.067F, InteractionHand.MAIN_HAND, biped.toolR, SAKURA_DANCE_COLL)}))
-                .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(30.0F))
+                .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(20.0F))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.LONG)
+                .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(SourceTags.WEAPON_INNATE, SourceTags.GUARD_PUNCTURE))
+                .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.multiplier(3.0F))
+                .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, WOMParticles.OVERBLOOD_HIT)
+                .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(Float.MAX_VALUE))
+                .addProperty(AnimationProperty.AttackAnimationProperty.BASIS_ATTACK_SPEED, 0.6F)
+                .addProperty(AnimationProperty.AttackAnimationProperty.ATTACK_SPEED_FACTOR, 0.0F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true)
-                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(new float[]{0.0F, 1.067F}))
-                .addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER, (dynamicAnimation, livingEntityPatch, v, v1) -> {
-                    return 0.99F;
-                });
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(new float[]{0.0F, 1.067F}));
     }
 }

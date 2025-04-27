@@ -68,6 +68,9 @@ public class ArcEffectsRegistry {
     //
     public static final RegistryObject<MobEffect> TACHIFINALSKILLC =
             EFFECTS.register("tachifinalskillc", TachiFinalSkill_C::new);
+    //
+    public static final RegistryObject<MobEffect> InstantDamage =
+            EFFECTS.register("instantdamage", PercentageInstantDamage::new);
     //闪光时调用的buff
     public static final RegistryObject<MobEffect> SuperFlash =
             EFFECTS.register("super_flash", SuperFlash::new);

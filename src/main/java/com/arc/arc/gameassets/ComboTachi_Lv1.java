@@ -2,8 +2,7 @@ package com.arc.arc.gameassets;
 import com.arc.arc.Animation.ArcAnimations;
 import com.arc.arc.ArcMod;
 import com.arc.arc.Registries.ArcEffectsRegistry;
-import com.arc.arc.Registries.ArcSoundRegistry;
-import com.arc.arc.skill.TachiSkill;
+import com.arc.arc.skill.TachiSkill_Lv1;
 import com.guhao.star.efmex.StarAnimations;
 import com.guhao.star.regirster.Effect;
 import com.guhao.star.regirster.Sounds;
@@ -34,55 +33,12 @@ import yesman.epicfight.world.effect.EpicFightMobEffects;
 import static java.lang.Integer.MAX_VALUE;
 
 @Mod.EventBusSubscriber(modid = ArcMod.MOD_ID)
-public class StellairsComboTachi {
-    public static Skill StellairsComboTachi;
+public class ComboTachi_Lv1 {
+    public static Skill ComboTachi_Lv1;
     public static void registerSkills(){
         ComboNode Tachiroot = ComboNode.create();
 
-        ComboNode Test_1 = ComboNode.createNode(() -> ArcAnimations.FUSHIGIRI_HAIRUI_SLASH_1)
-                .setConvertTime(0.1F).setPlaySpeed(1.25F).setStunTypeModifier(StunType.LONG).setDamageMultiplier(ValueModifier.multiplier(5)).setImpactMultiplier(5).setArmorNegation(100)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "execute as @p at @s run playsound cataclysm:flame_burst block @s ~ ~ ~ 0.75 0.75", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.7F, "execute as @s at @s run particle minecraft:falling_dust minecraft:crimson_hyphae ^ ^1.0 ^3 2.5 1.0 2.5 0.01 180", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.7F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 0.75 1.5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.7F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 3.0 0.5", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound epicfight:entity.hit.blade_rush_last block @s ~ ~ ~ 0.3 0.8", false))
-                .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
-                }))
-                .addTimeEvent(new TimeStampedEvent(3F,(entity) -> {
-                    if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
-                        ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
-                    }}));
-        ComboNode Test_2 = ComboNode.createNode(() -> ArcAnimations.FUSHIGIRI_HAIRUI_SLASH_2)
-                .setConvertTime(0.1F).setStunTypeModifier(StunType.LONG).setDamageMultiplier(ValueModifier.multiplier(5)).setImpactMultiplier(5).setArmorNegation(100)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "execute as @p at @s run playsound cataclysm:flame_burst block @s ~ ~ ~ 0.75 0.75", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "execute as @s at @s run particle minecraft:falling_dust minecraft:crimson_hyphae ^ ^2.0 ^3 2.5 1.0 2.5 0.01 250", true))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 3.0 1.5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 3.0 0.5", false))
-                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound epicfight:entity.hit.blade_rush_last block @s ~ ~ ~ 0.3 0.8", false))
-                .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
-                }));
-
-       ComboNode Test_3 = ComboNode.createNode(() -> ArcAnimations.SAKURA_DANCE)
-               .setConvertTime(0.3F).setStunTypeModifier(StunType.LONG).setDamageMultiplier(ValueModifier.multiplier(2)).setImpactMultiplier(3).setArmorNegation(100)
-               .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @p at @s run playsound epicfight:entity.weapon.whoosh_sharp block @s ~ ~ ~ 0.5 0.6", false))
-               .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "execute as @p at @s run playsound epicfight:entity.weapon.whoosh_sharp block @s ~ ~ ~ 3.0 1.2", false))
-               .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.4F, "execute as @p at @s run playsound epicfight:entity.weapon.whoosh_sharp block @s ~ ~ ~ 0.75 0.6", false))
-               .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "execute as @p at @s run playsound epicfight:entity.weapon.whoosh_sharp block @s ~ ~ ~ 3.0 0.4", false))
-               .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.9F, "execute as @p at @s run playsound epicfight:entity.weapon.whoosh_sharp block @s ~ ~ ~ 3.0 0.8", false))
-               .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                   entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
-               }));
-
-        ComboNode Test_4 = ComboNode.createNode(() -> ArcAnimations.Gesshoku)
-                .addTimeEvent(new TimeStampedEvent(0.6F, (entityPatch) -> {
-                    entityPatch.playSound(ArcSoundRegistry.Timer.get(),0,0);}))
-                .addTimeEvent(new TimeStampedEvent(1.87F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20));
-                }))
-                .addTimeEvent(new TimeStampedEvent(5.5F, (entityPatch) -> {
-                    entityPatch.playSound(EpicFightSounds.WHOOSH_SHARP,0.5F,0.6F);}));
+        ComboNode Test_4 = ComboNode.createNode(() -> ArcAnimations.Gesshoku);
 
         ComboNode Jump = ComboNode.createNode(() -> StarAnimations.YAMATO_AIRSLASH)
                 .addCondition(new JumpCondition())
@@ -154,6 +110,9 @@ public class StellairsComboTachi {
                 })))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get(), 400));
+                }))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40,10));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {if (entityPatch.getOriginal()instanceof ServerPlayer serverPlayer) {
                     ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -249,9 +208,6 @@ public class StellairsComboTachi {
                 .addDodgeSuccessEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 30));
                 }))
-                .addDodgeSuccessEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.HEXAGRAMBeta.get(), 5));
-                }))
                 .addTimeEvent(new TimeStampedEvent(0.13F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -314,26 +270,13 @@ public class StellairsComboTachi {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}));
 
-        ComboNode Final_Skill_UpperSlash_Once = ComboNode.createNode(()-> StarAnimations.YAMATO_POWER1)
+        ComboNode Final_Skill_Fushigiri_Once = ComboNode.createNode(()-> WOMAnimations.KNIGHT_ROLL_BACKWARD)
                 .addCondition(new ParrySuccessCondition())
                 .addCondition(new StackCondition(2, 4))
                 .addCondition(new MobEffectCondition(false, (ArcEffectsRegistry.TACHIFINALSKILLA), 0,MAX_VALUE))
                 .setPriority(6).setNotCharge(true).setCanBeInterrupt(false).setStunTypeModifier(StunType.LONG)
-                .setImpactMultiplier(3).setConvertTime(-0.15F).setPlaySpeed(1.3F).setCanBeInterrupt(false)
-                .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
-                }))
-                .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
-                    if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(), 400));}
-                }))
-                .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
-                    if(targetPatch != null){
-                        targetPatch.getOriginal().removeEffect(new MobEffectInstance(Effect.REALLY_STUN_IMMUNITY.get()).getEffect());}
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.3F,entityPatch -> {
+                .setCanBeInterrupt(false)
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().removeEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get()).getEffect());
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.3F, (entityPatch -> {
@@ -343,40 +286,64 @@ public class StellairsComboTachi {
                         container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 1);
                     }
                 })))
-                .addHitEvent(new BiEvent(((entityPatch, entity) -> {
-                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
-                    if(targetPatch != null){
-                        targetPatch.playAnimationSynchronized(Animations.BIPED_HIT_LONG, 0);
-                    }
-                })))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.35F, "invincible groundSlam @s 1.5 false true false", true))
-                .addTimeEvent(new TimeStampedEvent(0.65F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.2F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}));
-        ComboNode Final_Skill_UpperSlash_Twice = ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
-                .setNotCharge(true).setCanBeInterrupt(false).setStunTypeModifier(StunType.LONG).setImpactMultiplier(3).setConvertTime(0.2F).setPlaySpeed(0.8F).setCanBeInterrupt(false)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 2.5 false false false", true))
+        ComboNode Final_Skill_Fushigiri_Twice = ComboNode.createNode(()->ArcAnimations.FUSHIGIRI_HAIRUI_SLASH_1)
+                .setNotCharge(true).setCanBeInterrupt(false).setHurtDamageMultiplier(3F).setConvertTime(0.1F).setPlaySpeed(1.25F).setStunTypeModifier(StunType.LONG).setImpactMultiplier(5).setArmorNegation(100)
+                .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 34));
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 65));
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(Effect.REALLY_STUN_IMMUNITY.get(), 65));
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.InstantDamage.get(),1,30));
+                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.7F, "invincible groundSlam @s 5 false false false", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "execute as @p at @s run playsound cataclysm:flame_burst block @s ~ ~ ~ 0.75 0.75", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.7F, "execute as @s at @s run particle minecraft:falling_dust minecraft:crimson_hyphae ^ ^1.0 ^3 2.5 1.0 2.5 0.01 180", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.7F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 0.75 1.5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.7F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 3.0 0.5", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound epicfight:entity.hit.blade_rush_last block @s ~ ~ ~ 0.3 0.8", false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
                         targetPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get(),400));}
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
+                    entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,  0,0);
                 }))
                 .addHitEvent(new BiEvent(((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.playAnimationSynchronized(Animations.BIPED_HIT_LONG, 0);
+                        targetPatch.playAnimationSynchronized(Animations.BIPED_HIT_LONG, 0.3F);
                     }
                 })))
-                .addTimeEvent(new TimeStampedEvent(0.4F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(3F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}));
-        ComboNode Final_Skill_UpperSlash_Thrid = ComboNode.createNode(()->Animations.RUSHING_TEMPO3)
-                .setNotCharge(true).setCanBeInterrupt(false).setStunTypeModifier(StunType.LONG).setImpactMultiplier(3).setConvertTime(0.15F).setPlaySpeed(0.95F).setCanBeInterrupt(false)
+        ComboNode Final_Skill_Fushigiri_Thrid = ComboNode.createNode(()->ArcAnimations.FUSHIGIRI_HAIRUI_SLASH_2)
+                .setNotCharge(true).setCanBeInterrupt(false).setHurtDamageMultiplier(3F).setConvertTime(0.1F).setStunTypeModifier(StunType.LONG).setDamageMultiplier(ValueModifier.multiplier(1.5F)).setImpactMultiplier(5).setArmorNegation(100)
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 65));
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(Effect.REALLY_STUN_IMMUNITY.get(), 65));
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.InstantDamage.get(),1,30));
+                }))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "execute as @p at @s run playsound cataclysm:flame_burst block @s ~ ~ ~ 0.75 0.75", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "execute as @s at @s run particle minecraft:falling_dust minecraft:crimson_hyphae ^ ^2.0 ^3 2.5 1.0 2.5 0.01 250", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 3.0 1.5", false))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 3.0 0.5", false))
+                .addHitEvent(BiEvent.createBiCommandEvent("execute as @p at @s run playsound epicfight:entity.hit.blade_rush_last block @s ~ ~ ~ 0.3 0.8", false))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
@@ -385,13 +352,7 @@ public class StellairsComboTachi {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER,  0,0);
                 }))
-                .addHitEvent(new BiEvent(((entityPatch, entity) -> {
-                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
-                    if(targetPatch != null){
-                        targetPatch.playAnimationSynchronized(Animations.BIPED_HIT_LONG, 0);
-                    }
-                })))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 3.5 false false false", true));
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "invincible groundSlam @s 6 false false false", true));
 
         ComboNode Final_Skill_CrossSlash_Once = ComboNode.createNode(()->StarAnimations.YAMATO_STRIKE1)
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.Success),0,10))
@@ -448,9 +409,6 @@ public class StellairsComboTachi {
                     }}));
         ComboNode Final_Skill_CrossSlash_Thrid = ComboNode.createNode(()->Animations.RUSHING_TEMPO2)
                 .setNotCharge(true).setStunTypeModifier(StunType.LONG).setArmorNegation(70).setDamageMultiplier(ValueModifier.multiplier(1.2F)).setImpactMultiplier(2F).setConvertTime(0.2F).setCanBeInterrupt(false)
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.HEXAGRAMAlapha.get()));
-                }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
@@ -471,12 +429,12 @@ public class StellairsComboTachi {
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),30));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(Effect.SLOW_TIME.get(),10));}
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
-                        targetPatch.getOriginal().addEffect(new MobEffectInstance(com.dfdyz.epicacg.registry.MobEffects.STOP.get(), 30));}
+                        targetPatch.getOriginal().addEffect(new MobEffectInstance(com.dfdyz.epicacg.registry.MobEffects.STOP.get(), 10));}
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
@@ -491,25 +449,13 @@ public class StellairsComboTachi {
                     }
                 })))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "particle biomesoplenty:dripping_blood ~ ~1 ~ 1.9 1 1.9 1 45", false))
-                .addTimeEvent(new TimeStampedEvent(0.05F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,50,3));
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.01F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.HEXAGRAMAlapha.get()));
+                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION,60,20));
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
                         targetPatch.getOriginal().removeEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get()).getEffect());}
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch) -> {
-                    entityPatch.playSound(Sounds.SEKIRO,  0, 0);
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.0F, livingEntityPatch -> {
-                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(livingEntityPatch.getTarget(), LivingEntityPatch.class);
-                    if(targetPatch != null){
-                        targetPatch.playAnimationSynchronized(StarAnimations.TACHI_EXECUTED, 0);
-                    }
                 }));
 
         ComboNode BasicAttack = ComboNode.create()
@@ -529,27 +475,24 @@ public class StellairsComboTachi {
         ComboNode DefeatSkills = ComboNode.create()
                 .addConditionAnimation(Skill_LethalSlicing_Start)
                 .addConditionAnimation(Final_Skill_CrossSlash_Once)
-                .addConditionAnimation(Final_Skill_UpperSlash_Once);
+                .addConditionAnimation(Final_Skill_Fushigiri_Once);
 
         ComboNode ComboSkill_1 = ComboNode.create()
                 .addConditionAnimation(Skill_LethalSlicing_Start)
                 .addConditionAnimation(Skill_UpperSlash_Once)
-                .addConditionAnimation(Final_Skill_UpperSlash_Once);
+                .addConditionAnimation(Final_Skill_Fushigiri_Once);
 
         ComboNode ComboSkill_2 = ComboNode.create()
                 .addConditionAnimation(Skill_LethalSlicing_Start)
                 .addConditionAnimation(Skill_DodgeCounter_Dodge)
-                .addConditionAnimation(Final_Skill_UpperSlash_Once);
+                .addConditionAnimation(Final_Skill_Fushigiri_Once);
 
         ComboNode ComboSkill_3_A = ComboNode.create()
                 .addConditionAnimation(Skill_LethalSlicing_Start)
                 .addConditionAnimation(Skill_LethalSlicing_Start_Combo)
-                .addConditionAnimation(Final_Skill_UpperSlash_Once);
+                .addConditionAnimation(Final_Skill_Fushigiri_Once);
 
         //test
-        Tachiroot.key3(Test_1);
-        Test_1.key4(Test_2);
-
         Tachiroot.key4(Test_4);
         //Root
         Tachiroot.key1(BasicAttack);
@@ -565,13 +508,9 @@ public class StellairsComboTachi {
         Skill_DodgeCounter_Dodge.key4(Final_Skill_CrossSlash_Once);
         Final_Skill_CrossSlash_Once.key4(Final_Skill_CrossSlash_Twice);
         Final_Skill_CrossSlash_Twice.key4(Final_Skill_CrossSlash_Thrid);
-        Final_Skill_UpperSlash_Once.key4(Final_Skill_UpperSlash_Twice);
-        Final_Skill_UpperSlash_Twice.key4(Final_Skill_UpperSlash_Thrid);
+        Final_Skill_Fushigiri_Once.key4(Final_Skill_Fushigiri_Twice);
+        Final_Skill_Fushigiri_Twice.key4(Final_Skill_Fushigiri_Thrid);
         //闭环
-        Test_2.key1(BasicAttack);
-        Test_2.keyWeaponInnate(DefeatSkills);
-        Test_3.key1(BasicAttack);
-        Test_3.keyWeaponInnate(DefeatSkills);
         Test_4.key1(BasicAttack);
         Test_4.keyWeaponInnate(DefeatSkills);
         Auto3_1_Enhanced.key1(BasicAttack);
@@ -590,10 +529,10 @@ public class StellairsComboTachi {
         Skill_LethalSlicing_Start_Combo.keyWeaponInnate(DefeatSkills);
         Skill_LethalSlicing_Twice_Combo.key1(BasicAttack);
         Skill_LethalSlicing_Twice_Combo.keyWeaponInnate(DefeatSkills);
-        Final_Skill_UpperSlash_Twice.key1(BasicAttack);
-        Final_Skill_UpperSlash_Twice.keyWeaponInnate(DefeatSkills);
-        Final_Skill_UpperSlash_Thrid.key1(BasicAttack);
-        Final_Skill_UpperSlash_Thrid.keyWeaponInnate(DefeatSkills);
+        Final_Skill_Fushigiri_Twice.key1(BasicAttack);
+        Final_Skill_Fushigiri_Twice.keyWeaponInnate(DefeatSkills);
+        Final_Skill_Fushigiri_Thrid.key1(BasicAttack);
+        Final_Skill_Fushigiri_Thrid.keyWeaponInnate(DefeatSkills);
         Final_Skill_CrossSlash_Thrid.key1(BasicAttack);
         Final_Skill_CrossSlash_Thrid.keyWeaponInnate(DefeatSkills);
         Final_Skill_Execute.key1(BasicAttack);
@@ -609,10 +548,10 @@ public class StellairsComboTachi {
         Auto3_Enhanced.key4(Auto3_1_Enhanced);
         Auto3_Enhanced.keyWeaponInnate(ComboSkill_3_A);
         Auto3_1_Enhanced.keyWeaponInnate(ComboSkill_3_A);
-        SkillManager.register(TachiSkill::new, TachiSkill.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo2");
+        SkillManager.register(TachiSkill_Lv1::new, TachiSkill_Lv1.createComboBasicAttack().setCombo(Tachiroot).setShouldDrawGui(true), ArcMod.MOD_ID, "combo2_lv1");
     }
     @SubscribeEvent
     public static void BuildSkills(SkillBuildEvent event) {
-        StellairsComboTachi = event.build(ArcMod.MOD_ID, "combo2");
+        ComboTachi_Lv1 = event.build(ArcMod.MOD_ID, "combo2_lv1");
     }
 }
