@@ -112,7 +112,7 @@ public class ComboTachi_Lv1 {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get(), 400));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40,10));
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20,2));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {if (entityPatch.getOriginal()instanceof ServerPlayer serverPlayer) {
                     ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -138,8 +138,8 @@ public class ComboTachi_Lv1 {
                 .addCondition(new MobEffectCondition(false,(ArcEffectsRegistry.TACHI_ENHANCED_PHASE),0,10))
                 .addCondition(new StackCondition(1, MAX_VALUE))
                 .addCondition(new DownCondition())
-                .setPriority(3).setNotCharge(true).setCanBeInterrupt(false).setConvertTime(-0.15F).setPlaySpeed(1.3F).setStunTypeModifier(StunType.LONG)
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.25F, "invincible groundSlam @s 1 false true false", true))
+                .setPriority(3).setNotCharge(true).setCanBeInterrupt(false).setConvertTime(-0.05F).setPlaySpeed(1.2F).setStunTypeModifier(StunType.LONG)
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.15F, "invincible groundSlam @s 1 false true false", true))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get(), 400));
                 }))
@@ -158,20 +158,20 @@ public class ComboTachi_Lv1 {
                         container.getSkill().setConsumptionSynchronize(serverPlayerPatch, 1);
                     }
                 })))
-                .addTimeEvent(new TimeStampedEvent(0.69F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.59F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}))
-                .addTimeEvent(new TimeStampedEvent(0.7F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.6F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}))
-                .addTimeEvent(new TimeStampedEvent(0.71F,(entity) -> {
+                .addTimeEvent(new TimeStampedEvent(0.61F,(entity) -> {
                     if (entity.getOriginal() instanceof ServerPlayer serverPlayer) {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}));
         ComboNode Skill_UpperSlash_Twice = ComboNode.createNode(() -> Animations.RUSHING_TEMPO3)
-                .setNotCharge(true).setCanBeInterrupt(false).setConvertTime(0.1F).setPlaySpeed(0.9F).setStunTypeModifier(StunType.LONG)
+                .setNotCharge(true).setCanBeInterrupt(false).setConvertTime(0.15F).setPlaySpeed(0.85F).setStunTypeModifier(StunType.LONG)
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "invincible groundSlam @s 1.5 false true false", true))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get(), 400));
@@ -276,6 +276,7 @@ public class ComboTachi_Lv1 {
                 .addCondition(new MobEffectCondition(false, (ArcEffectsRegistry.TACHIFINALSKILLA), 0,MAX_VALUE))
                 .setPriority(6).setNotCharge(true).setCanBeInterrupt(false).setStunTypeModifier(StunType.LONG)
                 .setCanBeInterrupt(false)
+                .addTimeEvent(new TimeStampedEvent(0.05F,entityPatch -> {entityPatch.playSound(Sounds.FORESIGHT,0,0);}))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().removeEffect(new MobEffectInstance(ArcEffectsRegistry.TACHIFINALSKILLA.get()).getEffect());
                 }))
@@ -450,12 +451,21 @@ public class ComboTachi_Lv1 {
                 })))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "particle biomesoplenty:dripping_blood ~ ~1 ~ 1.9 1 1.9 1 45", false))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION,60,20));
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION,40,10));
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
                         targetPatch.getOriginal().removeEffect(new MobEffectInstance(ArcEffectsRegistry.Success.get()).getEffect());}
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.1F, (entityPatch) -> {
+                    entityPatch.playSound(Sounds.SEKIRO,  0, 0);
+                }))
+                .addTimeEvent(new TimeStampedEvent(0.0F, livingEntityPatch -> {
+                    LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(livingEntityPatch.getTarget(), LivingEntityPatch.class);
+                    if(targetPatch != null){
+                        targetPatch.playAnimationSynchronized(StarAnimations.TACHI_EXECUTED, 0);
+                    }
                 }));
 
         ComboNode BasicAttack = ComboNode.create()

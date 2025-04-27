@@ -14,9 +14,9 @@ public class TransformedArcbladeAttributeHandlers {
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent event) {
         Player player = event.player;
-        // 仅在服务端处理
-        if (!player.level.isClientSide) {
-            ItemStack mainHandItem = player.getMainHandItem();
+        ItemStack mainHandItem = player.getMainHandItem();
+        // 仅在服务端处理且手持 ArcbladeTransformed 时生效
+        if (!player.level.isClientSide && mainHandItem.getItem() == ArcBladeItemRegistry.ARCBLADETRANSFORMED.get()) {
             // 检查玩家是否手持 TransformedArcbladeItem
             boolean isHoldingArcblade = mainHandItem.getItem() == ArcBladeItemRegistry.ARCBLADETRANSFORMED.get();
             // 如果手持 TransformedArcbladeItem，添加 BUFF

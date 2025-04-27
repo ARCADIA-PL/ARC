@@ -7,6 +7,14 @@
     "sounds": ["arc:arcslash"],
     "subtitle": "subtitles.arc.arcslash"
   },
+  "gesshoku": {
+    "sounds": ["arc:gesshoku"],
+    "subtitle": "subtitles.arc.gesshoku"
+  },
+  "timer": {
+    "sounds": ["arc:timer"],
+    "subtitle": "subtitles.arc.timer"
+  },
   "laststardust": {
     "sounds": ["arc:laststardust"],
     "subtitle": "subtitles.arc.laststardust",

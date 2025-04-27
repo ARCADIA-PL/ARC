@@ -20,7 +20,7 @@ toggleSprint:false
 darkMojangStudiosBackground:false
 hideLightningFlashes:false
 mouseSensitivity:0.5
-fov:0.425
+fov:0.825
 screenEffectScale:1.0
 fovEffectScale:1.0
 gamma:0.5
@@ -36,7 +36,7 @@ ao:2
 prioritizeChunkUpdates:0
 biomeBlendRadius:2
 renderClouds:false
-resourcePacks:["vanilla","mod_resources","file/Epicfight Skin+Animation.zip"]
+resourcePacks:["vanilla","mod_resources","file/终焉决斗 发光刀光材质包 (2)","file/更强帕瓦.zip","file/Epicfight Skin+Animation.zip"]
 incompatibleResourcePacks:[]
 lastServer:
 lang:zh_cn
@@ -108,28 +108,23 @@ key_key.hotbar.6:key.keyboard.6
 key_key.hotbar.7:key.keyboard.7
 key_key.hotbar.8:key.keyboard.8
 key_key.hotbar.9:key.keyboard.9
-key_key.damage_number.show_config:key.keyboard.unknown
+key_key.wukong.smash_stance:key.keyboard.unknown
 key_key.invincible.key1:key.mouse.left
+key_key.invincible.key2:key.keyboard.unknown
 key_weaponthrow.throw:key.keyboard.unknown
-key_key.invincible.key2:key.keyboard.r
+key_key.damage_number.show_config:key.keyboard.unknown
+key_key.epicacg.switch_skill:key.keyboard.unknown
+key_key.waila.config:key.keyboard.unknown
 key_key.invincible.key3:key.mouse.5
 key_key.invincible.key4:key.keyboard.c
-key_key.waila.config:key.keyboard.unknown
 key_key.waila.show_overlay:key.keyboard.unknown
 key_key.waila.toggle_liquid:key.keyboard.unknown
-key_key.waila.narrate:key.keyboard.unknown
-key_key.waila.show_details:key.keyboard.unknown
-key_key.toybox.sword_spell_quick_cast:key.keyboard.unknown
-key_key.wukong.smash_stance:key.keyboard.unknown
-key_key.epicacg.switch_skill:key.keyboard.unknown
 key_key.wukong.pillar_stance:key.keyboard.unknown
 key_key.wukong.thrust_stance:key.keyboard.unknown
+key_key.waila.narrate:key.keyboard.unknown
+key_key.waila.show_details:key.keyboard.unknown
 key_key.wukong.staff_spin:key.keyboard.unknown
-key_key.guhao.ender:key.keyboard.unknown
-key_key.guhao.blood_burst:key.keyboard.unknown
-key_key.guhao.ctrl:key.keyboard.unknown
-key_key.guhao.shift:key.keyboard.unknown
-key_key.star.cut:key.keyboard.unknown
+key_key.toybox.sword_spell_quick_cast:key.keyboard.unknown
 key_Camera left:key.keyboard.left
 key_Camera right:key.keyboard.right
 key_Camera closer:key.keyboard.up
@@ -138,6 +133,11 @@ key_Camera up:key.keyboard.page.up
 key_Camera down:key.keyboard.page.down
 key_Swap shoulder:key.keyboard.o
 key_Toggle perspective:key.keyboard.unknown
+key_key.guhao.ender:key.keyboard.unknown
+key_key.guhao.blood_burst:key.keyboard.unknown
+key_key.guhao.ctrl:key.keyboard.unknown
+key_key.guhao.shift:key.keyboard.unknown
+key_key.star.cut:key.keyboard.unknown
 key_ibeeditor.key.editor:key.keyboard.unknown
 key_ibeeditor.key.nbt_editor:key.keyboard.unknown
 key_ibeeditor.key.snbt_editor:key.keyboard.unknown
@@ -146,7 +146,7 @@ key_key.epicfight.show_tooltip:key.keyboard.left.control
 key_key.epicfight.switch_mode:key.mouse.4
 key_key.epicfight.dodge:key.keyboard.left.alt
 key_key.epicfight.attack:key.mouse.left
-key_key.epicfight.weapon_innate_skill:key.keyboard.unknown
+key_key.epicfight.weapon_innate_skill:key.keyboard.r
 key_key.epicfight.mover_skill:key.keyboard.space
 key_key.epicfight.skill_gui:key.keyboard.k
 key_key.epicfight.lock_on:key.mouse.middle
@@ -173,11 +173,11 @@ key_key.unionlib.open_union_inventory:key.keyboard.unknown
 key_key.unionlib.test_bind:key.keyboard.unknown
 key_info.structure_gel.building_tool.undo:key.keyboard.unknown
 key_info.structure_gel.building_tool.redo:key.keyboard.unknown
-soundCategory_master:0.22075056
+soundCategory_master:0.20971303
 soundCategory_music:0.0
 soundCategory_record:0.0
 soundCategory_weather:0.1056338
-soundCategory_block:0.23943663
+soundCategory_block:0.5610329
 soundCategory_hostile:0.2112676
 soundCategory_neutral:0.4084507
 soundCategory_player:0.34976527

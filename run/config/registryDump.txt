@@ -1762,6 +1762,9 @@ ResourceKey[minecraft:root / minecraft:sound_event]
 1712. "omnis:holy_equip"
 1713. "arc:judgementcut"
 1714. "arc:arcslash"
+1715. "arc:laststardust"
+1716. "arc:gesshoku"
+1717. "arc:timer"
 
 
 ResourceKey[minecraft:root / minecraft:fluid]
@@ -1891,7 +1894,27 @@ ResourceKey[minecraft:root / minecraft:mob_effect]
 115. "omnis:stunned"
 116. "arc:magic_circle"
 117. "arc:stargazing"
-118. "arc:stars_twinkling"
+118. "arc:starcounter"
+119. "arc:super_flash"
+120. "arc:stars_twinklinga"
+121. "arc:stars_twinklingb"
+122. "arc:dodgesuccess"
+123. "arc:alhpa"
+124. "arc:tachienhancedphase"
+125. "arc:star_craker"
+126. "arc:beta"
+127. "arc:hexagram"
+128. "arc:hexagram1"
+129. "arc:strike"
+130. "arc:splash"
+131. "arc:timer"
+132. "arc:verticalstop"
+133. "arc:heavygravity"
+134. "arc:tachifinalskilla"
+135. "arc:tachifinalskillb"
+136. "arc:tachifinalskillc"
+137. "arc:combotimer"
+138. "arc:instantdamage"
 
 
 ResourceKey[minecraft:root / minecraft:block]
@@ -3293,6 +3316,7 @@ ResourceKey[minecraft:root / minecraft:entity_type]
 327. "epicfight:dodge_left"
 328. "dummmmmmy:target_dummy"
 329. "dummmmmmy:dummy_number"
+330. "arc:drive"
 
 
 ResourceKey[minecraft:root / minecraft:item]
@@ -6415,9 +6439,6 @@ ResourceKey[minecraft:root / minecraft:worldgen/structure_pool_element]
 12. "yungsapi:max_count_single_element"
 
 
-ResourceKey[minecraft:root / forge:world_types]
-
-
 ResourceKey[minecraft:root / forge:loot_modifier_serializers]
 0. "alexsmobs:banana_drop"
 1. "alexsmobs:blossom_drop"
@@ -6428,6 +6449,9 @@ ResourceKey[minecraft:root / forge:loot_modifier_serializers]
 
 ResourceKey[minecraft:root / minecraft:data_serializers]
 0. "epicfight:vector_3_double"
+
+
+ResourceKey[minecraft:root / forge:world_types]
 
 
 ResourceKey[minecraft:root / mobifier:condition]
@@ -6483,14 +6507,14 @@ ResourceKey[minecraft:root / minecraft:worldgen/structure_set]
 17. "mowziesmobs:wrought_chambers"
 18. "mowziesmobs:umvuthana_groves"
 19. "mowziesmobs:frostmaw_spawns"
-20. "cataclysm:ruined_citadel"
-21. "irons_spellbooks:ancient_battleground"
-22. "irons_spellbooks:mountain_tower"
-23. "irons_spellbooks:catacombs"
-24. "irons_spellbooks:evoker_fort"
-25. "irons_spellbooks:mangrove_hut"
+20. "irons_spellbooks:mangrove_hut"
+21. "irons_spellbooks:catacombs"
+22. "irons_spellbooks:evoker_fort"
+23. "cataclysm:burning_arena"
+24. "irons_spellbooks:ancient_battleground"
+25. "cataclysm:ruined_citadel"
 26. "cataclysm:soul_black_smith"
-27. "cataclysm:burning_arena"
+27. "irons_spellbooks:mountain_tower"
 
 
 ResourceKey[minecraft:root / minecraft:worldgen/noise_settings]
@@ -6818,69 +6842,69 @@ ResourceKey[minecraft:root / minecraft:worldgen/template_pool]
 123. "minecraft:pillager_outpost/towers"
 124. "minecraft:pillager_outpost/feature_plates"
 125. "minecraft:pillager_outpost/features"
-126. "irons_spellbooks:catacombs_start_pool"
-127. "mowziesmobs:monastery/room_wall_right_pool"
-128. "irons_spellbooks:battleground/start_pool"
-129. "mowziesmobs:monastery/center_door_pool"
-130. "mowziesmobs:monastery/interior/wall_corner_pool"
-131. "mowziesmobs:monastery/center_branch_pool"
-132. "mowziesmobs:monastery/test_zone_pool"
-133. "mowziesmobs:monastery/interior/wall_middle_pool"
-134. "irons_spellbooks:mountain_tower_pool"
-135. "irons_spellbooks:catacombs_room_or_hallway_pool"
-136. "mowziesmobs:monastery/interior/center_pool"
-137. "mowziesmobs:monastery/interior/wall_pool"
-138. "mowziesmobs:monastery/fallback/path_connector_fallback_pool"
-139. "irons_spellbooks:catacombs_secret_room_pool"
-140. "mowziesmobs:monastery/interior/banners_pool"
-141. "mowziesmobs:monastery/room_roof_pool"
-142. "mowziesmobs:monastery/room_up_pool"
+126. "mowziesmobs:monastery/test_zone_pool"
+127. "mowziesmobs:monastery/center_corners_pool"
+128. "mowziesmobs:monastery/tower_roof_pool"
+129. "mowziesmobs:monastery/room_wall_left_pool"
+130. "mowziesmobs:monastery/fallback/room_wall_center_fallback_pool"
+131. "mowziesmobs:monastery/path_pool"
+132. "mowziesmobs:monastery/room_wall_right_pool"
+133. "irons_spellbooks:evoker_fort/north_camp_pool"
+134. "mowziesmobs:monastery/center_back_pool"
+135. "irons_spellbooks:catacombs_hallway_pool"
+136. "irons_spellbooks:evoker_fort/halves_pool"
+137. "irons_spellbooks:evoker_fort/villager_guard_tower_pool"
+138. "mowziesmobs:monastery/tower_up_pool"
+139. "irons_spellbooks:evoker_fort/villager_spawn_pool"
+140. "mowziesmobs:monastery/fallback/path_fallback_pool"
+141. "mowziesmobs:monastery/room_up_pool"
+142. "irons_spellbooks:catacombs_treasure_pool"
 143. "irons_spellbooks:catacombs_mob_pool"
-144. "irons_spellbooks:evoker_fort/villager_cage_pool"
-145. "mowziesmobs:monastery/fallback/path_fallback_pool"
-146. "mowziesmobs:monastery/fallback/room_wall_left_fallback_pool"
-147. "irons_spellbooks:evoker_fort/halves_pool"
-148. "irons_spellbooks:evoker_fort/villager_spawn_pool"
-149. "irons_spellbooks:catacombs_fallback_pool"
-150. "mowziesmobs:monastery/room_wall_center_pool"
-151. "mowziesmobs:monastery/center_corners_pool"
-152. "mowziesmobs:monastery/fallback/room_wall_right_fallback_pool"
-153. "mowziesmobs:monastery/center_back_pool"
-154. "irons_spellbooks:evoker_fort/decoration_pool"
-155. "mowziesmobs:monastery/interior/room_stairs_2_pool"
-156. "mowziesmobs:monastery/crown_pool"
-157. "mowziesmobs:monastery/room_wall_left_pool"
-158. "mowziesmobs:monastery/center_walls_pool"
-159. "mowziesmobs:monastery/interior/room_stairs_1_pool"
-160. "mowziesmobs:monastery/tower_wall_pool"
-161. "mowziesmobs:monastery/room_down_pool"
-162. "mowziesmobs:monastery/interior/tower_stairs_1_pool"
-163. "irons_spellbooks:evoker_fort/south_camp_pool"
-164. "irons_spellbooks:evoker_fort/north_camp_pool"
-165. "mowziesmobs:monastery/interior/blocker_pool"
-166. "mowziesmobs:monastery/path_connector_pool"
-167. "irons_spellbooks:battleground/branch_pool"
-168. "mowziesmobs:monastery/dead_end_connect_pool"
-169. "irons_spellbooks:catacombs_treasure_pool"
-170. "mowziesmobs:monastery/fallback/room_wall_center_fallback_pool"
-171. "irons_spellbooks:mangrove_hut_pool"
-172. "mowziesmobs:monastery/wall_accent_pool"
-173. "irons_spellbooks:catacombs_room_pool"
-174. "mowziesmobs:monastery/tower_roof_pool"
-175. "mowziesmobs:monastery/tower_down_pool"
-176. "irons_spellbooks:evoker_fort/start_pool"
-177. "mowziesmobs:monastery/interior/gong_pool"
-178. "irons_spellbooks:catacombs_hallway_pool"
-179. "mowziesmobs:monastery/fallback/tower_wall_fallback_pool"
-180. "mowziesmobs:monastery/interior/tower_stairs_2_pool"
-181. "mowziesmobs:monastery/path_pool"
-182. "irons_spellbooks:battleground/decoration_pool"
-183. "irons_spellbooks:evoker_fort/villager_guard_tower_pool"
-184. "mowziesmobs:monastery/start_pool"
-185. "mowziesmobs:monastery/interior/floor_helper_pool"
-186. "mowziesmobs:monastery/tower_up_pool"
-187. "irons_spellbooks:catacombs_treasure_or_mob_pool"
-188. "irons_spellbooks:evoker_fort/tower_pool"
+144. "mowziesmobs:monastery/fallback/tower_wall_fallback_pool"
+145. "mowziesmobs:monastery/fallback/room_wall_right_fallback_pool"
+146. "mowziesmobs:monastery/room_wall_center_pool"
+147. "irons_spellbooks:evoker_fort/start_pool"
+148. "irons_spellbooks:mountain_tower_pool"
+149. "mowziesmobs:monastery/tower_wall_pool"
+150. "irons_spellbooks:catacombs_room_pool"
+151. "irons_spellbooks:catacombs_secret_room_pool"
+152. "mowziesmobs:monastery/interior/gong_pool"
+153. "mowziesmobs:monastery/room_down_pool"
+154. "mowziesmobs:monastery/interior/blocker_pool"
+155. "irons_spellbooks:catacombs_treasure_or_mob_pool"
+156. "irons_spellbooks:mangrove_hut_pool"
+157. "mowziesmobs:monastery/path_connector_pool"
+158. "mowziesmobs:monastery/tower_down_pool"
+159. "irons_spellbooks:battleground/start_pool"
+160. "mowziesmobs:monastery/center_branch_pool"
+161. "mowziesmobs:monastery/interior/wall_corner_pool"
+162. "mowziesmobs:monastery/interior/banners_pool"
+163. "mowziesmobs:monastery/interior/floor_helper_pool"
+164. "mowziesmobs:monastery/interior/room_stairs_2_pool"
+165. "irons_spellbooks:evoker_fort/villager_cage_pool"
+166. "mowziesmobs:monastery/interior/wall_pool"
+167. "mowziesmobs:monastery/crown_pool"
+168. "irons_spellbooks:catacombs_fallback_pool"
+169. "mowziesmobs:monastery/fallback/room_wall_left_fallback_pool"
+170. "irons_spellbooks:battleground/branch_pool"
+171. "irons_spellbooks:evoker_fort/tower_pool"
+172. "mowziesmobs:monastery/interior/center_pool"
+173. "mowziesmobs:monastery/interior/tower_stairs_2_pool"
+174. "mowziesmobs:monastery/interior/wall_middle_pool"
+175. "irons_spellbooks:evoker_fort/south_camp_pool"
+176. "mowziesmobs:monastery/interior/room_stairs_1_pool"
+177. "mowziesmobs:monastery/dead_end_connect_pool"
+178. "mowziesmobs:monastery/start_pool"
+179. "irons_spellbooks:catacombs_start_pool"
+180. "mowziesmobs:monastery/center_walls_pool"
+181. "irons_spellbooks:evoker_fort/decoration_pool"
+182. "mowziesmobs:monastery/interior/tower_stairs_1_pool"
+183. "irons_spellbooks:battleground/decoration_pool"
+184. "mowziesmobs:monastery/wall_accent_pool"
+185. "mowziesmobs:monastery/fallback/path_connector_fallback_pool"
+186. "mowziesmobs:monastery/room_roof_pool"
+187. "irons_spellbooks:catacombs_room_or_hallway_pool"
+188. "mowziesmobs:monastery/center_door_pool"
 
 
 ResourceKey[minecraft:root / minecraft:worldgen/biome]
@@ -6982,14 +7006,14 @@ ResourceKey[minecraft:root / minecraft:worldgen/configured_structure_feature]
 31. "mowziesmobs:wrought_chamber"
 32. "mowziesmobs:umvuthana_grove"
 33. "mowziesmobs:frostmaw_spawn"
-34. "cataclysm:ruined_citadel"
-35. "irons_spellbooks:ancient_battleground"
-36. "irons_spellbooks:mountain_tower"
-37. "irons_spellbooks:catacombs"
-38. "irons_spellbooks:evoker_fort"
-39. "irons_spellbooks:mangrove_hut"
+34. "irons_spellbooks:mangrove_hut"
+35. "irons_spellbooks:catacombs"
+36. "irons_spellbooks:evoker_fort"
+37. "cataclysm:burning_arena"
+38. "irons_spellbooks:ancient_battleground"
+39. "cataclysm:ruined_citadel"
 40. "cataclysm:soul_black_smith"
-41. "cataclysm:burning_arena"
+41. "irons_spellbooks:mountain_tower"
 
 
 ResourceKey[minecraft:root / minecraft:worldgen/placed_feature]
@@ -7216,16 +7240,6 @@ ResourceKey[minecraft:root / minecraft:worldgen/placed_feature]
 220. "irons_spellbooks:ore_arcane_debris_feature"
 
 
-ResourceKey[minecraft:root / minecraft:dimension_type]
-0. "minecraft:overworld"
-1. "minecraft:overworld_caves"
-2. "minecraft:the_nether"
-3. "minecraft:the_end"
-4. "stellariscraft:marena"
-5. "stellariscraft:uarena"
-6. "stellariscraft:parena"
-
-
 ResourceKey[minecraft:root / minecraft:worldgen/configured_carver]
 0. "minecraft:cave"
 1. "minecraft:cave_extra_underground"
@@ -7322,6 +7336,16 @@ ResourceKey[minecraft:root / minecraft:worldgen/noise]
 59. "minecraft:nether_state_selector"
 
 
+ResourceKey[minecraft:root / minecraft:dimension_type]
+0. "minecraft:overworld"
+1. "minecraft:overworld_caves"
+2. "minecraft:the_nether"
+3. "minecraft:the_end"
+4. "stellariscraft:parena"
+5. "stellariscraft:marena"
+6. "stellariscraft:uarena"
+
+
 ResourceKey[minecraft:root / minecraft:worldgen/processor_list]
 0. "minecraft:empty"
 1. "minecraft:zombie_plains"
@@ -7356,12 +7380,12 @@ ResourceKey[minecraft:root / minecraft:worldgen/processor_list]
 30. "minecraft:fossil_rot"
 31. "minecraft:fossil_coal"
 32. "minecraft:fossil_diamonds"
-33. "irons_spellbooks:catacombs_randomization"
-34. "mowziesmobs:monastery"
-35. "irons_spellbooks:ancient_battlegrounds_randomization"
+33. "mowziesmobs:monastery"
+34. "irons_spellbooks:evoker_fort_randomizer"
+35. "irons_spellbooks:catacombs_randomization"
 36. "irons_spellbooks:weather_stone_blocks"
-37. "irons_spellbooks:evoker_fort_randomizer"
-38. "irons_spellbooks:randomize_mud_bricks"
+37. "irons_spellbooks:randomize_mud_bricks"
+38. "irons_spellbooks:ancient_battlegrounds_randomization"
 39. "irons_spellbooks:randomize_deepslate"
 
 
@@ -9129,6 +9153,9 @@ ResourceKey[minecraft:root / minecraft:sound_event]
 1712. "omnis:holy_equip"
 1713. "arc:judgementcut"
 1714. "arc:arcslash"
+1715. "arc:laststardust"
+1716. "arc:gesshoku"
+1717. "arc:timer"
 
 
 ResourceKey[minecraft:root / minecraft:fluid]
@@ -9258,7 +9285,27 @@ ResourceKey[minecraft:root / minecraft:mob_effect]
 115. "omnis:stunned"
 116. "arc:magic_circle"
 117. "arc:stargazing"
-118. "arc:stars_twinkling"
+118. "arc:starcounter"
+119. "arc:super_flash"
+120. "arc:stars_twinklinga"
+121. "arc:stars_twinklingb"
+122. "arc:dodgesuccess"
+123. "arc:alhpa"
+124. "arc:tachienhancedphase"
+125. "arc:star_craker"
+126. "arc:beta"
+127. "arc:hexagram"
+128. "arc:hexagram1"
+129. "arc:strike"
+130. "arc:splash"
+131. "arc:timer"
+132. "arc:verticalstop"
+133. "arc:heavygravity"
+134. "arc:tachifinalskilla"
+135. "arc:tachifinalskillb"
+136. "arc:tachifinalskillc"
+137. "arc:combotimer"
+138. "arc:instantdamage"
 
 
 ResourceKey[minecraft:root / minecraft:block]
@@ -10660,6 +10707,7 @@ ResourceKey[minecraft:root / minecraft:entity_type]
 327. "epicfight:dodge_left"
 328. "dummmmmmy:target_dummy"
 329. "dummmmmmy:dummy_number"
+330. "arc:drive"
 
 
 ResourceKey[minecraft:root / minecraft:item]
@@ -13782,9 +13830,6 @@ ResourceKey[minecraft:root / minecraft:worldgen/structure_pool_element]
 12. "yungsapi:max_count_single_element"
 
 
-ResourceKey[minecraft:root / forge:world_types]
-
-
 ResourceKey[minecraft:root / forge:loot_modifier_serializers]
 0. "alexsmobs:banana_drop"
 1. "alexsmobs:blossom_drop"
@@ -13795,6 +13840,9 @@ ResourceKey[minecraft:root / forge:loot_modifier_serializers]
 
 ResourceKey[minecraft:root / minecraft:data_serializers]
 0. "epicfight:vector_3_double"
+
+
+ResourceKey[minecraft:root / forge:world_types]
 
 
 ResourceKey[minecraft:root / mobifier:condition]
