@@ -30,7 +30,7 @@ public class TachiSkill_Lv3 extends ComboBasicAttack{
         list.add(new TextComponent("技能派生:"));
         list.add(new TranslatableComponent("1A后按").append(new TextComponent(("§c后退S")).append(new TextComponent(("消耗一层技能上挑斩击，若命中后续可§b消耗两层技能§c§l发动招架反击:§c§l§o不死斩,§6命中标记敌人20S,释放过程霸体但受伤大幅增加,且每次攻击均会消耗血量")))));
         list.add(new TranslatableComponent("2A后按").append(new TextComponent(("§c后退S")).append(new TextComponent(("消耗两层技能主动后翻滚GP,若完美闪避则§c§l发动突进,§6若命中则标记敌人20S")))));
-        list.add(new TranslatableComponent("3AS消耗一层技能释放").withStyle(ChatFormatting.YELLOW).append(new TextComponent(("§c§l强化版体术攻击，§6命中则退出强化状态；§b若命中被标记目标则§c§l§o发动处决:§l§o§5月食"))));
+        list.add(new TranslatableComponent("3AS消耗一层技能释放").withStyle(ChatFormatting.YELLOW).append(new TextComponent(("§c§l强化版体术攻击，§6命中则退出强化状态；§b若命中被标记目标则§c§l§o发动处决:§u§l§o月食"))));
         return list;
     }
 }

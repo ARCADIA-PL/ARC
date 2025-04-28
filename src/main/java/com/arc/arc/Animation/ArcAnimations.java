@@ -155,11 +155,11 @@ public class ArcAnimations {
                         AnimationEvent.TimeStampedEvent.create(0.6F, (entitypatch, self, params) -> {
                             entitypatch.playSound(ArcSoundRegistry.Timer.get(),0,0);
                         }, AnimationEvent.Side.SERVER),
-                        // 时间戳事件：1.9s施加短暂失明效果
-                        AnimationEvent.TimeStampedEvent.create(1.9F, (entitypatch, self, params) -> {
+                        // 时间戳事件：2s施加短暂失明效果
+                        AnimationEvent.TimeStampedEvent.create(2F, (entitypatch, self, params) -> {
                             entitypatch.getOriginal().addEffect(new MobEffectInstance(
                                     MobEffects.BLINDNESS,
-                                    20, 0, true, false, false
+                                    30, 0, true, false, false
                             ));
                         }, AnimationEvent.Side.SERVER),
                         // 时间戳事件：2.05s施加伤害提升和护盾

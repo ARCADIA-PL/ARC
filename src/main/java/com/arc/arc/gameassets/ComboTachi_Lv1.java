@@ -83,6 +83,9 @@ public class ComboTachi_Lv1 {
                         ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
                     }}))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION,50,2));
+                }))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
                 }));
         ComboNode Auto3_1_Enhanced = ComboNode.createNode(() -> Animations.AXE_DASH)
@@ -92,6 +95,9 @@ public class ComboTachi_Lv1 {
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(Effect.REALLY_STUN_IMMUNITY.get(), 20));
+                }))
+                .addHitEvent(new BiEvent((entityPatch, entity) -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION,50,2));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.BLADE_RUSH_FINISHER, 0, 0);
@@ -112,7 +118,7 @@ public class ComboTachi_Lv1 {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.TACHI_ENHANCED_PHASE.get(), 400));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20,2));
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40,3));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {if (entityPatch.getOriginal()instanceof ServerPlayer serverPlayer) {
                     ComboBasicAttack.executeOnServer(serverPlayer, ComboNode.ComboTypes.KEY_4);
@@ -410,6 +416,9 @@ public class ComboTachi_Lv1 {
                     }}));
         ComboNode Final_Skill_CrossSlash_Thrid = ComboNode.createNode(()->Animations.RUSHING_TEMPO2)
                 .setNotCharge(true).setStunTypeModifier(StunType.LONG).setArmorNegation(70).setDamageMultiplier(ValueModifier.multiplier(1.2F)).setImpactMultiplier(2F).setConvertTime(0.2F).setCanBeInterrupt(false)
+                .addTimeEvent(new TimeStampedEvent(0.2F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.REGENERATION,30,5));
+                }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     LivingEntityPatch<?> targetPatch = EpicFightCapabilities.getEntityPatch(entityPatch.getTarget(), LivingEntityPatch.class);
                     if(targetPatch != null){
