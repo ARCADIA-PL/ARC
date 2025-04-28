@@ -320,9 +320,6 @@ public class ComboTachi_Lv3 {
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.InstantDamage.get(),1,30));
                 }))
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,10,10));
-                }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,(entityPatch -> {if (!entityPatch.getOriginal().getLevel().isClientSide()){
                     LivingEntity attacker = entityPatch.getOriginal();
                     ServerLevel level = (ServerLevel) attacker.getLevel();
@@ -362,7 +359,7 @@ public class ComboTachi_Lv3 {
                     entityPatch.playSound(EpicFightSounds.ENDER_DRAGON_BREATH_FINALE, 3,0, 0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s cofh_core:lightning_resistance 5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.8F, "summon minecraft:lightning_bolt", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.8F, "execute as @s at @s run summon minecraft:lightning_bolt", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.8F, "invincible groundSlam @s 5 false false false", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "execute as @p at @s run playsound cataclysm:flame_burst block @s ~ ~ ~ 0.75 0.75", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.7F, "execute as @s at @s run particle minecraft:falling_dust minecraft:crimson_hyphae ^ ^1.0 ^3 2.5 1.0 2.5 0.01 180", true))
@@ -389,6 +386,9 @@ public class ComboTachi_Lv3 {
                     }}));
         ComboNode Final_Skill_Fushigiri_Thrid = ComboNode.createNode(()->ArcAnimations.FUSHIGIRI_HAIRUI_SLASH_2)
                 .setNotCharge(true).setCanBeInterrupt(false).setHurtDamageMultiplier(3F).setConvertTime(0.1F).setStunTypeModifier(StunType.LONG).setDamageMultiplier(ValueModifier.multiplier(1.5F)).setImpactMultiplier(5).setArmorNegation(100)
+                .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 34));
+                }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 65));
                 }))
@@ -397,9 +397,6 @@ public class ComboTachi_Lv3 {
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(ArcEffectsRegistry.InstantDamage.get(),1,30));
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,10,10));
                 }))
                 .addTimeEvent(new TimeStampedEvent(1.5F,(entityPatch -> {if (!entityPatch.getOriginal().getLevel().isClientSide) {
                     List<LivingEntity> hitTargets = entityPatch.getCurrenltyHurtEntities()
@@ -424,7 +421,7 @@ public class ComboTachi_Lv3 {
                     entityPatch.playSound(EpicFightSounds.ENDER_DRAGON_BREATH_FINALE, 3,0, 0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s cofh_core:lightning_resistance 5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.5F, "summon minecraft:lightning_bolt", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.5F, "execute as @s at @s run summon minecraft:lightning_bolt", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "execute as @p at @s run playsound cataclysm:flame_burst block @s ~ ~ ~ 0.75 0.75", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "execute as @s at @s run particle minecraft:falling_dust minecraft:crimson_hyphae ^ ^2.0 ^3 2.5 1.0 2.5 0.01 250", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.4F, "execute as @p at @s run playsound cataclysm:sword_stomp block @s ~ ~ ~ 3.0 1.5", false))
@@ -453,7 +450,7 @@ public class ComboTachi_Lv3 {
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.6F, "invincible groundSlam @s 2 false false false", true))
                 .addTimeEvent(new TimeStampedEvent(0.2F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,30,10));
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,30,3));
                 }))
                 .addHitEvent(new BiEvent((entityPatch, entity) -> {
                     entityPatch.playSound(EpicFightSounds.EVISCERATE,  0,0);
@@ -603,9 +600,6 @@ public class ComboTachi_Lv3 {
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(Effect.REALLY_STUN_IMMUNITY.get(), 65));
                 }))
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,10,10));
-                }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,(entityPatch -> {if (!entityPatch.getOriginal().getLevel().isClientSide()){
                     LivingEntity attacker = entityPatch.getOriginal();
                     ServerLevel level = (ServerLevel) attacker.getLevel();
@@ -644,7 +638,7 @@ public class ComboTachi_Lv3 {
                 .addTimeEvent(new TimeStampedEvent(1.75F, (entityPatch) -> {
                     entityPatch.playSound(EpicFightSounds.ENDER_DRAGON_BREATH_FINALE, 3,0, 0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s cofh_core:lightning_resistance 5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.8F, "summon minecraft:lightning_bolt", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.8F, "execute as @s at @s run summon minecraft:lightning_bolt", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"particle biomesoplenty:dripping_blood ~ ~1 ~ 1.9 1 1.9 1 60",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.8F, "invincible groundSlam @s 5 false false false", true))
@@ -677,14 +671,14 @@ public class ComboTachi_Lv3 {
                     }}));
         ComboNode Final_Skill_Execute_Third = ComboNode.createNode(()->ArcAnimations.FUSHIGIRI_HAIRUI_SLASH_2)
                 .setNotCharge(true).setCanBeInterrupt(false).setConvertTime(0.1F).setStunTypeModifier(StunType.LONG).setDamageMultiplier(ValueModifier.multiplier(2F)).setImpactMultiplier(5).setArmorNegation(100)
+                .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 34));
+                }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 65));
                 }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(Effect.REALLY_STUN_IMMUNITY.get(), 65));
-                }))
-                .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
-                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,10,10));
                 }))
                 .addTimeEvent(new TimeStampedEvent(1.5F,(entityPatch -> {if (!entityPatch.getOriginal().getLevel().isClientSide) {
                     List<LivingEntity> hitTargets = entityPatch.getCurrenltyHurtEntities()
@@ -708,7 +702,7 @@ public class ComboTachi_Lv3 {
                 .addTimeEvent(new TimeStampedEvent(1.45F, (entityPatch) -> {
                     entityPatch.playSound(EpicFightSounds.ENDER_DRAGON_BREATH_FINALE, 3,0, 0);}))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F, "effect give @s cofh_core:lightning_resistance 5", false))
-                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.5F, "summon minecraft:lightning_bolt", true))
+                .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(1.5F, "execute as @s at @s run summon minecraft:lightning_bolt", true))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.2F, "playsound minecraft:block.respawn_anchor.deplete ambient @s ~ ~ ~ 200", false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.1F,"particle biomesoplenty:dripping_blood ~ ~1 ~ 1.9 1 1.9 1 60",false))
                 .addTimeEvent(TimeStampedEvent.createTimeCommandEvent(0.0F, "execute as @p at @s run playsound cataclysm:flame_burst block @s ~ ~ ~ 0.75 0.75", false))

@@ -337,6 +337,9 @@ public class ComboTachi_Lv1 {
                     }}));
         ComboNode Final_Skill_Fushigiri_Thrid = ComboNode.createNode(()->ArcAnimations.FUSHIGIRI_HAIRUI_SLASH_2)
                 .setNotCharge(true).setCanBeInterrupt(false).setHurtDamageMultiplier(3F).setConvertTime(0.1F).setStunTypeModifier(StunType.LONG).setDamageMultiplier(ValueModifier.multiplier(1.5F)).setImpactMultiplier(5).setArmorNegation(100)
+                .addTimeEvent(new TimeStampedEvent(0.0F,entityPatch -> {
+                    entityPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 34));
+                }))
                 .addTimeEvent(new TimeStampedEvent(0.1F,entityPatch -> {
                     entityPatch.getOriginal().addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 65));
                 }))

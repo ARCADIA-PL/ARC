@@ -89,7 +89,7 @@ public class WeaponCapabilityPresets {
                     .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
                     .swingSound(EpicFightSounds.WHOOSH)
                     .hitSound(EpicFightSounds.BLADE_HIT)
-                    .hitParticle(WOMParticles.ANTITHEUS_HIT_DOWN.get())
+                    .hitParticle(WOMParticles.ANTITHEUS_HIT_UP.get())
                     .canBePlacedOffhand(false)
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
                     .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> ComboTachi_Lv2.ComboTachi_Lv2)
@@ -104,7 +104,7 @@ public class WeaponCapabilityPresets {
                     .collider(ColliderPreset.TACHI)//这里可以用预设的，也可以new 一个
                     .swingSound(EpicFightSounds.WHOOSH)
                     .hitSound(EpicFightSounds.BLADE_HIT)
-                    .hitParticle(EpicFightParticles.HIT_BLADE.get())
+                    .hitParticle(WOMParticles.KATANA_SHEATHED_HIT.get())
                     .canBePlacedOffhand(false)
                     .newStyleCombo(CapabilityItem.Styles.TWO_HAND, Animations.AXE_AUTO1)
                     .innateSkill(CapabilityItem.Styles.TWO_HAND, (itemstack) -> ComboTachi_Lv3.ComboTachi_Lv3)
