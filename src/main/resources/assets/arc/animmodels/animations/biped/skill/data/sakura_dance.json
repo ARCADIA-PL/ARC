@@ -9,7 +9,7 @@
       "interpolations": 4,
       "joint": "Tool_R",
       "item_skin_hand": "main_hand",
-      "texture_path": "epicfight:textures/particle/trail14.png",
+      "texture_path": "arc:textures/trail/trail14.png",
       "particle_type": "epicacg:bloom_trail"
     },
 	{
@@ -21,7 +21,7 @@
       "interpolations": 6,
       "joint": "Tool_R",
       "item_skin_hand": "main_hand",
-      "texture_path": "epicfight:textures/particle/trail14.png",
+      "texture_path": "arc:textures/trail/trail14.png",
       "particle_type": "epicacg:bloom_trail"
     },
 	{
@@ -33,7 +33,7 @@
       "interpolations": 12,
       "joint": "Tool_R",
       "item_skin_hand": "main_hand",
-      "texture_path": "epicfight:textures/particle/trail14.png",
+      "texture_path": "arc:textures/trail/trail14.png",
       "particle_type": "epicacg:bloom_trail"
     }
   ]

@@ -214,7 +214,7 @@ public class ArcAnimations {
                                 }
                             }
                         }, AnimationEvent.Side.SERVER),
-                        // 在4.65秒事件中添加以下内容：
+                        // 4.65秒：
                         AnimationEvent.TimeStampedEvent.create(4.65F, (entitypatch, self, params) -> {
                             if (!entitypatch.getOriginal().getLevel().isClientSide() && entitypatch.getOriginal() instanceof Player attacker) {
                                 List<LivingEntity> hitTargets = entitypatch.getCurrenltyHurtEntities()
@@ -224,7 +224,7 @@ public class ArcAnimations {
                                         .toList();
                                 for (LivingEntity target : hitTargets) {
                                     ServerLevel level = (ServerLevel)target.getLevel();
-                                    // 粒子效果
+                                    // 粒子
                                     level.sendParticles(
                                             WOMParticles.ANTITHEUS_BLACKHOLE_END.get(),
                                             target.getX(),
@@ -232,7 +232,7 @@ public class ArcAnimations {
                                             target.getZ(),
                                             1, 0, 0, 0, 0
                                     );
-                                    // 伤害来源构造
+                                    // 伤害
                                     DamageSource damageSource;
                                     if (attacker instanceof Player) {
                                         damageSource = DamageSource.playerAttack((Player) attacker); // 玩家攻击
