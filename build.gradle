@@ -24,7 +24,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 version = '18.5.0'
 group = 'com.arc.arc' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'Arcblade-' + System.currentTimeSeconds()
+archivesBaseName = 'ArcbladeReborn-' + System.currentTimeSeconds()
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -67,12 +67,12 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'Arcblade'
+            property 'forge.enabledGameTestNamespaces', 'ArcbladeReborn'
 
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             mods {
-                Arcblade {
+                ArcbladeReborn {
                     source sourceSets.main
                 }
             }
@@ -86,12 +86,12 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'Arcblade'
+            property 'forge.enabledGameTestNamespaces', 'ArcbladeReborn'
 
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             mods {
-                Arcblade {
+                ArcbladeReborn {
                     source sourceSets.main
                 }
             }
@@ -116,10 +116,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'Arcblade'
+            property 'forge.enabledGameTestNamespaces', 'ArcbladeReborn'
 
             mods {
-                Arcblade {
+                ArcbladeReborn {
                     source sourceSets.main
                 }
             }
@@ -133,10 +133,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'Arcblade', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'ArcbladeReborn', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                Arcblade {
+                ArcbladeReborn {
                     source sourceSets.main
                 }
             }
@@ -214,7 +214,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "Epic Fight - Arcblade",
+                "Specification-Title"     : "Epic Fight - ArcbladeReborn",
                 "Specification-Vendor"    : "ARC大帝傀儡",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
